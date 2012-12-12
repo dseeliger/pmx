@@ -490,3 +490,216 @@ class Molecule(Atomselection):
             return False
 
 
+###################################################################################
+# SMALL MOLECULE HANDLING
+###################################################################################
+
+# SD file
+
+class SDMolecule:
+
+    def __init__(self, lst):
+
+        self.molfile = ''
+        self.properties = {}
+        self.name = ''
+        self.name2 = ''
+        self.read( lst )
+        
+    def read( self, lst ):
+        self.name = lst[0].strip()
+        self.name2 = lst[1].rstrip()
+        s = ''
+        for line in lst[2:]:
+            if line.startswith('M  END'):
+                s+=line.rstrip()
+                break
+            else:
+                s+=line
+        self.molfile = s
+        idx = lst.index('M  END\n')
+        for i, line in enumerate(lst[idx:]):
+            if line.startswith('>'):
+                prop = line.split()[1]
+                self.properties[prop] = ''
+                for line in lst[idx+i+1:]:
+                    if line.startswith('>'): break
+                    else:
+                        self.properties[prop]+=line
+
+    def write( self, fp ):
+        print >>fp, self.name
+        print >>fp, self.name2,
+        print >>fp
+        print >>fp, self.molfile
+        for k, v in self.properties.items():
+            print >>fp, '>', k
+            print >>fp, v,
+        print >>fp, '$$$$'
+        
+
+class SDFile:
+
+    def __init__(self, filename=None):
+
+        self.molecules = []
+        if filename:
+            self.read( filename )
+
+    def read(self, fn ):
+        #print >>sys.stderr, 'Reading SDFile:', fn
+        l = open(fn).readlines()
+        lst = []
+        for line in l:
+            if line.startswith('$$$$'):
+                mol = SDMolecule( lst )
+                self.molecules.append( mol )
+                lst = []
+            else:
+                lst.append( line )
+
+    def write(self, fp):
+        for m in self.molecules:
+            m.write( fp )
+
+
+# mol2 file
+
+class Mol2Molecule:
+
+    def __init__(self, lines):
+        self.atom_lines = []
+        self.atoms = []
+        self.bonds = []
+        self.bond_lines = []
+        self.header = []
+        self.name = ''
+        self.counts = []
+        self.mol_type = ''
+        self.charge_type = ''
+        self.footer = []
+        self.keys = []
+        self.__get_keys(lines)
+        self.read(lines)
+
+        
+    def __get_keys(self,lines):
+        for line in lines:
+            if line.startswith('@'):
+                entr = line.strip()
+                if entr not in ['@<TRIPOS>MOLECULE', '@<TRIPOS>ATOM', '@<TRIPOS>BOND']:
+                    self.keys.append( entr )
+    def read(self, lines):
+        self.header = readUntil( lines, '@<TRIPOS>ATOM')
+        self.atom_lines = readSection(lines,'@<TRIPOS>ATOM','@')
+        self.bond_lines = readSection(lines,'@<TRIPOS>BOND','@')
+        self.__parse_molecule()
+        self.__parse_atoms()
+        self.__parse_bonds()
+        if self.keys:
+            self.footer = [self.keys[0]]+readSection(lines, self.keys[0], 'XX')
+
+    def __parse_molecule(self):
+        lines = readSection(self.header, '@<TRIPOS>MOLECULE', '@')
+        self.name = lines[0].strip()
+        self.counts = [int(x) for x in lines[1].strip().split()]
+        self.num_atoms = self.counts[0]
+        self.num_bonds = self.counts[1]
+        self.num_substr = self.counts[2]
+        self.num_feat = self.counts[3]
+        self.num_sets = self.counts[4]
+        
+        self.mol_type = lines[2].strip()
+        self.charge_type = lines[3].strip()
+        
+
+    def __parse_atoms(self):
+        for line in self.atom_lines:
+            a = Atom( mol2line = line )
+            self.atoms.append( a )
+
+    def atom_by_id( self, idx ):
+        for atom in self.atoms:
+            if atom.id == idx: return atom
+        return None
+
+    def __parse_bonds(self):
+        entries = parseList('iiis', self.bond_lines )
+        for e in entries:
+            atom1 = self.atom_by_id( e[1] )
+            atom2 = self.atom_by_id( e[2] )
+            bond_type = e[3]
+            if atom1 is None or atom2 is None:
+                print >>sys.stderr,'Mol2Molecule: Error in bond parsing'
+                sys.exit(1)
+            self.bonds.append( [atom1, atom2, bond_type] )
+
+    def write(self, fp = sys.stdout):
+        print >>fp, '@<TRIPOS>MOLECULE'
+        print >>fp, self.name
+        print >>fp, self.num_atoms, self.num_bonds, self.num_substr, self.num_feat, self.num_sets
+        print >>fp, self.mol_type
+        print >>fp, self.charge_type
+        print >>fp
+        print >>fp, '@<TRIPOS>ATOM'
+        for atom in self.atoms:
+            print >>fp, "%7d %-8s %9.4f %9.4f %9.4f %-6s %3d %-8s %9.4f" %\
+                  (atom.id, atom.symbol, atom.x[0], atom.x[1], atom.x[2], atom.atype,\
+                   atom.resnr, atom.resname, atom.q)
+        print >>fp, '@<TRIPOS>BOND'
+        for i, b in enumerate(self.bonds):
+            print >>fp, "%6d %6d %6d %6s" % ((i+1), b[0].id, b[1].id, b[2])
+        for line in self.footer:
+            print >>fp, line
+        
+    def add_atom( self, atom ):
+        n = len(self.atoms)+1
+        atom.id = n
+        atom.resnr = self.atoms[0].resnr
+        atom.rename = self.atoms[0].resname
+        self.num_atoms+=1
+        self.atoms.append( atom )
+        
+    def add_bond(self, bond ):
+        self.num_bonds+=1
+        self.bonds.append( bond )
+        
+
+class Mol2File:
+
+    def __init__(self, filename = None):
+
+        self.molecules = []
+        if filename:
+            self.read( filename )
+
+
+    def read(self,fn):
+        l = open(fn).readlines()
+        lst = []
+        for i, line in enumerate(l):
+            if line.startswith('@<TRIPOS>MOLECULE'):
+                lines = readUntil(l[i+1:],'@<TRIPOS>MOLECULE')
+                mol = Mol2Molecule( [line]+lines )
+                self.molecules.append( mol )
+
+
+    def write(self,fn=None):
+        file_opened = False
+        if fn:
+            if hasattr(fn,"write"):
+                fp = fn
+            else:
+                try:
+                    fp = open(fn,'w')
+                    file_opened = True
+                except:
+                    fp = sys.stdout
+        else:
+            fp = sys.stdout
+        for m in self.molecules:
+            m.write( fp )
+        if file_opened:
+            fp.close()
+            
+            

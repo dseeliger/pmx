@@ -72,7 +72,7 @@ def add_bp(m, strand = None):
     for atom in m.atoms:
         atom.x = r.apply(atom.x, phi)
     for atom in m.atoms:
-        atom.x[2]+=N*.34
+        atom.x[2]+=N*3.4
 
 def make_3ter(r):
     # we add a proton at O5'

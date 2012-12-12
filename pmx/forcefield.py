@@ -123,6 +123,14 @@ class ITPFile:
         self.angles = []
         self.dihedrals = []
         self.atomtypes = None
+        self.virtual_sites1 = []
+        self.virtual_sites2 = []
+        self.virtual_sites3 = []
+        self.virtual_sites4 = []
+        self.has_vsites1 = False
+        self.has_vsites2 = False
+        self.has_vsites3 = False
+        self.has_vsites4 = False
         if fname:
             self.read(fname, ff = ff)
             
@@ -140,6 +148,8 @@ class ITPFile:
         self.angles = read_itp_angles(lines)
         self.dihedrals = read_itp_dihedrals(lines)
         self.atomtypes = read_atomtypes(lines,ff)
+        self.read_vsites2(lines)
+
         
     def write(self,fname):
         if not hasattr(fname,"write"):
@@ -156,6 +166,13 @@ class ITPFile:
             write_itp_angles(fp, self.angles)
         if self.dihedrals:
             write_itp_dihedrals(fp, self.dihedrals)
+        if self.has_vsites2:
+            self.write_itp_vsites2(fp)
+            
+    def write_itp_vsites2(self, fp ):
+        print >>fp, '[ virtual_sites2 ]'
+        for v in self.virtual_sites2:
+            print >>fp, "%8d %8d %8d %s %s" % (v[0].id, v[1].id, v[2].id, v[3], v[4])
         
     def set_name(self, name):
         self.name = name
@@ -185,6 +202,15 @@ class ITPFile:
             self.dihedrals[i][1] = self.atoms[id2-1]
             self.dihedrals[i][2] = self.atoms[id3-1]
             self.dihedrals[i][3] = self.atoms[id4-1]
+
+        for i, vs in enumerate(self.virtual_sites2):
+            id1 = dih[0]
+            id2 = dih[1]
+            id3 = dih[2]
+            self.virtual_sites2[i][0] = self.atoms[id1-1]
+            self.virtual_sites2[i][1] = self.atoms[id2-1]
+            self.virtual_sites2[i][2] = self.atoms[id3-1]
+
 
 
     def id2atoms(self):
@@ -247,7 +273,82 @@ class ITPFile:
                    dih[5], dih[6], dih[7], dih[8], dih[9], dih[10])
             
 
+    def read_vsites2(self, lines):
+        starts = []
+        dih = []
+        for i, line in enumerate(lines):
+            if line.strip().startswith('[ virtual_sites2 ]'):
+                starts.append(i)
+        if starts:
+            self.has_vsites2 = True
+        for s in starts:
+            lst = readSection(lines[s:],'[ virtual_sites2 ]','[')
+            for line in lst:
+                entr = line.split()
+                idx = [int(x) for x in entr[:3]]
+                
+                func = int(entr[3])
+                try:
+                    rest = ' '.join(entr[4:])
+                except:
+                    rest = ''
+                self.virtual_sites2.append([self.atoms[idx[0]-1],\
+                                            self.atoms[idx[1]-1],\
+                                            self.atoms[idx[2]-1],\
+                                            func,rest])
 
+
+    def read_vsites3(self, lines):
+        starts = []
+        dih = []
+        for i, line in enumerate(lines):
+            if line.strip().startswith('[ virtual_sites3 ]'):
+                starts.append(i)
+        if starts:
+            self.has_vsites3 = True
+        for s in starts:
+            lst = readSection(lines[s:],'[ virtual_sites3 ]','[')
+            for line in lst:
+                entr = line.split()
+                idx = [int(x) for x in entr[:4]]
+                
+                func = int(entr[4])
+                try:
+                    rest = ' '.join(entr[5:])
+                except:
+                    rest = ''
+                self.virtual_sites3.append([self.atoms[idx[0]-1],\
+                                            self.atoms[idx[1]-1],\
+                                            self.atoms[idx[2]-1],\
+                                            self.atoms[idx[3]-1],\
+                                            func,rest])
+
+    def read_vsites4(self, lines):
+        starts = []
+        dih = []
+        for i, line in enumerate(lines):
+            if line.strip().startswith('[ virtual_sites4 ]'):
+                starts.append(i)
+        if starts:
+            self.has_vsites4 = True
+        for s in starts:
+            lst = readSection(lines[s:],'[ virtual_sites4 ]','[')
+            for line in lst:
+                entr = line.split()
+                idx = [int(x) for x in entr[:5]]
+                
+                func = int(entr[5])
+                try:
+                    rest = ' '.join(entr[6:])
+                except:
+                    rest = ''
+                self.virtual_sites4.append([self.atoms[idx[0]-1],\
+                                            self.atoms[idx[1]-1],\
+                                            self.atoms[idx[2]-1],\
+                                            self.atoms[idx[3]-1],\
+                                            self.atoms[idx[4]-1],\
+                                            func,rest])
+                
 
 class Topology:
 
@@ -1460,6 +1561,7 @@ def read_itp_dihedrals(lines):
     return dihedrals
 
 
+
 def read_moleculetype(lines):
     l = readSection(lines,'[ moleculetype ]','[')
     if l:
@@ -1781,7 +1883,7 @@ def make_amber_residue_names(model):
                     o1.name = 'OC1'
                     o2.name = 'OC2'
                 except:
-                    print >>sys.stderr, 'pmx_Warning_> No terminal oxygen atoms found in chain %s' % chain.id
+                    print >>sys.stderr, 'pymacs_Warning_> No terminal oxygen atoms found in chain %s' % chain.id
 
 
 
@@ -1840,6 +1942,4 @@ def energy(m):
 ##     print 'coul14 = ',coul14_ene
  
     return bond_ene + angle_ene + dihedral_ene + improper_ene + nb_ene + lj14_ene + coul14_ene
-
-
 

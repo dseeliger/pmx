@@ -1588,7 +1588,7 @@ class MDPError(Exception):
     
 class MDP:
 
-    def __init__(self):
+    def __init__(self, fn = None):
         self.parameters = OrderedDict([
         ['include'                  ,''],
         ['define'                   ,''],
@@ -1751,6 +1751,9 @@ class MDP:
         ['userreal3'                , 0],
         ['userreal4'                , 0]
         ])
+        
+        if fn:
+            self.read(fn)
 
     def __str__(self):
         line = ''
@@ -1769,6 +1772,10 @@ class MDP:
             raise MDPError, "No such option %s" % item
         
         self.parameters[item] = value
+
+    def __getitem__(self, item):
+        return self.parameters[item]
+
         
     def write(self, fp = None):
 

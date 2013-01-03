@@ -78,6 +78,7 @@ def convergence( data, block_size = 1000, offset = 0):
 
 run_dirs = sys.argv[1:]
 for d in run_dirs:
+    here = os.path.abspath('.')
     os.chdir( d )
     print 'Processing -> %s' % d,
     data = read_data( 'dhdl.xvg' )
@@ -101,5 +102,5 @@ for d in run_dirs:
         print >>fp, t, r
     fp.close()
     print '.............done'
-    os.chdir('..')
+    os.chdir(here)
 

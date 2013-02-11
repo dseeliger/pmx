@@ -321,8 +321,8 @@ def BAR(res_ab, res_ba, T = 298):
         sr = 0
         for v in res_ba:
             sr+=1./(1+exp(-beta*(M+v - x)))
-        sf/=nf
-        sr/=nr
+	#sf/=nf
+	#sr/=nr
         r = sf-sr
         return r**2
 

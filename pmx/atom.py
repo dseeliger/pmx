@@ -131,8 +131,13 @@ class Atom:
             self.bfac=float(line[61:66])
         except:
             self.bfac = 0.
+        try:
+            self.symbol=line[70:73].strip()
+        except:
+            self.symbol = None
         self.unity = 'A'
-        self.get_symbol()
+        if not self.symbol:
+            self.get_symbol()
         return self
 
     def dist(self,other):
@@ -232,12 +237,12 @@ class Atom:
             s=pdb_format % (self.race,idx,name,self.altloc,\
                              resname,self.chain_id,resid,\
                              coords[0],coords[1],\
-                             coords[2],self.occ,self.bfac)
+                             coords[2],self.occ,self.bfac,self.symbol)
         except:
             s=pdb_format2 % (self.race,idx,name,self.altloc,\
                              resname,self.chain_id,resid,\
                              coords[0],coords[1],\
-                             coords[2],self.occ,self.bfac)
+                             coords[2],self.occ,self.bfac,self.symbol)
         return s
 
 
@@ -303,7 +308,7 @@ class Atom:
             c2 = self.long_name[2]
             if c1=='C':
                 self.symbol = 'C'
-                #if c2.upper()=='L': self.symbol = 'CL'
+                if c2.upper()=='L': self.symbol = 'CL'
                 #elif c2.upper()=='A': self.symbol = 'CA'
                 #else:
                 #    self.symbol = 'C'
@@ -314,6 +319,9 @@ class Atom:
             elif c1 == 'P': self.symbol = 'P'
             elif c1 == 'B':
                 if c2.upper()=='R': self.symbol = 'BR'
+            elif c1 == 'F':
+                if c2.upper()=='E': self.symbol = 'FE'
+                else: self.symbol = 'F'
             elif c1 == 'I':
                 self.symbol = 'I'
             elif c1 == 'D':

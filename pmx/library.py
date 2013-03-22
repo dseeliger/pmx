@@ -35,8 +35,8 @@ import sys, os, cPickle
 
 #pdb_format="%6s%5d %-4s%1s%3s%2s%4d %11.3f %7.3f %7.3f %5.2f %5.2f\n"
 
-pdb_format = "%6s%5d %-4s%1s%4s%1s%4d    %8.3f%8.3f%8.3f%6.2f%6.2f"
-pdb_format2 = "%6s%5d %-4s%1s%4s%1s%4s    %8.3f%8.3f%8.3f%6.2f%6.2f"
+pdb_format = "%6s%5d %-4s%1s%4s%1s%4d    %8.3f%8.3f%8.3f%6.2f%6.2f          %2s"
+pdb_format2 = "%6s%5d %-4s%1s%4s%1s%4s    %8.3f%8.3f%8.3f%6.2f%6.2f          %2s"
 
 _extended = (-139.,135.,180.)
 _helix = (-57.,-47.,180.)

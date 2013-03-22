@@ -32,13 +32,15 @@ from glob import glob
 from numpy import *
 #import random
 from pylab import *
+from pmx import *
+from pmx.odict import OrderedDict
 
 def simple_xy_plot(x,y,xlab, ylab, name, result, err, ylimit = False):
     figure(figsize=(8,8))
     plot(x,y,'rd-', lw=2)
     xlabel(xlab, fontsize=20)
     ylabel(ylab, fontsize=20)
-    title(r"$\int_0^1\langle\frac{dG}{d\lambda}\rangle_{\lambda}d\lambda$ = %.2f +/- %.2f kJ/mol" % (result, err))
+    title(r"$\int_0^1\langle\frac{dH}{d\lambda}\rangle_{\lambda}d\lambda$ = %.2f +/- %.2f kJ/mol" % (result, err))
     grid(lw=2)
     xx = gca()
     if ylimit:
@@ -48,13 +50,15 @@ def simple_xy_plot(x,y,xlab, ylab, name, result, err, ylimit = False):
     savefig(name, dpi=600)
 
 
-def plot_random_blocks( run_dic, block_file,avx, avy, ylimit = False):
-    figure(figsize=(8,8))
-    outf = 'random_blocks.png'
+def plot_random_blocks( outf, run_dic, block_file,avx, avy, ylimit = False):
+    figure(figsize=(8,5))
     xlab = r'$\lambda$'
-    ylab = r"dG/d$\lambda$"
+    ylab = r"dH/d$\lambda$ [kJ/mol]"
     block_res = []
+    std_lda = []
     for lda, p in run_dic.items():
+        r = read_convergence_file( os.path.join(p,'convergence.txt') )
+        std_lda.append( std(map( lambda a: a[1], r)) )
         blck = read_blocks(p, block_file)
         block_res.append( (lda, blck ))
     block_res.sort(lambda a, b: cmp(a[0],b[0]) )
@@ -62,11 +66,15 @@ def plot_random_blocks( run_dic, block_file,avx, avy, ylimit = False):
     for i in range(1000):
         dG, x, y = random_value_from_block( block_res, with_data = True )
         plot(x,y,'k-', lw=.5, alpha = .01)
-    plot(avx,avy,'rd-', lw=2)
+    errorbar(avx,avy,yerr=std_lda, fmt ='kd', markersize=5)
+    plot(avx,avy,'r-', lw=2)
     if ylimit:
         ylim( ylimit)
-    xlabel(xlab, fontsize=20)
-    ylabel(ylab, fontsize=20)
+    xlabel(xlab, fontsize=22)
+    ylabel(ylab, fontsize=22)
+    xticks(fontsize=20)
+    yticks(fontsize=20)
+    subplots_adjust(bottom=0.25, left=0.15)
 #    title("Curves from random blocks")
     grid(lw=2)
     xx = gca()
@@ -77,19 +85,26 @@ def plot_random_blocks( run_dic, block_file,avx, avy, ylimit = False):
 
 def check( lst ):
     
-    files = ['fe_convergence.txt',
-             'fe_sum.txt',
-             'fe_block_100.txt',
-             'fe_block_200.txt']
+    files = ['convergence.txt',
+             'results.txt',
+             'block100.txt',
+             'block500.txt']
+    missing = []
     for d in lst:
         for f in files:
             p = os.path.join(d, f)
             if not os.path.isfile( p ):
-                print 'file %s missing in directory %s -> Exiting' % (d,f)
-                sys.exit(1)
+                if d not in missing:
+                    missing.append(d)
+#                    print 'file %s missing in directory %s -> Exiting' % (f,d)
+#                missing = True
+    if missing:
+        for d in missing:
+            print 'Run %s KIA or MIA!!' % (d)
+        sys.exit(1)
         
 def read_result(p):
-    f = os.path.join(p,'fe_sum.txt')
+    f = os.path.join(p,'results.txt')
     r = float(open(f).read().split()[0])
     return r
 
@@ -136,6 +151,7 @@ def read_dGdl( run_dic) :
     results_all = []
     for lda, p in run_dic.items():
         r = read_result(p)
+        print 'DTI_analysis2__> lambda = %4.3f'% lda, 'dH/dl = %8.4f' %  r
         results_all.append( (lda, r ))
         
     results_all.sort(lambda a, b: cmp(a[0],b[0]) )
@@ -153,7 +169,7 @@ def dG_over_time( run_dic ):
     fp = open('dG_vs_time.txt','w')
     dG_vs_time = []
     for lda, p in run_dic.items():
-        r = read_convergence_file( os.path.join(p,'fe_convergence.txt') )
+        r = read_convergence_file( os.path.join(p,'convergence.txt') )
         dG_vs_time.append( (lda, r) )
     dG_vs_time.sort(lambda a, b: cmp(a[0],b[0]) )
     min_size = 100
@@ -193,23 +209,59 @@ def dG_from_last_blocks( run_dic, block_file, nblocks ):
     dG = trapz( map(lambda a:a[1], res), map(lambda a:a[0], res) )
     return dG, nblocks
                         
+###########################################################################################################
+
+
+help_text = ('Calculate delta G from multiple DTI runs. Input files are assumed to have default names',)
+
+options = [
+#        Option( "-b", "real", 0, "Start time [ps]"),
+#        Option( "-e", "real", -1, "End time[ps]"),
+#        Option( "-b", "bool", True, "bool"),
+#        Option( "-r2", "rvec", [1,2,3], "some vector that does wonderful things and returns always segfaults")
+        ]
+
+files = [
+    FileOption("-d", "r/m",["dir"],"run", "Run directories of DTI runs"),
+    FileOption("-o", "w",["txt"],"dti_result.txt", "Result with dG"),
+    FileOption("-dGdl", "w",["png"],"lda_vs_dGdl.png", "plot with dG/dl values"),
+    FileOption("-rblocks", "w",["png"],"random_blocks.png", "plot with dG/dl values and error estimation"),
+]
+
+
+cmdl = Commandline( sys.argv, options = options,
+                    fileoptions = files,
+                    program_desc = help_text,
+                    check_for_existing_files = False )
+
+
+run_dirs = cmdl['-d']
+
+
+
+#exit()
+
     
 
-run_name = sys.argv[1]
+#run_name = sys.argv[1]
 
-lst = glob('%s_*.*' % sys.argv[1])
-print lst
-check(lst)
+#lst = glob('%s_*.*' % sys.argv[1])
+#print lst
+check(run_dirs)
 
-run_dic = {}
-
-for d in lst:
-    lda = float(d.split('%s_' % sys.argv[1])[1])
+run_dic = OrderedDict()
+tmp_list = []
+for d in run_dirs:
+    tmp_list.append(d)
+tmp_list = sorted(tmp_list, key=lambda f: float(f.split('_')[-1]) )
+for d in tmp_list:
+    lda = float(d.split('_')[-1])
     run_dic[lda] = d
+    
 results_all = read_dGdl( run_dic )
 try:
-    err = error_from_block_aver( run_dic, 'fe_block_100.txt')
-    err2 = error_from_block_aver( run_dic, 'fe_block_200.txt')
+    err = error_from_block_aver( run_dic, 'block100.txt')
+    err2 = error_from_block_aver( run_dic, 'block500.txt')
 except:
     err = 0
     err2 = 0
@@ -221,22 +273,30 @@ fp = open(outf, 'w')
 for i in range(len(x)):
     print >>fp, x[i], y[i]
 
-outf = 'lda_vs_dGdl.png'
-try:
-    yl = ( float(sys.argv[1]), float(sys.argv[2]) )
-except:
-    yl = False
-           
-simple_xy_plot(x,y,r'$\lambda$', r"dG/d$\lambda$",outf, dgdl_all, err, yl)
+outf = cmdl['-dGdl']
+#try:
+#    yl = ( float(sys.argv[1]), float(sys.argv[2]) )
+#except:
+#    yl = False
+yl = False           
+simple_xy_plot(x,y,r'$\lambda$', r"dG/d$\lambda$",outf, dgdl_all, err)#, yl)
 if err != 0:
-    plot_random_blocks(run_dic, 'fe_block_100.txt', x, y, yl)
+    outf1 = os.path.splitext(cmdl['-rblocks'])[0]+str(100)+'.png'
+    outf2 = os.path.splitext(cmdl['-rblocks'])[0]+str(500)+'.png'
+    print 'DTI_analysis2__> Plotting random block figures'
+    plot_random_blocks(outf1, run_dic, 'block100.txt', x, y, yl)
+    plot_random_blocks(outf2, run_dic, 'block500.txt', x, y, yl)
 
-fp = open('fe_result.txt','w')
-print >>fp, 'Result dG = ', round(dgdl_all,2), 'kJ/mol', 'Err(100) = ', round(err,2), 'kJ/mol', 'Err(200) = ', round(err2,2), 'kJ/mol'
+final_result = round(dgdl_all,2)
+err100 =  round(err,2)
+err500 =  round(err2,2)
+print 'DTI_analysis2__> dG = %8.2f' % final_result, '+/- %8.4f' % err500
+fp = open(cmdl['-o'],'w')
+print >>fp, 'Result dG = ', round(dgdl_all,2), 'kJ/mol', 'Err(100) = ', round(err,2), 'kJ/mol', 'Err(500) = ', round(err2,2), 'kJ/mol'
 dG_over_time( run_dic )
 
-max_block = get_max_number_of_blocks( run_dic, 'fe_block_100.txt')
+max_block = get_max_number_of_blocks( run_dic, 'block100.txt')
 for i in range(1, max_block+1):
-    dG, ndata = dG_from_last_blocks( run_dic, 'fe_block_100.txt', i)
+    dG, ndata = dG_from_last_blocks( run_dic, 'block100.txt', i)
     print >>fp, 'dG (block) = ', round(dG,2), 'kJ/mol', 'from last ', ndata, 'blocks'
 

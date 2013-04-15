@@ -33,6 +33,7 @@ import sys, os, copy
 from pmx import *
 from pmx.forcefield2 import Topology
 from pmx.mutdb import read_mtp_entry
+from pmx.parser import kickOutComments
 
 _perturbed_nucleotides = ['DAT','DAC','DAG','DCT','DCG','DCA',
                           'DTA','DTG','DTC','DGA','DGC','DGT',
@@ -142,6 +143,7 @@ def find_angle_entries(topol):
                     astate = topol.BondedParams.get_angle_param(a1.type,a2.type,a3.type)
                     bstate = topol.BondedParams.get_angle_param(a1.typeB,a2.typeB,a3.typeB)
                     a.extend([astate, bstate])
+#		    print '%s %s %s' % (a1.name, a2.name, a3.name)
                 else:
                     astate = topol.BondedParams.get_angle_param(a1.type,a2.type,a3.type)
                     bstate = astate
@@ -154,13 +156,76 @@ def find_angle_entries(topol):
     print 'log_> Making angles for state B -> %d angles with perturbed atoms' % count
 
 
-def find_dihedral_entries( topol ):
+def check_dih_ILDN( topol, rlist, rdic, a1, a2, a3, a4 ):
+    counter = 0
+    for r in rlist:
+	if( r.id == a2.resnr ):
+	    idx = r.id - 1
+            dih = rdic[r.resname][3]
+            for d in dih:
+		if( counter == 1):
+		    break
+                al = []
+                for name in d[:4]:
+                    atom = r.fetch(name)[0]
+                    al.append(atom)
+                        
+                if (a1.id == al[0].id and \
+                   a2.id == al[1].id and \
+                   a3.id == al[2].id and \
+                   a4.id == al[3].id) or \
+                   (a1.id == al[3].id and \
+                   a2.id == al[2].id and \
+                   a3.id == al[1].id and \
+                   a4.id == al[0].id):
+		    if( ('torsion' in d[4]) and ('torsion' in d[5]) ):
+		        print 'torsion %s %s' % (d[4],d[5])
+			counter = 42
+			break
+		    elif( ('torsion' in d[4]) and ('undefined' in d[5]) ):
+                        print 'torsion_undef %s %s' % (d[4],d[5])
+                        counter = 2
+                        break
+                    elif( ('undefined' in d[4]) and ('torsion' in d[5]) ):
+                        print 'torsion_undef %s %s' % (d[4],d[5])
+                        counter = 3
+                        break
+		    elif( 'undefined' in d[4] ):
+			print 'undef %s' %d[4]
+			counter = 1
+			break
+    return counter
+
+
+def is_dih_encountered(visited_dih, d, encountered):
+    for dih in visited_dih:
+	if( dih[0].id==d[0].id and dih[1].id==d[1].id and dih[2].id==d[2].id and dih[3].id==d[3].id ):
+	    encountered = 1
+    return encountered
+
+
+def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
     count = 0
     nfake = 0
-    for d in topol.dihedrals:
-        if len(d) == 6:
+    dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
+    visited_dih = [] # need to store already visited angles to avoid multiple re-definitions
 
-            a1,a2,a3,a4, func, val = d
+    for d in topol.dihedrals:
+        if len(d) >= 6:
+
+	    # only consider the dihedral, if it has not been encountered so far
+	    encountered = 0
+	    encountered = is_dih_encountered(visited_dih, d, encountered)
+	    encountered = is_dih_encountered(dih_predef_default, d, encountered)
+	    if(encountered == 1):
+		continue
+
+	    if(len(d) == 6):
+                a1,a2,a3,a4, func, val = d
+	    else:
+                a1,a2,a3,a4, func, val, rest = d
+		
+            backup_d = d[:6]
             
             if atoms_morphe([a1,a2,a3,a4]):
                 A,B= check_case(d[:4])
@@ -171,26 +236,95 @@ def find_dihedral_entries( topol ):
                     d.append('NULL')
                 else:
                     count +=1
+		    astate = []
+		    bstate = []
                     if A == 'AAAA' and B!='AAAA':
-                        astate = topol.BondedParams.get_dihedral_param(a1.type,a2.type,a3.type,a4.type, func)
-                        bstate = astate
+                        foo = topol.BondedParams.get_dihedral_param(a1.type,a2.type,a3.type,a4.type, func)
+			#need to check if the dihedral has torsion pre-defined
+			counter = check_dih_ILDN(topol,rlist,rdic, a1, a2, a3, a4)
+			if( counter == 42 ):
+			    continue
+
+                        for ast in foo:
+                            if( counter == 0 ):
+                                d[5] = ast
+                                d.append(ast)
+                            else:
+                                alus = backup_d[:]
+                                alus[5] = ast
+                                alus.append(ast)
+                                dih9.append(alus)
+                            counter = 1
+
+
                     elif B == 'AAAA' and A!='AAAA':
-                        bstate = topol.BondedParams.get_dihedral_param(a1.typeB,a2.typeB,a3.typeB,a4.typeB, func)
-                        astate = bstate
+                        foo = topol.BondedParams.get_dihedral_param(a1.typeB,a2.typeB,a3.typeB,a4.typeB, func)
+                        #need to check if the dihedral has torsion pre-defined
+                        counter = check_dih_ILDN(topol,rlist,rdic, a1, a2, a3, a4)
+                        if( counter == 42 ):
+                            continue
+
+                        for bst in foo:
+                            if( counter == 0 ):
+                                d[5] = bst
+                                d.append(bst)
+                            else:
+                                alus = backup_d[:]
+                                alus[5] = bst
+                                alus.append(bst)
+                                dih9.append(alus)
+                            counter = 1
+
+
                     elif A=='AAAA' and B=='AAAA':
+			### VG ###
+			# disappear/appear dihedrals, do not morphe #
                         if val=='':
                             astate = topol.BondedParams.get_dihedral_param(a1.type,a2.type,a3.type,a4.type, func)
                         else:
-                            astate = val
+                            astate = topol.BondedParams.get_dihedral_param(a1.type,a2.type,a3.type,a4.type, func)
+#                            astate.append(val)
                         if types_morphe([a1,a2,a3,a4]):
                             bstate = topol.BondedParams.get_dihedral_param(a1.typeB,a2.typeB,a3.typeB,a4.typeB, func)
                         else:
-                            bstate = astate
-                        if astate[-1] != bstate[-1]:
-                            if astate[-1] == 0:
-                                astate = [astate[0], 0,0,bstate[-1] ]
-                            if bstate[-1] == 0:
-                                bstate = [bstate[0], 0,0,astate[-1]]
+                            bstate = astate[:] 
+
+                        #need to check if the dihedral has torsion pre-defined
+                        counter = check_dih_ILDN(topol,rlist,rdic, a1, a2, a3, a4)
+
+			if( counter == 42): #torsion for both states defined, change nothing
+			    continue
+
+			# A state disappears (when going to B)
+                        for ast in astate:
+			    if(counter == 0):
+			        d[5] = ast
+				bst = [ ast[0], ast[1], 0.0, ast[-1] ]
+				if( len(d)==6 ):
+				    d.append(bst)
+				else:
+				    d[6] = bst
+			        counter = 1
+                                #print '%s %s %s %s %s %s' % (d[0].id,d[1].id,d[2].id,d[3].id,astate,bstate)
+#				print '%s' %d
+			    elif( (counter==1) or (counter==3) ):
+				alus = backup_d[:]
+				alus[5] = ast
+				bst = [ ast[0], ast[1], 0.0, ast[-1] ]
+				alus.append(bst)
+				dih9.append(alus)
+
+			# B state disappears (when going to A)
+			# all must go to the new (appendable) dihedrals 
+                        for bst in bstate:
+			    if( (counter==0) or (counter==1) or (counter==2) ):
+			        alus = backup_d[:]
+                                ast = [bst[0], bst[1],0.0, bst[-1] ]
+                                alus[5] = ast
+                                alus.append(bst)
+                                dih9.append(alus)
+					
+
                     if astate == None :
                         print 'Error: No dihedral angle found (state A: predefined state B) for:' 
                         print a1.resname, a2.resname, a3.resname, a4.resname
@@ -199,6 +333,7 @@ def find_dihedral_entries( topol ):
                         print a1.type, a2.type, a3.type, a4.type
                         print a1.atomtypeB, a2.atomtypeB, a3.atomtypeB, a4.atomtypeB
                         print a1.typeB, a2.typeB, a3.typeB, a4.typeB
+			print astate
                         print d
                         sys.exit(1)
                         
@@ -212,19 +347,48 @@ def find_dihedral_entries( topol ):
                         print a1.typeB, a2.typeB, a3.typeB, a4.typeB
                         print d
                         sys.exit(1)
-                        
-                    d[5] = astate
-                    d.append(bstate)
+                       
+		    ### VG ###
+		    ### the previous two if sentences will kill the execution if anything goes wrong ###
+		    ### therefore, I am not afraid to do d.append() already in the previous steps ###
+		    ### VG ###
+
+
+    topol.dihedrals.extend(dih9)
     print 'log_> Making dihedrals for state B -> %d dihedrals with perturbed atoms' % count
     print 'log_> Removed %d fake dihedrals' % nfake
 
 
-def find_predefined_dihedrals(topol, rlist, rdic):
+def get_torsion_multiplicity( name ):
+    foo = list(name)
+    mult = int(foo[-1])
+    return mult
+
+# for ILDN we need to get the #define dihedral entries explicitly
+def explicit_defined_dihedrals(filename):
+    l = open(filename).readlines()
+    output = {}
+    for line in l:
+        if line.startswith('#define'):
+            entr = line.split()
+            name = entr[1]
+	    params = [9,float(entr[2]),float(entr[3]),int(entr[4])]
+            output[name] = params
+    return output
+
+
+
+def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default):
+
+    dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
+    explicit_def = explicit_defined_dihedrals(ffbonded)
+
     for r in rlist:
         idx = r.id - 1
         dih = rdic[r.resname][3]
         imp = rdic[r.resname][2]
         for d in imp+dih:
+#	    print '%s' %d[:4]
             al = []
             for name in d[:4]:
                 if name.startswith('+'):
@@ -238,6 +402,9 @@ def find_predefined_dihedrals(topol, rlist, rdic):
                 else:
                     atom = r.fetch(name)[0]
                     al.append(atom)
+
+	    ildn_already_found = 0
+
             for dx in topol.dihedrals:
                 func = dx[4]
                 if (dx[0].id == al[0].id and \
@@ -248,31 +415,102 @@ def find_predefined_dihedrals(topol, rlist, rdic):
                     dx[1].id == al[2].id and \
                     dx[2].id == al[1].id and \
                     dx[3].id == al[0].id):
+
+                    #the following checks are needed for amber99sb*-ildn
+                    #do not overwrite proper (type9) with improper (type4)
+                    if('default-star' in d[4] and dx[4]==9):
+		        print '%s' %d[4]
+                        continue
+                    #mark the dihedral found for ILDN
+		    if( ildn_already_found==1 ):
+			break
+		    elif ( 'torsion' in d[4] ):#'torsion' in dx[5] ):
+			if ( ('torsion' not in dx[5]) ):
+			   continue
+
                     A,B =  check_case(al[:4])
                     paramA = topol.BondedParams.get_dihedral_param(al[0].type,al[1].type,al[2].type,al[3].type, func)
                     paramB = topol.BondedParams.get_dihedral_param(al[0].typeB,al[1].typeB,al[2].typeB,al[3].typeB, func)
-                    if d[5] == 'default-A':
+
+		    astate = []
+		    bstate = []
+		    backup_dx = dx[:]
+
+		    multA = 0
+		    multB = 0
+
+                    if d[4] == 'default-A':
+			dih_predef_default.append(dx)
                         astate = paramA
-                    elif d[5] == 'default-B':
+                    elif d[4] == 'default-B':
+			dih_predef_default.append(dx)
                         astate = paramB
-                    elif d[5] == 'undefined':
-                        astate = 'NULL'
+                    elif d[4] == 'default-star':
+			foo  = [4, 105.4, 0.75, 1]
+			astate.append(foo)
+		    elif 'torsion' in d[4]:
+			foo = explicit_def[d[4]]
+			astate.append(foo)
+			ildn_already_found = 1
+			func = 9
+                    elif d[4] == 'undefined':
+			dih_predef_default.append(dx)
+                        astate = ''
                     else:
-                        astate = d[5]
-                    bstate = None
-                    if len(d) > 6:
-                        if d[6] == 'default-A':
-                            bstate = paramA
-                        elif d[6] == 'default-B':
-                            bstate = paramB
-                        elif d[6] == 'undefined':
-                            bstate = 'NULL'
-                        else:
-                            bstate = d[6]
-                    # write values to dx
-                    dx[5] = astate
-                    if bstate:
-                        dx.append(bstate)
+                        astate = d[4]
+
+                    if d[5] == 'default-A':
+                        bstate = paramA
+                    elif d[5] == 'default-B':
+                        bstate = paramB
+                    elif d[5] == 'default-star':
+                        foo = [4, 105.4, 0.75, 1]
+			bstate.append(foo)
+                    elif 'torsion' in d[5]:
+                        foo = explicit_def[d[5]]
+			bstate.append(foo)
+			ildn_already_found = 1
+			func = 9
+                    elif d[5] == 'undefined' :
+                        bstate = ''
+                    else:
+                        bstate = d[5]
+		
+#		    print '%s' %d[4]
+		    print '%d %d' %(multA,multB)
+
+		    ### VG ###
+		    # this should work for ILDN #
+                    counter = 0
+                    for foo in astate:
+			if( counter == 0 ):
+			    dx[4] = func
+		            dx[5] = foo
+                            bar = [foo[0], foo[1],0.0, foo[-1] ]
+                            dx.append(bar)
+			else:
+  			    alus = backup_dx[:]
+			    alus[5] = foo
+                            bar = [foo[0], foo[1],0.0, foo[-1] ]
+			    alus.append(bar)
+			    dih9.append(alus)
+#			print 'INLOOP %s %s' % (foo,bar)
+                        counter = 1
+
+                    for foo in bstate:
+                        alus = backup_dx[:]
+                        bar = [foo[0], foo[1],0.0, foo[-1] ]
+                        alus[5] = bar
+                        alus.append(foo)
+                        dih9.append(alus)
+#			print 'BINLOOP %s %s %s' % (bar,foo,d[5])
+#		    print '%s' % dx
+#		    print '%s' % dih9
+#		    print ''
+
+
+    topol.dihedrals.extend(dih9)
+
 
 
 class mtpError(Exception):
@@ -367,8 +605,12 @@ def sum_charge_of_states(rlist):
 def get_ff_path( ff ):
     ff_path = None
     if not os.path.isdir(ff):
-        gmxlib = os.environ.get('GMXDATA')
-        p = os.path.join( os.path.join(gmxlib,'top'), ff)
+	### VG ###
+	gmxlib = os.environ.get('GMXDATA') 
+    #    gmxlib = os.environ.get('GMXDATA')
+	p = os.path.join(gmxlib,ff)
+    #    p = os.path.join( os.path.join(gmxlib,'top'), ff)
+	### VG ###
         if not os.path.isdir(p):
             print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
         else:
@@ -405,6 +647,7 @@ def main(argv):
     out_file = cmdl['-o']
     log_file = cmdl['-log']
     mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres.mtp')
+    ffbonded_file = os.path.join( get_ff_path(cmdl['-ff']), 'ffbonded.itp')
     do_split = cmdl['-split']
     if cmdl.opt['-itp'].is_set:
         input_itp = cmdl['-itp']
@@ -434,8 +677,11 @@ def main(argv):
 
     find_bonded_entries( topol )
     find_angle_entries( topol )
-    find_predefined_dihedrals(topol,rlist,rdic)
-    find_dihedral_entries( topol )
+
+    dih_predef_default = []
+    find_predefined_dihedrals(topol,rlist,rdic,ffbonded_file,dih_predef_default)
+    find_dihedral_entries( topol, rlist, rdic, dih_predef_default )
+
     __add_extra_DNA_impropers(topol, rlist,   1, [180,40,2],[180,40,2])
     qA, qB = sum_charge_of_states( rlist )
     qA_mem = copy.deepcopy( qA )

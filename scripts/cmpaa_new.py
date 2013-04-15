@@ -1,32 +1,3 @@
-# pmx  Copyright Notice
-# ============================
-#
-# The pmx source code is copyrighted, but you can freely use and
-# copy it as long as you don't change or remove any of the copyright
-# notices.
-#
-# ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
-#
-#                        All Rights Reserved
-#
-# Permission to use, copy, modify, distribute, and distribute modified
-# versions of this software and its documentation for any purpose and
-# without fee is hereby granted, provided that the above copyright
-# notice appear in all copies and that both the copyright notice and
-# this permission notice appear in supporting documentation, and that
-# the name of Daniel Seeliger not be used in advertising or publicity
-# pertaining to distribution of the software without specific, written
-# prior permission.
-#
-# DANIEL SEELIGER DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
-# SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
-# FITNESS.  IN NO EVENT SHALL DANIEL SEELIGER BE LIABLE FOR ANY
-# SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
-# RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
-# CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
-# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-# ----------------------------------------------------------------------
 import sys, os
 from pmx import *
 from pmx.ffparser import RTPParser, NBParser
@@ -395,6 +366,66 @@ def improp_entries_match( lst1, lst2 ):
         if a1.name != a2.name: return False
     return True
 
+def generate_dihedral_entries( im1, im2, r, pairs ):
+    print 'Updating dihedrals...........'
+    new_ii = []
+    done_i1 = []
+    done_i2 = []
+    # ILDN dihedrals
+    for i1 in im1:
+	#print '%s %s %s %s %s' % (i1[0].name,i1[1].name,i1[2].name,i1[3].name,i1[4])
+        for i2 in im2:
+            if improp_entries_match(i1[:4], i2[:4]) and (i2 not in done_i2):
+                im_new = i1[:4]
+                if i1[4] == '': 
+		    im_new.append( 'default-A' )
+                else: 
+		    im_new.append( i1[4] )
+                if i2[4] == '': 
+		    im_new.append( 'default-B' )
+                else: 
+		    im_new.append( i2[4] )
+                done_i1.append( i1 )
+                done_i2.append( i2 )
+                new_ii.append( im_new )
+		break
+    for i1 in im1:
+        if i1 not in done_i1:
+            im_new =  i1[:4]
+            if i1[4] == '': 
+	        im_new.append( 'default-A' )
+	        im_new.append( 'default-A' )
+            else:
+		if ( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+  	            im_new.append( i1[4] )
+                    im_new.append( i1[4] )
+		else:
+                    im_new.append( i1[4] )
+#                    im_new.append( 'default-B' )
+		    im_new.append( 'undefined' )
+            new_ii.append( im_new )
+    for i2 in im2:
+#	print '%s %s %s %s %s' % (i2[0].name,i2[1].name,i2[2].name,i2[3].name,i2[4])
+        if i2 not in done_i2:
+            im_new =  i2[:4] 
+            if i2[4] == '': 
+		im_new.append( 'default-B' )
+		im_new.append( 'default-B' )
+            else: 
+#		print 'Bname %s %s %s %s' % (i2[0].nameB,i2[1].nameB,i2[2].nameB,i2[3].nameB)
+                if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
+                    im_new.append( i2[4] )
+                    im_new.append( i2[4] )
+                else:
+	            print 'and here'
+		    im_new.append( 'undefined' )
+#                    im_new.append( 'default-A' )
+                    im_new.append( i2[4] )
+            new_ii.append( im_new )
+##     for ii in new_ii:
+##         print '--->', ' '.join(ii)
+##     print
+    return new_ii
 
 def generate_improp_entries( im1, im2, r ):
     print 'Updating impropers...........'
@@ -406,34 +437,56 @@ def generate_improp_entries( im1, im2, r ):
     for i1 in im1:
         for i2 in im2:
             if improp_entries_match(i1[:4], i2[:4]):
+		print 'alus %s' % i1[4]
                 im_new = i1[:4]
-                if i1[4] == '': im_new.append( 'default-A' )
-                else: im_new.append( i1[4] )
-                if i2[4] == '': im_new.append( 'default-B' )
-                else: im_new.append( i2[4] )
+                if i1[4] == '': 
+		    im_new.append( 'default-A' )
+		elif( i1[4] == '105.4' ): #star
+		    im_new.append( 'default-star' )
+                else: 
+		    im_new.append( i1[4] )
+                if i2[4] == '': 
+		    im_new.append( 'default-B' )
+                elif( i2[4] == '105.4' ): #star
+                    im_new.append( 'default-star' )
+                else: 
+		    im_new.append( i2[4] )
                 done_i1.append( i1 )
                 done_i2.append( i2 )
                 new_ii.append( im_new )
     for i1 in im1:
         if i1 not in done_i1:
             im_new =  i1[:4] 
-            if i1[4] == '': im_new.append( 'default-A' )
-            else: im_new.append( i1[4] )
-            im_new.append( 'default-A' )
+            if i1[4] == '': 
+	        im_new.append( 'default-A' )
+                im_new.append( 'default-A' )
+            elif( i1[4] == '105.4' ): #star
+                im_new.append( 'default-star' )
+                im_new.append( 'undefined' )
+            else: 
+		im_new.append( i1[4] )
+                im_new.append( i1[4] )
             new_ii.append( im_new )
     for i2 in im2:
         if i2 not in done_i2:
             im_new =  i2[:4] #[ find_atom_by_nameB(r, n) for n in i2[:4] ] 
-            im_new.append( 'default-B' )
-            if i2[4] == '': im_new.append( 'default-B' )
-            else: im_new.append( i2[4] )
+#            im_new.append( 'default-B' )
+            if i2[4] == '': 
+	        im_new.append( 'default-B' )
+	        im_new.append( 'default-B' )
+            elif( i2[4] == '105.4' ): #star
+                im_new.append( 'undefined' )
+                im_new.append( 'default-star' )
+            else:
+	        im_new.append( i2[4] )
+		im_new.append( i2[4] )
             new_ii.append( im_new )
 ##     for ii in new_ii:
 ##         print '--->', ' '.join(ii)
 ##     print
     return new_ii
 
-def write_rtp( fp, r, ii_list ):
+def write_rtp( fp, r, ii_list, dihi_list ):
     print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
     print >>fp,' [ atoms ]'
     cgnr = 1
@@ -452,10 +505,17 @@ def write_rtp( fp, r, ii_list ):
             print >>fp, "%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4])
         else:
             print >>fp, "%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name)
+
+    print >>fp,'\n [ dihedrals ]'
+    for ii in dihi_list:
+        if not ii[4].startswith('default'):
+            print >>fp, "%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4])
+        else:
+            print >>fp, "%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name)
     print
                 
 
-def write_mtp( fp, r, ii_list, rotations ):
+def write_mtp( fp, r, ii_list, rotations, dihi_list ):
     print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
     print >>fp,'\n [ morphes ]'
     for atom in r.atoms:
@@ -480,6 +540,13 @@ def write_mtp( fp, r, ii_list, rotations ):
         print >>fp," %6s %6s %6s %6s     %-25s %-25s  " % \
               ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] )
     print
+
+    print >>fp,'\n [ dihedrals ]'
+    for ii in dihi_list:
+        print >>fp," %6s %6s %6s %6s     %-25s %-25s  " % \
+              ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] )
+    print
+
     if rotations:
         print >>fp, '\n [ rotations ]'
         for rot in rotations:
@@ -523,7 +590,7 @@ def make_rotations( r ):
     return rotations
 
 def assign_mass(r1, r2):
-    NBParams = NBParser( 'amber99sb.ff/ffnonbonded.itp' )
+    NBParams = NBParser( 'amber99sb-star-ildn.ff/ffnonbonded.itp' )
     for atom in r1.atoms+r2.atoms:
         print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
@@ -562,7 +629,6 @@ def improps_as_atoms( im, r, use_b = False):
         im_new.append( new_ii )
     return im_new
     
-                
 m1 = Model(sys.argv[1])
 m2 = Model(sys.argv[2])
 aa1 = sys.argv[1].split('.')[0].split('_')[0]
@@ -591,7 +657,7 @@ r1.resnB = r2.resname[0]+r2.resname[1:].lower()
 r1.write('r1.pdb')
 r2.write('r2.pdb')
 
-rtp = RTPParser('amber99sb.ff/aminoacids.rtp')
+rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
 assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
 assign_mass( r1, r2 )
@@ -615,17 +681,36 @@ abdic, badic = make_transition_dics( atom_pairs, r1)
 
 update_bond_lists( r1, badic )
 
+# VG #
+# CMAP for charmm #
+
+# VG #
+# dihedrals are necessary for ILDN #
+dih_1 = rtp[r1.resname]['diheds']
+dih_2 = rtp[r2.resname]['diheds']
+
+dih1 = improps_as_atoms( dih_1, r1) #its alright, can use improper function
+dih2 = improps_as_atoms( dih_2, r1, use_b = True)
+
+# VG #
+# here go impropers #
 im_1 = rtp[r1.resname]['improps']
 im_2 = rtp[r2.resname]['improps']
 
 im1 = improps_as_atoms( im_1, r1)
 im2 = improps_as_atoms( im_2, r1, use_b = True)
-## for x in im1:
-##     print x
+#for x in dih1:
+#    print x
 ## print
 ## for x in im2:
 ##     print x
 
+# cmap #
+
+# dihedrals #
+dihi_list = generate_dihedral_entries(dih1, dih2, r1, atom_pairs)
+
+# impropers #
 ii_list = generate_improp_entries(im1, im2, r1)
 
 rot = make_rotations(r1)
@@ -634,10 +719,9 @@ r1.set_resname( rr_name )
 rename_to_gmx( r1 )
 
 rtp_out = open(rr_name+'.rtp','w')
-write_rtp(rtp_out, r1, ii_list)
+write_rtp(rtp_out, r1, ii_list, dihi_list)
 r1.write(rr_name+'.pdb')
 mtp_out = open(rr_name+'.mtp','w')
 
-write_mtp(mtp_out, r1, ii_list, rot)     
-
+write_mtp(mtp_out, r1, ii_list, rot, dihi_list)     
 

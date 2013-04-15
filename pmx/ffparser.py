@@ -501,6 +501,8 @@ class BondedParser:
     
     def get_dihedral_param(self, type1,type2,type3,type4,func):
         
+	self.result = []
+	found = 0
         for entr in self.dihedraltypes:
             if (type1 == entr[0] and \
                 type2 == entr[1] and \
@@ -510,7 +512,12 @@ class BondedParser:
                  type2 == entr[2] and \
                  type3 == entr[1] and \
                  type4 == entr[0] and func==entr[4]):
-                return entr[4:]
+	 	self.result.append(entr[4:])
+		found = 1
+		if(func != 9):
+		    return self.result
+	if( found==1 ):
+	    return self.result
         for entr in self.dihedraltypes:
             if ('X' == entr[0] and \
                 type2 == entr[1] and \
@@ -520,7 +527,9 @@ class BondedParser:
                  type2 == entr[1] and \
                  type3 == entr[2] and \
                  'X' == entr[3] and func==entr[4]):
-                return entr[4:]
+                self.result.append(entr[4:])
+                if(func != 9):
+                    return self.result
             if ('X' == entr[3] and \
                 type2 == entr[2] and \
                 type3 == entr[1] and \
@@ -529,7 +538,12 @@ class BondedParser:
                  type2 == entr[2] and \
                  type3 == entr[1] and \
                  'X' == entr[0] and func==entr[4]):
-                return entr[4:]
+		self.result.append(entr[4:])
+		found = 1
+                if(func != 9):
+                    return self.result
+        if( found==1 ):
+            return self.result
         for entr in self.dihedraltypes:
             if ('X' == entr[0] and \
                 type2 == entr[1] and \
@@ -539,7 +553,12 @@ class BondedParser:
                  type2 == entr[2] and \
                  type3 == entr[1] and \
                  'X' == entr[0] and func==entr[4]):
-                return entr[4:]
+                self.result.append(entr[4:])
+		found = 1
+                if(func != 9):
+                    return self.result
+        if( found==1 ):
+            return self.result
         for entr in self.dihedraltypes:
             if ('X' == entr[0] and \
                 'X' == entr[1] and \
@@ -549,7 +568,12 @@ class BondedParser:
                  type2 == entr[2] and \
                  'X' == entr[1] and \
                  'X' == entr[0] and func==entr[4]):
-                return entr[4:]
+                self.result.append(entr[4:])
+		found = 1
+                if(func != 9):
+                    return self.result
+        if( found==1 ):
+            return self.result
         for entr in self.dihedraltypes: # exchange 1 -> 3
             if ('X' == entr[0] and \
                 'X' == entr[1] and \
@@ -559,9 +583,11 @@ class BondedParser:
                  type4 == entr[2] and \
                  'X' == entr[1] and \
                  'X' == entr[0] and func==entr[4]):
-                return entr[4:]
+                self.result.append(entr[4:])
+                if(func != 9):
+                    return self.result
         
-        return None 
+        return self.result
 
 
 

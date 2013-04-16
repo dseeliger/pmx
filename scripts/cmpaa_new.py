@@ -15,15 +15,57 @@ standard_pair_list = [
     ('2HB','2HB'),
     ('CG','CG')
     ]
+
+standard_pair_listB = [
+    ('N','N'),
+    ('H','H'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB'),
+    ('1HB','HB1'),
+    ('2HB','HB2'),
+    ('CG','CG')
+    ]
+
+standard_pair_listC = [
+    ('N','N'),
+    ('H','H'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB'),
+    ('HB1','1HB'),
+    ('HB2','2HB'),
+    ('CG','CG')
+    ]
+
+standard_pair_listD = [
+    ('N','N'),
+    ('H','H'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB'),
+    ('HB1','HB1'),
+    ('HB2','HB2'),
+    ('CG','CG')
+    ]
     
 use_standard_pair_list = {
-    'PHE': [ 'TRP','HIP','HID','HIE'],
-    'TYR': [ 'TRP','HIP','HID','HIE'],
-    'TRP': [ 'PHE','TYR','HIP','HID','HIE'],
+    'PHE': [ 'TRP','HIP','HID','HIE','HIS1','HISH','HISE'],
+    'TYR': [ 'TRP','HIP','HID','HIE','HIS1','HISH','HISE'],
+    'TRP': [ 'PHE','TYR','HIP','HID','HIE','HIS1','HISH','HISE'],
 #    'HIP': [ 'PHE','TYR','HIP','HID','HIE'],
     'HID': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HIE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
-    'HIP': [ 'PHE','TYR','TRP'] #,'HID','HIE'],
+    'HIP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
+    'HIS1': [ 'TRP','HIP','HID','HIE','HISH','HISE'],
+    'HISE': [ 'TRP','HIP','HID','HIE','HISH','HIS1'],
+    'HISH': [ 'TRP','HIP','HID','HIE','HIS1','HISE']
     }
 
 merge_by_name_list = {
@@ -32,6 +74,9 @@ merge_by_name_list = {
     'HID':['HIP','HIE'],
     'HIE':['HIP','HID'],
     'HIP':['HID','HIE'],
+    'HIS1':['HISE','HISH'],
+    'HISE':['HIS1','HISH'],
+    'HISH':['HIS1','HISE']
 }
     
 
@@ -41,12 +86,16 @@ mol_branch = {
     'LEU':3,
     'GLN':3,
     'GLU':3,
+    'GLUH':3,
     'ASP':2,
     'ASN':2,
     'PHE':2,
     'TYR':2,
     'TRP':2,
     'HIS':2,
+    'HIS1':2,
+    'HISE':2,
+    'HISH':2,
     'THR':2,
     'ALA':5,
     'SER':5,
@@ -590,7 +639,7 @@ def make_rotations( r ):
     return rotations
 
 def assign_mass(r1, r2):
-    NBParams = NBParser( 'amber99sb-star-ildn.ff/ffnonbonded.itp' )
+    NBParams = NBParser( 'oplsaa.ff/ffnonbonded.itp', 'new', 'opls' )
     for atom in r1.atoms+r2.atoms:
         print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
@@ -645,6 +694,7 @@ m2.rename_atoms()
 
 r1 = m1.residues[0]
 r2 = m2.residues[0]
+
 r1.get_mol2_types()
 r2.get_mol2_types()
 align_sidechains(r1,r2)
@@ -657,7 +707,8 @@ r1.resnB = r2.resname[0]+r2.resname[1:].lower()
 r1.write('r1.pdb')
 r2.write('r2.pdb')
 
-rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
+rtp = RTPParser('oplsaa.ff/aminoacids.rtp')
+
 assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
 assign_mass( r1, r2 )
@@ -668,7 +719,15 @@ assign_branch( r2 )
 
 if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
-    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
+    if(len(r1.resname)==3 and len(r2.resname)==3):
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
+    elif(len(r1.resname)==4 and len(r2.resname)==3):
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+    elif(len(r1.resname)==3 and len(r2.resname)==4):
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
+    elif(len(r1.resname)==4 and len(r2.resname)==4):
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
+
 elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]: 
     atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
 else:    

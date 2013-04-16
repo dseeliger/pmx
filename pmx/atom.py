@@ -242,7 +242,7 @@ class Atom:
             s=pdb_format2 % (self.race,idx,name,self.altloc,\
                              resname,self.chain_id,resid,\
                              coords[0],coords[1],\
-                             coords[2],self.occ,self.bfac,self.symbol)
+                             coords[2],self.occ,self.bfac)#,self.symbol)
         return s
 
 

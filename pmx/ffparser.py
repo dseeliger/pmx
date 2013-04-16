@@ -696,15 +696,24 @@ class NBParser:
                         }
                 
         elif version == 'new':
-            lst = parseList('siffsff',lst)
-            for entr in lst:
-                self.atomtypes[entr[0]] = {
-                    'bond_type':entr[0],
-                    'mass':float(entr[2]),
-                    'sigma':entr[5]*10, # nm -> A
-                    'eps':entr[6]
-                    }
-            
+            if self.ff.startswith('amber'):
+                lst = parseList('siffsff',lst)
+                for entr in lst:
+                    self.atomtypes[entr[0]] = {
+                        'bond_type':entr[0],
+                        'mass':float(entr[2]),
+                        'sigma':entr[5]*10, # nm -> A
+                        'eps':entr[6]
+                        }
+            elif self.ff.startswith('opls'):
+                lst = parseList('ssiffsff',lst)
+                for entr in lst:
+                    self.atomtypes[entr[0]] = {
+                        'bond_type':entr[1],
+                        'mass':float(entr[3]),
+                        'sigma':entr[6]*10, # nm -> A
+                        'eps':entr[7]
+                        }
                 
     def assign_params(self, model):
         for atom in model.atoms:

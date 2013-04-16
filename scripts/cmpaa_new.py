@@ -70,6 +70,7 @@ def assign_rtp_entries( mol, rtp ):
     entr = rtp[mol.resname]
     # atoms
     for atom_entry in entr['atoms']:
+        print atom_entry
         atom_name = atom_entry[0]
         atom_type = atom_entry[1]
         atom_q    = atom_entry[2]
@@ -628,11 +629,31 @@ def improps_as_atoms( im, r, use_b = False):
         new_ii.extend( ii[4:] )
         im_new.append( new_ii )
     return im_new
-    
-m1 = Model(sys.argv[1])
-m2 = Model(sys.argv[2])
-aa1 = sys.argv[1].split('.')[0].split('_')[0]
-aa2 = sys.argv[2].split('.')[0].split('_')[0]
+   
+files= [
+   FileOption("-pdb1", "r",["pdb"],"a1.pdb",""),
+   FileOption("-pdb2", "r",["pdb"],"a2.pdb",""),
+   FileOption("-opdb1", "w",["pdb"],"r1.pdb",""),
+   FileOption("-opdb2", "w",["pdb"],"r2.pdb",""),
+   FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
+]
+
+options=[]
+help_text = ("cmpaa.py reads two pdb files aligned on the backbone togheter with an rtp file.",
+		"This is used to generate a hybrid residue.\n")
+#options=[Option("-ff", "string", False ,"aminoacids.rtp")]
+cmdl = Commandline( sys.argv, options = options, fileoptions = files,
+                     program_desc = help_text,
+                     check_for_existing_files = False )
+
+
+rtpfile=cmdl['-ff']
+m1 = Model(cmdl['-pdb1'])
+m2 = Model(cmdl['-pdb2'])
+nm1=cmdl['-pdb1']
+nm2=cmdl['-pdb2']
+aa1 = nm1.split('.')[0].split('_')[0]
+aa2 = nm2.split('.')[0].split('_')[0]
 
 rr_name = aa1+'2'+aa2
 
@@ -654,10 +675,11 @@ r2.get_real_resname()
 r1.resnA = r1.resname[0]+r1.resname[1:].lower()
 r1.resnB = r2.resname[0]+r2.resname[1:].lower()
 
-r1.write('r1.pdb')
-r2.write('r2.pdb')
+r1.write(cmdl['-opdb1'])
+r2.write(cmdl['-opdb2'])
 
-rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
+#rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
+rtp = RTPParser(rtpfile)
 assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
 assign_mass( r1, r2 )

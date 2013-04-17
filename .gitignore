@@ -1,3 +1,4 @@
 *.[oa]
 *~
-build/
+build.sh
+.localhistory

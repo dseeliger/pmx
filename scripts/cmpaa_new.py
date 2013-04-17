@@ -70,7 +70,6 @@ def assign_rtp_entries( mol, rtp ):
     entr = rtp[mol.resname]
     # atoms
     for atom_entry in entr['atoms']:
-        print atom_entry
         atom_name = atom_entry[0]
         atom_type = atom_entry[1]
         atom_q    = atom_entry[2]
@@ -81,7 +80,15 @@ def assign_rtp_entries( mol, rtp ):
         atom.cgnr = atom_cgnr
     # bonds
     for a1, a2 in entr['bonds']:
-        if not '-' in a1 and not '-' in a2:
+        print a1
+        print a2
+	#MS charmm uses next residue in bonds (+), amber pervious (-)
+	#MS also write rtp is affected now, since normally -C N is added
+	#MS charmm used C +N, problem is that you run into trouble on the
+	#MS termini
+	bmin=not '-' in a1 and not '-' in a2
+	bplus=not '+' in a1 and not '+' in a2
+        if not bmin and bplus:
             atom1, atom2 = mol.fetchm( [a1, a2] )
             atom1.bonds.append( atom2 )
             atom2.bonds.append( atom1 )
@@ -499,6 +506,7 @@ def write_rtp( fp, r, ii_list, dihi_list ):
         for at  in atom.bonds:
             if atom.id < at.id:
                 print >>fp, "%6s  %6s ; (%6s  %6s)" % ( atom.name, at.name, atom.nameB, at.nameB )
+    #MS here there will have to be a check for FF, since for charmm we need to add C N
     print >>fp, "%6s  %6s " % ( "-C", "N")
     print >>fp,'\n [ impropers ]'
     for ii in ii_list:
@@ -590,8 +598,8 @@ def make_rotations( r ):
         rotations.append( rot_list )
     return rotations
 
-def assign_mass(r1, r2):
-    NBParams = NBParser( 'amber99sb-star-ildn.ff/ffnonbonded.itp' )
+def assign_mass(r1, r2,ffnonbonded):
+    NBParams = NBParser(ffnonbonded)
     for atom in r1.atoms+r2.atoms:
         print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
@@ -636,6 +644,7 @@ files= [
    FileOption("-opdb1", "w",["pdb"],"r1.pdb",""),
    FileOption("-opdb2", "w",["pdb"],"r2.pdb",""),
    FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
+   FileOption("-ffnb", "r",["itp"],"ffnonbonded.rtp",""),
 ]
 
 options=[]
@@ -682,7 +691,7 @@ r2.write(cmdl['-opdb2'])
 rtp = RTPParser(rtpfile)
 assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
-assign_mass( r1, r2 )
+assign_mass( r1, r2 ,cmdl['-ffnb'])
 
 
 assign_branch( r1 )

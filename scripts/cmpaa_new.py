@@ -2,10 +2,24 @@ import sys, os
 from pmx import *
 from pmx.ffparser import RTPParser, NBParser
 from pmx.rotamer import _aa_chi
+import tempfile
 
 standard_pair_list = [
     ('N','N'),
     ('H','H'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB'),
+    ('1HB','1HB'),
+    ('2HB','2HB'),
+    ('CG','CG')
+    ]
+
+standard_pair_list_charmm = [
+    ('N','N'),
+    ('HN','HN'),
     ('CA','CA'),
     ('C','C'),
     ('O','O'),
@@ -80,8 +94,6 @@ def assign_rtp_entries( mol, rtp ):
         atom.cgnr = atom_cgnr
     # bonds
     for a1, a2 in entr['bonds']:
-        print a1
-        print a2
 	#MS charmm uses next residue in bonds (+), amber pervious (-)
 	#MS also write rtp is affected now, since normally -C N is added
 	#MS charmm used C +N, problem is that you run into trouble on the
@@ -598,8 +610,30 @@ def make_rotations( r ):
         rotations.append( rot_list )
     return rotations
 
-def assign_mass(r1, r2,ffnonbonded):
-    NBParams = NBParser(ffnonbonded)
+def parse_ffnonbonded_charmm(ffnonbonded,f):
+    ifile=open(ffnonbonded,'r')
+    lines=ifile.readlines()
+    #now clean the heavy atom entries from file and write it to temp file
+    bAdd=True
+    for line in lines:
+        if line.strip()=='#ifdef HEAVY_H' :
+	    bAdd=False
+	if bAdd and line[0]!='#':
+	    f.write(line)
+	if line.strip()=='#else' :
+	    bAdd=True
+	if line.strip()=='#endif' :
+	    bAdd=True
+
+def assign_mass(r1, r2,ffnonbonded,bCharmm):
+    #MS open ffnonbonded, remove HEAVY_H, pass it to NBParser 
+    if bCharmm : 
+        f=tempfile.NamedTemporaryFile(delete=False)
+	parse_ffnonbonded_charmm(ffnonbonded,f)
+        NBParams = NBParser(f.name)
+	f.close()
+    else : 
+        NBParams = NBParser(ffnonbonded)
     for atom in r1.atoms+r2.atoms:
         print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
@@ -637,6 +671,12 @@ def improps_as_atoms( im, r, use_b = False):
         new_ii.extend( ii[4:] )
         im_new.append( new_ii )
     return im_new
+
+#MS charmm uses HN instead of H for backbone H on N
+def rename_atoms_charmm(m):
+    for atom in m.atoms:
+        if atom.name=='H' :
+	    atom.name='HN'
    
 files= [
    FileOption("-pdb1", "r",["pdb"],"a1.pdb",""),
@@ -647,14 +687,18 @@ files= [
    FileOption("-ffnb", "r",["itp"],"ffnonbonded.rtp",""),
 ]
 
-options=[]
+options=[Option( "-ft", "string", "charmm" , "force field type (charmm or nothing")]
 help_text = ("cmpaa.py reads two pdb files aligned on the backbone togheter with an rtp file.",
 		"This is used to generate a hybrid residue.\n")
+
 #options=[Option("-ff", "string", False ,"aminoacids.rtp")]
 cmdl = Commandline( sys.argv, options = options, fileoptions = files,
                      program_desc = help_text,
                      check_for_existing_files = False )
-
+if cmdl['-ft']=="charmm":
+    bCharmm=True
+else :
+    bCharmm=False
 
 rtpfile=cmdl['-ff']
 m1 = Model(cmdl['-pdb1'])
@@ -672,6 +716,11 @@ m1.get_order()
 m2.get_order()
 m1.rename_atoms()
 m2.rename_atoms()
+
+#charmm uses 
+if bCharmm:
+    rename_atoms_charmm(m1)
+    rename_atoms_charmm(m2)
 
 r1 = m1.residues[0]
 r2 = m2.residues[0]
@@ -691,7 +740,7 @@ r2.write(cmdl['-opdb2'])
 rtp = RTPParser(rtpfile)
 assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
-assign_mass( r1, r2 ,cmdl['-ffnb'])
+assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm)
 
 
 assign_branch( r1 )

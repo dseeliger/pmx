@@ -143,9 +143,9 @@ _aacids_ext_oplsaa = {
 
 
 _protein_residues = (
-    'ALA','ARG','ASN','ASP','ASPH','ASH','GLH','CYS','CYS2','CYN','CYX','CYM',
-    'GLU','GLN','GLY','HIS','HIE','HIP','HID','ILE','LEU','LYS','LYN',
-    'LYSH','LYP','MET','PHE','PRO','SER','THR','TRP','TYR','VAL',
+    'ALA','ARG','ASN','ASP','ASPH','ASH','ASPP','GLH','CYS','CYS2','CYN','CYX','CYM',
+    'GLU','GLUP','GLN','GLY','HIS','HIE','HIP','HID','HSE','HSD','HSP','ILE','LEU','LYS','LYN',
+    'LYSH','LYP','LSN','MET','PHE','PRO','SER','THR','TRP','TYR','VAL',
     'NALA','NGLY','NSER','NTHR','NLEU','NILE','NVAL','NASN','NGLN',
     'NARG','NHID','NHIE','NHIP','NTRP','NPHE','NTYR','NGLU','NASP',
     'NLYP','NPRO','NCYN','NCYX','NMET','CALA','CGLY','CSER','CTHR',
@@ -1559,6 +1559,10 @@ _aliases = {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
+	'ASPP': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+	},
 	'NASP': {
                  'H1':'1H',
                  'H2':'2H',
@@ -1609,6 +1613,8 @@ _aliases = {
 	'CYS': {
 		'HB1':'1HB',
 		'HB2':'2HB',
+		'HG1':'1HG',
+		#MS: HG1 i only in charmm...
 	},
 	'CYN': {
 		'HB1':'1HB',
@@ -1627,6 +1633,12 @@ _aliases = {
 		'HB2':'2HB',
 	},
 	'GLU': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+		'HG1':'1HG',
+		'HG2':'2HG',
+	},
+	'GLUP': {
 		'HB1':'1HB',
 		'HB2':'2HB',
 		'HG1':'1HG',
@@ -1714,7 +1726,15 @@ _aliases = {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
+	'HSE': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+	},
 	'HID': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+	},
+	'HSD': {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
@@ -1756,6 +1776,10 @@ _aliases = {
 		'HB2':'2HB',
 	},
 	'HIP': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+	},
+	'HSP': {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
@@ -1996,6 +2020,7 @@ _aliases = {
 	'SER': {
 		'HB1':'1HB',
 		'HB2':'2HB',
+		'HG1':'1HG',
 	},
 	'NSER': {
                  'H1':'1H',
@@ -4573,6 +4598,18 @@ _mol2_types = {
     'C':['C.2',0],
     'O':['O.2',0],
     },
+    'GLUP':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.3',0],
+    'CD':['C.2',0],
+    'OE1':['O.co2',-0.5],
+    'OE2':['O.co2',-0.5],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
     'GLH':
     {
     'N':['N.am',0],
@@ -4613,7 +4650,33 @@ _mol2_types = {
     'C':['C.2',0],
     'O':['O.2',0],
     },
+    'HSE':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'ND1':['N.2',0],
+    'CE1':['C.2',0],
+    'NE2':['N.pl3',0],
+    'CD2':['C.2',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
     'HID':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'ND1':['N.2',0],
+    'CE1':['C.2',0],
+    'NE2':['N.pl3',0],
+    'CD2':['C.2',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'HSD':
     {
     'N':['N.am',0],
     'CA':['C.3',0],
@@ -4639,7 +4702,33 @@ _mol2_types = {
     'C':['C.2',0],
     'O':['O.2',0],
     },
+    'HSE':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'ND1':['N.2',0],
+    'CE1':['C.2',0],
+    'NE2':['N.pl3',0],
+    'CD2':['C.2',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
     'HIP':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'ND1':['N.2',0],
+    'CE1':['C.2',0],
+    'NE2':['N.pl3',0],
+    'CD2':['C.2',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'HSP':
     {
     'N':['N.am',0],
     'CA':['C.3',0],
@@ -4698,6 +4787,18 @@ _mol2_types = {
     'O':['O.2',0],
     },
     'LYN':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.3',0],
+    'CD':['C.3',0],
+    'CE':['C.3',0],
+    'NZ':['N.4',1],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'LSN':
     {
     'N':['N.am',0],
     'CA':['C.3',0],
@@ -4792,6 +4893,17 @@ _mol2_types = {
     'O':['O.2',0],
     },
     'ASH':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'OD1':['O.co2',-0.5],
+    'OD2':['O.co2',-0.5],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'ASPP':
     {
     'N':['N.am',0],
     'CA':['C.3',0],

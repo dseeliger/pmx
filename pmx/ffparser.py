@@ -64,11 +64,16 @@ class RTPParser:
             # read impropers
             il = readSection(rtp_lines,'[ impropers ]','[')
             improps = self.__read_rtp_impropers(key, il)
+            # read cmap (only for charmm)
+            cmap = readSection(rtp_lines,'[ cmap ]','[')
+            #print cmap
+	    #cmap = self.__read_rtp_cmap(key, cl)
             self.entries[key] = {
                 'atoms': atoms,
                 'bonds': bonds,
                 'diheds': diheds,
-                'improps': improps
+                'improps': improps,
+		'cmap' : cmap
                 }
 
     def __str__(self):
@@ -309,7 +314,7 @@ class RTPParser:
         for line in self.lines[idx+1:]:
             if line.strip().startswith('['):
                 if line.strip()[1:-1].strip() not in \
-                       ['atoms','bonds','dihedrals','impropers']:
+                       ['atoms','bonds','dihedrals','impropers','cmap']:
                     break
                 else:
                     r.append(line)

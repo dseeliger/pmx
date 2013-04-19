@@ -31,13 +31,16 @@ standard_pair_list_charmm = [
     ]
     
 use_standard_pair_list = {
-    'PHE': [ 'TRP','HIP','HID','HIE'],
-    'TYR': [ 'TRP','HIP','HID','HIE'],
-    'TRP': [ 'PHE','TYR','HIP','HID','HIE'],
+    'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE'],
+    'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE'],
+    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE'],
 #    'HIP': [ 'PHE','TYR','HIP','HID','HIE'],
     'HID': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HIE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
-    'HIP': [ 'PHE','TYR','TRP'] #,'HID','HIE'],
+    'HIP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
+    'HSD': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
+    'HSE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
+    'HSP': [ 'PHE','TYR','TRP'] #,'HID','HIE'],
     }
 
 merge_by_name_list = {
@@ -46,6 +49,9 @@ merge_by_name_list = {
     'HID':['HIP','HIE'],
     'HIE':['HIP','HID'],
     'HIP':['HID','HIE'],
+    'HSD':['HSP','HSE'],
+    'HSE':['HSP','HSD'],
+    'HSP':['HSD','HSE']
 }
     
 
@@ -76,12 +82,15 @@ def tag(atom):
     return '%-20s' % s
 
 def align_sidechains(r1, r2):
+    #MS: if you add new force field, check pmx/molecule.py, make sure res is
+    #MS: correctly set into get_real_resname 
     for i in range(r1.nchi()):
         phi = r1.get_chi(i+1, degree = True)
         r2.set_chi(i+1,phi)
 
-def assign_rtp_entries( mol, rtp ):
+def assign_rtp_entries( mol, rtp):
     entr = rtp[mol.resname]
+    neigh=[]
     # atoms
     for atom_entry in entr['atoms']:
         atom_name = atom_entry[0]
@@ -100,10 +109,13 @@ def assign_rtp_entries( mol, rtp ):
 	#MS termini
 	bmin=not '-' in a1 and not '-' in a2
 	bplus=not '+' in a1 and not '+' in a2
-        if not bmin and bplus:
+        if bmin and bplus:
             atom1, atom2 = mol.fetchm( [a1, a2] )
             atom1.bonds.append( atom2 )
             atom2.bonds.append( atom1 )
+	else :
+	    neigh.append([a1,a2])
+    return neigh
         
 
 def assign_branch(mol):
@@ -218,15 +230,20 @@ def merge_by_names( mol1, mol2 ):
 
     
 
-def make_pairs( mol1, mol2 ):
+def make_pairs( mol1, mol2,bCharmm ):
     # make main chain + cb pairs
     print 'Making atom pairs.........'
     mol1.batoms = []
     merged_atoms1 = []
     merged_atoms2 = []
     atom_pairs = []
-    mc_list = ['N','CA','C','O','H','HA','CB']
-    gly_mc_list = ['N','CA','C','O','H','1HA','2HA'] 
+    if bCharmm :
+        mc_list = ['N','CA','C','O','HN','HA','CB']
+        gly_mc_list = ['N','CA','C','O','HN','1HA','2HA'] 
+    else :
+        mc_list = ['N','CA','C','O','H','HA','CB']
+        gly_mc_list = ['N','CA','C','O','H','1HA','2HA'] 
+
     if mol1.resname == 'GLY':
         atoms1 = mol1.fetchm( gly_mc_list )
     else:
@@ -506,7 +523,7 @@ def generate_improp_entries( im1, im2, r ):
 ##     print
     return new_ii
 
-def write_rtp( fp, r, ii_list, dihi_list ):
+def write_rtp( fp, r, ii_list, dihi_list,neigh_bonds,cmap):
     print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
     print >>fp,' [ atoms ]'
     cgnr = 1
@@ -519,7 +536,10 @@ def write_rtp( fp, r, ii_list, dihi_list ):
             if atom.id < at.id:
                 print >>fp, "%6s  %6s ; (%6s  %6s)" % ( atom.name, at.name, atom.nameB, at.nameB )
     #MS here there will have to be a check for FF, since for charmm we need to add C N
-    print >>fp, "%6s  %6s " % ( "-C", "N")
+    #MSsave those bonds with previous and next residue as a seperate entry
+    for i in neigh_bonds :
+        print >>fp, "%6s  %6s  " % (i[0],i[1])
+
     print >>fp,'\n [ impropers ]'
     for ii in ii_list:
         if not ii[4].startswith('default'):
@@ -533,8 +553,10 @@ def write_rtp( fp, r, ii_list, dihi_list ):
             print >>fp, "%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4])
         else:
             print >>fp, "%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name)
-    print
-                
+    if cmap :
+        print >>fp,'\n [ cmap ]'
+    for i in cmap:
+        print >>fp, "%s  " % (i)
 
 def write_mtp( fp, r, ii_list, rotations, dihi_list ):
     print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
@@ -635,7 +657,7 @@ def assign_mass(r1, r2,ffnonbonded,bCharmm):
     else : 
         NBParams = NBParser(ffnonbonded)
     for atom in r1.atoms+r2.atoms:
-        print atom.atomtype, atom.name
+        #print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
         
 def rename_to_gmx( r ):
@@ -677,6 +699,19 @@ def rename_atoms_charmm(m):
     for atom in m.atoms:
         if atom.name=='H' :
 	    atom.name='HN'
+        if atom.name=='HG' and atom.resname=='CYS' :
+	    atom.name='1HG'
+        if atom.name=='HG' and atom.resname=='SER' :
+	    atom.name='1HG'
+
+def rename_res_charmm(m):
+    rename={'HIE':'HSE','HID':'HSD','HIP':'HSP','ASH':'ASPP','GLH':'GLUP','LYN':'LSN'}
+    for res in m.residues:
+        if rename.has_key(res.resname):
+	    res.resname=rename[res.resname]
+	    for atom in res.atoms:
+	        atom.resname=res.resname
+
    
 files= [
    FileOption("-pdb1", "r",["pdb"],"a1.pdb",""),
@@ -717,18 +752,19 @@ m2.get_order()
 m1.rename_atoms()
 m2.rename_atoms()
 
-#charmm uses 
 if bCharmm:
     rename_atoms_charmm(m1)
     rename_atoms_charmm(m2)
+    rename_res_charmm(m1)
+    rename_res_charmm(m2)
 
 r1 = m1.residues[0]
 r2 = m2.residues[0]
 r1.get_mol2_types()
 r2.get_mol2_types()
-align_sidechains(r1,r2)
 r1.get_real_resname()
 r2.get_real_resname()
+align_sidechains(r1,r2)
 
 r1.resnA = r1.resname[0]+r1.resname[1:].lower()
 r1.resnB = r2.resname[0]+r2.resname[1:].lower()
@@ -738,7 +774,7 @@ r2.write(cmdl['-opdb2'])
 
 #rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
 rtp = RTPParser(rtpfile)
-assign_rtp_entries( r1, rtp )
+bond_neigh=assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
 assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm)
 
@@ -748,11 +784,15 @@ assign_branch( r2 )
 
 if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
-    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
+    if bCharmm :
+        print bCharmm
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
+    else :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
 elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]: 
     atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
 else:    
-    atom_pairs, dummies = make_pairs( r1, r2 )
+    atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
 
 merge_molecules( r1, dummies )
 make_bstate_dummies( r1 )
@@ -786,6 +826,9 @@ im2 = improps_as_atoms( im_2, r1, use_b = True)
 ##     print x
 
 # cmap #
+cmap=[]
+if bCharmm :
+    cmap=rtp[r1.resname]['cmap']
 
 # dihedrals #
 dihi_list = generate_dihedral_entries(dih1, dih2, r1, atom_pairs)
@@ -799,7 +842,7 @@ r1.set_resname( rr_name )
 rename_to_gmx( r1 )
 
 rtp_out = open(rr_name+'.rtp','w')
-write_rtp(rtp_out, r1, ii_list, dihi_list)
+write_rtp(rtp_out, r1,ii_list, dihi_list, bond_neigh,cmap)
 r1.write(rr_name+'.pdb')
 mtp_out = open(rr_name+'.mtp','w')
 

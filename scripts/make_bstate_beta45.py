@@ -212,7 +212,6 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
 
     for d in topol.dihedrals:
         if len(d) >= 6:
-
 	    # only consider the dihedral, if it has not been encountered so far
 	    encountered = 0
 	    encountered = is_dih_encountered(visited_dih, d, encountered)
@@ -415,6 +414,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default):
                     dx[1].id == al[2].id and \
                     dx[2].id == al[1].id and \
                     dx[3].id == al[0].id):
+
 
                     #the following checks are needed for amber99sb*-ildn
                     #do not overwrite proper (type9) with improper (type4)
@@ -671,6 +671,11 @@ def main(argv):
     topol.residues = m.residues          # use model residue list
     rlist, rdic = get_hybrid_residues( m, mtp_file, version = 'new')
     topol.assign_fftypes()               # correct b-states
+#    for atom in m.atoms:
+#        print atom.type
+#	if atom.atomtypeB is not None:
+#	    print "typeB"
+#	    print atom.typeB
     for r in rlist:
         print 'log_> Hybrid Residue -> %d | %s ' % (r.id, r.resname )
 

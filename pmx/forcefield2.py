@@ -575,21 +575,50 @@ class TopolBase:
         for ang in self.angles:
             if len(ang) == 4:
                 print >>fp, '%6d %6d %6d %6d' % (ang[0].id, ang[1].id, ang[2].id,ang[3])
-            elif len(ang) == 5:
-                print >>fp, '%6d %6d %6d %6d %14.6f %14.6f' % (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[4][0], ang[4][1])
             else:
                 if state == 'AB':
-                    print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+		    #MS check type here, for charmm its different, Urey-Bradley
+		    if ang[3]==1 :
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
                           (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[4][1], \
                            ang[4][2], ang[5][1], ang[5][2], ang[0].name, ang[1].name, ang[2].name)
+	            elif ang[3]==5:
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+                          (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[4][1], \
+                           ang[4][2], ang[4][3], ang[4][4], ang[5][1], \
+			   ang[5][2], ang[5][3], ang[5][4], \
+			   ang[0].name, ang[1].name, ang[2].name)
+		    else :
+		        print "Don't know how to print angletype %d" % ang[3]
+		        exit()
                 elif state == 'AA':
-                    print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+		    if ang[3]==1 :
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
                           (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[4][1], \
                            ang[4][2], ang[4][1], ang[4][2], ang[0].name, ang[1].name, ang[2].name)
+	            elif ang[3]==5:
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+                          (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[4][1], \
+                           ang[4][2], ang[4][3], ang[4][4], ang[4][1], \
+			   ang[4][2], ang[4][3], ang[4][4], \
+			   ang[0].name, ang[1].name, ang[2].name)
+		    else :
+		        print "Don't know how to print angletype %d" % ang[3]
+		        exit()
                 elif state == 'BB':
-                    print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+		    if ang[3]==1 :
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
                           (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[5][1], \
                            ang[5][2], ang[5][1], ang[5][2], ang[0].name, ang[1].name, ang[2].name)
+	            elif ang[3]==5:
+                        print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
+                          (ang[0].id, ang[1].id, ang[2].id,ang[3], ang[5][1], \
+                           ang[5][2], ang[5][3], ang[5][4], ang[5][1], \
+			   ang[5][2], ang[5][3], ang[5][4], \
+			   ang[0].name, ang[1].name, ang[2].name)
+		    else :
+		        print "Don't know how to print angletype %d" % ang[3]
+		        exit()
 
 
     def write_dihedrals(self, fp, state='AB'):
@@ -616,6 +645,8 @@ class TopolBase:
                         ast = ' '.join(["%.6f" % x for x in [0,0,0]])
                     elif d[4] == 9:
                         ast = ' '.join(["%.6f" % x for x in [0,0,0]])
+                    elif d[4] == 2:
+                        ast = ' '.join(["%.6f" % x for x in [0,0]])
                         
                 elif ast != 'NULL' and hasattr(ast,"append"):
                     ast = ' '.join(["%.6f" % x for x in d[5][1:]])
@@ -626,6 +657,8 @@ class TopolBase:
                         bs = ' '.join(["%.6f" % x for x in [0,0,0]])
                     elif d[4] == 9:
                         bs = ' '.join(["%.6f" % x for x in [0,0,0]])
+                    elif d[4] == 2:
+                        bs = ' '.join(["%.6f" % x for x in [0,0]])
                     
                 elif bs !='NULL' and hasattr(bs,"append"):
 		    #print '%s' % d[6]

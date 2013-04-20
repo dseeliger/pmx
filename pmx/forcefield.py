@@ -109,6 +109,16 @@ def get_dihedral_param(type1,type2,type3,type4,dih_lib, func):
             'X' == entr[1] and \
             'X' == entr[0] and func==entr[4]):
             return entr[4:]
+    for entr in dih_lib:
+        if (typ1 == entr[0] and \
+            'X' == entr[1] and \
+            'X' == entr[2] and \
+            type4 == entr[3] and func==entr[4]) or \
+           (type1 == entr[3] and \
+            'X' == entr[2] and \
+            'X' == entr[1] and \
+            type4 == entr[0] and func==entr[4]):
+            return entr[4:]
     return None 
 
 

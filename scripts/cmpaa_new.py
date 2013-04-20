@@ -343,7 +343,7 @@ def merge_molecules( r1, dummies ):
         r1.append( new_atom )
 
 
-def make_bstate_dummies( r1 ):
+def make_bstate_dummies(r1):
     for atom in r1.atoms:
         if not hasattr(atom, "nameB"):
             atom.nameB = atom.name+'.gone'
@@ -694,6 +694,66 @@ def improps_as_atoms( im, r, use_b = False):
         im_new.append( new_ii )
     return im_new
 
+def write_atp_fnb(fn_atp,fn_nb,r):
+    types=[]
+    if os.path.isfile(fn_atp) : 
+        ifile=open(fn_atp,'r')
+	for line in ifile:
+	    sp=line.split()
+	    types.append(sp[0])
+	ifile.close()
+    if os.path.isfile(fn_atp) :
+        ofile=open(fn_atp,'a')
+    else :
+        ofile=open(fn_atp,'w')
+
+    for atom in r.atoms:
+        if atom.atomtype[0:3]=='DUM':
+	    if atom.atomtype not in types:
+                ofile.write("%-6s  %10.6f\n" % (atom.atomtype,atom.m))
+		types.append(atom.atomtype)
+        if atom.atomtypeB[0:3]=='DUM':
+	    if atom.atomtypeB not in types:
+                ofile.write("%-6s  %10.6f\n" % (atom.atomtypeB,atom.mB))
+		types.append(atom.atomtypeB)
+    ofile.close()
+
+    types=[]
+    if os.path.isfile(fn_nb) : 
+        ifile=open(fn_nb,'r')
+	for line in ifile:
+	    sp=line.split()
+	    types.append(sp[0])
+	ifile.close()
+    if os.path.isfile(fn_nb) :
+        ofile=open(fn_nb,'a')
+    else :
+        ofile=open(fn_nb,'w')
+    print types
+
+    for atom in r.atoms:
+        if atom.atomtype[0:3]=='DUM':
+	    if atom.atomtype not in types:
+                ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+		     % (atom.atomtype,atom.m))
+		types.append(atom.atomtype)
+        if atom.atomtypeB[0:3]=='DUM':
+	    if atom.atomtypeB not in types:
+                ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+		     % (atom.atomtypeB,atom.mB))
+		types.append(atom.atomtypeB)
+    ofile.close()
+	        
+#    lines=fatp.readlines()
+#    for 
+#    types=[]
+#    for line in lines:
+#        
+#    #write output for atomtypes
+#    #write output for ffnonbonded.itp
+#    fnb.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+#		     % (atom.atomtypeB,atom.mB))
+#
 #MS charmm uses HN instead of H for backbone H on N
 def rename_atoms_charmm(m):
     for atom in m.atoms:
@@ -720,6 +780,8 @@ files= [
    FileOption("-opdb2", "w",["pdb"],"r2.pdb",""),
    FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
    FileOption("-ffnb", "r",["itp"],"ffnonbonded.rtp",""),
+   FileOption("-fatp", "w",["atp"],"types.atp",""),
+   FileOption("-fnb", "w",["itp"],"fnb.itp",""),
 ]
 
 options=[Option( "-ft", "string", "charmm" , "force field type (charmm or nothing")]
@@ -797,6 +859,7 @@ else:
 merge_molecules( r1, dummies )
 make_bstate_dummies( r1 )
 
+write_atp_fnb(cmdl["-fatp"],cmdl["-fnb"],r1)
 abdic, badic = make_transition_dics( atom_pairs, r1)
 
 update_bond_lists( r1, badic )

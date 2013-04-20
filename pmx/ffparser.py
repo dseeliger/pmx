@@ -591,6 +591,18 @@ class BondedParser:
                 self.result.append(entr[4:])
                 if(func != 9):
                     return self.result
+        for entr in self.dihedraltypes: 
+            if (type1 == entr[0] and \
+                'X' == entr[1] and \
+                'X' == entr[2] and \
+                type4 == entr[3] and func==entr[4]) or \
+                (type1 == entr[3] and \
+                 'X' == entr[1] and \
+                 'X' == entr[2] and \
+                 type4 == entr[0] and func==entr[4]):
+                self.result.append(entr[4:])
+                if(func != 9):
+                    return self.result
         
         return self.result
 
@@ -625,7 +637,14 @@ class BondedParser:
                 starts.append(i)
         for s in starts:
             lst = readSection(self.lines[s:],'[ angletypes ]','[')
-            lst = parseList('sssiff',lst)
+	    try :
+                lst = parseList('sssiff',lst)
+            except:
+                try:
+                    lst = parseList('sssiffff',lst)
+		except:
+		    print "Unkown Angle type"
+		    exit()
             res.extend(lst)
         self.angletypes = res 
 
@@ -643,7 +662,10 @@ class BondedParser:
                 try:
                     lst = parseList('ssssiffi',lst)
                 except:
-                    lst = parseList('ssiffi',lst)
+		    try :
+                        lst = parseList('ssiffi',lst)
+	            except :
+                        lst = parseList('ssssiff',lst)
             res.extend(lst)
         self.dihedraltypes = res
 

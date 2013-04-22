@@ -9,6 +9,7 @@ ASN1  	Protein
 ASP	Protein
 ASP1	Protein
 ASPH	Protein
+ASPP	Protein
 ASH 	Protein
 CYS 	Protein
 CYS1	Protein
@@ -18,6 +19,7 @@ DALA	Protein
 GLN  	Protein
 GLU  	Protein
 GLUH 	Protein
+GLUP 	Protein
 GLH	Protein
 GLY	Protein
 HIS 	Protein
@@ -35,6 +37,7 @@ HYP  	Protein
 ILE  	Protein
 LEU  	Protein
 LYS  	Protein
+LSN  	Protein
 LYSH 	Protein
 MELEU	Protein
 MET  	Protein

@@ -78,6 +78,7 @@ class TopolBase:
         self.constraints = []
         self.have_constraints = False
         self.pairs = []
+	self.cmap  = []
         self.angles = []
         self.dihedrals = []
         self.virtual_sites3 = []
@@ -107,6 +108,7 @@ class TopolBase:
             self.read_pairs(lines)
             self.read_angles(lines)
             self.read_dihedrals(lines)
+            self.read_cmap(lines)
             self.read_vsites3(lines)
             self.read_vsites4(lines)
             self.__make_residues()
@@ -303,6 +305,32 @@ class TopolBase:
                                        func,rest])
 #		foo = (self.atoms[idx[0]-1],self.atoms[idx[1]-1],self.atoms[idx[2]-1],self.atoms[idx[3]-1],func,rest)
 #		print 'length %d' % len(foo)
+    def read_cmap(self, lines):
+        starts = []
+        cmap = []
+	print "read cmpa"
+        for i, line in enumerate(lines):
+            if line.strip().startswith('[ cmap ]'):
+                starts.append(i)
+        for s in starts:
+            lst = readSection(lines[s:],'[ cmap ]','[')
+            for line in lst:
+                entr = line.split()
+                idx = [int(x) for x in entr[:5]]
+                
+                func = int(entr[5])
+                try:
+                    rest = ' '.join(entr[6:])
+                except:
+                    rest = ''
+                self.cmap.append([self.atoms[idx[0]-1],\
+                                       self.atoms[idx[1]-1],\
+                                       self.atoms[idx[2]-1],\
+                                       self.atoms[idx[3]-1],\
+                                       self.atoms[idx[4]-1],\
+                                       func,rest])
+#		foo = (self.atoms[idx[0]-1],self.atoms[idx[1]-1],self.atoms[idx[2]-1],self.atoms[idx[3]-1],func,rest)
+#		print 'length %d' % len(foo)
 
     def read_vsites3(self, lines):
         starts = []
@@ -380,6 +408,7 @@ class TopolBase:
             self.write_pairs(fp)
             self.write_angles(fp, state = stateBonded)
             self.write_dihedrals(fp, state = stateBonded)
+	    self.write_cmap(fp)
             if self.has_vsites3:
                 self.write_vsites3(fp)
             if self.has_vsites4:
@@ -577,6 +606,9 @@ class TopolBase:
                 print >>fp, '%6d %6d %6d %6d' % (ang[0].id, ang[1].id, ang[2].id,ang[3])
             else:
                 if state == 'AB':
+#		    print ang[0].id, ang[1].id, ang[2].id
+#		    print state
+#	            print ang
 		    #MS check type here, for charmm its different, Urey-Bradley
 		    if ang[3]==1 :
                         print >>fp, '%6d %6d %6d %6d %14.6f %14.6f %14.6f %14.6f ; %s %s %s' % \
@@ -620,9 +652,13 @@ class TopolBase:
 		        print "Don't know how to print angletype %d" % ang[3]
 		        exit()
 
+    def write_cmap(self, fp):
+        print >>fp,'\n [ cmap ]'    
+        print >>fp,';  ai    aj    ak    al    am funct'
+        for d in self.cmap:
+            print >>fp, "%6d %6d %6d %6d %6d %4d" % ( d[0].id, d[1].id, d[2].id,d[3].id,d[4].id,d[5])
 
     def write_dihedrals(self, fp, state='AB'):
-	print 'WRITE DIH'
         print >>fp,'\n [ dihedrals ]'    
         print >>fp,';  ai    aj    ak    al funct'
         for d in self.dihedrals:

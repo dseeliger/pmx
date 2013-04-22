@@ -847,7 +847,6 @@ assign_branch( r2 )
 if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
     if bCharmm :
-        print bCharmm
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
     else :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)

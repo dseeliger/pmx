@@ -65,6 +65,7 @@ ext_one_letter = {
     'ASN':'N',
     'ASP':'D',
     'ASPH':'B',
+    'ASPP':'B',
     'ASH':'B',
     'CYS':'C',
     'CYS2':'C',
@@ -73,21 +74,26 @@ ext_one_letter = {
     'CYM':'C',
     'GLU':'E',
     'GLUH':'J',
+    'GLUP':'J',
     'GLH':'J',
     'GLN':'Q',
     'GLY':'G',
     'HIS':'H',
     'HIE':'X',
     'HISE':'X',
+    'HSE':'X',
     'HIP':'Z',
+    'HSP':'Z',
     'HISH':'Z',
     'HID':'H',
+    'HSD':'H',
     'ILE':'I',
     'LEU':'L',
     'LYS':'K',
     'LYSH':'K',
     'LYP':'K',
     'LYN':'O',
+    'LSN':'O',
     'MET':'M',
     'PHE':'F',
     'PRO':'P',
@@ -103,14 +109,14 @@ def check_residue_name( res ):
         if res.has_atom( 'HZ3'):
             res.set_resname('LYP')
     elif res.resname == 'HIS':
-        if self.has_atom('HD1') and \
-           self.has_atom('HE2'):
+        if res.has_atom('HD1') and \
+           res.has_atom('HE2'):
             res.set_resname('HIP')
-        elif self.has_atom('HD1') and not \
-                 self.has_atom('HE2'):
+        elif res.has_atom('HD1') and not \
+                 res.has_atom('HE2'):
             res.set_resname( 'HID' )
-        elif not self.has_atom('HD1') and  \
-                 self.has_atom('HE2'):
+        elif not res.has_atom('HD1') and  \
+                 res.has_atom('HE2'):
             res.set_resname( 'HIE' )
     elif res.resname == 'ASP':
         if res.has_atom('HD2'):
@@ -229,6 +235,7 @@ def ask_next():
 def convert_aa_name( aa ):
     if len(aa) == 1: return aa.upper()
     elif len(aa) == 3: return ext_one_letter[aa.upper()]
+    elif len(aa) == 4: return ext_one_letter[aa.upper()]
     else: raise UnkownResidueError(aa)
     
 

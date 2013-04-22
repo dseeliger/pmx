@@ -103,12 +103,10 @@ def find_bonded_entries( topol ):
                 print 'Error A: No bond entry found for astate %s-%s (%s-%s -> %s-%s)' % (a1.name,a2.name,a1.atomtype,a2.atomtype, a1.type,a2.type)
                 print 'Resi = %s' % a1.resname
                 error_occured = True
-                print A, B
 
             if bstate == None:
                 print 'Error B: No bond entry found for bstate %s-%s (%s-%s -> %s-%s)' % (a1.name,a2.name,a1.atomtypeB,a2.atomtypeB, a1.typeB,a2.typeB)
                 error_occured = True
-                print A, B
             if error_occured:
                 sys.exit(1)
     print 'log_> Making bonds for state B -> %d bonds with perturbed atoms' % count
@@ -125,8 +123,12 @@ def find_angle_entries(topol):
             A, B = check_case([a1,a2,a3])
             count+=1
             if 'D' in A and 'D' in B: # fake angle
-                astate = [1,0,0]
-                bstate = [1,0,0]
+	        if func==5 :
+                    astate = [1,0,0,0,0]
+                    bstate = [1,0,0,0,0]
+		else :
+                    astate = [1,0,0]
+                    bstate = [1,0,0]
                 a.extend([astate,bstate])
             elif A == 'AAA' and 'D' in B: # take astate
                 astate = topol.BondedParams.get_angle_param(a1.type,a2.type,a3.type)
@@ -210,12 +212,15 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
     dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
     visited_dih = [] # need to store already visited angles to avoid multiple re-definitions
 
+
     for d in topol.dihedrals:
         if len(d) >= 6:
 	    # only consider the dihedral, if it has not been encountered so far
 	    encountered = 0
 	    encountered = is_dih_encountered(visited_dih, d, encountered)
 	    encountered = is_dih_encountered(dih_predef_default, d, encountered)
+	    #print "DIH"
+#            print d[0].id,d[1].id,d[2].id,d[3].id
 	    if(encountered == 1):
 		continue
 
@@ -377,7 +382,12 @@ def explicit_defined_dihedrals(filename):
 
 
 
-def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default):
+def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,ff):
+
+    if "charmm" in ff:
+        bCharmm=True
+    else :
+        bCharmm=False
 
     dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
     explicit_def = explicit_defined_dihedrals(ffbonded)
@@ -431,7 +441,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default):
                     A,B =  check_case(al[:4])
                     paramA = topol.BondedParams.get_dihedral_param(al[0].type,al[1].type,al[2].type,al[3].type, func)
                     paramB = topol.BondedParams.get_dihedral_param(al[0].typeB,al[1].typeB,al[2].typeB,al[3].typeB, func)
-
+			
 		    astate = []
 		    bstate = []
 		    backup_dx = dx[:]
@@ -477,39 +487,50 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default):
                         bstate = d[5]
 		
 #		    print '%s' %d[4]
-		    print '%d %d' %(multA,multB)
+		    #print '%d %d' %(multA,multB)
 
 		    ### VG ###
 		    # this should work for ILDN #
+	            #MS: only for type 9?
                     counter = 0
-                    for foo in astate:
-			if( counter == 0 ):
-			    dx[4] = func
-		            dx[5] = foo
-                            bar = [foo[0], foo[1],0.0, foo[-1] ]
-                            dx.append(bar)
-			else:
-  			    alus = backup_dx[:]
-			    alus[5] = foo
-                            bar = [foo[0], foo[1],0.0, foo[-1] ]
-			    alus.append(bar)
-			    dih9.append(alus)
-#			print 'INLOOP %s %s' % (foo,bar)
-                        counter = 1
+		    if not bCharmm :
+                        for foo in astate:
+		            if( counter == 0 ):
+		                dx[4] = func
+		                dx[5] = foo
+                                bar = [foo[0], foo[1],0.0, foo[-1] ]
+                                dx.append(bar)
+		            else:
+  		                alus = backup_dx[:]
+		                alus[5] = foo
+                                bar = [foo[0], foo[1],0.0, foo[-1] ]
+		                alus.append(bar)
+		                dih9.append(alus)
+#		            print 'INLOOP %s %s' % (foo,bar)
+                            counter = 1
 
-                    for foo in bstate:
-                        alus = backup_dx[:]
-                        bar = [foo[0], foo[1],0.0, foo[-1] ]
-                        alus[5] = bar
-                        alus.append(foo)
-                        dih9.append(alus)
-#			print 'BINLOOP %s %s %s' % (bar,foo,d[5])
+                        for foo in bstate:
+                            alus = backup_dx[:]
+                            bar = [foo[0], foo[1],0.0, foo[-1] ]
+                            alus[5] = bar
+                            alus.append(foo)
+                            dih9.append(alus)
+		    else :
+                        dx[4] = func
+			a=astate[0]
+			b=bstate[0]
+			dx[5]=a
+		        parm = a[1:] + b[1:]
+			dx.append(b)
+		        
+#		        print 'BINLOOP %s %s %s' % (bar,foo,d[5])
 #		    print '%s' % dx
 #		    print '%s' % dih9
 #		    print ''
 
 
-    topol.dihedrals.extend(dih9)
+    if not bCharmm:
+        topol.dihedrals.extend(dih9)
 
 
 
@@ -666,6 +687,9 @@ def main(argv):
         print 'log_> Reading input file "%s"' % (top_file)
         topol = Topology( top_file, version = 'new' )
 
+#    for i in topol.dihedrals:
+#        print  i[0].id,i[1].id,i[2].id,i[3].id
+
 
     m = Model( atoms = topol.atoms )     # create model with residue list
     topol.residues = m.residues          # use model residue list
@@ -684,7 +708,9 @@ def main(argv):
     find_angle_entries( topol )
 
     dih_predef_default = []
-    find_predefined_dihedrals(topol,rlist,rdic,ffbonded_file,dih_predef_default)
+    find_predefined_dihedrals(topol,rlist,rdic,ffbonded_file,dih_predef_default,cmdl['-ff'])
+#    for i in topol.dihedrals:
+#        print  i[0].id,i[1].id,i[2].id,i[3].id
     find_dihedral_entries( topol, rlist, rdic, dih_predef_default )
 
     __add_extra_DNA_impropers(topol, rlist,   1, [180,40,2],[180,40,2])

@@ -40,7 +40,7 @@ from geometry import *
 
 _aa_chi = { 'CYS' :
         { 1: [('N'  , 'CA' , 'CB' , 'SG' ),
-                ['1HB','2HB','SG','HG']]},
+                ['1HB','2HB','SG','HG','1HG']]},
         'ASP' :
         { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB','2HB','CG','OD1','OD2','HD2']],
           2: [('CA' , 'CB' , 'CG' , 'OD1'), ['OD1','OD2','HD2']]},
@@ -86,7 +86,7 @@ _aa_chi = { 'CYS' :
           3: [('CB' , 'CG' , 'CD'  ,'NE' ), ['1HD','2HD','NE','HE','CZ','NH1','NH2','1HH1','1HH2','2HH1','2HH2']],
           4: [('CG' , 'CD' , 'NE'  ,'CZ' ), ['HE','CZ','NH1','NH2','1HH1','1HH2','2HH1','2HH2']]},
         'SER' :
-        { 1: [('N'  , 'CA' , 'CB' , 'OG' ), ['1HB','2HB','OG','HG']]},
+        { 1: [('N'  , 'CA' , 'CB' , 'OG' ), ['1HB','2HB','OG','HG','1HG']]},
         'THR' :
         { 1: [('N'  , 'CA' , 'CB' , 'OG1'), ['HB','OG1','HG1','CG2','1HG2','2HG2','3HG2']]},
         'VAL' :

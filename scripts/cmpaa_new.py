@@ -652,6 +652,7 @@ def assign_mass(r1, r2,ffnonbonded,bCharmm):
     if bCharmm : 
         f=tempfile.NamedTemporaryFile(delete=False)
 	parse_ffnonbonded_charmm(ffnonbonded,f)
+	print f.name
         NBParams = NBParser(f.name)
 	f.close()
     else : 

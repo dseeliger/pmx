@@ -703,7 +703,7 @@ class NBParser:
         self.atomtypes = {}
         lst = readSection(self.lines,'[ atomtypes ]','[')
         if version == 'old':
-            if self.ff.startswith('amber'):
+            if self.ff.startswith('amber') :
                 lst = parseList('ssffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
@@ -723,7 +723,7 @@ class NBParser:
                         }
                 
         elif version == 'new':
-            if self.ff.startswith('amber'):
+            if self.ff.startswith('amber') or self.ff.startswith('charmm'):
                 lst = parseList('siffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
@@ -732,7 +732,7 @@ class NBParser:
                         'sigma':entr[5]*10, # nm -> A
                         'eps':entr[6]
                         }
-            elif self.ff.startswith('opls'):
+            elif self.ff.startswith('opls') :
                 lst = parseList('ssiffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {

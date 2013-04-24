@@ -46,8 +46,7 @@ import _pmx as _p
 def TR ( s ):
     print "pmx.forcefield_> " + s 
 
-#def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')+'/top'] ):
-def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')] ):
+def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')+'/top'] ):
 
     defs = []
     incs = []
@@ -308,7 +307,6 @@ class TopolBase:
     def read_cmap(self, lines):
         starts = []
         cmap = []
-	print "read cmpa"
         for i, line in enumerate(lines):
             if line.strip().startswith('[ cmap ]'):
                 starts.append(i)
@@ -660,14 +658,13 @@ class TopolBase:
 
     def write_dihedrals(self, fp, state='AB'):
         print >>fp,'\n [ dihedrals ]'    
-        print >>fp,';  ai    aj    ak    al funct'
+        print >>fp,';  ai    aj    ak    al funct            c0            c1            c2            c3            c4            c5'
         for d in self.dihedrals:
             if len(d) == 5:
                 print >>fp, "%6d %6d %6d %6d %4d" % ( d[0].id, d[1].id, d[2].id, d[3].id, d[4])
             elif len(d) == 6:
                 print >>fp, "%6d %6d %6d %6d %4d %s" % ( d[0].id, d[1].id, d[2].id, d[3].id, d[4], d[5])
             elif len(d) == 7:
-#                print  "%6d %6d %6d %6d %4d %s %s" % ( d[0].id, d[1].id, d[2].id, d[3].id, d[4], d[5], d[6])
                 A, B = self.__check_case(d[:4])
                 ast = d[5]
                 bs = d[6]
@@ -676,29 +673,28 @@ class TopolBase:
                     print d[0].type, d[1].type, d[2].type, d[3].type, d[0].typeB, d[1].typeB, d[2].typeB, d[3].typeB
                 if ast == 'NULL':
                     if d[4] == 3: # Ryckaert-Bellemans
-                        ast = ' '.join(["%.6f" % x for x in [0,0,0,0,0,0]])
+                        ast = ' '.join(["%g" % x for x in [0,0,0,0,0,0]])
                     elif d[4] == 1 or d[4] == 4:
-                        ast = ' '.join(["%.6f" % x for x in [0,0,0]])
+                        ast = ' '.join(["%g" % x for x in [0,0,0]])
                     elif d[4] == 9:
-                        ast = ' '.join(["%.6f" % x for x in [0,0,0]])
+                        ast = ' '.join(["%g" % x for x in [0,0,0]])
                     elif d[4] == 2:
-                        ast = ' '.join(["%.6f" % x for x in [0,0]])
+                        ast = ' '.join(["%g" % x for x in [0,0]])
                         
                 elif ast != 'NULL' and hasattr(ast,"append"):
-                    ast = ' '.join(["%.6f" % x for x in d[5][1:]])
+                    ast = ' '.join(["%g" % x for x in d[5][1:]])
                 if bs == 'NULL':
                     if d[4] == 3:
-                        bs = ' '.join(["%.6f" % x for x in [0,0,0,0,0,0]]) 
+                        bs = ' '.join(["%g" % x for x in [0,0,0,0,0,0]]) 
                     elif d[4] == 1 or d[4] == 4:
-                        bs = ' '.join(["%.6f" % x for x in [0,0,0]])
+                        bs = ' '.join(["%g" % x for x in [0,0,0]])
                     elif d[4] == 9:
-                        bs = ' '.join(["%.6f" % x for x in [0,0,0]])
+                        bs = ' '.join(["%g" % x for x in [0,0,0]])
                     elif d[4] == 2:
-                        bs = ' '.join(["%.6f" % x for x in [0,0]])
+                        bs = ' '.join(["%g" % x for x in [0,0]])
                     
                 elif bs !='NULL' and hasattr(bs,"append"):
-		    #print '%s' % d[6]
-                    bs = ' '.join(["%.6f" % x for x in d[6][1:]])
+                    bs = ' '.join(["%g" % x for x in d[6][1:]])
                 if state == 'AB':
                     print >>fp, "%6d %6d %6d %6d %4d %s %s ; %s %s %s %s %s %s %s %s (%s->%s)" % \
                           ( d[0].id, d[1].id, d[2].id, d[3].id, d[4], ast, bs, d[0].name,d[1].name,d[2].name,d[3].name, \
@@ -819,8 +815,7 @@ class ITPFile( TopolBase ):
 
 class Topology( TopolBase ):
 
-#    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')+'/top'], cpp_defs = [], version = 'old', ff = 'amber' ):
-    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')], cpp_defs = [], version = 'old', ff = 'amber' ):
+    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')+'/top'], cpp_defs = [], version = 'old', ff = 'amber' ):
         TopolBase.__init__(self, filename, version)
         if not topfile:
             topfile = filename

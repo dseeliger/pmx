@@ -2,6 +2,7 @@ import sys, os
 from pmx import *
 from pmx.ffparser import RTPParser, NBParser
 from pmx.rotamer import _aa_chi
+from pmx.parser import kickOutComments, readSection, parseList
 import tempfile
 
 standard_pair_list = [
@@ -695,18 +696,18 @@ def parse_ffnonbonded_charmm(ffnonbonded,f):
 	if line.strip()=='#endif' :
 	    bAdd=True
 
-def assign_mass(r1, r2,ffnonbonded,bCharmm):
+def assign_mass(r1, r2,ffnonbonded,bCharmm,ff):
     #MS open ffnonbonded, remove HEAVY_H, pass it to NBParser 
     if bCharmm : 
         f=tempfile.NamedTemporaryFile(delete=False)
 	parse_ffnonbonded_charmm(ffnonbonded,f)
 	print f.name
-        NBParams = NBParser(f.name)
+        NBParams = NBParser(f.name,'new',ff)
 	f.close()
     else : 
-        NBParams = NBParser(ffnonbonded)
+        NBParams = NBParser(ffnonbonded,'new',ff)
     for atom in r1.atoms+r2.atoms:
-        #print atom.atomtype, atom.name
+#        print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
         
 def rename_to_gmx( r ):
@@ -743,7 +744,18 @@ def improps_as_atoms( im, r, use_b = False):
         im_new.append( new_ii )
     return im_new
 
-def write_atp_fnb(fn_atp,fn_nb,r):
+
+def read_nbitp(fn):
+    l = open(fn,'r').readlines()
+    l = kickOutComments(l,';')
+    l = readSection(l,'[ atomtypes ]','[')
+    l = parseList('ssiffsff',l)
+    dic = {}
+    for entry in l:
+        dic[entry[0]]=entry[1:]
+    return dic
+
+def write_atp_fnb(fn_atp,fn_nb,r,ff):
     types=[]
     if os.path.isfile(fn_atp) : 
         ifile=open(fn_atp,'r')
@@ -780,15 +792,29 @@ def write_atp_fnb(fn_atp,fn_nb,r):
         ofile=open(fn_nb,'w')
     print types
 
+    # for opls need to extract the atom name
+    if( 'opls' in ff):
+	dum_real_name = read_nbitp(cmdl['-ffnb'])
+
     for atom in r.atoms:
         if atom.atomtype[0:3]=='DUM':
 	    if atom.atomtype not in types:
-                ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+		if( 'opls' in ff):
+		    foo = dum_real_name['opls_'+atom.atomtype.split('_')[2]]
+                    ofile.write("%-13s\t\t%3s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+		     % (atom.atomtype,foo[0],atom.m))
+		else:
+                    ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
 		     % (atom.atomtype,atom.m))
 		types.append(atom.atomtype)
         if atom.atomtypeB[0:3]=='DUM':
 	    if atom.atomtypeB not in types:
-                ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+		if( 'opls' in ff):
+                    foo = dum_real_name['opls_'+atom.atomtypeB.split('_')[2]]
+                    ofile.write("%-13s\t\t%3s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
+                     % (atom.atomtypeB,foo[0],atom.mB))
+		else:
+                    ofile.write("%-10s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
 		     % (atom.atomtypeB,atom.mB))
 		types.append(atom.atomtypeB)
     ofile.close()
@@ -833,12 +859,13 @@ files= [
    FileOption("-fnb", "w",["itp"],"fnb.itp",""),
 ]
 
-options=[Option( "-ft", "string", "charmm" , "force field type (charmm or nothing")]
+options=[Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa")]
 help_text = ("cmpaa.py reads two pdb files aligned on the backbone togheter with an rtp file.",
 		"This is used to generate a hybrid residue.\n")
 
 #options=[Option("-ff", "string", False ,"aminoacids.rtp")]
-cmdl = Commandline( sys.argv, options = options, fileoptions = files,
+cmdl = Commandline( sys.argv, options = options, 
+		     fileoptions = files,
                      program_desc = help_text,
                      check_for_existing_files = False )
 if cmdl['-ft']=="charmm":
@@ -888,7 +915,7 @@ r2.write(cmdl['-opdb2'])
 rtp = RTPParser(rtpfile)
 bond_neigh=assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
-assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm)
+assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
 
 
 assign_branch( r1 )
@@ -916,7 +943,7 @@ else:
 merge_molecules( r1, dummies )
 make_bstate_dummies( r1 )
 
-write_atp_fnb(cmdl["-fatp"],cmdl["-fnb"],r1)
+write_atp_fnb(cmdl["-fatp"],cmdl["-fnb"],r1,cmdl['-ft'])
 abdic, badic = make_transition_dics( atom_pairs, r1)
 
 update_bond_lists( r1, badic )

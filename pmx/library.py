@@ -143,7 +143,7 @@ _aacids_ext_oplsaa = {
 
 
 _protein_residues = (
-    'ALA','ARG','ASN','ASP','ASPH','ASH','ASPP','GLH','CYS','CYS2','CYN','CYX','CYM',
+    'ALA','ARG','ASN','ASP','ASPH','ASH','ASPP','GLH','CYS','CYS2','CYN','CYX','CYM','CYSH',
     'GLU','GLUP','GLN','GLY','HIS','HIE','HIP','HID','HSE','HSD','HSP','ILE','LEU','LYS','LYN',
     'LYSH','LYP','LSN','MET','PHE','PRO','SER','THR','TRP','TYR','VAL',
     'NALA','NGLY','NSER','NTHR','NLEU','NILE','NVAL','NASN','NGLN',
@@ -1638,6 +1638,10 @@ _aliases = {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
+        'CYSH': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+        },
 	'GLU': {
 		'HB1':'1HB',
 		'HB2':'2HB',
@@ -5097,6 +5101,15 @@ _mol2_types = {
     'O':['O.2',0],
     },
     'CYN':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'SG':['S.3',-1],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'CYSH':
     {
     'N':['N.am',0],
     'CA':['C.3',0],

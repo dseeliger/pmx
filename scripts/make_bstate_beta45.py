@@ -560,6 +560,8 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,f
         	            alus[5] = foo
                             if(func == 3):
                                 bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        	            elif(func == 2):
+                                bar = [foo[0], foo[1],0.0]
                             else:
                                 bar = [foo[0], foo[1],0.0, foo[-1] ]
         	            alus.append(bar)

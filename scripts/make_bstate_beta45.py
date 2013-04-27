@@ -415,11 +415,6 @@ def explicit_defined_dihedrals(filename,ff):
 
 def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,ff):
 
-    if "charmm" in ff:
-        bCharmm=True
-    else :
-        bCharmm=False
-
     dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
     explicit_def = explicit_defined_dihedrals(ffbonded,ff)
 
@@ -548,48 +543,40 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,f
 		    # this should work for ILDN #
 	            #MS: only for type 9?
                     counter = 0
-		    if not bCharmm :
-                        for foo in astate:
-		            if( counter == 0 ):
-		                dx[4] = func
-		                dx[5] = foo
-		                if(func == 3):
-                                    bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
-		                else:
-                                    bar = [foo[0], foo[1],0.0, foo[-1] ]
-                                dx.append(bar)
-		            else:
-  		                alus = backup_dx[:]
-		                alus[5] = foo
-                                if(func == 3):
-                                    bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
-                                else:
-                                    bar = [foo[0], foo[1],0.0, foo[-1] ]
-		                alus.append(bar)
-		                dih9.append(alus)
-#		            print 'INLOOP %s %s' % (foo,bar)
-                            counter = 1
-
-                        for foo in bstate:
-                            alus = backup_dx[:]
+#		    if not bCharmm :
+                    for foo in astate:
+        	        if( counter == 0 ):
+        	            dx[4] = func
+        	            dx[5] = foo
+        	            if(func == 3):
+                                bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+        	            elif(func == 2):
+                                bar = [foo[0], foo[1],0.0]
+        	            else:
+                                bar = [foo[0], foo[1],0.0, foo[-1] ]
+                            dx.append(bar)
+        	        else:
+        	            alus = backup_dx[:]
+        	            alus[5] = foo
                             if(func == 3):
                                 bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
                             else:
                                 bar = [foo[0], foo[1],0.0, foo[-1] ]
-                            alus[5] = bar
-                            alus.append(foo)
-                            dih9.append(alus)
-		    else :
-                        dx[4] = func
-			a=astate[0]
-			b=bstate[0]
-			dx[5]=a
-		        parm = a[1:] + b[1:]
-			dx.append(b)
-
-
-    if not bCharmm:
-        topol.dihedrals.extend(dih9)
+        	            alus.append(bar)
+        	            dih9.append(alus)
+                        counter = 1
+                    for foo in bstate:
+                        alus = backup_dx[:]
+                        if(func == 3):
+                            bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+    	                elif(func == 2):
+                            bar = [foo[0], foo[1],0.0,]
+                        else:
+                            bar = [foo[0], foo[1],0.0, foo[-1] ]
+                        alus[5] = bar
+                        alus.append(foo)
+                        dih9.append(alus)
+    topol.dihedrals.extend(dih9)
 
 
 

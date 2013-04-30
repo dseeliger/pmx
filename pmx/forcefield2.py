@@ -271,7 +271,7 @@ class TopolBase:
                 k = float(entries[5])
                 self.angles.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], \
                                     self.atoms[idx[2]-1], idx[3], [l,k]])
-            elif len(entries) == 8:
+            elif len(entries) == 8 and entries[3]=='1':
                 idx = [int(x) for x in entries[:4]]
                 lA = float(entries[4])
                 kA = float(entries[5])
@@ -279,6 +279,27 @@ class TopolBase:
                 kB = float(entries[7])
                 self.angles.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], \
                                     self.atoms[idx[2]-1], idx[3], [idx[3],lA,kA],[idx[3],lB,kB]])
+            elif len(entries) == 8 and entries[3]=='5':
+                idx = [int(x) for x in entries[:4]]
+                lA1 = float(entries[4])
+                kA1 = float(entries[5])
+                lA2 = float(entries[6])
+                kA2 = float(entries[7])
+                self.angles.append([self.atoms[idx[0]-1], \
+			self.atoms[idx[1]-1],self.atoms[idx[2]-1],idx[3],[idx[3],lA1,kA1,lA2,kA2]])
+            elif len(entries) == 12:
+                idx = [int(x) for x in entries[:4]]
+                lA1 = float(entries[4])
+                kA1 = float(entries[5])
+                lA2 = float(entries[6])
+                kA2 = float(entries[7])
+                lB1 = float(entries[8])
+                kB1 = float(entries[9])
+                lB2 = float(entries[10])
+                kB2 = float(entries[11])
+                self.angles.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], \
+                                    self.atoms[idx[2]-1], idx[3],\
+				    [idx[3],lA1,kA1,lA2,kA2],[idx[3],lB1,kB1,lB2,kB2]])
                 
     def read_dihedrals(self, lines):
         starts = []

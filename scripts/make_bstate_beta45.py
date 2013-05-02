@@ -321,6 +321,8 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
 			        d[5] = ast
                                 if(ast[0] == 3):
                                     bst = [ast[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                                elif(ast[0] == 2):
+                                    bst = [ast[0], ast[1], 0.0]
                                 else:
 				    bst = [ ast[0], ast[1], 0.0, ast[-1] ]
 				if( len(d)==6 ):
@@ -335,6 +337,8 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
 				alus[5] = ast
                                 if(ast[0] == 3):
                                     bst = [ast[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                                elif(ast[0] == 2):
+                                    bst = [ast[0], ast[1], 0.0]
                                 else:
                                     bst = [ ast[0], ast[1], 0.0, ast[-1] ]
 				alus.append(bst)
@@ -347,6 +351,8 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
 			        alus = backup_d[:]
                                 if(bst[0] == 3):
                                     ast = [bst[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                                elif(ast[0] == 2):
+                                    ast = [bst[0], bst[1], 0.0]
                                 else:
                                     ast = [ bst[0], bst[1], 0.0, bst[-1] ]
                                 alus[5] = ast

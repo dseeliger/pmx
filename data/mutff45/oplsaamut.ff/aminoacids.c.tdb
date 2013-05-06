@@ -7,8 +7,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1	8	O1	C	CA	N
+	opls_272	15.9994	-0.8	2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8	3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -19,8 +21,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1	8	O1	C	CA	N
+	opls_272	15.9994	-0.8	2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8	3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -31,8 +35,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1	8	O1	C	CA	N
+	opls_272	15.9994	-0.8	2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8	3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -43,8 +49,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1	8	O1	C	CA	N
+	opls_272	15.9994	-0.8	2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8	3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -55,8 +63,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1	8	O1	C	CA	N
+	opls_272	15.9994	-0.8	2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8    3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -67,8 +77,10 @@ C	C	opls_271	12.011	0.7
 O	O1	opls_272	15.9994	-0.8
 OXT	O2	opls_272	15.9994	-0.8
 [ add ]
-2	8	O	C	CA	N
-	opls_272	15.9994	-0.8
+1       8       O1      C       CA      N
+        opls_272        15.9994 -0.8    2
+1       8       O2      C       CA      N
+        opls_272        15.9994 -0.8    3
 [ impropers ]
 CA	O1	C	O2	improper_O_C_X_Y
 
@@ -79,9 +91,9 @@ O	O	opls_268	15.9994	-0.53
 OXT	OT	opls_269	15.9994	-0.44
 [ add ]
 1	2	OT	C	CA	N
-	opls_269	15.9994	-0.44
+	opls_269	15.9994	-0.44	2
 1	2	HO	O	C	CA
-	opls_270	1.008	0.45
+	opls_270	1.008	0.45	3
 [ impropers ]
 CA	OT	C	O	improper_O_C_X_Y
 
@@ -92,9 +104,9 @@ O	O	opls_268	15.9994	-0.53
 OXT	OT	opls_269	15.9994	-0.44
 [ add ]
 1	2	OT	C	CA	N
-	opls_269	15.9994	-0.44
+	opls_269	15.9994	-0.44	2
 1	2	HO	O	C	CA
-	opls_270	1.008	0.45
+	opls_270	1.008	0.45	3
 [ impropers ]
 CA	OT	C	O	improper_O_C_X_Y
 

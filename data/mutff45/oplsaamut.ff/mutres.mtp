@@ -58,7 +58,7 @@
      CB    HB1   DOD2   DHD2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOD1    HB1   DOD2   DHD2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
-[ A2C ] ; Ala -> Cys
+[ A2C ] ; Ala -> Cysh
 
 
  [ morphes ]
@@ -1717,7 +1717,7 @@
   CB-CG OD1 OD2 HD2
 
 
-[ B2C ] ; Asph -> Cys
+[ B2C ] ; Asph -> Cysh
 
 
  [ morphes ]
@@ -1768,8 +1768,8 @@
    2.559   -5.290    7.171
   -1.234   -2.969    7.858
   -2.101   -1.985    7.498
-   0.973   -5.258    7.461
-   1.560   -5.911    6.452
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -3750,7 +3750,7 @@
   CB-CG OD1 OD2 HD2 DND1 DHD1 DCD2 DHD2 DCE1 DHE1 DNE2 DHE2
 
 
-[ C2A ] ; Cys -> Ala
+[ C2A ] ; Cysh -> Ala
 
 
  [ morphes ]
@@ -3803,11 +3803,7 @@
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DHB1
-
-
-[ C2B ] ; Cys -> Asph
+[ C2B ] ; Cysh -> Asph
 
 
  [ morphes ]
@@ -3856,10 +3852,10 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.658   -5.458    7.493
-   0.583   -5.635    8.728
-   1.706   -5.470    6.816
-   2.487   -5.648    7.415
+   0.732   -5.254    7.394
+   0.775   -5.293    8.643
+   1.719   -5.252    6.630
+   2.559   -5.290    7.171
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -3874,11 +3870,7 @@
      CB    DCG   DOD2   DHD2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOD1    DCG   DOD2   DHD2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DOD1 DOD2 DHD2
-
-
-[ C2D ] ; Cys -> Asp
+[ C2D ] ; Cysh -> Asp
 
 
  [ morphes ]
@@ -3925,9 +3917,9 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.658   -5.458    7.493
-   0.583   -5.635    8.728
-   1.706   -5.470    6.816
+   0.732   -5.254    7.394
+   0.775   -5.293    8.643
+   1.719   -5.252    6.630
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -3940,11 +3932,7 @@
       N     CA     CB    DCG     dih_ASP_chi1_N_C_C_C      dih_ASP_chi1_N_C_C_C       
     DCG     CB     CA      C     dih_ASP_chi1_C_C_C_CO     dih_ASP_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DOD1 DOD2
-
-
-[ C2E ] ; Cys -> Glu
+[ C2E ] ; Cysh -> Glu
 
 
  [ morphes ]
@@ -3953,13 +3941,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 ->     CG   opls_274
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-   DCG DUM_opls_274 ->     CG   opls_274
+  DHB1 DUM_opls_140 ->    HB1   opls_140
   DHG1 DUM_opls_140 ->    HG1   opls_140
   DHG2 DUM_opls_140 ->    HG2   opls_140
    DCD DUM_opls_271 ->     CD   opls_271
@@ -3973,12 +3961,12 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB2   opls_140   0.060000      1   1.008000   opls_274  -0.220000  12.011000   ;  types != | charge != 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-     DCG DUM_opls_274   0.000000      1  12.011000   opls_274  -0.220000  12.011000   ;  types != | charge != 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCD DUM_opls_271   0.000000      1  12.011000   opls_271   0.700000  12.011000   ;  types != | charge != 
@@ -3997,29 +3985,25 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.681   -5.553    7.494
-   1.183   -4.626    7.764
-   0.528   -6.109    8.419
-   1.634   -6.376    6.629
-   1.229   -6.760    5.514
-   2.761   -6.614    7.118
+   0.231   -5.391    7.403
+  -1.089   -4.508    4.791
+   0.256   -3.701    5.562
+   0.762   -5.566    4.689
+   1.144   -6.611    5.252
+   1.125   -5.171    3.558
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
-    DCG   DOE1    DCD   DOE2     improper_O_C_X_Y          improper_O_C_X_Y           
+    HB2   DOE1    DCD   DOE2     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB    DCG     dih_GLU_chi1_N_C_C_C      dih_GLU_chi1_N_C_C_C       
-    DCG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     dih_GLU_chi1_C_C_C_CO      
+      N     CA     CB    HB2     undefined                 dih_GLU_chi1_N_C_C_C       
+    HB2     CB     CA      C     undefined                 dih_GLU_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DCD DOE1 DOE2
-
-
-[ C2F ] ; Cys -> Phe
+[ C2F ] ; Cysh -> Phe
 
 
  [ morphes ]
@@ -4028,12 +4012,14 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_149
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DCG DUM_opls_145 ->     CG   opls_145
   DCD1 DUM_opls_145 ->    CD1   opls_145
   DHD1 DUM_opls_146 ->    HD1   opls_146
@@ -4052,12 +4038,14 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_149  -0.005000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCG DUM_opls_145   0.000000      1  12.011000   opls_145  -0.115000  12.011000   ;  types != | charge != 
     DCD1 DUM_opls_145   0.000000      1  12.011000   opls_145  -0.115000  12.011000   ;  types != | charge != 
     DHD1 DUM_opls_146   0.000000      1   1.008000   opls_146   0.115000   1.008000   ;  types != | charge != 
@@ -4082,17 +4070,19 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.662   -5.494    7.452
-   0.748   -6.547    8.389
-  -0.103   -7.190    8.564
-   1.802   -4.694    7.203
-   1.772   -3.911    6.459
-   1.938   -6.763    9.110
-   1.996   -7.566    9.832
-   2.987   -4.904    7.933
-   3.851   -4.278    7.761
-   3.052   -5.926    8.901
-   3.955   -6.075    9.475
+  -1.139   -5.595    5.844
+   0.138   -4.566    6.377
+  -0.036   -6.402    7.471
+  -0.758   -7.609    7.589
+  -1.726   -7.712    7.119
+   1.249   -6.304    8.054
+   1.838   -5.405    7.939
+  -0.231   -8.685    8.328
+  -0.791   -9.605    8.422
+   1.770   -7.377    8.802
+   2.742   -7.294    9.268
+   1.024   -8.562    8.956
+   1.416   -9.378    9.546
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4108,11 +4098,7 @@
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DCD1 DHD1 DCD2 DHD2 DCE1 DHE1 DCE2 DHE2 DCZ DHZ
-
-
-[ C2G ] ; Cys -> Gly
+[ C2G ] ; Cysh -> Gly
 
 
  [ morphes ]
@@ -4162,11 +4148,7 @@
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG
-
-
-[ C2H ] ; Cys -> His1
+[ C2H ] ; Cysh -> His1
 
 
  [ morphes ]
@@ -4253,11 +4235,7 @@
     DCG     CB     CA      C     dih_HIS_chi1_C_C_C_CO     dih_HIS_chi1_C_C_C_CO      
      CA     CB    DCG   DND1     dih_HIS_chi2_C_C_C_N      dih_HIS_chi2_C_C_C_N       
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DHB1 DHB2 DCG DND1 DHD1 DCD2 DHD2 DCE1 DHE1 DNE2
-
-
-[ C2I ] ; Cys -> Ile
+[ C2I ] ; Cysh -> Ile
 
 
  [ morphes ]
@@ -4266,15 +4244,15 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_137
-   HB1   opls_140 ->     HB   opls_140
-   HB2   opls_140 ->    CG2   opls_135
+   HB1   opls_140 ->    CG1   opls_136
+   HB2   opls_140 ->     HB   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-  DCG1 DUM_opls_136 ->    CG1   opls_136
   DHG1 DUM_opls_140 ->   HG11   opls_140
   DHG2 DUM_opls_140 ->   HG12   opls_140
+  DCG2 DUM_opls_135 ->    CG2   opls_135
   DHG3 DUM_opls_140 ->   HG21   opls_140
   DHG4 DUM_opls_140 ->   HG22   opls_140
   DHG5 DUM_opls_140 ->   HG23   opls_140
@@ -4289,15 +4267,15 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_137  -0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_135  -0.180000  12.011000   ;  types != | charge != 
+     HB1   opls_140   0.060000      1   1.008000   opls_136  -0.120000  12.011000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-    DCG1 DUM_opls_136   0.000000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
     DHG1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
+    DCG2 DUM_opls_135   0.000000      1  12.011000   opls_135  -0.180000  12.011000   ;  types != | charge != 
     DHG3 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG4 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG5 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
@@ -4318,16 +4296,16 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.702   -5.465    7.502
-   1.217   -4.523    7.701
-   0.498   -5.906    8.477
-   0.403   -4.981    4.813
-  -1.260   -4.473    4.777
-  -0.051   -3.456    5.558
-   1.654   -6.438    6.784
-   2.536   -6.637    7.393
-   1.168   -7.394    6.591
-   2.013   -6.047    5.832
+  -1.203   -7.252    7.259
+  -2.100   -6.589    5.922
+   0.736   -5.256    7.468
+   1.469   -5.852    6.928
+   1.174   -4.262    7.568
+   0.642   -5.681    8.468
+  -0.209   -7.342    5.335
+  -0.631   -8.307    5.053
+  -0.112   -6.750    4.425
+   0.793   -7.538    5.716
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4336,16 +4314,12 @@
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB   DCG1     dih_ILE_chi1_N_C_C_C      dih_ILE_chi1_N_C_C_C       
-      N     CA     CB    HB2     undefined                 dih_ILE_chi1_N_C_C_C       
-   DCG1     CB     CA      C     dih_ILE_chi1_C_C_C_CO     dih_ILE_chi1_C_C_C_CO      
-    HB2     CB     CA      C     undefined                 dih_ILE_chi1_C_C_C_CO      
+      N     CA     CB    HB1     undefined                 dih_ILE_chi1_N_C_C_C       
+      N     CA     CB   DCG2     dih_ILE_chi1_N_C_C_C      dih_ILE_chi1_N_C_C_C       
+    HB1     CB     CA      C     undefined                 dih_ILE_chi1_C_C_C_CO      
+   DCG2     CB     CA      C     dih_ILE_chi1_C_C_C_CO     dih_ILE_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG1 DHG1 DHG2 DHG3 DHG4 DHG5 DCD1 DHD1 DHD2 DHD3
-
-
-[ C2J ] ; Cys -> Gluh
+[ C2J ] ; Cysh -> Gluh
 
 
  [ morphes ]
@@ -4355,13 +4329,12 @@
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
    HB1   opls_140 ->    HB2   opls_140
-   HB2   opls_140 -> HB.gone2 DUM_opls_140
+   HB2   opls_140 ->     CG   opls_136
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
   DHB1 DUM_opls_140 ->    HB1   opls_140
-   DCG DUM_opls_136 ->     CG   opls_136
   DHG1 DUM_opls_140 ->    HG1   opls_140
   DHG2 DUM_opls_140 ->    HG2   opls_140
    DCD DUM_opls_267 ->     CD   opls_267
@@ -4376,13 +4349,12 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000   opls_136  -0.120000  12.011000   ;  types != | charge != 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
     DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
-     DCG DUM_opls_136   0.000000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
     DHG1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCD DUM_opls_267   0.000000      1  12.011000   opls_267   0.520000  12.011000   ;  types != | charge != 
@@ -4403,32 +4375,27 @@
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
    0.152   -5.371    7.358
-   0.681   -5.553    7.494
   -1.035   -4.547    4.859
    0.210   -3.783    5.590
-   1.634   -6.376    6.629
-   1.229   -6.760    5.514
-   2.761   -6.614    7.118
-   3.298   -7.156    6.471
+   0.762   -5.566    4.689
+   1.144   -6.611    5.252
+   1.125   -5.171    3.558
+   1.767   -5.830    3.165
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
-    DCG   DOE1    DCD   DOE2     improper_O_C_X_Y          improper_O_C_X_Y           
+    HB2   DOE1    DCD   DOE2     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB    DCG     dih_GLU_chi1_N_C_C_C      dih_GLU_chi1_N_C_C_C       
-    DCG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     dih_GLU_chi1_C_C_C_CO      
-    DCG    DCD   DOE2   DHE2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
+      N     CA     CB    HB2     undefined                 dih_GLU_chi1_N_C_C_C       
+    HB2     CB     CA      C     undefined                 dih_GLU_chi1_C_C_C_CO      
+    HB2    DCD   DOE2   DHE2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOE1    DCD   DOE2   DHE2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DHB1 DCG DHG1 DHG2 DCD DOE1 DOE2 DHE2
-
-
-[ C2K ] ; Cys -> Lysh
+[ C2K ] ; Cysh -> Lysh
 
 
  [ morphes ]
@@ -4495,16 +4462,16 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.673   -5.518    7.321
+   0.706   -5.436    7.286
    1.178   -4.479    7.512
    0.604   -5.962    8.237
-   1.579   -6.320    6.371
+   1.612   -6.242    6.340
    1.154   -7.217    6.159
    1.648   -5.735    5.373
-   2.975   -6.574    6.962
+   3.036   -6.415    6.892
    3.500   -5.438    7.039
    3.004   -6.900    7.869
-   3.820   -7.370    6.050
+   3.882   -7.216    5.986
    4.813   -7.300    6.374
    3.491   -8.140    5.871
    3.945   -6.766    5.082
@@ -4522,11 +4489,7 @@
     DCD    DCE    DNZ   DHZ2     dih_LYS_chi5_C_C_N_H      dih_LYS_chi5_C_C_N_H       
     DCD    DCE    DNZ   DHZ3     dih_LYS_chi5_C_C_N_H      dih_LYS_chi5_C_C_N_H       
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DCD DHD1 DHD2 DCE DHE1 DHE2 DNZ DHZ1 DHZ2 DHZ3
-
-
-[ C2L ] ; Cys -> Leu
+[ C2L ] ; Cysh -> Leu
 
 
  [ morphes ]
@@ -4535,12 +4498,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DCG DUM_opls_137 ->     CG   opls_137
    DHG DUM_opls_140 ->     HG   opls_140
   DCD1 DUM_opls_135 ->    CD1   opls_135
@@ -4558,12 +4522,13 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCG DUM_opls_137   0.000000      1  12.011000   opls_137  -0.060000  12.011000   ;  types != | charge != 
      DHG DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DCD1 DUM_opls_135   0.000000      1  12.011000   opls_135  -0.180000  12.011000   ;  types != | charge != 
@@ -4587,16 +4552,17 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.721   -5.495    7.388
-   0.543   -6.086    8.288
-   1.576   -6.360    6.448
-   2.508   -6.662    6.927
-   1.052   -7.273    6.158
-   1.833   -5.823    5.533
-   1.512   -4.236    7.791
-   2.397   -4.508    8.369
-   1.853   -3.679    6.917
-   0.930   -3.557    8.412
+   0.340   -5.071    7.182
+  -0.916   -6.687    6.497
+  -1.892   -6.791    6.020
+   0.121   -7.268    5.522
+  -0.104   -8.307    5.279
+   0.140   -6.713    4.582
+   1.127   -7.237    5.943
+  -0.926   -7.519    7.794
+  -1.255   -8.540    7.592
+   0.068   -7.579    8.240
+  -1.603   -7.115    8.544
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4608,11 +4574,7 @@
       N     CA     CB    DCG     dih_LEU_chi1_N_C_C_C      dih_LEU_chi1_N_C_C_C       
     DCG     CB     CA      C     dih_LEU_chi1_C_C_C_CO     dih_LEU_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG DCD1 DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
-
-
-[ C2M ] ; Cys -> Met
+[ C2M ] ; Cysh -> Met
 
 
  [ morphes ]
@@ -4621,13 +4583,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->     CG   opls_210
+   HB2   opls_140 ->    HB1   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-   DCG DUM_opls_210 ->     CG   opls_210
+  DHB2 DUM_opls_140 ->    HB2   opls_140
   DHG1 DUM_opls_140 ->    HG1   opls_140
   DHG2 DUM_opls_140 ->    HG2   opls_140
    DSD DUM_opls_202 ->     SD   opls_202
@@ -4642,13 +4604,13 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000   opls_210   0.048000  12.011000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-     DCG DUM_opls_210   0.000000      1  12.011000   opls_210   0.048000  12.011000   ;  types != | charge != 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSD DUM_opls_202   0.000000      1  32.060000   opls_202  -0.335000  32.060000   ;  types != | charge != 
@@ -4669,14 +4631,14 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.673   -5.449    7.440
-   1.066   -4.532    7.879
-   0.503   -6.146    8.260
-   1.965   -6.159    6.393
-   3.127   -6.614    7.706
-   4.024   -7.070    7.287
-   3.417   -5.734    8.279
-   2.661   -7.330    8.384
+   0.328   -5.105    7.188
+  -1.202   -7.130    7.489
+  -1.923   -6.733    5.943
+   0.257   -7.627    5.675
+  -0.732   -9.115    5.378
+  -0.143   -9.873    4.862
+  -1.088   -9.530    6.321
+  -1.597   -8.870    4.760
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4685,14 +4647,10 @@
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB    DCG     dih_MET_chi1_N_C_C_C      dih_MET_chi1_N_C_C_C       
-    DCG     CB     CA      C     dih_MET_chi1_C_C_C_CO     dih_MET_chi1_C_C_C_CO      
+      N     CA     CB    HB1     undefined                 dih_MET_chi1_N_C_C_C       
+    HB1     CB     CA      C     undefined                 dih_MET_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DSD DCE DHE1 DHE2 DHE3
-
-
-[ C2N ] ; Cys -> Asn
+[ C2N ] ; Cysh -> Asn
 
 
  [ morphes ]
@@ -4701,12 +4659,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DCG DUM_opls_235 ->     CG   opls_235
   DOD1 DUM_opls_236 ->    OD1   opls_236
   DND2 DUM_opls_237 ->    ND2   opls_237
@@ -4719,12 +4678,13 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCG DUM_opls_235   0.000000      1  12.011000   opls_235   0.500000  12.011000   ;  types != | charge != 
     DOD1 DUM_opls_236   0.000000      1  15.999400   opls_236  -0.500000  15.999400   ;  types != | charge != 
     DND2 DUM_opls_237   0.000000      1  14.006700   opls_237  -0.760000  14.006700   ;  types != | charge != 
@@ -4743,11 +4703,12 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.700   -5.436    7.498
-   1.039   -6.569    7.816
-   1.491   -4.402    7.755
-   1.250   -3.469    7.468
-   2.350   -4.589    8.250
+   0.369   -5.052    7.212
+  -0.878   -6.679    6.632
+  -1.184   -7.179    5.557
+  -0.731   -7.440    7.709
+  -0.443   -7.055    8.592
+  -0.919   -8.426    7.606
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4762,11 +4723,7 @@
     DCG     CB     CA      C     dih_ASN_chi1_C_C_C_CO     dih_ASN_chi1_C_C_C_CO      
      CA     CB    DCG   DND2     dih_ASN_chi2_C_C_CO_N     dih_ASN_chi2_C_C_CO_N      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DOD1 DND2 DHD1 DHD2
-
-
-[ C2O ] ; Cys -> Lys
+[ C2O ] ; Cysh -> Lys
 
 
  [ morphes ]
@@ -4831,18 +4788,18 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.673   -5.518    7.321
-   1.134   -4.663    7.558
-   0.523   -6.056    8.150
-   1.579   -6.320    6.371
-   1.146   -7.201    6.182
-   1.681   -5.808    5.518
-   2.975   -6.574    6.962
-   3.436   -5.702    7.128
-   2.891   -7.077    7.823
-   3.820   -7.370    6.050
-   4.718   -7.514    6.468
-   3.386   -8.254    5.880
+   0.706   -5.436    7.286
+   1.139   -4.553    7.470
+   0.605   -5.942    8.142
+   1.612   -6.242    6.340
+   1.209   -7.147    6.204
+   1.664   -5.765    5.463
+   3.036   -6.415    6.892
+   3.466   -5.519    7.005
+   3.001   -6.882    7.776
+   3.882   -7.216    5.986
+   4.798   -7.306    6.378
+   3.479   -8.123    5.869
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4856,11 +4813,7 @@
     DCD    DCE    DNZ   DHZ1     dih_LYS_chi5_C_C_N_H      dih_LYS_chi5_C_C_N_H       
     DCD    DCE    DNZ   DHZ2     dih_LYS_chi5_C_C_N_H      dih_LYS_chi5_C_C_N_H       
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DCD DHD1 DHD2 DCE DHE1 DHE2 DNZ DHZ1 DHZ2
-
-
-[ C2Q ] ; Cys -> Gln
+[ C2Q ] ; Cysh -> Gln
 
 
  [ morphes ]
@@ -4917,14 +4870,14 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.668   -5.516    7.384
-   1.189   -4.595    7.648
-   0.506   -6.059    8.315
-   1.630   -6.340    6.526
-   2.737   -6.634    6.959
-   1.253   -6.730    5.315
-   0.343   -6.491    4.955
-   1.916   -7.252    4.764
+   0.730   -5.352    7.307
+   1.191   -4.374    7.454
+   0.675   -5.820    8.290
+   1.697   -6.175    6.454
+   2.850   -6.345    6.828
+   1.274   -6.699    5.310
+   0.326   -6.562    4.999
+   1.939   -7.217    4.758
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -4939,11 +4892,7 @@
     DCG     CB     CA      C     dih_GLN_chi1_C_C_C_CO     dih_GLN_chi1_C_C_C_CO      
      CB    DCG    DCD   DNE2     dih_GLN_chi3_C_C_CO_N     dih_GLN_chi3_C_C_CO_N      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DCD DOE1 DNE2 DHE1 DHE2
-
-
-[ C2R ] ; Cys -> Arg
+[ C2R ] ; Cysh -> Arg
 
 
  [ morphes ]
@@ -5014,21 +4963,21 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.671   -5.513    7.321
-   1.187   -4.588    7.583
-   0.504   -6.058    8.252
-   1.555   -6.357    6.386
-   1.029   -7.272    6.107
-   1.757   -5.808    5.464
-   2.834   -6.725    7.024
-   2.952   -6.319    7.944
-   3.802   -7.488    6.496
-   3.682   -7.986    5.263
-   2.864   -7.787    4.704
-   4.391   -8.562    4.825
-   4.900   -7.748    7.211
-   5.023   -7.399    8.153
-   5.659   -8.313    6.853
+   0.678   -5.496    7.314
+   1.188   -4.564    7.564
+   0.523   -6.033    8.251
+   1.563   -6.341    6.380
+   1.043   -7.263    6.114
+   1.753   -5.798    5.452
+   2.849   -6.692    7.013
+   2.970   -6.276    7.928
+   3.820   -7.451    6.485
+   3.695   -7.962    5.257
+   2.872   -7.775    4.702
+   4.406   -8.536    4.819
+   4.925   -7.696    7.194
+   5.052   -7.337    8.132
+   5.687   -8.257    6.836
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5044,11 +4993,7 @@
       N     CA     CB    DCG     dih_ARG_chi1_N_C_C_C      dih_ARG_chi1_N_C_C_C       
     DCG     CB     CA      C     dih_ARG_chi1_C_C_C_CO     dih_ARG_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DHG1 DHG2 DCD DHD1 DHD2 DNE DHE DCZ DNH1 DHH1 DHH2 DNH2 DHH3 DHH4
-
-
-[ C2S ] ; Cys -> Ser
+[ C2S ] ; Cysh -> Ser
 
 
  [ morphes ]
@@ -5057,13 +5002,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_157
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 ->     OG   opls_154
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-   DOG DUM_opls_154 ->     OG   opls_154
+  DHB1 DUM_opls_140 ->    HB1   opls_140
    DHG DUM_opls_155 ->     HG   opls_155
 
  [ atoms ]
@@ -5073,12 +5018,12 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_157   0.145000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB2   opls_140   0.060000      1   1.008000   opls_154  -0.683000  15.999400   ;  types != | charge != 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-     DOG DUM_opls_154   0.000000      1  15.999400   opls_154  -0.683000  15.999400   ;  types != | charge != 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DHG DUM_opls_155   0.000000      1   1.008000   opls_155   0.418000   1.008000   ;  types != | charge != 
 
  [ coords ]
@@ -5093,8 +5038,8 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.550   -5.480    7.437
-   1.183   -5.855    6.843
+   0.265   -5.348    7.312
+   0.133   -5.224    4.975
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5103,15 +5048,11 @@
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB    DOG     dih_SER_THR_chi1_N_C_C_O  dih_SER_THR_chi1_N_C_C_O   
-      C     CA     CB    DOG     dih_SER_THR_chi1_CO_C_C_O dih_SER_THR_chi1_CO_C_C_O  
-     CA     CB    DOG    DHG     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
+      N     CA     CB    HB2     undefined                 dih_SER_THR_chi1_N_C_C_O   
+      C     CA     CB    HB2     undefined                 dih_SER_THR_chi1_CO_C_C_O  
+     CA     CB    HB2    DHG     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DOG DHG
-
-
-[ C2T ] ; Cys -> Thr
+[ C2T ] ; Cysh -> Thr
 
 
  [ morphes ]
@@ -5120,14 +5061,14 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_158
-   HB1   opls_140 ->     HB   opls_140
-   HB2   opls_140 ->    CG2   opls_135
+   HB1   opls_140 ->    OG1   opls_154
+   HB2   opls_140 ->     HB   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-  DOG1 DUM_opls_154 ->    OG1   opls_154
   DHG1 DUM_opls_155 ->    HG1   opls_155
+  DCG2 DUM_opls_135 ->    CG2   opls_135
   DHG2 DUM_opls_140 ->   HG21   opls_140
   DHG3 DUM_opls_140 ->   HG22   opls_140
   DHG4 DUM_opls_140 ->   HG23   opls_140
@@ -5138,14 +5079,14 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_158   0.205000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_135  -0.180000  12.011000   ;  types != | charge != 
+     HB1   opls_140   0.060000      1   1.008000   opls_154  -0.683000  15.999400   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-    DOG1 DUM_opls_154   0.000000      1  15.999400   opls_154  -0.683000  15.999400   ;  types != | charge != 
     DHG1 DUM_opls_155   0.000000      1   1.008000   opls_155   0.418000   1.008000   ;  types != | charge != 
+    DCG2 DUM_opls_135   0.000000      1  12.011000   opls_135  -0.180000  12.011000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG3 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG4 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
@@ -5162,11 +5103,11 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.513   -5.412    7.466
-   1.052   -6.045    7.012
-   0.499   -5.034    4.878
-  -1.112   -4.359    4.748
-   0.136   -3.486    5.636
+  -0.653   -6.978    5.919
+   0.748   -5.288    7.293
+   1.392   -5.920    6.681
+   1.218   -4.305    7.335
+   0.745   -5.699    8.304
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5175,15 +5116,11 @@
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
-      N     CA     CB   DOG1     dih_SER_THR_chi1_N_C_C_O  dih_SER_THR_chi1_N_C_C_O   
-      C     CA     CB   DOG1     dih_SER_THR_chi1_CO_C_C_O dih_SER_THR_chi1_CO_C_C_O  
-     CA     CB   DOG1   DHG1     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
+      N     CA     CB    HB1     undefined                 dih_SER_THR_chi1_N_C_C_O   
+      C     CA     CB    HB1     undefined                 dih_SER_THR_chi1_CO_C_C_O  
+     CA     CB    HB1   DHG1     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DOG1 DHG1 DHG2 DHG3 DHG4
-
-
-[ C2V ] ; Cys -> Val
+[ C2V ] ; Cysh -> Val
 
 
  [ morphes ]
@@ -5192,7 +5129,7 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_137
-   HB1   opls_140 ->    CG2   opls_135
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
    HB2   opls_140 ->     HB   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
@@ -5202,6 +5139,7 @@
   DHG1 DUM_opls_140 ->   HG11   opls_140
   DHG2 DUM_opls_140 ->   HG12   opls_140
   DHG3 DUM_opls_140 ->   HG13   opls_140
+  DCG2 DUM_opls_135 ->    CG2   opls_135
   DHG4 DUM_opls_140 ->   HG21   opls_140
   DHG5 DUM_opls_140 ->   HG22   opls_140
   DHG6 DUM_opls_140 ->   HG23   opls_140
@@ -5212,7 +5150,7 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_137  -0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_135  -0.180000  12.011000   ;  types != | charge != 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
@@ -5222,6 +5160,7 @@
     DHG1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG3 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
+    DCG2 DUM_opls_135   0.000000      1  12.011000   opls_135  -0.180000  12.011000   ;  types != | charge != 
     DHG4 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG5 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DHG6 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
@@ -5238,13 +5177,14 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.658   -5.537    7.481
-   1.311   -6.161    6.870
-   1.211   -4.619    7.685
-   0.496   -6.055    8.426
-  -0.548   -7.236    5.826
-  -1.711   -7.151    7.139
-  -2.088   -6.443    5.568
+   0.790   -5.116    7.218
+   1.449   -5.752    6.626
+   1.158   -4.096    7.099
+   0.908   -5.401    8.263
+  -1.058   -6.752    6.737
+  -0.283   -7.355    6.260
+  -1.196   -7.144    7.745
+  -1.979   -6.926    6.180
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5254,15 +5194,11 @@
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
       N     CA     CB   DCG1     dih_VAL_chi1_N_C_C_C      dih_VAL_chi1_N_C_C_C       
-      N     CA     CB    HB1     undefined                 dih_VAL_chi1_N_C_C_C       
+      N     CA     CB   DCG2     dih_VAL_chi1_N_C_C_C      dih_VAL_chi1_N_C_C_C       
    DCG1     CB     CA      C     dih_VAL_chi1_C_C_C_CO     dih_VAL_chi1_C_C_C_CO      
-    HB1     CB     CA      C     undefined                 dih_VAL_chi1_C_C_C_CO      
+   DCG2     CB     CA      C     dih_VAL_chi1_C_C_C_CO     dih_VAL_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG1 DHG1 DHG2 DHG3 DHG4 DHG5 DHG6
-
-
-[ C2W ] ; Cys -> Trp
+[ C2W ] ; Cysh -> Trp
 
 
  [ morphes ]
@@ -5271,12 +5207,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_136
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DCG DUM_opls_500 ->     CG   opls_500
   DCD1 DUM_opls_514 ->    CD1   opls_514
   DHD1 DUM_opls_146 ->    HD1   opls_146
@@ -5299,12 +5236,13 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_136  -0.120000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DCG DUM_opls_500   0.000000      1  12.011000   opls_500   0.075000  12.011000   ;  types != | charge != 
     DCD1 DUM_opls_514   0.000000      1  12.011000   opls_514  -0.115000  12.011000   ;  types != | charge != 
     DHD1 DUM_opls_146   0.000000      1   1.008000   opls_146   0.115000   1.008000   ;  types != | charge != 
@@ -5333,21 +5271,22 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.648   -5.460    7.400
-   1.014   -6.639    7.953
-   0.394   -7.525    7.953
-   1.755   -4.541    7.646
-   2.253   -6.505    8.547
-   2.701   -7.257    9.051
-   2.756   -5.228    8.396
-   2.003   -3.185    7.330
-   1.270   -2.633    6.762
-   3.935   -4.597    8.826
-   4.669   -5.139    9.405
-   3.187   -2.543    7.747
-   3.352   -1.505    7.493
-   4.149   -3.245    8.499
-   5.052   -2.747    8.822
+   0.343   -5.059    7.144
+  -0.920   -6.644    6.603
+  -1.507   -7.256    5.549
+  -1.840   -6.740    4.659
+  -0.659   -7.694    7.582
+  -1.652   -8.602    5.820
+  -2.100   -9.242    5.180
+  -1.153   -8.929    7.065
+  -0.074   -7.723    8.870
+   0.313   -6.809    9.294
+  -1.087  -10.128    7.795
+  -1.482  -11.045    7.383
+   0.008   -8.921    9.608
+   0.460   -8.916   10.591
+  -0.502  -10.121    9.075
+  -0.443  -11.035    9.647
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5366,11 +5305,7 @@
       N     CA     CB    DCG     dih_TRP_chi1_N_C_C_C      dih_TRP_chi1_N_C_C_C       
     DCG     CB     CA      C     dih_TRP_chi1_C_C_C_CO     dih_TRP_chi1_C_C_C_CO      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DCD1 DHD1 DCD2 DNE1 DHE1 DCE2 DCE3 DHE3 DCZ2 DHZ2 DCZ3 DHZ3 DCH2 DHH2
-
-
-[ C2X ] ; Cys -> Hise
+[ C2X ] ; Cysh -> Hise
 
 
  [ morphes ]
@@ -5457,11 +5392,7 @@
     DCG     CB     CA      C     dih_HIS_chi1_C_C_C_CO     dih_HIS_chi1_C_C_C_CO      
      CA     CB    DCG   DND1     dih_HIS_chi2_C_C_C_N      dih_HIS_chi2_C_C_C_N       
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DHB1 DHB2 DCG DND1 DCD2 DHD2 DCE1 DHE1 DNE2 DHE2
-
-
-[ C2Y ] ; Cys -> Tyr
+[ C2Y ] ; Cysh -> Tyr
 
 
  [ morphes ]
@@ -5470,13 +5401,13 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_206 ->     CB   opls_149
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->     CG   opls_145
+   HB2   opls_140 ->    HB1   opls_140
     SG   opls_200 -> SG.gone DUM_opls_200
     HG   opls_204 -> HG.gone DUM_opls_204
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
-   DCG DUM_opls_145 ->     CG   opls_145
+  DHB2 DUM_opls_140 ->    HB2   opls_140
   DCD1 DUM_opls_145 ->    CD1   opls_145
   DHD1 DUM_opls_146 ->    HD1   opls_146
   DCD2 DUM_opls_145 ->    CD2   opls_145
@@ -5495,13 +5426,13 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_206   0.060000      1  12.011000   opls_149  -0.005000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000   opls_145  -0.115000  12.011000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       SG   opls_200  -0.335000      1  32.060000 DUM_opls_200   0.000000  32.060000   ;  types != | charge != 
       HG   opls_204   0.155000      1   1.008000 DUM_opls_204   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
-     DCG DUM_opls_145   0.000000      1  12.011000   opls_145  -0.115000  12.011000   ;  types != | charge != 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
     DCD1 DUM_opls_145   0.000000      1  12.011000   opls_145  -0.115000  12.011000   ;  types != | charge != 
     DHD1 DUM_opls_146   0.000000      1   1.008000   opls_146   0.115000   1.008000   ;  types != | charge != 
     DCD2 DUM_opls_145   0.000000      1  12.011000   opls_145  -0.115000  12.011000   ;  types != | charge != 
@@ -5526,38 +5457,34 @@
    1.497   -6.105    6.549
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.694   -5.429    7.378
-   1.639   -4.401    7.584
-   1.432   -3.391    7.260
-   0.995   -6.744    7.792
-   0.279   -7.539    7.634
-   2.859   -4.683    8.228
-   3.574   -3.892    8.405
-   2.218   -7.028    8.426
-   2.427   -8.040    8.738
-   3.146   -5.993    8.656
-   4.317   -6.249    9.304
-   4.387   -7.136    9.620
+   0.342   -5.075    7.186
+  -0.700   -7.579    7.436
+  -0.311   -7.298    8.404
+  -1.414   -6.996    5.178
+  -1.583   -6.255    4.408
+  -0.996   -8.931    7.177
+  -0.846   -9.676    7.945
+  -1.700   -8.348    4.915
+  -2.078   -8.627    3.943
+  -1.503   -9.315    5.921
+  -1.815  -10.621    5.691
+  -2.219  -10.770    4.850
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
-    DCG   DCE2   DCD2   DHD2     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
+    HB1   DCE2   DCD2   DHD2     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
    DCD2    DCZ   DCE2   DHE2     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
    DCD1    DCZ   DCE1   DHE1     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
-    DCG   DCE1   DCD1   DHD1     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
-   DCD1   DCD2    DCG     CB     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
+    HB1   DCE1   DCD1   DHD1     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
+   DCD1   DCD2    HB1     CB     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
    DCE1   DCE2    DCZ    DOH     improper_Z_CA_X_Y         improper_Z_CA_X_Y          
 
  [ dihedrals ]
       N     CA     CB     SG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DCG DCD1 DHD1 DCD2 DHD2 DCE1 DHE1 DCE2 DHE2 DCZ DOH DHH
-
-
-[ C2Z ] ; Cys -> Hish
+[ C2Z ] ; Cysh -> Hish
 
 
  [ morphes ]
@@ -5622,15 +5549,15 @@
   -1.305   -2.106    6.983
   -1.106   -5.439    5.863
    0.117   -4.586    6.529
-   0.642   -5.460    7.405
-   1.645   -4.498    7.532
-   1.628   -3.556    7.197
-   1.048   -6.611    8.047
-   0.529   -7.460    8.144
-   2.625   -5.103    8.191
-   3.498   -4.666    8.410
-   2.322   -6.355    8.531
-   2.903   -6.990    9.040
+  -0.135   -6.432    7.357
+   0.876   -6.417    8.319
+   1.356   -5.619    8.683
+  -0.555   -7.733    7.176
+  -1.283   -8.050    6.568
+   1.063   -7.690    8.646
+   1.752   -7.998    9.302
+   0.234   -8.514    8.006
+   0.190   -9.508    8.106
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -5646,10 +5573,6 @@
       C     CA     CB     SG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
       N     CA     CB    DCG     dih_HIP_chi1_N_C_C_C      dih_HIP_chi1_N_C_C_C       
     DCG     CB     CA      C     dih_HIP_chi1_C_C_C_CO     dih_HIP_chi1_C_C_C_CO      
-
- [ rotations ]
-  CA-CB HB1 HB2 SG HG DHB1 DHB2 DCG DND1 DHD1 DCD2 DHD2 DCE1 DHE1 DNE2 DHE2
-
 
 [ D2A ] ; Asp -> Ala
 
@@ -5774,7 +5697,7 @@
   CB-CG OD1 OD2 DHD2
 
 
-[ D2C ] ; Asp -> Cys
+[ D2C ] ; Asp -> Cysh
 
 
  [ morphes ]
@@ -5822,8 +5745,8 @@
    1.719   -5.252    6.630
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.973   -5.258    7.461
-   1.560   -5.911    6.452
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -7790,7 +7713,7 @@
   CG-CD OE1 OE2
 
 
-[ E2C ] ; Glu -> Cys
+[ E2C ] ; Glu -> Cysh
 
 
  [ morphes ]
@@ -7799,9 +7722,9 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
-    CG   opls_274 -> CG.gone DUM_opls_274
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
+    CG   opls_274 ->    HB2   opls_140
    HG1   opls_140 -> HG.gone1 DUM_opls_140
    HG2   opls_140 -> HG.gone2 DUM_opls_140
     CD   opls_271 -> CD.gone DUM_opls_271
@@ -7818,9 +7741,9 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-      CG   opls_274  -0.220000      1  12.011000 DUM_opls_274   0.000000  12.011000   ;  types != | charge != 
+      CG   opls_274  -0.220000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
      HG1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HG2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CD   opls_271   0.700000      1  12.011000 DUM_opls_271   0.000000  12.011000   ;  types != | charge != 
@@ -7847,8 +7770,8 @@
    1.125   -5.171    3.558
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -0.305   -4.270    5.183
-   0.499   -5.200    4.654
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -7856,8 +7779,8 @@
      CG    OE1     CD    OE2     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB     CG     dih_GLU_chi1_N_C_C_C      dih_GLU_chi1_N_C_C_C       
-     CG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     dih_GLU_chi1_C_C_C_CO      
+      N     CA     CB     CG     dih_GLU_chi1_N_C_C_C      undefined                  
+     CG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     undefined                  
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
@@ -9957,7 +9880,7 @@
   CB-CG CD1 HD1 CD2 HD2 CE1 HE1 CE2 HE2 CZ HZ DHD2
 
 
-[ F2C ] ; Phe -> Cys
+[ F2C ] ; Phe -> Cysh
 
 
  [ morphes ]
@@ -9966,8 +9889,8 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_149 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
     CG   opls_145 -> CG.gone DUM_opls_145
    CD1   opls_145 -> CD1.gone DUM_opls_145
    HD1   opls_146 -> HD1.gone DUM_opls_146
@@ -9981,6 +9904,8 @@
     HZ   opls_146 -> HZ.gone DUM_opls_146
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -9990,8 +9915,8 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_149  -0.005000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CG   opls_145  -0.115000      1  12.011000 DUM_opls_145   0.000000  12.011000   ;  types != | charge != 
      CD1   opls_145  -0.115000      1  12.011000 DUM_opls_145   0.000000  12.011000   ;  types != | charge != 
      HD1   opls_146   0.115000      1   1.008000 DUM_opls_146   0.000000   1.008000   ;  types != | charge != 
@@ -10005,6 +9930,8 @@
       HZ   opls_146   0.115000      1   1.008000 DUM_opls_146   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -10029,8 +9956,10 @@
    1.416   -9.378    9.546
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.037   -6.608    7.582
-   0.847   -6.992    6.589
+  -1.091   -6.152    6.414
+  -0.479   -4.634    5.788
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -10047,7 +9976,7 @@
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB1 HB2 CG CD1 HD1 CD2 HD2 CE1 HE1 CE2 HE2 CZ HZ DSG DHG
+  CA-CB HB1 HB2 CG CD1 HD1 CD2 HD2 CE1 HE1 CE2 HE2 CZ HZ DHB1 DHB2 DSG DHG
   CB-CG CD1 HD1 CD2 HD2 CE1 HE1 CE2 HE2 CZ HZ
 
 
@@ -12437,7 +12366,7 @@
     HA2    DCG   DOD2   DHD2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOD1    DCG   DOD2   DHD2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
-[ G2C ] ; Gly -> Cys
+[ G2C ] ; Gly -> Cysh
 
 
  [ morphes ]
@@ -14123,7 +14052,7 @@
      CB    DCG   DOD2   DHD2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOD1    DCG   DOD2   DHD2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
-[ H2C ] ; His1 -> Cys
+[ H2C ] ; His1 -> Cysh
 
 
  [ morphes ]
@@ -16520,7 +16449,7 @@
   CB-CG1 HG11 HG12 CD1 HD11 HD12 HD13
 
 
-[ I2C ] ; Ile -> Cys
+[ I2C ] ; Ile -> Cysh
 
 
  [ morphes ]
@@ -16529,11 +16458,11 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_137 ->     CB   opls_206
-    HB   opls_140 ->    HB1   opls_140
-   CG1   opls_136 -> CG1.gone DUM_opls_136
+    HB   opls_140 ->    HB2   opls_140
+   CG1   opls_136 ->    HB1   opls_140
   HG11   opls_140 -> HG1.gone1 DUM_opls_140
   HG12   opls_140 -> HG1.gone2 DUM_opls_140
-   CG2   opls_135 ->    HB2   opls_140
+   CG2   opls_135 -> CG2.gone DUM_opls_135
   HG21   opls_140 -> HG2.gone1 DUM_opls_140
   HG22   opls_140 -> HG2.gone2 DUM_opls_140
   HG23   opls_140 -> HG2.gone3 DUM_opls_140
@@ -16553,10 +16482,10 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_137  -0.060000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
       HB   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     CG1   opls_136  -0.120000      1  12.011000 DUM_opls_136   0.000000  12.011000   ;  types != | charge != 
+     CG1   opls_136  -0.120000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
     HG11   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG12   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
-     CG2   opls_135  -0.180000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
+     CG2   opls_135  -0.180000      1  12.011000 DUM_opls_135   0.000000  12.011000   ;  types != | charge != 
     HG21   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG22   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG23   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
@@ -16589,18 +16518,18 @@
    0.793   -7.538    5.716
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.313   -6.831    6.267
-  -0.235   -7.217    5.576
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB    CG1     dih_ILE_chi1_N_C_C_C      dih_ILE_chi1_N_C_C_C       
-      N     CA     CB    CG2     dih_ILE_chi1_N_C_C_C      undefined                  
-    CG1     CB     CA      C     dih_ILE_chi1_C_C_C_CO     dih_ILE_chi1_C_C_C_CO      
-    CG2     CB     CA      C     dih_ILE_chi1_C_C_C_CO     undefined                  
+      N     CA     CB    CG1     dih_ILE_chi1_N_C_C_C      undefined                  
+      N     CA     CB    CG2     dih_ILE_chi1_N_C_C_C      dih_ILE_chi1_N_C_C_C       
+    CG1     CB     CA      C     dih_ILE_chi1_C_C_C_CO     undefined                  
+    CG2     CB     CA      C     dih_ILE_chi1_C_C_C_CO     dih_ILE_chi1_C_C_C_CO      
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
@@ -18870,7 +18799,7 @@
   CG-CD OE1 OE2 HE2
 
 
-[ J2C ] ; Gluh -> Cys
+[ J2C ] ; Gluh -> Cysh
 
 
  [ morphes ]
@@ -18879,9 +18808,9 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
-    CG   opls_136 -> CG.gone DUM_opls_136
+   HB1   opls_140 -> HB1.gone DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
+    CG   opls_136 ->    HB2   opls_140
    HG1   opls_140 -> HG1.gone DUM_opls_140
    HG2   opls_140 -> HG2.gone DUM_opls_140
     CD   opls_267 -> CD.gone DUM_opls_267
@@ -18899,9 +18828,9 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-      CG   opls_136  -0.120000      1  12.011000 DUM_opls_136   0.000000  12.011000   ;  types != | charge != 
+      CG   opls_136  -0.120000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
      HG1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HG2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CD   opls_267   0.520000      1  12.011000 DUM_opls_267   0.000000  12.011000   ;  types != | charge != 
@@ -18930,8 +18859,8 @@
    1.767   -5.830    3.165
   -1.234   -2.969    7.858
   -2.101   -1.985    7.498
-  -0.305   -4.270    5.183
-   0.499   -5.200    4.654
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -18939,8 +18868,8 @@
      CG    OE1     CD    OE2     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB     CG     dih_GLU_chi1_N_C_C_C      dih_GLU_chi1_N_C_C_C       
-     CG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     dih_GLU_chi1_C_C_C_CO      
+      N     CA     CB     CG     dih_GLU_chi1_N_C_C_C      undefined                  
+     CG     CB     CA      C     dih_GLU_chi1_C_C_C_CO     undefined                  
      CG     CD    OE2    HE2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
     OE1     CD    OE2    HE2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
@@ -21139,7 +21068,7 @@
   CD-CE HE1 HE2 NZ HZ1 HZ2 HZ3
 
 
-[ K2C ] ; Lysh -> Cys
+[ K2C ] ; Lysh -> Cysh
 
 
  [ morphes ]
@@ -21217,8 +21146,8 @@
    3.945   -6.766    5.082
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.924   -5.404    7.534
-   1.526   -6.026    6.513
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -23721,7 +23650,7 @@
   CB-CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHD2
 
 
-[ L2C ] ; Leu -> Cys
+[ L2C ] ; Leu -> Cysh
 
 
  [ morphes ]
@@ -23730,8 +23659,8 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
     CG   opls_137 -> CG.gone DUM_opls_137
     HG   opls_140 -> HG.gone DUM_opls_140
    CD1   opls_135 -> CD1.gone DUM_opls_135
@@ -23744,6 +23673,7 @@
   HD23   opls_140 -> HD2.gone3 DUM_opls_140
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -23754,7 +23684,7 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CG   opls_137  -0.060000      1  12.011000 DUM_opls_137   0.000000  12.011000   ;  types != | charge != 
       HG   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      CD1   opls_135  -0.180000      1  12.011000 DUM_opls_135   0.000000  12.011000   ;  types != | charge != 
@@ -23767,6 +23697,7 @@
     HD23   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -23790,8 +23721,9 @@
   -1.603   -7.115    8.544
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.160   -6.929    6.523
-  -0.108   -7.287    5.778
+  -1.091   -6.152    6.414
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -23804,7 +23736,7 @@
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DSG DHG
+  CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHB1 DSG DHG
   CB-CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23
 
 
@@ -26043,7 +25975,7 @@
   CG-SD CE HE1 HE2 HE3
 
 
-[ M2C ] ; Met -> Cys
+[ M2C ] ; Met -> Cysh
 
 
  [ morphes ]
@@ -26052,9 +25984,9 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
-    CG   opls_210 -> CG.gone DUM_opls_210
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
+    CG   opls_210 ->    HB1   opls_140
    HG1   opls_140 -> HG.gone1 DUM_opls_140
    HG2   opls_140 -> HG.gone2 DUM_opls_140
     SD   opls_202 -> SD.gone DUM_opls_202
@@ -26074,8 +26006,8 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-      CG   opls_210   0.048000      1  12.011000 DUM_opls_210   0.000000  12.011000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+      CG   opls_210   0.048000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
      HG1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HG2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       SD   opls_202  -0.335000      1  32.060000 DUM_opls_202   0.000000  32.060000   ;  types != | charge != 
@@ -26106,16 +26038,16 @@
   -1.597   -8.870    4.760
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.166   -6.926    6.514
-  -0.112   -7.285    5.770
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB     CG     dih_MET_chi1_N_C_C_C      dih_MET_chi1_N_C_C_C       
-     CG     CB     CA      C     dih_MET_chi1_C_C_C_CO     dih_MET_chi1_C_C_C_CO      
+      N     CA     CB     CG     dih_MET_chi1_N_C_C_C      undefined                  
+     CG     CB     CA      C     dih_MET_chi1_C_C_C_CO     undefined                  
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
@@ -28274,7 +28206,7 @@
   CB-CG OD1 ND2 HD21 HD22
 
 
-[ N2C ] ; Asn -> Cys
+[ N2C ] ; Asn -> Cysh
 
 
  [ morphes ]
@@ -28283,8 +28215,8 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
     CG   opls_235 -> CG.gone DUM_opls_235
    OD1   opls_236 -> OD1.gone DUM_opls_236
    ND2   opls_237 -> ND2.gone DUM_opls_237
@@ -28292,6 +28224,7 @@
   HD22   opls_240 -> HD2.gone2 DUM_opls_240
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -28302,7 +28235,7 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CG   opls_235   0.500000      1  12.011000 DUM_opls_235   0.000000  12.011000   ;  types != | charge != 
      OD1   opls_236  -0.500000      1  15.999400 DUM_opls_236   0.000000  15.999400   ;  types != | charge != 
      ND2   opls_237  -0.760000      1  14.006700 DUM_opls_237   0.000000  14.006700   ;  types != | charge != 
@@ -28310,6 +28243,7 @@
     HD22   opls_240   0.380000      1   1.008000 DUM_opls_240   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -28328,8 +28262,9 @@
   -0.919   -8.426    7.606
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.113   -6.947    6.590
-  -0.069   -7.299    5.830
+  -1.091   -6.152    6.414
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -28345,7 +28280,7 @@
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB1 HB2 CG OD1 ND2 HD21 HD22 DSG DHG
+  CA-CB HB1 HB2 CG OD1 ND2 HD21 HD22 DHB1 DSG DHG
   CB-CG OD1 ND2 HD21 HD22
 
 
@@ -30490,7 +30425,7 @@
   CD-CE HE1 HE2 NZ HZ1 HZ2
 
 
-[ O2C ] ; Lys -> Cys
+[ O2C ] ; Lys -> Cysh
 
 
  [ morphes ]
@@ -30565,8 +30500,8 @@
    3.479   -8.123    5.869
   -1.234   -2.969    7.858
   -2.101   -1.985    7.498
-   0.924   -5.404    7.534
-   1.526   -6.026    6.513
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -32988,7 +32923,7 @@
   CG-CD OE1 NE2 HE21 HE22
 
 
-[ Q2C ] ; Gln -> Cys
+[ Q2C ] ; Gln -> Cysh
 
 
  [ morphes ]
@@ -33051,8 +32986,8 @@
    1.939   -7.217    4.758
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.958   -5.305    7.486
-   1.550   -5.948    6.473
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -35323,7 +35258,7 @@
   CD-NE HE CZ NH1 HH11 HH12 NH2 HH21 HH22
 
 
-[ R2C ] ; Arg -> Cys
+[ R2C ] ; Arg -> Cysh
 
 
  [ morphes ]
@@ -35407,8 +35342,8 @@
    5.687   -8.257    6.836
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   0.894   -5.483    7.568
-   1.503   -6.088    6.542
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -38011,7 +37946,7 @@
   CA-CB HB1 HB2 OG HG DCG DOD1 DOD2 DHD2
 
 
-[ S2C ] ; Ser -> Cys
+[ S2C ] ; Ser -> Cysh
 
 
  [ morphes ]
@@ -38020,9 +37955,9 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_157 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
-    OG   opls_154 -> OG.gone DUM_opls_154
+   HB1   opls_140 -> HB.gone1 DUM_opls_140
+   HB2   opls_140 ->    HB1   opls_140
+    OG   opls_154 ->    HB2   opls_140
     HG   opls_155 -> HG.gone DUM_opls_155
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
@@ -38035,9 +37970,9 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_157   0.145000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
      HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-      OG   opls_154  -0.683000      1  15.999400 DUM_opls_154   0.000000  15.999400   ;  types != | charge != 
+      OG   opls_154  -0.683000      1  15.999400   opls_140   0.060000   1.008000   ;  types != | charge != 
       HG   opls_155   0.418000      1   1.008000 DUM_opls_155   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
@@ -38056,16 +37991,16 @@
    0.133   -5.224    4.975
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -0.358   -4.303    5.151
-   0.457   -5.228    4.630
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB     OG     dih_SER_THR_chi1_N_C_C_O  dih_SER_THR_chi1_N_C_C_O   
-      C     CA     CB     OG     dih_SER_THR_chi1_CO_C_C_O dih_SER_THR_chi1_CO_C_C_O  
+      N     CA     CB     OG     dih_SER_THR_chi1_N_C_C_O  undefined                  
+      C     CA     CB     OG     dih_SER_THR_chi1_CO_C_C_O undefined                  
      CA     CB     OG     HG     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
@@ -39937,7 +39872,7 @@
   CA-CB HB OG1 HG1 CG2 HG21 HG22 HG23 DCG DOD1 DOD2 DHD2
 
 
-[ T2C ] ; Thr -> Cys
+[ T2C ] ; Thr -> Cysh
 
 
  [ morphes ]
@@ -39946,10 +39881,10 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_158 ->     CB   opls_206
-    HB   opls_140 ->    HB1   opls_140
-   OG1   opls_154 -> OG1.gone DUM_opls_154
+    HB   opls_140 ->    HB2   opls_140
+   OG1   opls_154 ->    HB1   opls_140
    HG1   opls_155 -> HG1.gone DUM_opls_155
-   CG2   opls_135 ->    HB2   opls_140
+   CG2   opls_135 -> CG2.gone DUM_opls_135
   HG21   opls_140 -> HG2.gone1 DUM_opls_140
   HG22   opls_140 -> HG2.gone2 DUM_opls_140
   HG23   opls_140 -> HG2.gone3 DUM_opls_140
@@ -39965,9 +39900,9 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_158   0.205000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
       HB   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     OG1   opls_154  -0.683000      1  15.999400 DUM_opls_154   0.000000  15.999400   ;  types != | charge != 
+     OG1   opls_154  -0.683000      1  15.999400   opls_140   0.060000   1.008000   ;  types != | charge != 
      HG1   opls_155   0.418000      1   1.008000 DUM_opls_155   0.000000   1.008000   ;  types != | charge != 
-     CG2   opls_135  -0.180000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
+     CG2   opls_135  -0.180000      1  12.011000 DUM_opls_135   0.000000  12.011000   ;  types != | charge != 
     HG21   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG22   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG23   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
@@ -39991,16 +39926,16 @@
    0.745   -5.699    8.304
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.191   -6.914    6.475
-  -0.133   -7.277    5.740
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
      CA     +N      C      O     improper_O_C_X_Y          improper_O_C_X_Y           
 
  [ dihedrals ]
-      N     CA     CB    OG1     dih_SER_THR_chi1_N_C_C_O  dih_SER_THR_chi1_N_C_C_O   
-      C     CA     CB    OG1     dih_SER_THR_chi1_CO_C_C_O dih_SER_THR_chi1_CO_C_C_O  
+      N     CA     CB    OG1     dih_SER_THR_chi1_N_C_C_O  undefined                  
+      C     CA     CB    OG1     dih_SER_THR_chi1_CO_C_C_O undefined                  
      CA     CB    OG1    HG1     dih_SER_THR_chi2_C_C_OH_HO dih_SER_THR_chi2_C_C_OH_HO  
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
@@ -42060,7 +41995,7 @@
   CA-CB HB CG1 HG11 HG12 HG13 CG2 HG21 HG22 HG23 DHB1 DCG DOD1 DOD2 DHD2
 
 
-[ V2C ] ; Val -> Cys
+[ V2C ] ; Val -> Cysh
 
 
  [ morphes ]
@@ -42074,12 +42009,13 @@
   HG11   opls_140 -> HG1.gone1 DUM_opls_140
   HG12   opls_140 -> HG1.gone2 DUM_opls_140
   HG13   opls_140 -> HG1.gone3 DUM_opls_140
-   CG2   opls_135 ->    HB1   opls_140
+   CG2   opls_135 -> CG2.gone DUM_opls_135
   HG21   opls_140 -> HG2.gone1 DUM_opls_140
   HG22   opls_140 -> HG2.gone2 DUM_opls_140
   HG23   opls_140 -> HG2.gone3 DUM_opls_140
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -42094,12 +42030,13 @@
     HG11   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG12   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG13   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
-     CG2   opls_135  -0.180000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
+     CG2   opls_135  -0.180000      1  12.011000 DUM_opls_135   0.000000  12.011000   ;  types != | charge != 
     HG21   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG22   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
     HG23   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -42120,8 +42057,9 @@
   -1.979   -6.926    6.180
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-   1.031   -4.981    7.287
-   1.598   -5.695    6.309
+  -1.091   -6.152    6.414
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -42129,14 +42067,14 @@
 
  [ dihedrals ]
       N     CA     CB    CG1     dih_VAL_chi1_N_C_C_C      dih_VAL_chi1_N_C_C_C       
-      N     CA     CB    CG2     dih_VAL_chi1_N_C_C_C      undefined                  
+      N     CA     CB    CG2     dih_VAL_chi1_N_C_C_C      dih_VAL_chi1_N_C_C_C       
     CG1     CB     CA      C     dih_VAL_chi1_C_C_C_CO     dih_VAL_chi1_C_C_C_CO      
-    CG2     CB     CA      C     dih_VAL_chi1_C_C_C_CO     undefined                  
+    CG2     CB     CA      C     dih_VAL_chi1_C_C_C_CO     dih_VAL_chi1_C_C_C_CO      
       N     CA     CB    DSG     dih_CYS_chi1_N_C_C_S      dih_CYS_chi1_N_C_C_S       
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB CG1 HG11 HG12 HG13 CG2 HG21 HG22 HG23 DSG DHG
+  CA-CB HB CG1 HG11 HG12 HG13 CG2 HG21 HG22 HG23 DHB1 DSG DHG
 
 
 [ V2D ] ; Val -> Asp
@@ -44299,7 +44237,7 @@
   CB-CG CD1 HD1 CD2 NE1 HE1 CE2 CE3 HE3 CZ2 HZ2 CZ3 HZ3 CH2 HH2 DHD2
 
 
-[ W2C ] ; Trp -> Cys
+[ W2C ] ; Trp -> Cysh
 
 
  [ morphes ]
@@ -44308,8 +44246,8 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_136 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
     CG   opls_500 -> CG.gone DUM_opls_500
    CD1   opls_514 -> CD1.gone DUM_opls_514
    HD1   opls_146 -> HD1.gone DUM_opls_146
@@ -44327,6 +44265,7 @@
    HH2   opls_146 -> HH2.gone DUM_opls_146
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -44337,7 +44276,7 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_136  -0.120000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CG   opls_500   0.075000      1  12.011000 DUM_opls_500   0.000000  12.011000   ;  types != | charge != 
      CD1   opls_514  -0.115000      1  12.011000 DUM_opls_514   0.000000  12.011000   ;  types != | charge != 
      HD1   opls_146   0.115000      1   1.008000 DUM_opls_146   0.000000   1.008000   ;  types != | charge != 
@@ -44355,6 +44294,7 @@
      HH2   opls_146   0.115000      1   1.008000 DUM_opls_146   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -44383,8 +44323,9 @@
   -0.443  -11.035    9.647
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.096   -6.952    6.614
-  -0.056   -7.302    5.849
+  -1.091   -6.152    6.414
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -44404,7 +44345,7 @@
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB1 HB2 CG CD1 HD1 CD2 NE1 HE1 CE2 CE3 HE3 CZ2 HZ2 CZ3 HZ3 CH2 HH2 DSG DHG
+  CA-CB HB1 HB2 CG CD1 HD1 CD2 NE1 HE1 CE2 CE3 HE3 CZ2 HZ2 CZ3 HZ3 CH2 HH2 DHB1 DSG DHG
   CB-CG CD1 HD1 CD2 NE1 HE1 CE2 CE3 HE3 CZ2 HZ2 CZ3 HZ3 CH2 HH2
 
 
@@ -47170,7 +47111,7 @@
      CB    DCG   DOD2   DHD2     dih_sidechain_COOH_C_C_O_H dih_sidechain_COOH_C_C_O_H  
    DOD1    DCG   DOD2   DHD2     dih_sidechain_COOH_O_C_O_H dih_sidechain_COOH_O_C_O_H  
 
-[ X2C ] ; Hise -> Cys
+[ X2C ] ; Hise -> Cysh
 
 
  [ morphes ]
@@ -49580,7 +49521,7 @@
   CB-CG CD1 HD1 CD2 HD2 CE1 HE1 CE2 HE2 CZ OH HH DHD2
 
 
-[ Y2C ] ; Tyr -> Cys
+[ Y2C ] ; Tyr -> Cysh
 
 
  [ morphes ]
@@ -49589,9 +49530,9 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_149 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
-    CG   opls_145 -> CG.gone DUM_opls_145
+   HB1   opls_140 ->    HB2   opls_140
+   HB2   opls_140 -> HB.gone2 DUM_opls_140
+    CG   opls_145 ->    HB1   opls_140
    CD1   opls_145 -> CD1.gone DUM_opls_145
    HD1   opls_146 -> HD1.gone DUM_opls_146
    CD2   opls_145 -> CD2.gone DUM_opls_145
@@ -49615,8 +49556,8 @@
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_149  -0.005000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
      HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-      CG   opls_145  -0.115000      1  12.011000 DUM_opls_145   0.000000  12.011000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+      CG   opls_145  -0.115000      1  12.011000   opls_140   0.060000   1.008000   ;  types != | charge != 
      CD1   opls_145  -0.115000      1  12.011000 DUM_opls_145   0.000000  12.011000   ;  types != | charge != 
      HD1   opls_146   0.115000      1   1.008000 DUM_opls_146   0.000000   1.008000   ;  types != | charge != 
      CD2   opls_145  -0.115000      1  12.011000 DUM_opls_145   0.000000  12.011000   ;  types != | charge != 
@@ -49655,8 +49596,8 @@
   -2.219  -10.770    4.850
   -1.234   -2.969    7.858
   -1.305   -2.106    6.983
-  -1.174   -6.922    6.500
-  -0.120   -7.282    5.760
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -52193,7 +52134,7 @@
   CB-CG ND1 HD1 CD2 HD2 CE1 HE1 NE2 HE2 DOD1 DOD2 DHD2
 
 
-[ Z2C ] ; Hish -> Cys
+[ Z2C ] ; Hish -> Cysh
 
 
  [ morphes ]
@@ -52202,8 +52143,8 @@
     CA  opls_224B ->     CA  opls_224B
     HA   opls_140 ->     HA   opls_140
     CB   opls_505 ->     CB   opls_206
-   HB1   opls_140 ->    HB1   opls_140
-   HB2   opls_140 ->    HB2   opls_140
+   HB1   opls_140 -> HB1.gone DUM_opls_140
+   HB2   opls_140 -> HB2.gone DUM_opls_140
     CG   opls_510 -> CG.gone DUM_opls_510
    ND1   opls_512 -> ND1.gone DUM_opls_512
    HD1   opls_513 -> HD1.gone DUM_opls_513
@@ -52215,6 +52156,8 @@
    HE2   opls_513 -> HE2.gone DUM_opls_513
      C   opls_235 ->      C   opls_235
      O   opls_236 ->      O   opls_236
+  DHB1 DUM_opls_140 ->    HB1   opls_140
+  DHB2 DUM_opls_140 ->    HB2   opls_140
    DSG DUM_opls_200 ->     SG   opls_200
    DHG DUM_opls_204 ->     HG   opls_204
 
@@ -52224,8 +52167,8 @@
       CA  opls_224B   0.140000      1  12.011000  opls_224B   0.140000  12.011000   ;  types == | charge == 
       HA   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
       CB   opls_505  -0.005000      1  12.011000   opls_206   0.060000  12.011000   ;  types != | charge != 
-     HB1   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
-     HB2   opls_140   0.060000      1   1.008000   opls_140   0.060000   1.008000   ;  types == | charge == 
+     HB1   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
+     HB2   opls_140   0.060000      1   1.008000 DUM_opls_140   0.000000   1.008000   ;  types != | charge != 
       CG   opls_510   0.215000      1  12.011000 DUM_opls_510   0.000000  12.011000   ;  types != | charge != 
      ND1   opls_512  -0.540000      1  14.006700 DUM_opls_512   0.000000  14.006700   ;  types != | charge != 
      HD1   opls_513   0.460000      1   1.008000 DUM_opls_513   0.000000   1.008000   ;  types != | charge != 
@@ -52237,6 +52180,8 @@
      HE2   opls_513   0.460000      1   1.008000 DUM_opls_513   0.000000   1.008000   ;  types != | charge != 
        C   opls_235   0.500000      1  12.011000   opls_235   0.500000  12.011000   ;  types == | charge == 
        O   opls_236  -0.500000      1  15.999400   opls_236  -0.500000  15.999400   ;  types == | charge == 
+    DHB1 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
+    DHB2 DUM_opls_140   0.000000      1   1.008000   opls_140   0.060000   1.008000   ;  types != | charge != 
      DSG DUM_opls_200   0.000000      1  32.060000   opls_200  -0.335000  32.060000   ;  types != | charge != 
      DHG DUM_opls_204   0.000000      1   1.008000   opls_204   0.155000   1.008000   ;  types != | charge != 
 
@@ -52259,8 +52204,10 @@
    0.190   -9.508    8.106
   -1.234   -2.969    7.858
   -2.101   -1.985    7.498
-  -0.082   -6.695    7.524
-   0.754   -7.063    6.547
+  -1.091   -6.152    6.414
+  -0.479   -4.634    5.788
+   0.885   -5.504    7.576
+   1.497   -6.105    6.549
 
  [ impropers ]
      -C     CA      N      H     improper_Z_N_X_Y          improper_Z_N_X_Y           
@@ -52278,7 +52225,7 @@
       C     CA     CB    DSG     dih_CYS_chi1_CO_C_C_S     dih_CYS_chi1_CO_C_C_S      
 
  [ rotations ]
-  CA-CB HB1 HB2 CG ND1 HD1 CD2 HD2 CE1 HE1 NE2 HE2 DSG DHG
+  CA-CB HB1 HB2 CG ND1 HD1 CD2 HD2 CE1 HE1 NE2 HE2 DHB1 DHB2 DSG DHG
   CB-CG ND1 HD1 CD2 HD2 CE1 HE1 NE2 HE2
 
 

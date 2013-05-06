@@ -26,12 +26,12 @@
 
 [ ACE ]
  [ atoms ]
-   CH3    opls_135   -0.180     1
-  HH31    opls_140    0.060     1
-  HH32    opls_140    0.060     1
-  HH33    opls_140    0.060     1
-     C    opls_235    0.500     2
-     O    opls_236   -0.500     2
+   CH3     opls_135  -0.180     1
+  HH31     opls_140   0.060     2
+  HH32     opls_140   0.060     3
+  HH33     opls_140   0.060     4
+     C     opls_235   0.500     5
+     O     opls_236  -0.500     6
  [ bonds ]
    CH3  HH31
    CH3  HH32
@@ -43,16 +43,16 @@
 
 [ ALA ]
  [ atoms ] 
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1 
-    CA    opls_224B   0.140     1 
-    HA    opls_140    0.060     1 
-    CB    opls_135   -0.180     2 
-   HB1    opls_140    0.060     2 
-   HB2    opls_140    0.060     2 
-   HB3    opls_140    0.060     2 
-     C    opls_235    0.500     3
-     O    opls_236   -0.500     3
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_135  -0.180     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+   HB3     opls_140   0.060     8
+     C     opls_235   0.500     9
+     O     opls_236  -0.500    10
  [ bonds ]
      N     H
      N    CA
@@ -71,19 +71,19 @@
 
 [ AIB ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1 
-    CA    opls_225B   0.200     1 
-   CB1    opls_135   -0.180     2 
-  HB11    opls_140    0.060     2 
-  HB12    opls_140    0.060     2 
-  HB13    opls_140    0.060     2 
-   CB2    opls_135   -0.180     3 
-  HB21    opls_140    0.060     3 
-  HB22    opls_140    0.060     3 
-  HB23    opls_140    0.060     3 
-     C    opls_235    0.500     4
-     O    opls_236   -0.500     4
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_225B   0.200     3
+   CB1     opls_135  -0.180     4
+  HB11     opls_140   0.060     5
+  HB12     opls_140   0.060     6
+  HB13     opls_140   0.060     7
+   CB2     opls_135  -0.180     8
+  HB21     opls_140   0.060     9
+  HB22     opls_140   0.060    10
+  HB23     opls_140   0.060    11
+     C     opls_235   0.500    12
+     O     opls_236  -0.500    13
  [ bonds ]
      N     H
      N    CA
@@ -105,30 +105,30 @@
 
 [ ARG ]
  [ atoms ]
-     N    opls_238   -0.500     1       
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1 
-    HA    opls_140    0.060     1 
-    CB    opls_136   -0.120     2 
-   HB1    opls_140    0.060     2 
-   HB2    opls_140    0.060     2 
-    CG    opls_308   -0.050     3 
-   HG1    opls_140    0.060     3 
-   HG2    opls_140    0.060     3 
-    CD    opls_307    0.190     4 
-   HD1    opls_140    0.060     4 
-   HD2    opls_140    0.060     4 
-    NE    opls_303   -0.700     5 
-    HE    opls_304    0.440     5 
-    CZ    opls_302    0.640	5 
-   NH1    opls_300   -0.800     6
-  HH11    opls_301    0.460     6
-  HH12    opls_301    0.460     6
-   NH2    opls_300   -0.800     7
-  HH21    opls_301    0.460     7
-  HH22    opls_301    0.460     7
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_308  -0.050     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_307   0.190    11
+   HD1     opls_140   0.060    12
+   HD2     opls_140   0.060    13
+    NE     opls_303  -0.700    14
+    HE     opls_304   0.440    15
+    CZ     opls_302   0.640    16
+   NH1     opls_300  -0.800    17
+  HH11     opls_301   0.460    18
+  HH12     opls_301   0.460    19
+   NH2     opls_300  -0.800    20
+  HH21     opls_301   0.460    21
+  HH22     opls_301   0.460    22
+     C     opls_235   0.500    23
+     O     opls_236  -0.500    24
  [ bonds ]
      N     H
      N    CA
@@ -167,29 +167,29 @@
 
 [ ARGN ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_308   -0.050     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_748    0.040     4
-   HD1    opls_140    0.060     4
-   HD2    opls_140    0.060     4
-    NE    opls_749   -0.620     5
-    HE    opls_304    0.350     5; guessed charge
-    CZ    opls_752    0.550	6
-   NH1    opls_750   -0.785     6
-   HH1    opls_301    0.340     6; guessed charge  
-   NH2    opls_751   -0.785     7
-  HH21    opls_301    0.360     7; guessed charge  
-  HH22    opls_301    0.360     7; guessed charge
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_308  -0.050     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_748   0.040    11
+   HD1     opls_140   0.060    12
+   HD2     opls_140   0.060    13
+    NE     opls_749  -0.620    14
+    HE     opls_304   0.350    15; guessed
+    CZ     opls_752   0.550    16
+   NH1     opls_750  -0.785    17
+   HH1     opls_301   0.340    18; guessed
+   NH2     opls_751  -0.785    19
+  HH21     opls_301   0.360    20; guessed
+  HH22     opls_301   0.360    21; guessed
+     C     opls_235   0.500    22
+     O     opls_236  -0.500    23
  [ bonds ]
      N     H
      N    CA
@@ -224,20 +224,20 @@
 
 [ ASN ]
  [ atoms ]
-     N    opls_238   -0.500     0
-     H    opls_241    0.300     0
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_235    0.500     3
-   OD1    opls_236   -0.500     3
-   ND2    opls_237   -0.760     4
-  HD21    opls_240    0.380     4
-  HD22    opls_240    0.380     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_235   0.500     8
+   OD1     opls_236  -0.500     9
+   ND2     opls_237  -0.760    10
+  HD21     opls_240   0.380    11
+  HD22     opls_240   0.380    12
+     C     opls_235   0.500    13
+     O     opls_236  -0.500    14
  [ bonds ]
      N     H
      N    CA
@@ -265,18 +265,18 @@
 
 [ ASP ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_274   -0.220     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_271    0.700     3
-   OD1    opls_272   -0.800     3
-   OD2    opls_272   -0.800     3
-     C    opls_235    0.500     4
-     O    opls_236   -0.500     4
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_274  -0.220     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_271   0.700     8
+   OD1     opls_272  -0.800     9
+   OD2     opls_272  -0.800    10
+     C     opls_235   0.500    11
+     O     opls_236  -0.500    12
  [ bonds ]
      N     H
      N    CA
@@ -300,19 +300,19 @@
 
 [ ASPH ]
  [ atoms ]
-     N    opls_238   -0.500     0  
-     H    opls_241    0.300     0  
-    CA    opls_224B   0.140     1  
-    HA    opls_140    0.060     1  
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_267    0.520     3
-   OD1    opls_269   -0.530     3
-   OD2    opls_268   -0.440     4
-   HD2    opls_270    0.450     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_267   0.520     8
+   OD1     opls_269  -0.530     9
+   OD2     opls_268  -0.440    10
+   HD2     opls_270   0.450    11
+     C     opls_235   0.500    12
+     O     opls_236  -0.500    13
  [ bonds ]
      N     H
      N    CA
@@ -340,16 +340,16 @@
 
 [ CYS2 ] ; aka CYX
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_214    0.0975    2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    SG    opls_203   -0.2175    2
-     C    opls_235    0.500     3
-     O    opls_236   -0.500     3
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_214  0.0975     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    SG     opls_203 -0.2175     8
+     C     opls_235   0.500     9
+     O     opls_236  -0.500    10
  [ bonds ]
      N     H
      N    CA
@@ -368,19 +368,19 @@
     -C    CA     N     H    improper_Z_N_X_Y 
     CA    +N     C     O    improper_O_C_X_Y 
 
-[ CYS ]
+[ CYSH ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_206    0.060     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    SG    opls_200   -0.335     3
-    HG    opls_204    0.155     3
-     C    opls_235    0.500     4
-     O    opls_236   -0.500     4
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_206   0.060     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    SG     opls_200  -0.335     8
+    HG     opls_204   0.155     9
+     C     opls_235   0.500    10
+     O     opls_236  -0.500    11
  [ bonds ]
      N     H
      N    CA
@@ -402,23 +402,23 @@
 
 [ GLN ]
  [ atoms ]
-     N    opls_238   -0.500     0
-     H    opls_241    0.300     0
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_235    0.500     4
-   OE1    opls_236   -0.500     4
-   NE2    opls_237   -0.760     5
-  HE21    opls_240    0.380     5
-  HE22    opls_240    0.380     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_136  -0.120     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_235   0.500    11
+   OE1     opls_236  -0.500    12
+   NE2     opls_237  -0.760    13
+  HE21     opls_240   0.380    14
+  HE22     opls_240   0.380    15
+     C     opls_235   0.500    16
+     O     opls_236  -0.500    17
  [ bonds ]
      N     H
      N    CA
@@ -451,24 +451,24 @@
 ; See. Patriksson et al. Int. J. Mass. Spectrom. 248 pp 124-135 (2006)
 [ QLN ]
  [ atoms ]
-     N    opls_238   -0.500     0
-     H    opls_241    0.300     0
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136    0.054     3
-   HG1    opls_140    0.131     3
-   HG2    opls_140    0.131     3
-    CD    opls_235    0.544     4
-   OE1    opls_154   -0.496     4
-   HE1    opls_155    0.498     4
-   NE2    opls_237   -0.720     5
-  HE21    opls_240    0.429     5
-  HE22    opls_240    0.429     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_136   0.054     8
+   HG1     opls_140   0.131     9
+   HG2     opls_140   0.131    10
+    CD     opls_235   0.544    11
+   OE1     opls_154  -0.496    12
+   HE1     opls_155   0.498    13
+   NE2     opls_237  -0.720    14
+  HE21     opls_240   0.429    15
+  HE22     opls_240   0.429    16
+     C     opls_235   0.500    17
+     O     opls_236  -0.500    18
  [ bonds ]
      N     H
      N    CA
@@ -503,21 +503,21 @@
 
 [ GLU ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_274   -0.220     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_271    0.700     4
-   OE1    opls_272   -0.800     4
-   OE2    opls_272   -0.800     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_274  -0.220     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_271   0.700    11
+   OE1     opls_272  -0.800    12
+   OE2     opls_272  -0.800    13
+     C     opls_235   0.500    14
+     O     opls_236  -0.500    15
  [ bonds ]
      N     H
      N    CA
@@ -545,20 +545,20 @@
 
 [ PGLU ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_274   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_235    0.500     4
-    OE    opls_236   -0.500     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_274  -0.120     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_235   0.500    11
+    OE     opls_236  -0.500    12
+     C     opls_235   0.500    13
+     O     opls_236  -0.500    14
  [ bonds ]
      N     H
      N    CA
@@ -586,22 +586,22 @@
 
 [ GLUH ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_267    0.520     4
-   OE1    opls_269   -0.440     4
-   OE2    opls_268   -0.530     5
-   HE2    opls_270    0.450     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_136  -0.120     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_267   0.520    11
+   OE1     opls_269  -0.440    12
+   OE2     opls_268  -0.530    13
+   HE2     opls_270   0.450    14
+     C     opls_235   0.500    15
+     O     opls_236  -0.500    16
  [ bonds ]
      N     H
      N    CA
@@ -632,13 +632,13 @@
 
 [ GLY ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_223B   0.080     1
-   HA1    opls_140    0.060     1
-   HA2    opls_140    0.060     1
-     C    opls_235    0.500     2
-     O    opls_236   -0.500     2
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_223B   0.080     3
+   HA1     opls_140   0.060     4
+   HA2     opls_140   0.060     5
+     C     opls_235   0.500     6
+     O     opls_236  -0.500     7
  [ bonds ]
      N     H
      N    CA
@@ -654,23 +654,23 @@
 
 [ HISD ] 
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_505   -0.297     2 
-   HB1    opls_140    0.060     2 
-   HB2    opls_140    0.060     2 
-    CG    opls_508   -0.261     3
-   ND1    opls_503   -0.291     4
-   HD1    opls_504    0.326     4
-   CD2    opls_507    0.504     5
-   HD2    opls_146    0.183     5
-   CE1    opls_506    0.182     6
-   HE1    opls_146    0.098     6
-   NE2    opls_511   -0.564     7
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_505  -0.297     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_508  -0.261     8
+   ND1     opls_503  -0.291     9
+   HD1     opls_504   0.326    10
+   CD2     opls_507   0.504    11
+   HD2     opls_146   0.183    12
+   CE1     opls_506   0.182    13
+   HE1     opls_146   0.098    14
+   NE2     opls_511  -0.564    15
+     C     opls_235   0.500    16
+     O     opls_236  -0.500    17
  [ bonds ]
      N     H
      N    CA
@@ -705,23 +705,23 @@
 
 [ HIS1 ]   ; Identical to HISD
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_505   -0.297     2 
-   HB1    opls_140    0.060     2 
-   HB2    opls_140    0.060     2 
-    CG    opls_508   -0.261     3
-   ND1    opls_503   -0.291     4
-   HD1    opls_504    0.326     4
-   CD2    opls_507    0.504     5
-   HD2    opls_146    0.183     5
-   CE1    opls_506    0.182     6
-   HE1    opls_146    0.098     6
-   NE2    opls_511   -0.564     7
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_505  -0.297     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_508  -0.261     8
+   ND1     opls_503  -0.291     9
+   HD1     opls_504   0.326    10
+   CD2     opls_507   0.504    11
+   HD2     opls_146   0.183    12
+   CE1     opls_506   0.182    13
+   HE1     opls_146   0.098    14
+   NE2     opls_511  -0.564    15
+     C     opls_235   0.500    16
+     O     opls_236  -0.500    17
  [ bonds ]
      N     H
      N    CA
@@ -756,23 +756,23 @@
 
 [ HISE ] 
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_505   -0.297     2
-   HB1    opls_140    0.060	2
-   HB2    opls_140    0.060	2
-    CG    opls_507    0.504     3
-   ND1    opls_511   -0.564     3
-   CD2    opls_508   -0.261     4
-   HD2    opls_146    0.183     4 
-   CE1    opls_506    0.182     5
-   HE1    opls_146    0.098     5
-   NE2    opls_503   -0.291     6
-   HE2    opls_504    0.326     6
-     C    opls_235    0.500     7
-     O    opls_236   -0.500     7
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_505  -0.297     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_507   0.504     8
+   ND1     opls_511  -0.564     9
+   CD2     opls_508  -0.261    10
+   HD2     opls_146   0.183    11
+   CE1     opls_506   0.182    12
+   HE1     opls_146   0.098    13
+   NE2     opls_503  -0.291    14
+   HE2     opls_504   0.326    15
+     C     opls_235   0.500    16
+     O     opls_236  -0.500    17
  [ bonds ]
      N     H
      N    CA
@@ -807,24 +807,24 @@
 
 [ HISH ]  ; also known as HISP (or HIS+)
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_505   -0.005     2 
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_510    0.215     3 
-   ND1    opls_512   -0.540     4
-   HD1    opls_513    0.460     4 
-   CD2    opls_510    0.215     5 
-   HD2    opls_146    0.115     5 
-   CE1    opls_509    0.385     6 
-   HE1    opls_146    0.115     6 
-   NE2    opls_512   -0.540     7 
-   HE2    opls_513    0.460     7 
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_505  -0.005     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_510   0.215     8
+   ND1     opls_512  -0.540     9
+   HD1     opls_513   0.460    10
+   CD2     opls_510   0.215    11
+   HD2     opls_146   0.115    12
+   CE1     opls_509   0.385    13
+   HE1     opls_146   0.115    14
+   NE2     opls_512  -0.540    15
+   HE2     opls_513   0.460    16
+     C     opls_235   0.500    17
+     O     opls_236  -0.500    18
  [ bonds ]
      N     H
      N    CA
@@ -861,9 +861,9 @@
 [ HOH ] 
 ; We believe SPC has slightly better properties than TIP3P...
  [ atoms ]
-    OW   opls_116   -0.82      0
-   HW1   opls_117    0.41      0
-   HW2   opls_117    0.41      0
+    OW     opls_116   -0.82     1
+   HW1     opls_117    0.41     2
+   HW2     opls_117    0.41     3
  [ bonds ]
     OW   HW1
     OW   HW2
@@ -871,10 +871,10 @@
 [ HO4 ] 
 ; TIP4P
  [ atoms ]
-    OW   opls_113    0.00      0
-   HW1   opls_114    0.52      0
-   HW2   opls_114    0.52      0
-    MW   opls_115   -1.04      0
+    OW     opls_113    0.00     1
+   HW1     opls_114    0.52     2
+   HW2     opls_114    0.52     3
+    MW     opls_115   -1.04     4
  [ bonds ]
     OW   HW1
     OW   HW2
@@ -882,36 +882,36 @@
 [ HO5 ] 
 ; TIP5P
  [ atoms ]
-    OW   opls_118    0.00      0
-   HW1   opls_119    0.248     0
-   HW2   opls_119    0.248     0
-   LP1   opls_120   -0.248     0
-   LP2   opls_120   -0.248     0
+    OW     opls_118    0.00     1
+   HW1     opls_119   0.248     2
+   HW2     opls_119   0.248     3
+   LP1     opls_120  -0.248     4
+   LP2     opls_120  -0.248     5
  [ bonds ]
     OW   HW1
     OW   HW2
 
 [ ILE ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_137   -0.060     2
-    HB    opls_140    0.060     2
-   CG1    opls_136   -0.120     3
-  HG11    opls_140    0.060     3
-  HG12    opls_140    0.060     3
-   CG2    opls_135   -0.180     4
-  HG21    opls_140    0.060     4
-  HG22    opls_140    0.060     4
-  HG23    opls_140    0.060     4
-    CD    opls_135   -0.180     5
-   HD1    opls_140    0.060     5
-   HD2    opls_140    0.060     5
-   HD3    opls_140    0.060     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_137  -0.060     5
+    HB     opls_140   0.060     6
+   CG1     opls_136  -0.120     7
+  HG11     opls_140   0.060     8
+  HG12     opls_140   0.060     9
+   CG2     opls_135  -0.180    10
+  HG21     opls_140   0.060    11
+  HG22     opls_140   0.060    12
+  HG23     opls_140   0.060    13
+    CD     opls_135  -0.180    14
+   HD1     opls_140   0.060    15
+   HD2     opls_140   0.060    16
+   HD3     opls_140   0.060    17
+     C     opls_235   0.500    18
+     O     opls_236  -0.500    19
  [ bonds ]
      N     H
      N    CA
@@ -943,25 +943,25 @@
 
 [ LEU ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_137   -0.060     3
-    HG    opls_140    0.060     3
-   CD1    opls_135   -0.180     4
-  HD11    opls_140    0.060     4
-  HD12    opls_140    0.060     4
-  HD13    opls_140    0.060     4
-   CD2    opls_135   -0.180     5
-  HD21    opls_140    0.060     5
-  HD22    opls_140    0.060     5
-  HD23    opls_140    0.060     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_137  -0.060     8
+    HG     opls_140   0.060     9
+   CD1     opls_135  -0.180    10
+  HD11     opls_140   0.060    11
+  HD12     opls_140   0.060    12
+  HD13     opls_140   0.060    13
+   CD2     opls_135  -0.180    14
+  HD21     opls_140   0.060    15
+  HD22     opls_140   0.060    16
+  HD23     opls_140   0.060    17
+     C     opls_235   0.500    18
+     O     opls_236  -0.500    19
  [ bonds ]
      N     H
      N    CA
@@ -991,27 +991,27 @@
 
 [ LYS ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_136   -0.120     4
-   HD1    opls_140    0.060     4
-   HD2    opls_140    0.060     4
-    CE    opls_906    0.060     5
-   HE1    opls_911    0.060     5
-   HE2    opls_911    0.060     5
-    NZ    opls_900   -0.900     6 
-   HZ1    opls_909    0.360     6 
-   HZ2    opls_909    0.360     6 
-     C    opls_235    0.500     7
-     O    opls_236   -0.500     7
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_136  -0.120     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_136  -0.120    11
+   HD1     opls_140   0.060    12
+   HD2     opls_140   0.060    13
+    CE     opls_906   0.060    14
+   HE1     opls_911   0.060    15
+   HE2     opls_911   0.060    16
+    NZ     opls_900  -0.900    17
+   HZ1     opls_909   0.360    18
+   HZ2     opls_909   0.360    19
+     C     opls_235   0.500    20
+     O     opls_236  -0.500    21
  [ bonds ]
      N     H
      N    CA
@@ -1046,28 +1046,28 @@
 
 [ LYSH ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_136   -0.120     4
-   HD1    opls_140    0.060     4
-   HD2    opls_140    0.060     4
-    CE    opls_292    0.190     5
-   HE1    opls_140    0.060     5
-   HE2    opls_140    0.060     5
-    NZ    opls_287   -0.300     6
-   HZ1    opls_290    0.330     6
-   HZ2    opls_290    0.330     6
-   HZ3    opls_290    0.330     6
-     C    opls_235    0.500     7
-     O    opls_236   -0.500     7
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_136  -0.120     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    CD     opls_136  -0.120    11
+   HD1     opls_140   0.060    12
+   HD2     opls_140   0.060    13
+    CE     opls_292   0.190    14
+   HE1     opls_140   0.060    15
+   HE2     opls_140   0.060    16
+    NZ     opls_287  -0.300    17
+   HZ1     opls_290   0.330    18
+   HZ2     opls_290   0.330    19
+   HZ3     opls_290   0.330    20
+     C     opls_235   0.500    21
+     O     opls_236  -0.500    22
  [ bonds ]
      N     H
      N    CA
@@ -1104,23 +1104,23 @@
 
 [ MET ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_210    0.048     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    SD    opls_202   -0.335     4
-    CE    opls_209   -0.013     5
-   HE1    opls_140    0.060     5
-   HE2    opls_140    0.060     5
-   HE3    opls_140    0.060     5
-     C    opls_235    0.500     6
-     O    opls_236   -0.500     6
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_210   0.048     8
+   HG1     opls_140   0.060     9
+   HG2     opls_140   0.060    10
+    SD     opls_202  -0.335    11
+    CE     opls_209  -0.013    12
+   HE1     opls_140   0.060    13
+   HE2     opls_140   0.060    14
+   HE3     opls_140   0.060    15
+     C     opls_235   0.500    16
+     O     opls_236  -0.500    17
  [ bonds ]
      N     H
      N    CA
@@ -1149,12 +1149,12 @@
 
 [ NAC ] ; metylamide, a.k.a NMA.
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-   CH3    opls_242    0.020     2
-  HH31    opls_140    0.060     2
-  HH32    opls_140    0.060     2
-  HH33    opls_140    0.060     2
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+   CH3     opls_242   0.020     3
+  HH31     opls_140   0.060     4
+  HH32     opls_140   0.060     5
+  HH33     opls_140   0.060     6
  [ bonds ]
      N     H
      N   CH3
@@ -1168,9 +1168,9 @@
 
 [ NH2 ]
  [ atoms ]
-     N     opls_237  -0.760	1
-    H1     opls_240   0.380     1
-    H2     opls_240   0.380     1
+     N     opls_237  -0.760     1
+    H1     opls_240   0.380     2
+    H2     opls_240   0.380     3
  [ bonds ]
     -C     N
      N	   H1
@@ -1181,9 +1181,9 @@
 [ NHE ] 
 ; same as NH2
  [ atoms ]
-     N     opls_237  -0.760	1
-    H1     opls_240   0.380     1
-    H2     opls_240   0.380     1
+     N     opls_237  -0.760     1
+    H1     opls_240   0.380     2
+    H2     opls_240   0.380     3
  [ bonds ]
     -C     N
      N	   H1
@@ -1193,26 +1193,26 @@
  
 [ PHE ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_149   -0.005     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_145   -0.115     2
-   CD1    opls_145   -0.115     3
-   HD1    opls_146    0.115     3
-   CD2    opls_145   -0.115     4
-   HD2    opls_146    0.115     4
-   CE1    opls_145   -0.115     5
-   HE1    opls_146    0.115     5
-   CE2    opls_145   -0.115     6
-   HE2    opls_146    0.115     6 
-    CZ    opls_145   -0.115     7 
-    HZ    opls_146    0.115     7
-     C    opls_235    0.500     8
-     O    opls_236   -0.500     8
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_149  -0.005     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_145  -0.115     8
+   CD1     opls_145  -0.115     9
+   HD1     opls_146   0.115    10
+   CD2     opls_145  -0.115    11
+   HD2     opls_146   0.115    12
+   CE1     opls_145  -0.115    13
+   HE1     opls_146   0.115    14
+   CE2     opls_145  -0.115    15
+   HE2     opls_146   0.115    16
+    CZ     opls_145  -0.115    17
+    HZ     opls_146   0.115    18
+     C     opls_235   0.500    19
+     O     opls_236  -0.500    20
  [ bonds ]
      N     H
      N    CA
@@ -1248,20 +1248,20 @@
 
 [ PRO ]
  [ atoms ]
-     N    opls_239   -0.140     1
-    CA    opls_246    0.010     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_136   -0.120     3
-   HG1    opls_140    0.060     3
-   HG2    opls_140    0.060     3
-    CD    opls_245   -0.050     4
-   HD1    opls_140    0.060     4
-   HD2    opls_140    0.060     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_239  -0.140     1
+    CA     opls_246   0.010     2
+    HA     opls_140   0.060     3
+    CB     opls_136  -0.120     4
+   HB1     opls_140   0.060     5
+   HB2     opls_140   0.060     6
+    CG     opls_136  -0.120     7
+   HG1     opls_140   0.060     8
+   HG2     opls_140   0.060     9
+    CD     opls_245  -0.050    10
+   HD1     opls_140   0.060    11
+   HD2     opls_140   0.060    12
+     C     opls_235   0.500    13
+     O     opls_236  -0.500    14
  [ bonds ]
      N    CA
     CA    HA
@@ -1285,17 +1285,17 @@
 
 [ SER ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_157    0.145     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    OG    opls_154   -0.683     3
-    HG    opls_155    0.418     3
-     C    opls_235    0.500     4
-     O    opls_236   -0.500     4
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_157   0.145     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    OG     opls_154  -0.683     8
+    HG     opls_155   0.418     9
+     C     opls_235   0.500    10
+     O     opls_236  -0.500    11
  [ bonds ]
      N     H
      N    CA
@@ -1319,21 +1319,21 @@
 
 [ SEP ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_157    0.145     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    OD    opls_447   -0.500	 3
-     P    opls_445    1.515 	4
-   OP1    opls_434   -0.742 	4
-   OP2    opls_446   -1.0215	 4
-   OP3    opls_446   -1.0215	 4
-    HO    opls_155    0.505	 4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_157   0.145     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    OD     opls_447  -0.500     8
+     P     opls_445   1.515     9
+   OP1     opls_434  -0.742    10
+   OP2     opls_446 -1.0215    11
+   OP3     opls_446 -1.0215    12
+    HO     opls_155   0.505    13
+     C     opls_235   0.500    14
+     O     opls_236  -0.500    15
  [ bonds ]
      N     H
      N    CA
@@ -1388,20 +1388,20 @@
 
 [ THR ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_158    0.205     2
-    HB    opls_140    0.060     2
-   OG1    opls_154   -0.683     2
-   HG1    opls_155    0.418     2
-   CG2    opls_135   -0.180     3
-  HG21    opls_140    0.060     3
-  HG22    opls_140    0.060     3
-  HG23    opls_140    0.060     3
-     C    opls_235    0.500     4
-     O    opls_236   -0.500     4
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_158   0.205     5
+    HB     opls_140   0.060     6
+   OG1     opls_154  -0.683     7
+   HG1     opls_155   0.418     8
+   CG2     opls_135  -0.180     9
+  HG21     opls_140   0.060    10
+  HG22     opls_140   0.060    11
+  HG23     opls_140   0.060    12
+     C     opls_235   0.500    13
+     O     opls_236  -0.500    14
  [ bonds ]
      N     H
      N    CA
@@ -1428,30 +1428,30 @@
   
 [ TRP ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_136   -0.120     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_500    0.075     3  
-   CD1    opls_514   -0.115     4 
-   HD1    opls_146    0.115     4  
-   CD2    opls_501   -0.055     5
-   NE1    opls_503   -0.570     6  
-   HE1    opls_504    0.420     6  
-   CE2    opls_502    0.130     6
-   CE3    opls_145   -0.115     7  
-   HE3    opls_146    0.115     7  
-   CZ2    opls_145   -0.115     8  
-   HZ2    opls_146    0.115     8   
-   CZ3    opls_145   -0.115     9  
-   HZ3    opls_146    0.115     9  
-   CH2    opls_145   -0.115     10  
-   HH2    opls_146    0.115     10 
-     C    opls_235    0.500     11
-     O    opls_236   -0.500     11
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_136  -0.120     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_500   0.075     8
+   CD1     opls_514  -0.115     9
+   HD1     opls_146   0.115    10
+   CD2     opls_501  -0.055    11
+   NE1     opls_503  -0.570    12
+   HE1     opls_504   0.420    13
+   CE2     opls_502   0.130    14
+   CE3     opls_145  -0.115    15
+   HE3     opls_146   0.115    16
+   CZ2     opls_145  -0.115    17
+   HZ2     opls_146   0.115    18
+   CZ3     opls_145  -0.115    19
+   HZ3     opls_146   0.115    20
+   CH2     opls_145  -0.115    21
+   HH2     opls_146   0.115    22
+     C     opls_235   0.500    23
+     O     opls_236  -0.500    24
  [ bonds ]
      N     H
      N    CA
@@ -1496,27 +1496,27 @@
 
 [ TYR ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_149   -0.005     2
-   HB1    opls_140    0.060     2
-   HB2    opls_140    0.060     2
-    CG    opls_145   -0.115     2
-   CD1    opls_145   -0.115     4
-   HD1    opls_146    0.115     4
-   CD2    opls_145   -0.115     5
-   HD2    opls_146    0.115     5
-   CE1    opls_145   -0.115     6
-   HE1    opls_146    0.115     6
-   CE2    opls_145   -0.115     7
-   HE2    opls_146    0.115     7
-    CZ    opls_166    0.150     8
-    OH    opls_167   -0.585     8
-    HH    opls_168    0.435     8
-     C    opls_235    0.500     9
-     O    opls_236   -0.500     9
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_149  -0.005     5
+   HB1     opls_140   0.060     6
+   HB2     opls_140   0.060     7
+    CG     opls_145  -0.115     8
+   CD1     opls_145  -0.115     9
+   HD1     opls_146   0.115    10
+   CD2     opls_145  -0.115    11
+   HD2     opls_146   0.115    12
+   CE1     opls_145  -0.115    13
+   HE1     opls_146   0.115    14
+   CE2     opls_145  -0.115    15
+   HE2     opls_146   0.115    16
+    CZ     opls_166   0.150    17
+    OH     opls_167  -0.585    18
+    HH     opls_168   0.435    19
+     C     opls_235   0.500    20
+     O     opls_236  -0.500    21
  [ bonds ]
      N     H
      N    CA
@@ -1553,22 +1553,22 @@
 
 [ VAL ]
  [ atoms ]
-     N    opls_238   -0.500     1
-     H    opls_241    0.300     1
-    CA    opls_224B   0.140     1
-    HA    opls_140    0.060     1
-    CB    opls_137   -0.060	2
-    HB    opls_140    0.060     2
-   CG1    opls_135   -0.180     3
-  HG11    opls_140    0.060     3
-  HG12    opls_140    0.060     3
-  HG13    opls_140    0.060     3
-   CG2    opls_135   -0.180     4
-  HG21    opls_140    0.060     4
-  HG22    opls_140    0.060     4
-  HG23    opls_140    0.060     4
-     C    opls_235    0.500     5
-     O    opls_236   -0.500     5
+     N     opls_238  -0.500     1
+     H     opls_241   0.300     2
+    CA    opls_224B   0.140     3
+    HA     opls_140   0.060     4
+    CB     opls_137  -0.060     5
+    HB     opls_140   0.060     6
+   CG1     opls_135  -0.180     7
+  HG11     opls_140   0.060     8
+  HG12     opls_140   0.060     9
+  HG13     opls_140   0.060    10
+   CG2     opls_135  -0.180    11
+  HG21     opls_140   0.060    12
+  HG22     opls_140   0.060    13
+  HG23     opls_140   0.060    14
+     C     opls_235   0.500    15
+     O     opls_236  -0.500    16
  [ bonds ]
      N     H
      N    CA
@@ -1670,14 +1670,14 @@
 [ EtOH ]
  [ atoms ]
     CB   opls_135    -0.180    1
-   HB1   opls_140     0.060    1
-   HB2   opls_140     0.060    1
-   HB3   opls_140     0.060    1
-    CA   opls_157     0.145    2
-   HA1   opls_140     0.060    2
-   HA2   opls_140     0.060    2
-    OH   opls_154    -0.683    2
-    HO   opls_155     0.418    2
+   HB1   opls_140     0.060    2
+   HB2   opls_140     0.060    3
+   HB3   opls_140     0.060    4
+    CA   opls_157     0.145    5
+   HA1   opls_140     0.060    6
+   HA2   opls_140     0.060    7
+    OH   opls_154    -0.683    8
+    HO   opls_155     0.418    9
  [ bonds ]
    CB    HB1
    CB    HB2
@@ -1688,21 +1688,21 @@
    CA    OH
    OH    HO
 
+
 ; New All atom DMSO model, DvdS, 17/06/2006
 ; Use at your own risk!
 [ DMSO  ]
  [ atoms ]
-OD	    opls_125	-0.459	    1
-SD	    opls_124	 0.139      1
-CD1	    opls_139	-0.020	    1
-HD11	    opls_140	 0.060	    1
-HD12	    opls_140	 0.060	    1
-HD13	    opls_140	 0.060	    1
-CD2	    opls_139	-0.020	    1
-HD21	    opls_140	 0.060	    1
-HD22	    opls_140	 0.060	    1
-HD23	    opls_140	 0.060	    1
-
+    OD     opls_125  -0.459     1
+    SD     opls_124   0.139     2
+   CD1     opls_139  -0.020     3
+  HD11     opls_140   0.060     4
+  HD12     opls_140   0.060     5
+  HD13     opls_140   0.060     6
+   CD2     opls_139  -0.020     7
+  HD21     opls_140   0.060     8
+  HD22     opls_140   0.060     9
+  HD23     opls_140   0.060    10
  [ bonds ]
     OD     SD  
     SD     CD1 

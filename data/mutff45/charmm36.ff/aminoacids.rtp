@@ -1207,11 +1207,11 @@
 [ ACE ] ; terminal residue, provided by Mark Abraham
  [ atoms ]
        CH3     CT3     -0.270  1
-       HH31    HA3     0.090   1
-       HH32    HA3     0.090   1
-       HH33    HA3     0.090   1
-       C       C       0.510   2
-       O       O       -0.510  2
+       HH31    HA3     0.090   2
+       HH32    HA3     0.090   3
+       HH33    HA3     0.090   4
+       C       C       0.510   5
+       O       O       -0.510  6
  [ bonds ]
        C       CH3
        C       +N
@@ -1225,11 +1225,11 @@
 [ CT3 ] ; terminal residue, provided by Mark Abraham
  [ atoms ]
        N       NH1     -0.470  1
-       HN      H       0.310   1
-       CH3     CT3     -0.110  1
-       HH31    HA3     0.090   1
-       HH32    HA3     0.090   1
-       HH33    HA3     0.090   1
+       HN      H       0.310   2
+       CH3     CT3     -0.110  3
+       HH31    HA3     0.090   4
+       HH32    HA3     0.090   5
+       HH33    HA3     0.090   6
  [ bonds ]
        -C      N
        N       HN

@@ -86,3 +86,66 @@ ZN              1
 [ atoms ]
 ; id    at type         res nr  residu name     at name  cg nr  charge
    1    Zn                  1       ZN             ZN      1    2.00000
+
+
+; Entries for the Joung ion atom types for TIP3P(TIP4P)
+[ moleculetype ]
+; molname       nrexcl
+NaJ              1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_338        1       NaJ            NaJ       1     1       22.99000
+
+[ moleculetype ]
+; molname       nrexcl
+ClJ              1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_333        1       ClJ            ClJ       1    -1       35.45000
+
+[ moleculetype ]
+; molname       nrexcl
+KJ               1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_337        1        KJ             KJ       1     1       39.10000
+; Entry ends
+
+[ moleculetype ]
+; molname       nrexcl
+NaS              1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_143        1       NaS            NaS       1     1       22.99000
+
+[ moleculetype ]
+; molname       nrexcl
+ClS              1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_144        1       ClS            ClS       1     -1    35.45000
+
+;spce water ions from Joung
+[ moleculetype ]
+; molname       nrexcl
+NaE             1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_356        1       NaJ           NaJ      1     1       22.99000
+
+[ moleculetype ]
+; molname       nrexcl
+ClE              1
+
+[ atoms ]
+; id    at type         res nr  residu name     at name  cg nr  charge   mass
+1       amber99_351        1       ClJ            ClJ       1    -1       35.45000
+
+
+

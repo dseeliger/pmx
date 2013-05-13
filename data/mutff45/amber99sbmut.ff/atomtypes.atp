@@ -93,3 +93,10 @@ DUM_CW            12.010
 DUM_CB            12.010
 DUM_CN            12.010
 DUM_C*            12.010
+amber99_333       35.45000      ; Cl- Joung
+amber99_337       39.10000      ; K+  potassium Joung
+amber99_338       22.99000      ; Na+ Joung
+amber99_143       22.99000      ; NaS Smith parameters
+amber99_144       35.45000      ; ClS Smith parameters
+amber99_356       22.99000      ; Na+ Joung spce
+amber99_351       35.45000      ; Cl- Joung spce

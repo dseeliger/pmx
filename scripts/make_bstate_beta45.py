@@ -734,7 +734,7 @@ def main(argv):
 
     if input_itp:
         print 'log_> Reading input files "%s" and "%s"' % (top_file, input_itp)
-        topol = Topology( input_itp,  topfile = top_file, version = 'new')
+        topol = Topology( input_itp,  topfile = top_file, version = 'new', ff = cmdl['-ff'] )
     else:
         print 'log_> Reading input file "%s"' % (top_file)
         topol = Topology( top_file, version = 'new', ff = cmdl['-ff'] )

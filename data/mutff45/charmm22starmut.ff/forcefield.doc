@@ -1,4 +1,4 @@
-CHARMM22* all-atom force field
+CHARMM22*MUTATION all-atom force field
 
 *******************************************************************************
 *                    CHARMM port writted by                                   *

@@ -180,6 +180,19 @@ def check_dih_ILDN_OPLS( topol, rlist, rdic, a1, a2, a3, a4 ):
                    a2.id == al[2].id and \
                    a3.id == al[1].id and \
                    a4.id == al[0].id):
+                    ##### checks for OPLS #####
+                    if( ('dih_' in d[4]) and ('dih_' in d[5]) ):
+#                       print 'torsion %s %s' % (d[4],d[5])
+                        counter = 42
+                        break
+                    elif( ('dih_' in d[4]) and ('undefined' in d[5]) ):
+#                        print 'torsion_undef %s %s' % (d[4],d[5])
+                        counter = 2
+                        break
+                    elif( ('undefined' in d[4]) and ('dih_' in d[5]) ):
+#                        print 'torsion_undef %s %s' % (d[4],d[5])
+                        counter = 3
+                        break
 		    ##### checks for ILDN #####
 		    if( ('torsion' in d[4]) and ('torsion' in d[5]) ):
 #		        print 'torsion %s %s' % (d[4],d[5])
@@ -197,19 +210,6 @@ def check_dih_ILDN_OPLS( topol, rlist, rdic, a1, a2, a3, a4 ):
 #			print 'undef %s' %d[4]
 			counter = 1
 			break
-                    ##### checks for OPLS #####
-                    if( ('dih_' in d[4]) and ('dih_' in d[5]) ):
-#                       print 'torsion %s %s' % (d[4],d[5])
-                        counter = 42
-                        break
-                    elif( ('dih_' in d[4]) and ('undefined' in d[5]) ):
-#                        print 'torsion_undef %s %s' % (d[4],d[5])
-                        counter = 2
-                        break
-                    elif( ('undefined' in d[4]) and ('dih_' in d[5]) ):
-#                        print 'torsion_undef %s %s' % (d[4],d[5])
-                        counter = 3
-                        break
     return counter
 
 
@@ -345,11 +345,26 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
 				dih9.append(alus)
 
 			# B state disappears (when going to A)
-			# all must go to the new (appendable) dihedrals 
+			# all must go to the new (appendable) dihedrals
                         for bst in bstate:
-			    if( (counter==0) or (counter==1) or (counter==2) ):
-			        alus = backup_d[:]
+                            if(counter == 0):
                                 if(bst[0] == 3):
+                                    ast = [bst[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                                elif(bst[0] == 2):
+                                    ast = [bst[0], bst[1], 0.0]
+                                else:
+                                    ast = [ bst[0], bst[1], 0.0, bst[-1] ]
+				d[5] = ast
+                                if( len(d)==6 ):
+                                    d.append(bst)
+                                else:
+                                    d[6] = bst
+                                counter = 1
+                                #print '%s %s %s %s %s %s' % (d[0].id,d[1].id,d[2].id,d[3].id,astate,bstate)
+#                               print '%s' %d
+                            elif( (counter==1) or (counter==2) ):
+                                alus = backup_d[:]
+                                if(ast[0] == 3):
                                     ast = [bst[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
                                 elif(ast[0] == 2):
                                     ast = [bst[0], bst[1], 0.0]
@@ -358,9 +373,9 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default ):
                                 alus[5] = ast
                                 alus.append(bst)
                                 dih9.append(alus)
-					
 
-                    if astate == None :
+                    
+		    if astate == None :
                         print 'Error: No dihedral angle found (state A: predefined state B) for:' 
                         print a1.resname, a2.resname, a3.resname, a4.resname
                         print a1.name, a2.name, a3.name, a4.name, func
@@ -419,7 +434,7 @@ def explicit_defined_dihedrals(filename,ff):
 
 
 
-def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,ff):
+def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, ff):
 
     dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
     explicit_def = explicit_defined_dihedrals(ffbonded,ff)
@@ -511,8 +526,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,f
                         astate.append(foo)
                         opls_already_found = 1
                         func = 1
-                    elif d[4] == 'undefined':
-			dih_predef_default.append(dx)
+                    elif d[4] == 'undefined': #amber99sb-ildn and opls
                         astate = ''
                     else:
                         astate = d[4]
@@ -539,15 +553,18 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,f
                         bstate.append(foo)
                         opls_already_found = 1
                         func = 1
-                    elif d[5] == 'undefined' :
+                    elif d[5] == 'undefined' : #amber99sb-ildn and opls
                         bstate = ''
                     else:
                         bstate = d[5]
 		
-
+		    
 		    ### VG ###
 		    # this should work for ILDN #
 	            #MS: only for type 9?
+		    #VG: for all types
+
+		    # A state
                     counter = 0
 #		    if not bCharmm :
                     for foo in astate:
@@ -573,17 +590,32 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default,f
         	            alus.append(bar)
         	            dih9.append(alus)
                         counter = 1
+
+		    # B state
                     for foo in bstate:
-                        alus = backup_dx[:]
-                        if(func == 3):
-                            bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
-    	                elif(func == 2):
-                            bar = [foo[0], foo[1],0.0]
+                        if( counter == 0 ):
+                            dx[4] = func
+                            if(func == 3):
+                                bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                            elif(func == 2):
+                                bar = [foo[0], foo[1],0.0]
+                            else:
+                                bar = [foo[0], foo[1],0.0, foo[-1] ]
+			    dx[5] = bar
+                            dx.append(foo)
                         else:
-                            bar = [foo[0], foo[1],0.0, foo[-1] ]
-                        alus[5] = bar
-                        alus.append(foo)
-                        dih9.append(alus)
+                            alus = backup_dx[:]
+                            if(func == 3):
+                                bar = [foo[0], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+                            elif(func == 2):
+                                bar = [foo[0], foo[1],0.0]
+                            else:
+                                bar = [foo[0], foo[1],0.0, foo[-1] ]
+                            alus[5] = bar
+                            alus.append(foo)
+                            dih9.append(alus)
+                        counter = 1
+			
     topol.dihedrals.extend(dih9)
 
 

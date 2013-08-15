@@ -1648,6 +1648,13 @@ _aliases = {
 		'HG1':'1HG',
 		'HG2':'2HG',
 	},
+        'GLUH': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+                'HG1':'1HG',
+                'HG2':'2HG',
+                'HE2':'2HE',
+        },
 	'GLUP': {
 		'HB1':'1HB',
 		'HB2':'2HB',
@@ -1736,10 +1743,22 @@ _aliases = {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
+        'HIS1': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+        },
 	'HSE': {
 		'HB1':'1HB',
 		'HB2':'2HB',
 	},
+        'HISE': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+        },
+        'HISH': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+        },
 	'HID': {
 		'HB1':'1HB',
 		'HB2':'2HB',
@@ -1884,6 +1903,19 @@ _aliases = {
 		'HZ2':'2HZ',
 		'HZ3':'3HZ',
 	},
+        'LYSH': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+                'HG1':'1HG',
+                'HG2':'2HG',
+                'HD1':'1HD',
+                'HD2':'2HD',
+                'HE1':'1HE',
+                'HE2':'2HE',
+                'HZ1':'1HZ',
+                'HZ2':'2HZ',
+                'HZ3':'3HZ',
+        },
         'LYN': {
                 'HB1':'1HB',
                 'HB2':'2HB',

@@ -39,8 +39,8 @@ standard_pair_listB = [
     ('O','O'),
     ('HA','HA'),
     ('CB','CB'),
-    ('1HB','HB1'),
-    ('2HB','HB2'),
+    ('1HB','1HB'),
+    ('2HB','2HB'),
     ('CG','CG')
     ]
 
@@ -52,8 +52,8 @@ standard_pair_listC = [
     ('O','O'),
     ('HA','HA'),
     ('CB','CB'),
-    ('HB1','1HB'),
-    ('HB2','2HB'),
+    ('1HB','1HB'),
+    ('2HB','2HB'),
     ('CG','CG')
     ]
 
@@ -65,8 +65,8 @@ standard_pair_listD = [
     ('O','O'),
     ('HA','HA'),
     ('CB','CB'),
-    ('HB1','HB1'),
-    ('HB2','HB2'),
+    ('1HB','1HB'),
+    ('2HB','2HB'),
     ('CG','CG')
     ]
     
@@ -80,9 +80,9 @@ use_standard_pair_list = {
     'HSD': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HSE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HSP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
-    'HIS1': [ 'TRP','HIP','HID','HIE','HISH','HISE'],
-    'HISE': [ 'TRP','HIP','HID','HIE','HISH','HIS1'],
-    'HISH': [ 'TRP','HIP','HID','HIE','HIS1','HISE']
+    'HIS1': [ 'TRP','PHE','TYR','HIP','HID','HIE','HISH','HISE'],
+    'HISE': [ 'TRP','PHE','TYR','HIP','HID','HIE','HISH','HIS1'],
+    'HISH': [ 'TRP','PHE','TYR','HIP','HID','HIE','HIS1','HISE']
     }
 
 merge_by_name_list = {
@@ -223,7 +223,7 @@ def cmp_mol2_types( type1, type2 ):
         
         
 def find_closest_atom( atom1, atom_list, merged_atoms ):
-    min_d = .50
+    min_d = .55
     idx = 99
     for i, atom in enumerate(atom_list):
         if atom not in merged_atoms:
@@ -242,6 +242,7 @@ def make_predefined_pairs( mol1, mol2, pair_list ):
     merged_atoms1 = []
     merged_atoms2 = []
     for name1, name2 in pair_list:
+	print "ffffff %s %s" %(mol1.fetch(name1),name1)
         at1 = mol1.fetch( name1 )[0]
         at2 = mol2.fetch( name2 )[0]
         at1.atomtypeB = at2.atomtype

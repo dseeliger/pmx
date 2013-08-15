@@ -54,6 +54,15 @@ _aa_chi = { 'CYS' :
         'HIS' :
         { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB',  '2HB',  'CG',  'CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1',  'HE2',  'HE1']],
           2: [('CA' , 'CB' , 'CG' , 'ND1'),['CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1',  'HE2','HE1']] },
+        'HIE' :
+        { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB',  '2HB',  'CG',  'CD2',  'ND1',  'HD2',  'NE2',  'CE1',  'HE2',  'HE1']],
+          2: [('CA' , 'CB' , 'CG' , 'ND1'),['CD2',  'ND1',  'HD2', 'NE2',  'CE1',  'HE2', 'HE1']] },
+        'HID' :
+        { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB',  '2HB',  'CG',  'CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1', 'HE1']],
+          2: [('CA' , 'CB' , 'CG' , 'ND1'),['CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1', 'HE1']] },
+        'HIP' :
+        { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB',  '2HB',  'CG',  'CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1',  'HE2',  'HE1']],
+          2: [('CA' , 'CB' , 'CG' , 'ND1'),['CD2',  'ND1',  'HD2',  'HD1',  'NE2',  'CE1',  'HE2', 'HE1']] },
         'ILE' :
         { 1: [('N'  , 'CA' , 'CB' , 'CG1'),['HB','CG1','1HG1','2HG1','CG2','1HG2','2HG2','3HG2','CD1','1HD1','2HD1','3HD1']],
 #          2: [('CA' , 'CB' , 'CG1', 'CD1'),['1HG1','1HG2','CG2','1HG2','2HG2','3HG2','CD1','1HD1','2HD1','3HD1']] }, 
@@ -63,6 +72,11 @@ _aa_chi = { 'CYS' :
           2: [('CA' , 'CB' , 'CG'  ,'CD' ),['1HG','2HG','CD','1HD','2HD','CE','1HE','2HE','NZ','1HZ','2HZ','3HZ']],
           3: [('CB' , 'CG' , 'CD'  ,'CE' ),['1HD','2HD','CE','1HE','2HE','NZ','1HZ','2HZ','3HZ']],
           4: [('CG' , 'CD' , 'CE'  ,'NZ' ),['1HE','2HE','NZ','1HZ','2HZ','3HZ']] },
+        'LYN' :
+        { 1: [('N'  , 'CA' , 'CB'  ,'CG' ),['1HB','2HB','CG','1HG','2HG','CD','1HD','2HD','CE','1HE','2HE','NZ','1HZ','2HZ']],
+          2: [('CA' , 'CB' , 'CG'  ,'CD' ),['1HG','2HG','CD','1HD','2HD','CE','1HE','2HE','NZ','1HZ','2HZ']],
+          3: [('CB' , 'CG' , 'CD'  ,'CE' ),['1HD','2HD','CE','1HE','2HE','NZ','1HZ','2HZ']],
+          4: [('CG' , 'CD' , 'CE'  ,'NZ' ),['1HE','2HE','NZ','1HZ','2HZ']] },
         'LEU' :
         { 1: [('N'  , 'CA' , 'CB' , 'CG' ),['1HB','2HB','CG', 'HG','CD1','1HD1','2HD1','3HD1','CD2','1HD2','2HD2','3HD2']],
           2: [('CA' , 'CB' , 'CG' , 'CD1'), ['HG','CD1','1HD1','2HD1','3HD1','CD2','1HD2','2HD2','3HD2']]}, 

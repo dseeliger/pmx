@@ -73,7 +73,7 @@ standard_pair_listD = [
 use_standard_pair_list = {
     'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
     'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
-    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISH','HISE'],
+    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISH','HISE','HIE'],
     'HID': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HIE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HIP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
@@ -124,6 +124,7 @@ mol_branch = {
     'MET':5,
     'ARG':5,
     'LYS':5,
+    'LYN':5,
     }
 
 def tag(atom):
@@ -222,7 +223,7 @@ def cmp_mol2_types( type1, type2 ):
         
         
 def find_closest_atom( atom1, atom_list, merged_atoms ):
-    min_d = .55
+    min_d = .50
     idx = 99
     for i, atom in enumerate(atom_list):
         if atom not in merged_atoms:
@@ -859,7 +860,10 @@ files= [
    FileOption("-fnb", "w",["itp"],"fnb.itp",""),
 ]
 
-options=[Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa")]
+options=[
+   Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa"),
+   Option( "-align", "bool", True, "align side chains"),
+	]
 help_text = ("cmpaa.py reads two pdb files aligned on the backbone togheter with an rtp file.",
 		"This is used to generate a hybrid residue.\n")
 
@@ -872,6 +876,7 @@ if cmdl['-ft']=="charmm":
     bCharmm=True
 else :
     bCharmm=False
+align = cmdl['-align']
 
 rtpfile=cmdl['-ff']
 m1 = Model(cmdl['-pdb1'])
@@ -903,7 +908,10 @@ r1.get_mol2_types()
 r2.get_mol2_types()
 r1.get_real_resname()
 r2.get_real_resname()
-align_sidechains(r1,r2)
+#for foo in r2.atoms:
+#    print "aaaaaa %s" %foo.name
+if(align):
+    align_sidechains(r1,r2)
 
 r1.resnA = r1.resname[0]+r1.resname[1:].lower()
 r1.resnB = r2.resname[0]+r2.resname[1:].lower()

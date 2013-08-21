@@ -148,8 +148,8 @@ def bb_super(mol1,mol2, use_orig_mc_coords = True):
     fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
 
     if use_orig_mc_coords:
-        atom_set = ['N','CA','C','H','O','HA']
-        gly_atom_set = ['N','CA','C','H','O','HA1']
+        atom_set = ['N','CA','C','H','O','HA','HN']
+        gly_atom_set = ['N','CA','C','H','O','HA1','HN']
         if mol1.resname == 'GLY':
             atoms1 = mol1.fetchm(gly_atom_set)
         else:

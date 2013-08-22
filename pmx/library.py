@@ -83,6 +83,34 @@ _aacids_dic = {
     'V':'VAL'
     }
 
+_aacids_ext_charmm = {
+    'A':'ALA',
+    'B':'ASPP',
+    'R':'ARG',
+    'N':'ASN',
+    'D':'ASP',
+    'C':'CYS',
+    'E':'GLU',
+    'Q':'GLN',
+    'G':'GLY',
+    'H':'HSD',
+    'X':'HSE',
+    'Z':'HSP',
+    'I':'ILE',
+    'J':'GLUP',
+    'L':'LEU',
+    'K':'LYS',
+    'O':'LSN',
+    'M':'MET',
+    'F':'PHE',
+    'P':'PRO',
+    'S':'SER',
+    'T':'THR',
+    'W':'TRP',
+    'Y':'TYR',
+    'V':'VAL'
+    }
+
 _aacids_ext_amber = {
     'A':'ALA',
     'B':'ASH',
@@ -1917,6 +1945,18 @@ _aliases = {
                 'HZ3':'3HZ',
         },
         'LYN': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+                'HG1':'1HG',
+                'HG2':'2HG',
+                'HD1':'1HD',
+                'HD2':'2HD',
+                'HE1':'1HE',
+                'HE2':'2HE',
+                'HZ1':'1HZ',
+                'HZ2':'2HZ',
+        },
+        'LSN': {
                 'HB1':'1HB',
                 'HB2':'2HB',
                 'HG1':'1HG',

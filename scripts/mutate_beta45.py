@@ -169,11 +169,11 @@ def select_residue(m):
             selected_residue_id = None
     return selected_residue_id
 
-def select_mutation(m, selected_residue_id):
+def select_mutation(m, selected_residue_id, ffpath):
 
     residue = m.residues[selected_residue_id - 1]
     if get_restype(residue) == 'PEPTIDE':
-        return select_aa_mutation(residue)
+        return select_aa_mutation(residue,ffpath)
     elif get_restype(residue) in ['DNA','RNA']:
         return select_nuc_mutation(residue)
 
@@ -193,7 +193,7 @@ def select_nuc_mutation(residue):
             print 'Will apply mutation %s->%s on residue %s-%d' % (residue.resname[1],aa,residue.resname,residue.id)
         return aa
 
-def select_aa_mutation(residue):
+def select_aa_mutation(residue,ffpath):
     check_residue_name( residue )
     print '\nSelect new amino acid for %s-%s: ' % (residue.id,residue.resname) 
     sys.stdout.write('Three- or one-letter code: ')
@@ -207,6 +207,16 @@ def select_aa_mutation(residue):
     aa = None
     ol = library._aacids_dic.keys()
     tl = library._aacids_dic.values()
+    if('amber' in ffpath):
+	    ol = library._aacids_ext_amber.keys()
+	    tl = library._aacids_ext_amber.values()
+    if('opls' in ffpath):
+            ol = library._aacids_ext_oplsaa.keys()
+            tl = library._aacids_ext_oplsaa.values()
+    if('charmm' in ffpath):
+            ol = library._aacids_ext_charmm.keys()
+            tl = library._aacids_ext_charmm.values()
+
     while aa is None:
         aa = raw_input().upper()
         if len(aa) != 1 and len(aa)!=3:
@@ -220,9 +230,9 @@ def select_aa_mutation(residue):
     return aa
 
 
-def interactive_selection(m):
+def interactive_selection(m,ffpath):
     residue_id = select_residue(m)
-    mutation = select_mutation(m, residue_id )
+    mutation = select_mutation(m, residue_id, ffpath )
     return residue_id, mutation
     
 def ask_next():
@@ -441,7 +451,7 @@ def main(argv):
    else:
        do_more = True
        while do_more:
-           mutation = interactive_selection(m)
+           mutation = interactive_selection(m,ffpath)
            apply_mutation( m, mutation, mtp_file )
            if not ask_next(): do_more = False
        

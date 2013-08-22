@@ -128,7 +128,7 @@ _aacids_ext_amber = {
     'Z':'HIP',
     'I':'ILE',
     'L':'LEU',
-    'K':'LYP',
+    'K':'LYS',
     'O':'LYN',
     'M':'MET',
     'F':'PHE',

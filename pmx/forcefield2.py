@@ -782,7 +782,7 @@ class TopolBase:
 
     def __atoms_morphe( self, atoms ):
         for atom in atoms:
-            if atom.atomtypeB is not None and (atom.q!=atom.qB or atom.m != atom.mB): return True
+            if atom.atomtypeB is not None and (atom.q!=atom.qB or atom.m != atom.mB or atom.atomtype != atom.atomtypeB): return True
         return False
 
     def __atomtypes_morphe(self, atoms):

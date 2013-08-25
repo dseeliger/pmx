@@ -47,6 +47,7 @@ Usage:
 import sys, os
 from library import pmx_data_file
 from geometry import *
+from chain import *
 from atom import Atom
 from model import Model
 
@@ -221,5 +222,199 @@ def attach_group(atom, mol):
     bb.bonds.append(bR)
     for a in mol.atoms:
         master.append(a)
+
+
+def make_residue(key,hydrogens = True):
+    """ returns a molecule object with
+    default geometry"""
+
+    if not library._aacids.has_key(key):
+        raise KeyError, "Residue %s not known" % key
+    m = Molecule()
+    m.unity = 'A'
+    m.resname = key
+    for i, entry in enumerate(library._aacids[key]):
+        if hydrogens == False and entry[0][0] == 'H':
+            continue
+        else:
+            a = Atom()
+            a.id = i+1
+            a.name = entry[0]
+            a.symbol = a.name[0]
+            a.x = entry[1]
+            a.occ = 1.
+            a.resname = key
+            a.m = library._atommass[a.symbol]
+            a.unity = 'A'
+            m.atoms.append(a)
+    return m
+
+
+def build_chain(sequence,dihedrals = None, \
+                hydrogens = True, ss = None, chain_id='X'):
+
+    ch = Chain()
+    if dihedrals is None:
+        if ss is None:
+            dihedrals = []
+            for i in range(len(sequence)):
+                dihedrals.append(library._extended)
+        else:
+            dihedrals = []
+            for i, s in enumerate(ss):
+                if s == '-':
+                    dihedrals.append(library._extended)
+                elif s=='H':
+                    dihedrals.append(library._helix)
+                elif s=='E':
+                    dihedrals.append(library._anti_beta)
+
+
+    rl = []
+    start = make_residue(library._aacids_dic[sequence[0]],\
+                                 hydrogens = hydrogens)
+    start.set_resid(1)
+    set_psi(start,dihedrals[0][1])
+    rl.append(start)
+    for i,aa in enumerate(sequence[1:]):
+        phi, psi, om = dihedrals[i+1]
+        phi2, psi2, om2 = dihedrals[i]
+        mol = attach_aminoacid(start,library._aacids_ext_amber[aa], \
+                               hydrogens = hydrogens,
+                               phi = phi,psi=psi,omega=om2
+                               )
+        mol.set_resid(i+2)
+        set_phi(start,mol,dihedrals[i+1][0])
+        start = mol
+        rl.append(mol)
+    al = []
+    for r in rl:
+        al+=r.atoms
+    ch.unity = 'A'
+    ch.atoms = al
+    ch.renumber_atoms()
+    ch.residues = rl
+    ch.set_chain_id(chain_id)
+    for atom in ch.atoms:
+        atom.unity = 'A'
+    return ch
+
+
+def set_phi(mol1,mol2,phi):
+    # select c, n, ca, c
+    C = mol1.fetchm(['C'])[0]
+    N,CA,C2 = mol2.fetchm(['N','CA','C'])
+    dih = C.dihedral(N,CA,C2) - pi
+    phi = pi/180*phi
+    delta = phi-dih
+
+    # rotation is around N -> CA
+    r = Rotation(N.x, CA.x)
+
+    for atom in mol2.atoms:
+        if atom.name not in ['N','H']:
+            atom.x = r.apply(atom.x,delta)
+
+
+def set_psi(mol,phi):
+
+    # select n, c, ca, o
+    N, CA, C, O = mol.fetchm(['N','CA','C','O'])
+    dih = N.dihedral(CA,C,O) - pi
+    phi = pi/180*phi  - pi # psi is defined with N'
+    delta = phi - dih
+    r = Rotation(CA.x,C.x)
+
+    # only O is affected
+    O.x = r.apply(O.x,delta)
+
+
+def set_omega(mol1,mol2,phi):
+
+    # select c, n, ca, c
+    CA,C = mol1.fetchm(['CA','C'])
+    N,CA2,C2 = mol2.fetchm(['N','CA','C'])
+    dih = CA.dihedral(C,N,CA2) -pi
+    phi = pi/180*phi
+    delta = phi-dih
+
+    # rotation is around C -> N
+    r = Rotation(C.x, N.x)
+    for atom in mol2.atoms:
+        if atom.name !='N':
+            atom.x = r.apply(atom.x,delta)
+
+
+def attach_aminoacid(mol, resname, hydrogens = True,
+                     omega = 180., phi = -139., psi = 135.):
+
+    new = make_residue(resname,hydrogens = hydrogens)
+    # we need Ca, C and O from mol
+    Ca, C, O = mol.fetchm(['CA','C','O'])
+    # and N from new
+    N, CA2 = new.fetchm(['N','CA'])
+
+    l = 1.33 # length of peptide bond
+
+    v = array(C.x)-array(Ca.x)
+    x = 1./linalg.norm(v)
+    vec = v*x*l
+    newpos = array(C.x)+vec
+    t = array(N.x)-newpos
+
+    # shift to new position
+    for a in new.atoms:
+        a.x = array(a.x)-t
+
+    # gen rotation vector
+    # this rotation yields the correct
+    # O-C-N angle
+    v1 = array(C.x)-array(Ca.x)
+    v2 = array(O.x)-array(C.x)
+    cr = cross(v1,v2)
+    x = 1./linalg.norm(cr)
+    cr = cr*x
+    cr = C.x + cr
+
+    # do first rotation
+    r = Rotation(cr,C.x)
+    for atom in new.atoms:
+        atom.x = r.apply(atom.x,pi/3.)
+
+
+    # do next rotation
+    # here we correct the C-N-Ca angle
+    v1 = array(N.x)-array(C.x)
+    v2 = array(CA2.x)-array(N.x)
+    cr = cross(v1,v2)
+    x = 1./linalg.norm(cr)
+    cr = cr*x
+    cr = N.x + cr
+    an = N.angle(C,CA2)
+    delta = an - 120*pi/180
+    # do second rotation
+    r = Rotation(cr,N.x)
+    for atom in new.atoms:
+        if atom.name !='N':
+            atom.x = r.apply(atom.x,-delta)
+
+    # correct H if we have one
+    H = new.fetch('H')
+    if H:
+        H=H[0]
+        # we place the H-atom along the
+        # N-Ca vector.
+        # then we move it
+        v1 = array(CA2.x)-array(N.x)
+        x = 1./linalg.norm(v1)
+        H.x = N.x + v1*x
+        H.x = r.apply(H.x,2*pi/3.)
+
+
+    set_omega(mol,new,omega)
+    set_phi(mol, new,phi)
+    set_psi(new,psi)
+
+    return new
 
 

@@ -703,7 +703,7 @@ class TopolBase:
                         ast = ' '.join(["%g" % x for x in [0,0]])
                         
                 elif ast != 'NULL' and hasattr(ast,"append"):
-                    ast = ' '.join(["%g" % x for x in d[5][1:]])
+                    ast = ' '.join(["%.10g" % x for x in d[5][1:]])
                 if bs == 'NULL':
                     if d[4] == 3:
                         bs = ' '.join(["%g" % x for x in [0,0,0,0,0,0]]) 
@@ -715,7 +715,7 @@ class TopolBase:
                         bs = ' '.join(["%g" % x for x in [0,0]])
                     
                 elif bs !='NULL' and hasattr(bs,"append"):
-                    bs = ' '.join(["%g" % x for x in d[6][1:]])
+                    bs = ' '.join(["%.10g" % x for x in d[6][1:]])
                 if state == 'AB':
                     print >>fp, "%6d %6d %6d %6d %4d %s %s ; %s %s %s %s %s %s %s %s (%s->%s)" % \
                           ( d[0].id, d[1].id, d[2].id, d[3].id, d[4], ast, bs, d[0].name,d[1].name,d[2].name,d[3].name, \

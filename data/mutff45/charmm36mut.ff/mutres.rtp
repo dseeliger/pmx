@@ -8,7 +8,7 @@
 ; Col 7: Generate 1,4 interactions between pairs of hydrogens if 1
 ; Col 8: Remove impropers over the same bond as a proper if it is 1
 ; bonds  angles  dihedrals  impropers all_dihedrals nrexcl HH14 RemoveDih
-     1       5          9        2        1           3      1     0 
+     1       5          9          2        1         3      1     0
 
 [ A2B ] ; Ala -> Aspp
 
@@ -1975,7 +1975,7 @@
      N      -C      CA      HN 
      C      CA      +N       O 
     CG      CB     OD2     OD1 
-    CG     OD2      CB     OD1 
+    CG     OD2      CB     OD1  undefined                
    OD2      CG    DHD1     HD2 
    OD2      CG     HD2    DHD1 
 
@@ -4539,7 +4539,7 @@
      N      -C      CA      HN 
      C      CA      +N       O 
     CG      CB     OD2     OD1 
-    CG     OD2      CB     OD1 
+    CG     OD2      CB     OD1  undefined                
    OD2      CG    DHD1    DHD2 
    OD2      CG    DHD2    DHD1 
 
@@ -6000,7 +6000,7 @@
      N      -C      CA      HN 
      C      CA      +N       O 
     CD      CG     OE2     OE1 
-    CD     OE2      CG     OE1 
+    CD     OE2      CG     OE1  undefined                
    OE2      CD    DHE1    DHE2 
    OE2      CD    DHE2    DHE1 
 
@@ -13360,7 +13360,7 @@
      N      -C      CA      HN 
      C      CA      +N       O 
     CD      CG     OE2     OE1 
-    CD     OE2      CG     OE1 
+    CD     OE2      CG     OE1  undefined                
    OE2      CD    DHE1     HE2 
    OE2      CD     HE2    DHE1 
 
@@ -34701,10 +34701,10 @@
      C      CA      +N       O 
    NE2     CD2     CE1     HE2 
    NE2     CE1     CD2     HE2 
-   CD2      CG     NE2     HD2 
-   CE1     ND1     NE2     HE1 
-   CD2     NE2      CG     HD2 
-   CE1     NE2     ND1     HE1 
+   CD2      CG     NE2     HD2  undefined                
+   CE1     ND1     NE2     HE1  undefined                
+   CD2     NE2      CG     HD2  undefined                
+   CE1     NE2     ND1     HE1  undefined                
 
  [ dihedrals ]
 
@@ -35737,10 +35737,10 @@
      C      CA      +N       O 
    ND1      CG     CE1     HD1 
    ND1     CE1      CG     HD1 
-   CD2      CG     NE2     HD2 
-   CE1     ND1     NE2     HE1 
-   CD2     NE2      CG     HD2 
-   CE1     NE2     ND1     HE1 
+   CD2      CG     NE2     HD2  undefined                
+   CE1     ND1     NE2     HE1  undefined                
+   CD2     NE2      CG     HD2  undefined                
+   CE1     NE2     ND1     HE1  undefined                
 
  [ dihedrals ]
 

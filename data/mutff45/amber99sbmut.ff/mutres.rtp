@@ -1887,7 +1887,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1 
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2     HD2 
 
  [ dihedrals ]
@@ -4340,7 +4340,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1 
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2    DHD2 
 
  [ dihedrals ]
@@ -5738,7 +5738,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1 
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2    DHE2 
 
  [ dihedrals ]
@@ -12901,7 +12901,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1 
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2     HE2 
 
  [ dihedrals ]
@@ -17997,7 +17997,7 @@
     CA      +N       C       O 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2 
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
 
@@ -18086,7 +18086,7 @@
     CA      +N       C       O 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2 
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
 
@@ -21073,7 +21073,7 @@
     CA      +N       C       O 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2 
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
 
@@ -21378,7 +21378,7 @@
     CA      +N       C       O 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2 
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
 

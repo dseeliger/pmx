@@ -526,7 +526,8 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                         astate.append(foo)
                         opls_already_found = 1
                         func = 1
-                    elif d[4] == 'undefined': #amber99sb-ildn and opls
+                    elif d[4] == 'undefined': #amber99sb-ildn and opls and others
+                        dih_predef_default.append(dx)
                         astate = ''
                     else:
                         astate = d[4]
@@ -553,7 +554,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                         bstate.append(foo)
                         opls_already_found = 1
                         func = 1
-                    elif d[5] == 'undefined' : #amber99sb-ildn and opls
+                    elif d[5] == 'undefined' : #amber99sb-ildn and opls and others
                         bstate = ''
                     else:
                         bstate = d[5]

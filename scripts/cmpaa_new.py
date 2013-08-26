@@ -242,7 +242,6 @@ def make_predefined_pairs( mol1, mol2, pair_list ):
     merged_atoms1 = []
     merged_atoms2 = []
     for name1, name2 in pair_list:
-	print "ffffff %s %s" %(mol1.fetch(name1),name1)
         at1 = mol1.fetch( name1 )[0]
         at2 = mol2.fetch( name2 )[0]
         at1.atomtypeB = at2.atomtype
@@ -481,8 +480,11 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
         if i1 not in done_i1:
             im_new =  i1[:4]
             if i1[4] == '': 
-	        im_new.append( 'default-A' )
-	        im_new.append( 'default-A' )
+                im_new.append( 'default-A' )
+                if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+                    im_new.append( 'default-A' )
+                else:
+                    im_new.append( 'undefined' )
             else:
 		if ( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
   	            im_new.append( i1[4] )
@@ -497,7 +499,10 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
         if i2 not in done_i2:
             im_new =  i2[:4] 
             if i2[4] == '': 
-		im_new.append( 'default-B' )
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
+                    im_new.append( 'default-B' )
+                else:
+                    im_new.append( 'undefined' )
 		im_new.append( 'default-B' )
             else: 
 #		print 'Bname %s %s %s %s' % (i2[0].nameB,i2[1].nameB,i2[2].nameB,i2[3].nameB)
@@ -547,26 +552,38 @@ def generate_improp_entries( im1, im2, r ):
             im_new =  i1[:4] 
             if i1[4] == '': 
 	        im_new.append( 'default-A' )
-                im_new.append( 'default-A' )
+		if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+	            im_new.append( 'default-A' )
+		else:
+		    im_new.append( 'undefined' )
             elif( i1[4] == '105.4' ): #star
                 im_new.append( 'default-star' )
                 im_new.append( 'undefined' )
             else: 
 		im_new.append( i1[4] )
-                im_new.append( i1[4] )
+                if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+                    im_new.append( i1[4] )
+                else:
+                    im_new.append( 'undefined' )
             new_ii.append( im_new )
     for i2 in im2:
         if i2 not in done_i2:
             im_new =  i2[:4] #[ find_atom_by_nameB(r, n) for n in i2[:4] ] 
 #            im_new.append( 'default-B' )
             if i2[4] == '': 
-	        im_new.append( 'default-B' )
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
+                    im_new.append( 'default-B' )
+                else:
+                    im_new.append( 'undefined' )
 	        im_new.append( 'default-B' )
             elif( i2[4] == '105.4' ): #star
                 im_new.append( 'undefined' )
                 im_new.append( 'default-star' )
             else:
-	        im_new.append( i2[4] )
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
+                    im_new.append( i2[4] )
+                else:
+                    im_new.append( 'undefined' )
 		im_new.append( i2[4] )
             new_ii.append( im_new )
 ##     for ii in new_ii:
@@ -909,8 +926,6 @@ r1.get_mol2_types()
 r2.get_mol2_types()
 r1.get_real_resname()
 r2.get_real_resname()
-#for foo in r2.atoms:
-#    print "aaaaaa %s" %foo.name
 if(align):
     align_sidechains(r1,r2)
 

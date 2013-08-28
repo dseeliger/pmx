@@ -491,11 +491,13 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( i1[4] )
 		else:
                     im_new.append( i1[4] )
-#                    im_new.append( 'default-B' )
-		    im_new.append( 'undefined' )
+                    if( 'torsion' in i1[4] ):
+                        foo = 'undefined_' + i1[4]
+                        im_new.append( foo )
+                    else:
+                        im_new.append( 'undefined' )
             new_ii.append( im_new )
     for i2 in im2:
-#	print '%s %s %s %s %s' % (i2[0].name,i2[1].name,i2[2].name,i2[3].name,i2[4])
         if i2 not in done_i2:
             im_new =  i2[:4] 
             if i2[4] == '': 
@@ -505,19 +507,18 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( 'undefined' )
 		im_new.append( 'default-B' )
             else: 
-#		print 'Bname %s %s %s %s' % (i2[0].nameB,i2[1].nameB,i2[2].nameB,i2[3].nameB)
                 if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( i2[4] )
                     im_new.append( i2[4] )
                 else:
-	            print 'and here'
-		    im_new.append( 'undefined' )
-#                    im_new.append( 'default-A' )
+                    if( 'torsion' in i2[4] ):
+			foo = 'undefined_' + i2[4]
+			im_new.append( foo )
+		    else:
+		        im_new.append( 'undefined' )
                     im_new.append( i2[4] )
             new_ii.append( im_new )
-##     for ii in new_ii:
-##         print '--->', ' '.join(ii)
-##     print
+    
     return new_ii
 
 def generate_improp_entries( im1, im2, r ):

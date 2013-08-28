@@ -124,12 +124,12 @@
     CB    DOD1     HB1    DOD2 
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-     N      CA      CB     HB1  undefined                
-     N      CA      CB     HB1  undefined                
-     N      CA      CB     HB1  undefined                
-     N      CA      CB     HB1  undefined                
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB     HB1  undefined_torsion_ASP_N_CA_CB_CG_mult6
     CA      CB     HB1    DOD1  torsion_ASP_CA_CB_CG_OD_mult1
     CA      CB     HB1    DOD1  torsion_ASP_CA_CB_CG_OD_mult2
     CA      CB     HB1    DOD1  torsion_ASP_CA_CB_CG_OD_mult3
@@ -1398,24 +1398,24 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult6
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult1
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult2
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult3
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult4
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult5
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult6
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult1
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult2
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult3
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult4
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult5
+    CA      CB      CG     OD2  undefined_torsion_ASP_CA_CB_CG_OD_mult6
 
 [ B2E ] ; Ash -> Glu
 
@@ -1981,22 +1981,22 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1 
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2     HD2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
-    CA      CB      CG     OD2  undefined                
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult3
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult4
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult5
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult6
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult1
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult2
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult3
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult4
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult5
+    CA      CB      CG     OD2  undefined_torsion_ASN_CA_CB_CG_ND2_mult6
 
 [ B2O ] ; Ash -> Lyn
 
@@ -3015,8 +3015,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ C2J ] ; Cys -> Glh
 
@@ -4400,8 +4400,8 @@
     CA      CB      CG     OD2  torsion_ASP_CA_CB_CG_OD_mult4
     CA      CB      CG     OD2  torsion_ASP_CA_CB_CG_OD_mult5
     CA      CB      CG     OD2  torsion_ASP_CA_CB_CG_OD_mult6
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ D2J ] ; Asp -> Glh
 
@@ -4746,7 +4746,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1 
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2    DHD2 
 
  [ dihedrals ]
@@ -4768,12 +4768,12 @@
     CA      CB      CG     OD1  torsion_ASP_CA_CB_CG_OD_mult4
     CA      CB      CG     OD1  torsion_ASP_CA_CB_CG_OD_mult5
     CA      CB      CG     OD1  torsion_ASP_CA_CB_CG_OD_mult6
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult3
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult4
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult5
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult6
 
 [ D2O ] ; Asp -> Lyn
 
@@ -6003,8 +6003,8 @@
     CG     OE1      CD     OE2 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ E2J ] ; Glu -> Glh
 
@@ -6173,9 +6173,9 @@
     CG     OE1      CD     OE2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ E2M ] ; Glu -> Met
 
@@ -6406,7 +6406,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1 
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2    DHE2 
 
  [ dihedrals ]
@@ -7499,8 +7499,8 @@
    CD1     CD2      CG      CB 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ F2J ] ; Phe -> Glh
 
@@ -10083,12 +10083,12 @@
     CB    DOD1      CG    DOD2 
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult6
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult1
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult2
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult3
@@ -10723,12 +10723,12 @@
     CG    DHD1    DND2    DHD2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult3
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult4
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult5
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult6
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult1
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult2
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult3
@@ -12154,9 +12154,9 @@
  [ dihedrals ]
      N      CA      CB     CG2  torsion_ILE_N_CA_CB_CG2_mult1
      N      CA      CB     CG2  torsion_ILE_N_CA_CB_CG2_mult2
-     C      CA      CB     CG1  undefined                
-     C      CA      CB     CG1  undefined                
-     C      CA      CB     CG1  undefined                
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ I2M ] ; Ile -> Met
 
@@ -13656,9 +13656,9 @@
     CG     OE1      CD     OE2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ J2M ] ; Glh -> Met
 
@@ -13895,7 +13895,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1 
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2     HE2 
 
  [ dihedrals ]
@@ -15062,8 +15062,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ K2J ] ; Lys -> Glh
 
@@ -15199,9 +15199,9 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ K2M ] ; Lys -> Met
 
@@ -16684,8 +16684,8 @@
      C      CA      CB      CG  torsion_LEU_C_CA_CB_CG_mult1
      C      CA      CB      CG  torsion_LEU_C_CA_CB_CG_mult2
      C      CA      CB      CG  torsion_LEU_C_CA_CB_CG_mult3
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ L2J ] ; Leu -> Glh
 
@@ -18220,8 +18220,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ M2J ] ; Met -> Glh
 
@@ -18406,9 +18406,9 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ M2N ] ; Met -> Asn
 
@@ -19247,7 +19247,7 @@
      N      CA       C      +N 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2 
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
      C      CA      CB      CG  torsion_ASN_C_CA_CB_CG_mult1
@@ -19362,7 +19362,7 @@
      N      CA       C      +N 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2 
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
     CA      CB      CG     ND2  torsion_ASN_CA_CB_CG_ND2_mult1
@@ -19377,18 +19377,18 @@
      C      CA      CB      CG  torsion_ASN_C_CA_CB_CG_mult4
      C      CA      CB      CG  torsion_ASN_C_CA_CB_CG_mult5
      C      CA      CB      CG  torsion_ASN_C_CA_CB_CG_mult6
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
-    CA      CB      CG     OD1  undefined                
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult6
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult1
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult2
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult3
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult4
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult5
+    CA      CB      CG     OD1  undefined_torsion_ASP_CA_CB_CG_OD_mult6
 
 [ N2E ] ; Asn -> Glu
 
@@ -19745,8 +19745,8 @@
     CA      CB      CG     ND2  torsion_ASN_CA_CB_CG_ND2_mult4
     CA      CB      CG     ND2  torsion_ASN_CA_CB_CG_ND2_mult5
     CA      CB      CG     ND2  torsion_ASN_CA_CB_CG_ND2_mult6
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ N2J ] ; Asn -> Glh
 
@@ -21600,9 +21600,9 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ O2M ] ; Lyn -> Met
 
@@ -22702,7 +22702,7 @@
      N      CA       C      +N 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2 
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
 
@@ -22965,8 +22965,8 @@
     CD    HE21     NE2    HE22 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ Q2J ] ; Gln -> Glh
 
@@ -23014,7 +23014,7 @@
      N      CA       C      +N 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2 
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
 
@@ -23149,9 +23149,9 @@
     CD    HE21     NE2    HE22 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ Q2M ] ; Gln -> Met
 
@@ -24600,8 +24600,8 @@
     CZ    HH21     NH2    HH22 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ R2J ] ; Arg -> Glh
 
@@ -24826,9 +24826,9 @@
     CZ    HH21     NH2    HH22 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ R2M ] ; Arg -> Met
 
@@ -26181,8 +26181,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ S2J ] ; Ser -> Glh
 
@@ -27482,8 +27482,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB     CG2  undefined                
-     N      CA      CB     CG2  undefined                
+     N      CA      CB     CG2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     CG2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ T2J ] ; Thr -> Glh
 
@@ -28893,8 +28893,8 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     N      CA      CB      HB  undefined                
-     N      CA      CB      HB  undefined                
+     N      CA      CB      HB  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB      HB  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ V2J ] ; Val -> Glh
 
@@ -29075,9 +29075,9 @@
      N      CA       C      +N 
 
  [ dihedrals ]
-     C      CA      CB     CG1  undefined                
-     C      CA      CB     CG1  undefined                
-     C      CA      CB     CG1  undefined                
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult1
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult2
+     C      CA      CB     CG1  undefined_torsion_LEU_C_CA_CB_CG_mult3
 
 [ V2M ] ; Val -> Met
 
@@ -30547,8 +30547,8 @@
    CD1      CG      CB     CD2 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ W2J ] ; Trp -> Glh
 
@@ -32037,12 +32037,12 @@
     CB    DOD1      CG    DOD2 
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult6
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult1
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult2
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult3
@@ -32378,8 +32378,8 @@
    ND1     CD2      CG      CB 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ X2J ] ; Hie -> Glh
 
@@ -32730,12 +32730,12 @@
     CG    DHD1    DND2    DHD2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult3
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult4
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult5
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult6
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult1
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult2
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult3
@@ -34040,8 +34040,8 @@
    CE1     CE2      CZ      OH 
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult1
+     N      CA      CB     HB2  undefined_torsion_ILE_N_CA_CB_CG2_mult2
 
 [ Y2J ] ; Tyr -> Glh
 
@@ -35438,12 +35438,12 @@
     CB    DOD1      CG    DOD2 
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
-     N      CA      CB      CG  undefined                
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult1
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult2
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult3
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult4
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult5
+     N      CA      CB      CG  undefined_torsion_ASP_N_CA_CB_CG_mult6
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult1
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult2
     CA      CB      CG    DOD1  torsion_ASP_CA_CB_CG_OD_mult3
@@ -36160,12 +36160,12 @@
     CG    DHD1    DND2    DHD2 
 
  [ dihedrals ]
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
-     C      CA      CB      CG  undefined                
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult1
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult2
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult3
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult4
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult5
+     C      CA      CB      CG  undefined_torsion_ASN_C_CA_CB_CG_mult6
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult1
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult2
     CA      CB      CG    DND2  torsion_ASN_CA_CB_CG_ND2_mult3

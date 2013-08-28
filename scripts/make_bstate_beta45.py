@@ -64,7 +64,7 @@ def dump_atoms_and_exit( msg, atoms ):
     
 def atoms_morphe(atoms):
     for atom in atoms:
-        if atom.atomtypeB is not None and (atom.q!=atom.qB or atom.m != atom.mB): return True
+        if atom.atomtypeB is not None and (atom.q!=atom.qB or atom.m != atom.mB or atom.atomtype != atom.atomtypeB): return True
     return False
 
 def types_morphe(atoms):
@@ -311,6 +311,7 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default, ):
                         foo = topol.BondedParams.get_dihedral_param(a1.typeB,a2.typeB,a3.typeB,a4.typeB, func)
                         #need to check if the dihedral has torsion pre-defined
                         counter = check_dih_ILDN_OPLS(topol,rlist,rdic, a1, a2, a3, a4)
+			
                         if( counter == 42 ):
                             continue
 
@@ -341,10 +342,13 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default, ):
 #                        else:
 #			    if (undef != 3):
  #                               bstate = astate[:] 
-#			        print "dddd %s %s %s %s %s %s" % (a1.id,a2.id,a3.id,a4.id,astate,undef)
 
 
-			if(undef==1 and (astate[0][0]==4 or astate[0][0]==2) ):
+			if(undef==1 and astate == [] ):
+			    continue
+			elif(undef==1 and (astate[0][0]==4 or astate[0][0]==2)):
+			    continue
+			elif(undef==2 and bstate == []): 
 			    continue
 			elif(undef==2 and (bstate[0][0]==4 or bstate[0][0]==2) ):
 			    continue
@@ -370,7 +374,6 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default, ):
 				else:
 				    d[6] = bst
 			        counter = 1
-#                                print '%s %s %s %s %s %s' % (d[0].id,d[1].id,d[2].id,d[3].id,astate,bstate)
 #				print '%s' %d
 			    elif( (counter==1) or (counter==3) ):
 				alus = backup_d[:]
@@ -400,7 +403,6 @@ def find_dihedral_entries( topol, rlist, rdic, dih_predef_default, ):
                                 else:
                                     d[6] = bst
                                 counter = 1
-                                #print '%s %s %s %s %s %s' % (d[0].id,d[1].id,d[2].id,d[3].id,astate,bstate)
 #                               print '%s' %d
                             elif( (counter==1) or (counter==2) ):
                                 alus = backup_d[:]
@@ -555,7 +557,6 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 
 		    multA = 0
 		    multB = 0
-#		    print "new %s %s %s %s %s %s" %(dx[0].id,dx[1].id,dx[2].id,dx[3].id,d[4],d[5])
                     if d[4] == 'default-A': #amber99sb
 			if 'undefined' in d[5]:
 			    backup_dx2.append('undefB')
@@ -666,6 +667,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                                 bar = [foo[0], foo[1],0.0, foo[-1] ]
         	            alus.append(bar)
         	            dih9.append(alus)
+#  		    	print "new %s %s %s %s %s %s" %(dx[0].id,dx[1].id,dx[2].id,dx[3].id,d[4],dx)
                         counter = 1
 
 		    # B state

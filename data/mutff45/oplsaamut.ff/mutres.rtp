@@ -48,8 +48,8 @@
     CB    DOD1     HB1    DOD2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_ASP_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_ASP_chi1_C_C_C_CO
     CB     HB1    DOD2    DHD2  dih_sidechain_COOH_C_C_O_H
   DOD1     HB1    DOD2    DHD2  dih_sidechain_COOH_O_C_O_H
 
@@ -127,8 +127,8 @@
     CB    DOD1     HB1    DOD2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_ASP_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_ASP_chi1_C_C_C_CO
 
 [ A2E ] ; Ala -> Glu
 
@@ -155,12 +155,12 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB     HB3 ; (    CB      CG)
-   HB3    DHG1 ; (    CG     HG1)
-   HB3    DHG2 ; (    CG     HG2)
-   HB3     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB      CG)
+    CB     HB2 ; (    CB     HB1)
+    CB     HB3 ; (    CB     HB2)
+   HB1    DHG1 ; (    CG     HG1)
+   HB1    DHG2 ; (    CG     HG2)
+   HB1     DCD ; (    CG      CD)
      C       O ; (     C       O)
    DCD    DOE1 ; (    CD     OE1)
    DCD    DOE2 ; (    CD     OE2)
@@ -169,11 +169,11 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   HB3    DOE1     DCD    DOE2  improper_O_C_X_Y         
+   HB1    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB3  undefined                
-   HB3      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_GLU_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_GLU_chi1_C_C_C_CO
 
 [ A2F ] ; Ala -> Phe
 
@@ -188,19 +188,16 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHB1   DUM_opls_140      0.00000  11
-  DHB2   DUM_opls_140      0.00000  12
-   DCG   DUM_opls_145      0.00000  13
-  DCD1   DUM_opls_145      0.00000  14
-  DHD1   DUM_opls_146      0.00000  15
-  DCD2   DUM_opls_145      0.00000  16
-  DHD2   DUM_opls_146      0.00000  17
-  DCE1   DUM_opls_145      0.00000  18
-  DHE1   DUM_opls_146      0.00000  19
-  DCE2   DUM_opls_145      0.00000  20
-  DHE2   DUM_opls_146      0.00000  21
-   DCZ   DUM_opls_145      0.00000  22
-   DHZ   DUM_opls_146      0.00000  23
+  DCD1   DUM_opls_145      0.00000  11
+  DHD1   DUM_opls_146      0.00000  12
+  DCD2   DUM_opls_145      0.00000  13
+  DHD2   DUM_opls_146      0.00000  14
+  DCE1   DUM_opls_145      0.00000  15
+  DHE1   DUM_opls_146      0.00000  16
+  DCE2   DUM_opls_145      0.00000  17
+  DHE2   DUM_opls_146      0.00000  18
+   DCZ   DUM_opls_145      0.00000  19
+   DHZ   DUM_opls_146      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -208,15 +205,12 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
-    CB     HB3 ; (    CB  HB.gone3)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
-    CB     DCG ; (    CB      CG)
+    CB     HB1 ; (    CB      CG)
+    CB     HB2 ; (    CB     HB1)
+    CB     HB3 ; (    CB     HB2)
+   HB1    DCD1 ; (    CG     CD1)
+   HB1    DCD2 ; (    CG     CD2)
      C       O ; (     C       O)
-   DCG    DCD1 ; (    CG     CD1)
-   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
   DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DHD2 ; (   CD2     HD2)
@@ -231,12 +225,12 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   DCG    DCE2    DCD2    DHD2  improper_Z_CA_X_Y        
+   HB1    DCE2    DCD2    DHD2  improper_Z_CA_X_Y        
   DCD2     DCZ    DCE2    DHE2  improper_Z_CA_X_Y        
   DCE1    DCE2     DCZ     DHZ  improper_Z_CA_X_Y        
   DCD1     DCZ    DCE1    DHE1  improper_Z_CA_X_Y        
-   DCG    DCE1    DCD1    DHD1  improper_Z_CA_X_Y        
-  DCD1    DCD2     DCG      CB  improper_Z_CA_X_Y        
+   HB1    DCE1    DCD1    DHD1  improper_Z_CA_X_Y        
+  DCD1    DCD2     HB1      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
 
@@ -345,15 +339,18 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-  DHG3   DUM_opls_140      0.00000  13
-  DHG4   DUM_opls_140      0.00000  14
-  DHG5   DUM_opls_140      0.00000  15
-  DCD1   DUM_opls_135      0.00000  16
-  DHD1   DUM_opls_140      0.00000  17
-  DHD2   DUM_opls_140      0.00000  18
-  DHD3   DUM_opls_140      0.00000  19
+   DHB   DUM_opls_140      0.00000  11
+  DCG1   DUM_opls_136      0.00000  12
+  DHG1   DUM_opls_140      0.00000  13
+  DHG2   DUM_opls_140      0.00000  14
+  DCG2   DUM_opls_135      0.00000  15
+  DHG3   DUM_opls_140      0.00000  16
+  DHG4   DUM_opls_140      0.00000  17
+  DHG5   DUM_opls_140      0.00000  18
+  DCD1   DUM_opls_135      0.00000  19
+  DHD1   DUM_opls_140      0.00000  20
+  DHD2   DUM_opls_140      0.00000  21
+  DHD3   DUM_opls_140      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -361,16 +358,19 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     CG2)
-    CB     HB2 ; (    CB     CG1)
-    CB     HB3 ; (    CB      HB)
-   HB1    DHG3 ; (   CG2    HG21)
-   HB1    DHG4 ; (   CG2    HG22)
-   HB1    DHG5 ; (   CG2    HG23)
-   HB2    DHG1 ; (   CG1    HG11)
-   HB2    DHG2 ; (   CG1    HG12)
-   HB2    DCD1 ; (   CG1     CD1)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB     DHB ; (    CB      HB)
+    CB    DCG1 ; (    CB     CG1)
+    CB    DCG2 ; (    CB     CG2)
      C       O ; (     C       O)
+  DCG1    DHG1 ; (   CG1    HG11)
+  DCG1    DHG2 ; (   CG1    HG12)
+  DCG1    DCD1 ; (   CG1     CD1)
+  DCG2    DHG3 ; (   CG2    HG21)
+  DCG2    DHG4 ; (   CG2    HG22)
+  DCG2    DHG5 ; (   CG2    HG23)
   DCD1    DHD1 ; (   CD1    HD11)
   DCD1    DHD2 ; (   CD1    HD12)
   DCD1    DHD3 ; (   CD1    HD13)
@@ -381,10 +381,10 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     N      CA      CB     HB1  undefined                
-   HB2      CB      CA       C  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
+     N      CA      CB    DCG2  dih_ILE_chi1_N_C_C_C     
+  DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
+  DCG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
 
 [ A2J ] ; Ala -> Gluh
 
@@ -399,12 +399,15 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DCD   DUM_opls_267      0.00000  13
-  DOE1   DUM_opls_269      0.00000  14
-  DOE2   DUM_opls_268      0.00000  15
-  DHE2   DUM_opls_270      0.00000  16
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_136      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DCD   DUM_opls_267      0.00000  16
+  DOE1   DUM_opls_269      0.00000  17
+  DOE2   DUM_opls_268      0.00000  18
+  DHE2   DUM_opls_270      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -412,13 +415,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB     HB3 ; (    CB      CG)
-   HB3    DHG1 ; (    CG     HG1)
-   HB3    DHG2 ; (    CG     HG2)
-   HB3     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DOE1 ; (    CD     OE1)
    DCD    DOE2 ; (    CD     OE2)
   DOE2    DHE2 ; (   OE2     HE2)
@@ -427,12 +433,12 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   HB3    DOE1     DCD    DOE2  improper_O_C_X_Y         
+   DCG    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB3  undefined                
-   HB3      CB      CA       C  undefined                
-   HB3     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
+     N      CA      CB     DCG  dih_GLU_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
+   DCG     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1     DCD    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
 [ A2K ] ; Ala -> Lysh
@@ -448,18 +454,21 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DCD   DUM_opls_136      0.00000  13
-  DHD1   DUM_opls_140      0.00000  14
-  DHD2   DUM_opls_140      0.00000  15
-   DCE   DUM_opls_292      0.00000  16
-  DHE1   DUM_opls_140      0.00000  17
-  DHE2   DUM_opls_140      0.00000  18
-   DNZ   DUM_opls_287      0.00000  19
-  DHZ1   DUM_opls_290      0.00000  20
-  DHZ2   DUM_opls_290      0.00000  21
-  DHZ3   DUM_opls_290      0.00000  22
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_136      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DCD   DUM_opls_136      0.00000  16
+  DHD1   DUM_opls_140      0.00000  17
+  DHD2   DUM_opls_140      0.00000  18
+   DCE   DUM_opls_292      0.00000  19
+  DHE1   DUM_opls_140      0.00000  20
+  DHE2   DUM_opls_140      0.00000  21
+   DNZ   DUM_opls_287      0.00000  22
+  DHZ1   DUM_opls_290      0.00000  23
+  DHZ2   DUM_opls_290      0.00000  24
+  DHZ3   DUM_opls_290      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -467,13 +476,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
-    CB     HB3 ; (    CB     HB2)
-   HB1    DHG1 ; (    CG     HG1)
-   HB1    DHG2 ; (    CG     HG2)
-   HB1     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DHD1 ; (    CD     HD1)
    DCD    DHD2 ; (    CD     HD2)
    DCD     DCE ; (    CD      CE)
@@ -490,8 +502,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_LYS_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
@@ -509,15 +521,18 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-   DHG   DUM_opls_140      0.00000  11
-  DCD1   DUM_opls_135      0.00000  12
-  DHD1   DUM_opls_140      0.00000  13
-  DHD2   DUM_opls_140      0.00000  14
-  DHD3   DUM_opls_140      0.00000  15
-  DCD2   DUM_opls_135      0.00000  16
-  DHD4   DUM_opls_140      0.00000  17
-  DHD5   DUM_opls_140      0.00000  18
-  DHD6   DUM_opls_140      0.00000  19
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_137      0.00000  13
+   DHG   DUM_opls_140      0.00000  14
+  DCD1   DUM_opls_135      0.00000  15
+  DHD1   DUM_opls_140      0.00000  16
+  DHD2   DUM_opls_140      0.00000  17
+  DHD3   DUM_opls_140      0.00000  18
+  DCD2   DUM_opls_135      0.00000  19
+  DHD4   DUM_opls_140      0.00000  20
+  DHD5   DUM_opls_140      0.00000  21
+  DHD6   DUM_opls_140      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -525,13 +540,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
-    CB     HB3 ; (    CB     HB1)
-   HB2     DHG ; (    CG      HG)
-   HB2    DCD1 ; (    CG     CD1)
-   HB2    DCD2 ; (    CG     CD2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG     DHG ; (    CG      HG)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1    HD11)
   DCD1    DHD2 ; (   CD1    HD12)
   DCD1    DHD3 ; (   CD1    HD13)
@@ -545,8 +563,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_LEU_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
 
 [ A2M ] ; Ala -> Met
 
@@ -561,13 +579,16 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DSD   DUM_opls_202      0.00000  13
-   DCE   DUM_opls_209      0.00000  14
-  DHE1   DUM_opls_140      0.00000  15
-  DHE2   DUM_opls_140      0.00000  16
-  DHE3   DUM_opls_140      0.00000  17
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_210      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DSD   DUM_opls_202      0.00000  16
+   DCE   DUM_opls_209      0.00000  17
+  DHE1   DUM_opls_140      0.00000  18
+  DHE2   DUM_opls_140      0.00000  19
+  DHE3   DUM_opls_140      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -575,13 +596,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
-    CB     HB3 ; (    CB     HB1)
-   HB2    DHG1 ; (    CG     HG1)
-   HB2    DHG2 ; (    CG     HG2)
-   HB2     DSD ; (    CG      SD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DSD ; (    CG      SD)
    DSD     DCE ; (    SD      CE)
    DCE    DHE1 ; (    CE     HE1)
    DCE    DHE2 ; (    CE     HE2)
@@ -593,8 +617,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_MET_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
 
 [ A2N ] ; Ala -> Asn
 
@@ -609,10 +633,13 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DOD1   DUM_opls_236      0.00000  11
-  DND2   DUM_opls_237      0.00000  12
-  DHD1   DUM_opls_240      0.00000  13
-  DHD2   DUM_opls_240      0.00000  14
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_235      0.00000  13
+  DOD1   DUM_opls_236      0.00000  14
+  DND2   DUM_opls_237      0.00000  15
+  DHD1   DUM_opls_240      0.00000  16
+  DHD2   DUM_opls_240      0.00000  17
 
  [ bonds ]
      N       H ; (     N       H)
@@ -620,12 +647,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
-    CB     HB3 ; (    CB     HB1)
-   HB2    DOD1 ; (    CG     OD1)
-   HB2    DND2 ; (    CG     ND2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DOD1 ; (    CG     OD1)
+   DCG    DND2 ; (    CG     ND2)
   DND2    DHD1 ; (   ND2    HD21)
   DND2    DHD2 ; (   ND2    HD22)
     -C       N  
@@ -633,13 +663,13 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-    CB    DND2     HB2    DOD1  improper_O_C_X_Y         
-   HB2    DHD1    DND2    DHD2  improper_Z_N_X_Y         
+    CB    DND2     DCG    DOD1  improper_O_C_X_Y         
+   DCG    DHD1    DND2    DHD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
-    CA      CB     HB2    DND2  dih_ASN_chi2_C_C_CO_N    
+     N      CA      CB     DCG  dih_ASN_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
+    CA      CB     DCG    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ A2O ] ; Ala -> Lys
 
@@ -654,17 +684,20 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DCD   DUM_opls_136      0.00000  13
-  DHD1   DUM_opls_140      0.00000  14
-  DHD2   DUM_opls_140      0.00000  15
-   DCE   DUM_opls_906      0.00000  16
-  DHE1   DUM_opls_911      0.00000  17
-  DHE2   DUM_opls_911      0.00000  18
-   DNZ   DUM_opls_900      0.00000  19
-  DHZ1   DUM_opls_909      0.00000  20
-  DHZ2   DUM_opls_909      0.00000  21
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_136      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DCD   DUM_opls_136      0.00000  16
+  DHD1   DUM_opls_140      0.00000  17
+  DHD2   DUM_opls_140      0.00000  18
+   DCE   DUM_opls_906      0.00000  19
+  DHE1   DUM_opls_911      0.00000  20
+  DHE2   DUM_opls_911      0.00000  21
+   DNZ   DUM_opls_900      0.00000  22
+  DHZ1   DUM_opls_909      0.00000  23
+  DHZ2   DUM_opls_909      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -672,13 +705,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
-    CB     HB3 ; (    CB     HB2)
-   HB1    DHG1 ; (    CG     HG1)
-   HB1    DHG2 ; (    CG     HG2)
-   HB1     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DHD1 ; (    CD     HD1)
    DCD    DHD2 ; (    CD     HD2)
    DCD     DCE ; (    CD      CE)
@@ -694,8 +730,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_LYS_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
 
@@ -712,13 +748,16 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DCD   DUM_opls_235      0.00000  13
-  DOE1   DUM_opls_236      0.00000  14
-  DNE2   DUM_opls_237      0.00000  15
-  DHE1   DUM_opls_240      0.00000  16
-  DHE2   DUM_opls_240      0.00000  17
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_136      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DCD   DUM_opls_235      0.00000  16
+  DOE1   DUM_opls_236      0.00000  17
+  DNE2   DUM_opls_237      0.00000  18
+  DHE1   DUM_opls_240      0.00000  19
+  DHE2   DUM_opls_240      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -726,13 +765,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
-    CB     HB3 ; (    CB     HB2)
-   HB1    DHG1 ; (    CG     HG1)
-   HB1    DHG2 ; (    CG     HG2)
-   HB1     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DOE1 ; (    CD     OE1)
    DCD    DNE2 ; (    CD     NE2)
   DNE2    DHE1 ; (   NE2    HE21)
@@ -742,13 +784,13 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   HB1    DNE2     DCD    DOE1  improper_O_C_X_Y         
+   DCG    DNE2     DCD    DOE1  improper_O_C_X_Y         
    DCD    DHE1    DNE2    DHE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
-    CB     HB1     DCD    DNE2  dih_GLN_chi3_C_C_CO_N    
+     N      CA      CB     DCG  dih_GLN_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
+    CB     DCG     DCD    DNE2  dih_GLN_chi3_C_C_CO_N    
 
 [ A2R ] ; Ala -> Arg
 
@@ -763,20 +805,23 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-   DCD   DUM_opls_307      0.00000  13
-  DHD1   DUM_opls_140      0.00000  14
-  DHD2   DUM_opls_140      0.00000  15
-   DNE   DUM_opls_303      0.00000  16
-   DHE   DUM_opls_304      0.00000  17
-   DCZ   DUM_opls_302      0.00000  18
-  DNH1   DUM_opls_300      0.00000  19
-  DHH1   DUM_opls_301      0.00000  20
-  DHH2   DUM_opls_301      0.00000  21
-  DNH2   DUM_opls_300      0.00000  22
-  DHH3   DUM_opls_301      0.00000  23
-  DHH4   DUM_opls_301      0.00000  24
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_308      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+   DCD   DUM_opls_307      0.00000  16
+  DHD1   DUM_opls_140      0.00000  17
+  DHD2   DUM_opls_140      0.00000  18
+   DNE   DUM_opls_303      0.00000  19
+   DHE   DUM_opls_304      0.00000  20
+   DCZ   DUM_opls_302      0.00000  21
+  DNH1   DUM_opls_300      0.00000  22
+  DHH1   DUM_opls_301      0.00000  23
+  DHH2   DUM_opls_301      0.00000  24
+  DNH2   DUM_opls_300      0.00000  25
+  DHH3   DUM_opls_301      0.00000  26
+  DHH4   DUM_opls_301      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -784,13 +829,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
-    CB     HB3 ; (    CB     HB2)
-   HB1    DHG1 ; (    CG     HG1)
-   HB1    DHG2 ; (    CG     HG2)
-   HB1     DCD ; (    CG      CD)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DHD1 ; (    CD     HD1)
    DCD    DHD2 ; (    CD     HD2)
    DCD     DNE ; (    CD      NE)
@@ -813,8 +861,8 @@
    DCZ    DHH3    DNH2    DHH4  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_ARG_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
 
 [ A2S ] ; Ala -> Ser
 
@@ -829,7 +877,10 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-   DHG   DUM_opls_155      0.00000  11
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DOG   DUM_opls_154      0.00000  13
+   DHG   DUM_opls_155      0.00000  14
 
  [ bonds ]
      N       H ; (     N       H)
@@ -837,11 +888,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB     HB3 ; (    CB      OG)
-   HB3     DHG ; (    OG      HG)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DOG ; (    CB      OG)
      C       O ; (     C       O)
+   DOG     DHG ; (    OG      HG)
     -C       N  
 
  [ impropers ]
@@ -849,9 +903,9 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB3  undefined                
-     C      CA      CB     HB3  undefined                
-    CA      CB     HB3     DHG  dih_SER_THR_chi2_C_C_OH_HO
+     N      CA      CB     DOG  dih_SER_THR_chi1_N_C_C_O 
+     C      CA      CB     DOG  dih_SER_THR_chi1_CO_C_C_O
+    CA      CB     DOG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ A2T ] ; Ala -> Thr
 
@@ -866,10 +920,13 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_155      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-  DHG3   DUM_opls_140      0.00000  13
-  DHG4   DUM_opls_140      0.00000  14
+   DHB   DUM_opls_140      0.00000  11
+  DOG1   DUM_opls_154      0.00000  12
+  DHG1   DUM_opls_155      0.00000  13
+  DCG2   DUM_opls_135      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+  DHG3   DUM_opls_140      0.00000  16
+  DHG4   DUM_opls_140      0.00000  17
 
  [ bonds ]
      N       H ; (     N       H)
@@ -877,14 +934,17 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     CG2)
-    CB     HB2 ; (    CB     OG1)
-    CB     HB3 ; (    CB      HB)
-   HB1    DHG2 ; (   CG2    HG21)
-   HB1    DHG3 ; (   CG2    HG22)
-   HB1    DHG4 ; (   CG2    HG23)
-   HB2    DHG1 ; (   OG1     HG1)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB     DHB ; (    CB      HB)
+    CB    DOG1 ; (    CB     OG1)
+    CB    DCG2 ; (    CB     CG2)
      C       O ; (     C       O)
+  DOG1    DHG1 ; (   OG1     HG1)
+  DCG2    DHG2 ; (   CG2    HG21)
+  DCG2    DHG3 ; (   CG2    HG22)
+  DCG2    DHG4 ; (   CG2    HG23)
     -C       N  
 
  [ impropers ]
@@ -892,9 +952,9 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-     C      CA      CB     HB2  undefined                
-    CA      CB     HB2    DHG1  dih_SER_THR_chi2_C_C_OH_HO
+     N      CA      CB    DOG1  dih_SER_THR_chi1_N_C_C_O 
+     C      CA      CB    DOG1  dih_SER_THR_chi1_CO_C_C_O
+    CA      CB    DOG1    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ A2V ] ; Ala -> Val
 
@@ -909,13 +969,15 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DHG1   DUM_opls_140      0.00000  11
-  DHG2   DUM_opls_140      0.00000  12
-  DHG3   DUM_opls_140      0.00000  13
-  DCG2   DUM_opls_135      0.00000  14
-  DHG4   DUM_opls_140      0.00000  15
-  DHG5   DUM_opls_140      0.00000  16
-  DHG6   DUM_opls_140      0.00000  17
+   DHB   DUM_opls_140      0.00000  11
+  DCG1   DUM_opls_135      0.00000  12
+  DHG1   DUM_opls_140      0.00000  13
+  DHG2   DUM_opls_140      0.00000  14
+  DHG3   DUM_opls_140      0.00000  15
+  DCG2   DUM_opls_135      0.00000  16
+  DHG4   DUM_opls_140      0.00000  17
+  DHG5   DUM_opls_140      0.00000  18
+  DHG6   DUM_opls_140      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -923,14 +985,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     CG1)
+    CB     HB1 ; (    CB  HB.gone1)
     CB     HB2 ; (    CB  HB.gone2)
-    CB     HB3 ; (    CB      HB)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB     DHB ; (    CB      HB)
+    CB    DCG1 ; (    CB     CG1)
     CB    DCG2 ; (    CB     CG2)
-   HB1    DHG1 ; (   CG1    HG11)
-   HB1    DHG2 ; (   CG1    HG12)
-   HB1    DHG3 ; (   CG1    HG13)
      C       O ; (     C       O)
+  DCG1    DHG1 ; (   CG1    HG11)
+  DCG1    DHG2 ; (   CG1    HG12)
+  DCG1    DHG3 ; (   CG1    HG13)
   DCG2    DHG4 ; (   CG2    HG21)
   DCG2    DHG5 ; (   CG2    HG22)
   DCG2    DHG6 ; (   CG2    HG23)
@@ -941,9 +1005,9 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  undefined                
+     N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
      N      CA      CB    DCG2  dih_VAL_chi1_N_C_C_C     
-   HB1      CB      CA       C  undefined                
+  DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
   DCG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
 
 [ A2W ] ; Ala -> Trp
@@ -959,20 +1023,23 @@
    HB3   opls_140          0.06000  8
      C   opls_235          0.50000  9
      O   opls_236         -0.50000  10
-  DCD1   DUM_opls_514      0.00000  11
-  DHD1   DUM_opls_146      0.00000  12
-  DCD2   DUM_opls_501      0.00000  13
-  DNE1   DUM_opls_503      0.00000  14
-  DHE1   DUM_opls_504      0.00000  15
-  DCE2   DUM_opls_502      0.00000  16
-  DCE3   DUM_opls_145      0.00000  17
-  DHE3   DUM_opls_146      0.00000  18
-  DCZ2   DUM_opls_145      0.00000  19
-  DHZ2   DUM_opls_146      0.00000  20
-  DCZ3   DUM_opls_145      0.00000  21
-  DHZ3   DUM_opls_146      0.00000  22
-  DCH2   DUM_opls_145      0.00000  23
-  DHH2   DUM_opls_146      0.00000  24
+  DHB1   DUM_opls_140      0.00000  11
+  DHB2   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_500      0.00000  13
+  DCD1   DUM_opls_514      0.00000  14
+  DHD1   DUM_opls_146      0.00000  15
+  DCD2   DUM_opls_501      0.00000  16
+  DNE1   DUM_opls_503      0.00000  17
+  DHE1   DUM_opls_504      0.00000  18
+  DCE2   DUM_opls_502      0.00000  19
+  DCE3   DUM_opls_145      0.00000  20
+  DHE3   DUM_opls_146      0.00000  21
+  DCZ2   DUM_opls_145      0.00000  22
+  DHZ2   DUM_opls_146      0.00000  23
+  DCZ3   DUM_opls_145      0.00000  24
+  DHZ3   DUM_opls_146      0.00000  25
+  DCH2   DUM_opls_145      0.00000  26
+  DHH2   DUM_opls_146      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -980,12 +1047,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
-    CB     HB3 ; (    CB     HB1)
-   HB2    DCD1 ; (    CG     CD1)
-   HB2    DCD2 ; (    CG     CD2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
   DCD1    DNE1 ; (   CD1     NE1)
   DCD2    DCE2 ; (   CD2     CE2)
@@ -1010,12 +1080,12 @@
   DCZ2    DCZ3    DCH2    DHH2  improper_Z_CA_X_Y        
   DCH2    DCE3    DCZ3    DHZ3  improper_Z_CA_X_Y        
   DCZ3    DCD2    DCE3    DHE3  improper_Z_CA_X_Y        
-   HB2    DNE1    DCD1    DHD1  improper_Z_CA_X_Y        
-  DCD1    DCD2     HB2      CB  improper_Z_CA_X_Y        
+   DCG    DNE1    DCD1    DHD1  improper_Z_CA_X_Y        
+  DCD1    DCD2     DCG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_TRP_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_TRP_chi1_C_C_C_CO    
 
 [ A2X ] ; Ala -> Hise
 
@@ -1948,7 +2018,7 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CB     OD1      CG     OD2  improper_O_C_X_Y         
-    CB     OD2      CG     OD1  improper_O_C_X_Y         
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2     HD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
@@ -1956,7 +2026,7 @@
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
     CB      CG     OD2     HD2  dih_sidechain_COOH_C_C_O_H
    OD1      CG     OD2     HD2  dih_sidechain_COOH_O_C_O_H
-    CA      CB      CG     OD2  undefined                
+    CA      CB      CG     OD2  undefined_dih_ASN_chi2_C_C_CO_N
 
 [ B2O ] ; Asph -> Lys
 
@@ -2783,7 +2853,7 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB1   DUM_opls_140      0.00000  12
+   DCG   DUM_opls_274      0.00000  12
   DHG1   DUM_opls_140      0.00000  13
   DHG2   DUM_opls_140      0.00000  14
    DCD   DUM_opls_271      0.00000  15
@@ -2796,15 +2866,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      SG ; (    CB  SG.gone)
-    CB    DHB1 ; (    CB     HB1)
-   HB2    DHG1 ; (    CG     HG1)
-   HB2    DHG2 ; (    CG     HG2)
-   HB2     DCD ; (    CG      CD)
+    CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DOE1 ; (    CD     OE1)
    DCD    DOE2 ; (    CD     OE2)
     -C       N  
@@ -2812,13 +2882,13 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   HB2    DOE1     DCD    DOE2  improper_O_C_X_Y         
+   DCG    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_GLU_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
 
 [ C2F ] ; Cysh -> Phe
 
@@ -2834,19 +2904,17 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB1   DUM_opls_140      0.00000  12
-  DHB2   DUM_opls_140      0.00000  13
-   DCG   DUM_opls_145      0.00000  14
-  DCD1   DUM_opls_145      0.00000  15
-  DHD1   DUM_opls_146      0.00000  16
-  DCD2   DUM_opls_145      0.00000  17
-  DHD2   DUM_opls_146      0.00000  18
-  DCE1   DUM_opls_145      0.00000  19
-  DHE1   DUM_opls_146      0.00000  20
-  DCE2   DUM_opls_145      0.00000  21
-  DHE2   DUM_opls_146      0.00000  22
-   DCZ   DUM_opls_145      0.00000  23
-   DHZ   DUM_opls_146      0.00000  24
+   DCG   DUM_opls_145      0.00000  12
+  DCD1   DUM_opls_145      0.00000  13
+  DHD1   DUM_opls_146      0.00000  14
+  DCD2   DUM_opls_145      0.00000  15
+  DHD2   DUM_opls_146      0.00000  16
+  DCE1   DUM_opls_145      0.00000  17
+  DHE1   DUM_opls_146      0.00000  18
+  DCE2   DUM_opls_145      0.00000  19
+  DHE2   DUM_opls_146      0.00000  20
+   DCZ   DUM_opls_145      0.00000  21
+   DHZ   DUM_opls_146      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -2854,11 +2922,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      SG ; (    CB  SG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
@@ -3003,16 +3069,18 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHG1   DUM_opls_140      0.00000  12
-  DHG2   DUM_opls_140      0.00000  13
-  DCG2   DUM_opls_135      0.00000  14
-  DHG3   DUM_opls_140      0.00000  15
-  DHG4   DUM_opls_140      0.00000  16
-  DHG5   DUM_opls_140      0.00000  17
-  DCD1   DUM_opls_135      0.00000  18
-  DHD1   DUM_opls_140      0.00000  19
-  DHD2   DUM_opls_140      0.00000  20
-  DHD3   DUM_opls_140      0.00000  21
+   DHB   DUM_opls_140      0.00000  12
+  DCG1   DUM_opls_136      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+  DCG2   DUM_opls_135      0.00000  16
+  DHG3   DUM_opls_140      0.00000  17
+  DHG4   DUM_opls_140      0.00000  18
+  DHG5   DUM_opls_140      0.00000  19
+  DCD1   DUM_opls_135      0.00000  20
+  DHD1   DUM_opls_140      0.00000  21
+  DHD2   DUM_opls_140      0.00000  22
+  DHD3   DUM_opls_140      0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3020,15 +3088,17 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     CG1)
-    CB     HB2 ; (    CB      HB)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB     DHB ; (    CB      HB)
+    CB    DCG1 ; (    CB     CG1)
     CB    DCG2 ; (    CB     CG2)
-   HB1    DHG1 ; (   CG1    HG11)
-   HB1    DHG2 ; (   CG1    HG12)
-   HB1    DCD1 ; (   CG1     CD1)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+  DCG1    DHG1 ; (   CG1    HG11)
+  DCG1    DHG2 ; (   CG1    HG12)
+  DCG1    DCD1 ; (   CG1     CD1)
   DCG2    DHG3 ; (   CG2    HG21)
   DCG2    DHG4 ; (   CG2    HG22)
   DCG2    DHG5 ; (   CG2    HG23)
@@ -3044,9 +3114,9 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB1  undefined                
+     N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
      N      CA      CB    DCG2  dih_ILE_chi1_N_C_C_C     
-   HB1      CB      CA       C  undefined                
+  DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
   DCG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
 
 [ C2J ] ; Cysh -> Gluh
@@ -3064,12 +3134,14 @@
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
   DHB1   DUM_opls_140      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DCD   DUM_opls_267      0.00000  15
-  DOE1   DUM_opls_269      0.00000  16
-  DOE2   DUM_opls_268      0.00000  17
-  DHE2   DUM_opls_270      0.00000  18
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_136      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DCD   DUM_opls_267      0.00000  17
+  DOE1   DUM_opls_269      0.00000  18
+  DOE2   DUM_opls_268      0.00000  19
+  DHE2   DUM_opls_270      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3077,15 +3149,17 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      CG)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
     CB    DHB1 ; (    CB     HB1)
-   HB2    DHG1 ; (    CG     HG1)
-   HB2    DHG2 ; (    CG     HG2)
-   HB2     DCD ; (    CG      CD)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
    DCD    DOE1 ; (    CD     OE1)
    DCD    DOE2 ; (    CD     OE2)
   DOE2    DHE2 ; (   OE2     HE2)
@@ -3094,14 +3168,14 @@
  [ impropers ]
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
-   HB2    DOE1     DCD    DOE2  improper_O_C_X_Y         
+   DCG    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
-   HB2     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
+     N      CA      CB     DCG  dih_GLU_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
+   DCG     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1     DCD    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
 [ C2K ] ; Cysh -> Lysh
@@ -3118,19 +3192,21 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-   DCG   DUM_opls_136      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DCD   DUM_opls_136      0.00000  15
-  DHD1   DUM_opls_140      0.00000  16
-  DHD2   DUM_opls_140      0.00000  17
-   DCE   DUM_opls_292      0.00000  18
-  DHE1   DUM_opls_140      0.00000  19
-  DHE2   DUM_opls_140      0.00000  20
-   DNZ   DUM_opls_287      0.00000  21
-  DHZ1   DUM_opls_290      0.00000  22
-  DHZ2   DUM_opls_290      0.00000  23
-  DHZ3   DUM_opls_290      0.00000  24
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_136      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DCD   DUM_opls_136      0.00000  17
+  DHD1   DUM_opls_140      0.00000  18
+  DHD2   DUM_opls_140      0.00000  19
+   DCE   DUM_opls_292      0.00000  20
+  DHE1   DUM_opls_140      0.00000  21
+  DHE2   DUM_opls_140      0.00000  22
+   DNZ   DUM_opls_287      0.00000  23
+  DHZ1   DUM_opls_290      0.00000  24
+  DHZ2   DUM_opls_290      0.00000  25
+  DHZ3   DUM_opls_290      0.00000  26
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3138,9 +3214,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
@@ -3185,17 +3263,18 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB2   DUM_opls_140      0.00000  12
-   DCG   DUM_opls_137      0.00000  13
-   DHG   DUM_opls_140      0.00000  14
-  DCD1   DUM_opls_135      0.00000  15
-  DHD1   DUM_opls_140      0.00000  16
-  DHD2   DUM_opls_140      0.00000  17
-  DHD3   DUM_opls_140      0.00000  18
-  DCD2   DUM_opls_135      0.00000  19
-  DHD4   DUM_opls_140      0.00000  20
-  DHD5   DUM_opls_140      0.00000  21
-  DHD6   DUM_opls_140      0.00000  22
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_137      0.00000  14
+   DHG   DUM_opls_140      0.00000  15
+  DCD1   DUM_opls_135      0.00000  16
+  DHD1   DUM_opls_140      0.00000  17
+  DHD2   DUM_opls_140      0.00000  18
+  DHD3   DUM_opls_140      0.00000  19
+  DCD2   DUM_opls_135      0.00000  20
+  DHD4   DUM_opls_140      0.00000  21
+  DHD5   DUM_opls_140      0.00000  22
+  DHD6   DUM_opls_140      0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3204,8 +3283,9 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
@@ -3245,14 +3325,16 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB2   DUM_opls_140      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DSD   DUM_opls_202      0.00000  15
-   DCE   DUM_opls_209      0.00000  16
-  DHE1   DUM_opls_140      0.00000  17
-  DHE2   DUM_opls_140      0.00000  18
-  DHE3   DUM_opls_140      0.00000  19
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_210      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DSD   DUM_opls_202      0.00000  17
+   DCE   DUM_opls_209      0.00000  18
+  DHE1   DUM_opls_140      0.00000  19
+  DHE2   DUM_opls_140      0.00000  20
+  DHE3   DUM_opls_140      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3260,15 +3342,17 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
-   HB1    DHG1 ; (    CG     HG1)
-   HB1    DHG2 ; (    CG     HG2)
-   HB1     DSD ; (    CG      SD)
+    CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DSD ; (    CG      SD)
    DSD     DCE ; (    SD      CE)
    DCE    DHE1 ; (    CE     HE1)
    DCE    DHE2 ; (    CE     HE2)
@@ -3282,8 +3366,8 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     DCG  dih_MET_chi1_N_C_C_C     
+   DCG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
 
 [ C2N ] ; Cysh -> Asn
 
@@ -3299,12 +3383,13 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB2   DUM_opls_140      0.00000  12
-   DCG   DUM_opls_235      0.00000  13
-  DOD1   DUM_opls_236      0.00000  14
-  DND2   DUM_opls_237      0.00000  15
-  DHD1   DUM_opls_240      0.00000  16
-  DHD2   DUM_opls_240      0.00000  17
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_235      0.00000  14
+  DOD1   DUM_opls_236      0.00000  15
+  DND2   DUM_opls_237      0.00000  16
+  DHD1   DUM_opls_240      0.00000  17
+  DHD2   DUM_opls_240      0.00000  18
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3313,8 +3398,9 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
@@ -3352,18 +3438,20 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-   DCG   DUM_opls_136      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DCD   DUM_opls_136      0.00000  15
-  DHD1   DUM_opls_140      0.00000  16
-  DHD2   DUM_opls_140      0.00000  17
-   DCE   DUM_opls_906      0.00000  18
-  DHE1   DUM_opls_911      0.00000  19
-  DHE2   DUM_opls_911      0.00000  20
-   DNZ   DUM_opls_900      0.00000  21
-  DHZ1   DUM_opls_909      0.00000  22
-  DHZ2   DUM_opls_909      0.00000  23
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_136      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DCD   DUM_opls_136      0.00000  17
+  DHD1   DUM_opls_140      0.00000  18
+  DHD2   DUM_opls_140      0.00000  19
+   DCE   DUM_opls_906      0.00000  20
+  DHE1   DUM_opls_911      0.00000  21
+  DHE2   DUM_opls_911      0.00000  22
+   DNZ   DUM_opls_900      0.00000  23
+  DHZ1   DUM_opls_909      0.00000  24
+  DHZ2   DUM_opls_909      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3371,9 +3459,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
@@ -3416,14 +3506,16 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-   DCG   DUM_opls_136      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DCD   DUM_opls_235      0.00000  15
-  DOE1   DUM_opls_236      0.00000  16
-  DNE2   DUM_opls_237      0.00000  17
-  DHE1   DUM_opls_240      0.00000  18
-  DHE2   DUM_opls_240      0.00000  19
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_136      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DCD   DUM_opls_235      0.00000  17
+  DOE1   DUM_opls_236      0.00000  18
+  DNE2   DUM_opls_237      0.00000  19
+  DHE1   DUM_opls_240      0.00000  20
+  DHE2   DUM_opls_240      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3431,9 +3523,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
@@ -3473,21 +3567,23 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-   DCG   DUM_opls_308      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-   DCD   DUM_opls_307      0.00000  15
-  DHD1   DUM_opls_140      0.00000  16
-  DHD2   DUM_opls_140      0.00000  17
-   DNE   DUM_opls_303      0.00000  18
-   DHE   DUM_opls_304      0.00000  19
-   DCZ   DUM_opls_302      0.00000  20
-  DNH1   DUM_opls_300      0.00000  21
-  DHH1   DUM_opls_301      0.00000  22
-  DHH2   DUM_opls_301      0.00000  23
-  DNH2   DUM_opls_300      0.00000  24
-  DHH3   DUM_opls_301      0.00000  25
-  DHH4   DUM_opls_301      0.00000  26
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_308      0.00000  14
+  DHG1   DUM_opls_140      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+   DCD   DUM_opls_307      0.00000  17
+  DHD1   DUM_opls_140      0.00000  18
+  DHD2   DUM_opls_140      0.00000  19
+   DNE   DUM_opls_303      0.00000  20
+   DHE   DUM_opls_304      0.00000  21
+   DCZ   DUM_opls_302      0.00000  22
+  DNH1   DUM_opls_300      0.00000  23
+  DHH1   DUM_opls_301      0.00000  24
+  DHH2   DUM_opls_301      0.00000  25
+  DNH2   DUM_opls_300      0.00000  26
+  DHH3   DUM_opls_301      0.00000  27
+  DHH4   DUM_opls_301      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3495,9 +3591,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
@@ -3546,7 +3644,9 @@
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
   DHB1   DUM_opls_140      0.00000  12
-   DHG   DUM_opls_155      0.00000  13
+  DHB2   DUM_opls_140      0.00000  13
+   DOG   DUM_opls_154      0.00000  14
+   DHG   DUM_opls_155      0.00000  15
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3554,13 +3654,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB      OG)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
     CB    DHB1 ; (    CB     HB1)
-   HB2     DHG ; (    OG      HG)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DOG ; (    CB      OG)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+   DOG     DHG ; (    OG      HG)
     -C       N  
 
  [ impropers ]
@@ -3570,9 +3672,9 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB2  undefined                
-     C      CA      CB     HB2  undefined                
-    CA      CB     HB2     DHG  dih_SER_THR_chi2_C_C_OH_HO
+     N      CA      CB     DOG  dih_SER_THR_chi1_N_C_C_O 
+     C      CA      CB     DOG  dih_SER_THR_chi1_CO_C_C_O
+    CA      CB     DOG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ C2T ] ; Cysh -> Thr
 
@@ -3588,11 +3690,13 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHG1   DUM_opls_155      0.00000  12
-  DCG2   DUM_opls_135      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-  DHG3   DUM_opls_140      0.00000  15
-  DHG4   DUM_opls_140      0.00000  16
+   DHB   DUM_opls_140      0.00000  12
+  DOG1   DUM_opls_154      0.00000  13
+  DHG1   DUM_opls_155      0.00000  14
+  DCG2   DUM_opls_135      0.00000  15
+  DHG2   DUM_opls_140      0.00000  16
+  DHG3   DUM_opls_140      0.00000  17
+  DHG4   DUM_opls_140      0.00000  18
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3600,13 +3704,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     OG1)
-    CB     HB2 ; (    CB      HB)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB     DHB ; (    CB      HB)
+    CB    DOG1 ; (    CB     OG1)
     CB    DCG2 ; (    CB     CG2)
-   HB1    DHG1 ; (   OG1     HG1)
     SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+  DOG1    DHG1 ; (   OG1     HG1)
   DCG2    DHG2 ; (   CG2    HG21)
   DCG2    DHG3 ; (   CG2    HG22)
   DCG2    DHG4 ; (   CG2    HG23)
@@ -3619,9 +3725,9 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB1  undefined                
-     C      CA      CB     HB1  undefined                
-    CA      CB     HB1    DHG1  dih_SER_THR_chi2_C_C_OH_HO
+     N      CA      CB    DOG1  dih_SER_THR_chi1_N_C_C_O 
+     C      CA      CB    DOG1  dih_SER_THR_chi1_CO_C_C_O
+    CA      CB    DOG1    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ C2V ] ; Cysh -> Val
 
@@ -3637,14 +3743,15 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DCG1   DUM_opls_135      0.00000  12
-  DHG1   DUM_opls_140      0.00000  13
-  DHG2   DUM_opls_140      0.00000  14
-  DHG3   DUM_opls_140      0.00000  15
-  DCG2   DUM_opls_135      0.00000  16
-  DHG4   DUM_opls_140      0.00000  17
-  DHG5   DUM_opls_140      0.00000  18
-  DHG6   DUM_opls_140      0.00000  19
+   DHB   DUM_opls_140      0.00000  12
+  DCG1   DUM_opls_135      0.00000  13
+  DHG1   DUM_opls_140      0.00000  14
+  DHG2   DUM_opls_140      0.00000  15
+  DHG3   DUM_opls_140      0.00000  16
+  DCG2   DUM_opls_135      0.00000  17
+  DHG4   DUM_opls_140      0.00000  18
+  DHG5   DUM_opls_140      0.00000  19
+  DHG6   DUM_opls_140      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3653,8 +3760,9 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB      HB)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB     DHB ; (    CB      HB)
     CB    DCG1 ; (    CB     CG1)
     CB    DCG2 ; (    CB     CG2)
     SG      HG ; (SG.gone  HG.gone)
@@ -3693,22 +3801,23 @@
     HG   opls_204          0.15500  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB2   DUM_opls_140      0.00000  12
-   DCG   DUM_opls_500      0.00000  13
-  DCD1   DUM_opls_514      0.00000  14
-  DHD1   DUM_opls_146      0.00000  15
-  DCD2   DUM_opls_501      0.00000  16
-  DNE1   DUM_opls_503      0.00000  17
-  DHE1   DUM_opls_504      0.00000  18
-  DCE2   DUM_opls_502      0.00000  19
-  DCE3   DUM_opls_145      0.00000  20
-  DHE3   DUM_opls_146      0.00000  21
-  DCZ2   DUM_opls_145      0.00000  22
-  DHZ2   DUM_opls_146      0.00000  23
-  DCZ3   DUM_opls_145      0.00000  24
-  DHZ3   DUM_opls_146      0.00000  25
-  DCH2   DUM_opls_145      0.00000  26
-  DHH2   DUM_opls_146      0.00000  27
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DCG   DUM_opls_500      0.00000  14
+  DCD1   DUM_opls_514      0.00000  15
+  DHD1   DUM_opls_146      0.00000  16
+  DCD2   DUM_opls_501      0.00000  17
+  DNE1   DUM_opls_503      0.00000  18
+  DHE1   DUM_opls_504      0.00000  19
+  DCE2   DUM_opls_502      0.00000  20
+  DCE3   DUM_opls_145      0.00000  21
+  DHE3   DUM_opls_146      0.00000  22
+  DCZ2   DUM_opls_145      0.00000  23
+  DHZ2   DUM_opls_146      0.00000  24
+  DCZ3   DUM_opls_145      0.00000  25
+  DHZ3   DUM_opls_146      0.00000  26
+  DCH2   DUM_opls_145      0.00000  27
+  DHH2   DUM_opls_146      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3717,8 +3826,9 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      SG ; (    CB  SG.gone)
+    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     SG      HG ; (SG.gone  HG.gone)
@@ -4369,9 +4479,9 @@
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ D2J ] ; Asp -> Gluh
 
@@ -4657,13 +4767,13 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CB     OD1      CG     OD2  improper_O_C_X_Y         
-    CB     OD2      CG     OD1  improper_O_C_X_Y         
+    CB     OD2      CG     OD1  undefined                
     CG    DHD1     OD2    DHD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-    CA      CB      CG     OD2  undefined                
+    CA      CB      CG     OD2  undefined_dih_ASN_chi2_C_C_CO_N
 
 [ D2O ] ; Asp -> Lys
 
@@ -5018,9 +5128,9 @@
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ D2W ] ; Asp -> Trp
 
@@ -5325,12 +5435,12 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB     HB3)
-    CG     HG1 ; (   HB3  HG.gone1)
-    CG     HG2 ; (   HB3  HG.gone2)
-    CG      CD ; (   HB3  CD.gone)
+    CB     HB1 ; (    CB     HB2)
+    CB     HB2 ; (    CB     HB3)
+    CB      CG ; (    CB     HB1)
+    CG     HG1 ; (   HB1  HG.gone1)
+    CG     HG2 ; (   HB1  HG.gone2)
+    CG      CD ; (   HB1  CD.gone)
     CD     OE1 ; (CD.gone  OE1.gone)
     CD     OE2 ; (CD.gone  OE2.gone)
      C       O ; (     C       O)
@@ -5430,13 +5540,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
+    CB      CG ; (    CB  CG.gone)
     CB     DSG ; (    CB      SG)
-    CG     HG1 ; (   HB2  HG.gone1)
-    CG     HG2 ; (   HB2  HG.gone2)
-    CG      CD ; (   HB2  CD.gone)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     OE1 ; (CD.gone  OE1.gone)
     CD     OE2 ; (CD.gone  OE2.gone)
      C       O ; (     C       O)
@@ -5758,8 +5868,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ E2J ] ; Glu -> Gluh
 
@@ -6161,13 +6271,13 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CG     OE1      CD     OE2  improper_O_C_X_Y         
-    CG     OE2      CD     OE1  improper_O_C_X_Y         
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2    DHE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-    CB      CG      CD     OE2  undefined                
+    CB      CG      CD     OE2  undefined_dih_GLN_chi3_C_C_CO_N
 
 [ E2R ] ; Glu -> Arg
 
@@ -6406,8 +6516,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ E2W ] ; Glu -> Trp
 
@@ -6738,9 +6848,6 @@
     HZ   opls_146          0.11500  18
      C   opls_235          0.50000  19
      O   opls_236         -0.50000  20
-  DHB1   DUM_opls_140      0.00000  21
-  DHB2   DUM_opls_140      0.00000  22
-  DHB3   DUM_opls_140      0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6748,14 +6855,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
-    CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
-    CB    DHB3 ; (    CB     HB3)
-    CG     CD1 ; (CG.gone  CD1.gone)
-    CG     CD2 ; (CG.gone  CD2.gone)
+    CB     HB1 ; (    CB     HB2)
+    CB     HB2 ; (    CB     HB3)
+    CB      CG ; (    CB     HB1)
+    CG     CD1 ; (   HB1  CD1.gone)
+    CG     CD2 ; (   HB1  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
    CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
@@ -6875,10 +6979,8 @@
     HZ   opls_146          0.11500  18
      C   opls_235          0.50000  19
      O   opls_236         -0.50000  20
-  DHB1   DUM_opls_140      0.00000  21
-  DHB2   DUM_opls_140      0.00000  22
-   DSG   DUM_opls_200      0.00000  23
-   DHG   DUM_opls_204      0.00000  24
+   DSG   DUM_opls_200      0.00000  21
+   DHG   DUM_opls_204      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6886,11 +6988,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     CD1 ; (CG.gone  CD1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -7199,8 +7299,8 @@
   DND1    DNE2    DCE1    DHE1  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIS_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIS_chi1_C_C_C_CO
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ F2I ] ; Phe -> Ile
@@ -7282,9 +7382,9 @@
 
  [ dihedrals ]
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ F2J ] ; Phe -> Gluh
 
@@ -8159,9 +8259,9 @@
 
  [ dihedrals ]
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ F2W ] ; Phe -> Trp
 
@@ -8258,8 +8358,8 @@
   DCD1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_TRP_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_TRP_chi1_C_C_C_CO
 
 [ F2X ] ; Phe -> Hise
 
@@ -8338,8 +8438,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIS_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIS_chi1_C_C_C_CO
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ F2Y ] ; Phe -> Tyr
@@ -8486,8 +8586,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIP_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIP_chi1_C_C_C_CO
 
 [ G2A ] ; Gly -> Ala
 
@@ -10141,18 +10241,17 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-   DHB   DUM_opls_140      0.00000  18
-  DCG1   DUM_opls_136      0.00000  19
-  DHG1   DUM_opls_140      0.00000  20
-  DHG2   DUM_opls_140      0.00000  21
-  DCG2   DUM_opls_135      0.00000  22
-  DHG3   DUM_opls_140      0.00000  23
-  DHG4   DUM_opls_140      0.00000  24
-  DHG5   DUM_opls_140      0.00000  25
-  DCD1   DUM_opls_135      0.00000  26
-  DHD1   DUM_opls_140      0.00000  27
-  DHD2   DUM_opls_140      0.00000  28
-  DHD3   DUM_opls_140      0.00000  29
+  DCG1   DUM_opls_136      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+  DCG2   DUM_opls_135      0.00000  21
+  DHG3   DUM_opls_140      0.00000  22
+  DHG4   DUM_opls_140      0.00000  23
+  DHG5   DUM_opls_140      0.00000  24
+  DCD1   DUM_opls_135      0.00000  25
+  DHD1   DUM_opls_140      0.00000  26
+  DHD2   DUM_opls_140      0.00000  27
+  DHD3   DUM_opls_140      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10160,10 +10259,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB1 ; (    CB      HB)
     CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
-    CB     DHB ; (    CB      HB)
     CB    DCG1 ; (    CB     CG1)
     CB    DCG2 ; (    CB     CG2)
     CG     ND1 ; (CG.gone  ND1.gone)
@@ -10223,15 +10321,13 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_136      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DCD   DUM_opls_267      0.00000  23
-  DOE1   DUM_opls_269      0.00000  24
-  DOE2   DUM_opls_268      0.00000  25
-  DHE2   DUM_opls_270      0.00000  26
+   DCG   DUM_opls_136      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DCD   DUM_opls_267      0.00000  21
+  DOE1   DUM_opls_269      0.00000  22
+  DOE2   DUM_opls_268      0.00000  23
+  DHE2   DUM_opls_270      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10239,11 +10335,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10300,21 +10394,19 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_136      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DCD   DUM_opls_136      0.00000  23
-  DHD1   DUM_opls_140      0.00000  24
-  DHD2   DUM_opls_140      0.00000  25
-   DCE   DUM_opls_292      0.00000  26
-  DHE1   DUM_opls_140      0.00000  27
-  DHE2   DUM_opls_140      0.00000  28
-   DNZ   DUM_opls_287      0.00000  29
-  DHZ1   DUM_opls_290      0.00000  30
-  DHZ2   DUM_opls_290      0.00000  31
-  DHZ3   DUM_opls_290      0.00000  32
+   DCG   DUM_opls_136      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DCD   DUM_opls_136      0.00000  21
+  DHD1   DUM_opls_140      0.00000  22
+  DHD2   DUM_opls_140      0.00000  23
+   DCE   DUM_opls_292      0.00000  24
+  DHE1   DUM_opls_140      0.00000  25
+  DHE2   DUM_opls_140      0.00000  26
+   DNZ   DUM_opls_287      0.00000  27
+  DHZ1   DUM_opls_290      0.00000  28
+  DHZ2   DUM_opls_290      0.00000  29
+  DHZ3   DUM_opls_290      0.00000  30
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10322,11 +10414,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10389,18 +10479,16 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_137      0.00000  20
-   DHG   DUM_opls_140      0.00000  21
-  DCD1   DUM_opls_135      0.00000  22
-  DHD1   DUM_opls_140      0.00000  23
-  DHD2   DUM_opls_140      0.00000  24
-  DHD3   DUM_opls_140      0.00000  25
-  DCD2   DUM_opls_135      0.00000  26
-  DHD4   DUM_opls_140      0.00000  27
-  DHD5   DUM_opls_140      0.00000  28
-  DHD6   DUM_opls_140      0.00000  29
+   DCG   DUM_opls_137      0.00000  18
+   DHG   DUM_opls_140      0.00000  19
+  DCD1   DUM_opls_135      0.00000  20
+  DHD1   DUM_opls_140      0.00000  21
+  DHD2   DUM_opls_140      0.00000  22
+  DHD3   DUM_opls_140      0.00000  23
+  DCD2   DUM_opls_135      0.00000  24
+  DHD4   DUM_opls_140      0.00000  25
+  DHD5   DUM_opls_140      0.00000  26
+  DHD6   DUM_opls_140      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10408,11 +10496,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10469,16 +10555,14 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_210      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DSD   DUM_opls_202      0.00000  23
-   DCE   DUM_opls_209      0.00000  24
-  DHE1   DUM_opls_140      0.00000  25
-  DHE2   DUM_opls_140      0.00000  26
-  DHE3   DUM_opls_140      0.00000  27
+   DCG   DUM_opls_210      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DSD   DUM_opls_202      0.00000  21
+   DCE   DUM_opls_209      0.00000  22
+  DHE1   DUM_opls_140      0.00000  23
+  DHE2   DUM_opls_140      0.00000  24
+  DHE3   DUM_opls_140      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10486,11 +10570,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10545,13 +10627,10 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_235      0.00000  20
-  DOD1   DUM_opls_236      0.00000  21
-  DND2   DUM_opls_237      0.00000  22
-  DHD1   DUM_opls_240      0.00000  23
-  DHD2   DUM_opls_240      0.00000  24
+  DOD1   DUM_opls_236      0.00000  18
+  DND2   DUM_opls_237      0.00000  19
+  DHD1   DUM_opls_240      0.00000  20
+  DHD2   DUM_opls_240      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10559,14 +10638,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
-    CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
-    CB     DCG ; (    CB      CG)
-    CG     ND1 ; (CG.gone  ND1.gone)
-    CG     CD2 ; (CG.gone  CD2.gone)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
+    CB      CG ; (    CB      CG)
+    CG     ND1 ; (    CG  ND1.gone)
+    CG     CD2 ; (    CG  CD2.gone)
+    CG    DOD1 ; (    CG     OD1)
+    CG    DND2 ; (    CG     ND2)
    ND1     HD1 ; (ND1.gone  HD1.gone)
    ND1     CE1 ; (ND1.gone  CE1.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
@@ -10574,8 +10652,6 @@
    CE1     HE1 ; (CE1.gone  HE1.gone)
    CE1     NE2 ; (CE1.gone  NE2.gone)
      C       O ; (     C       O)
-   DCG    DOD1 ; (    CG     OD1)
-   DCG    DND2 ; (    CG     ND2)
   DND2    DHD1 ; (   ND2    HD21)
   DND2    DHD2 ; (   ND2    HD22)
     -C       N  
@@ -10587,16 +10663,14 @@
     CG     CE1     ND1     HD1  improper_Z_N_X_Y         
     CG     NE2     CD2     HD2  improper_Z_CA_X_Y        
    ND1     NE2     CE1     HE1  improper_Z_CA_X_Y        
-    CB    DND2     DCG    DOD1  improper_O_C_X_Y         
-   DCG    DHD1    DND2    DHD2  improper_Z_N_X_Y         
+    CB    DND2      CG    DOD1  improper_O_C_X_Y         
+    CG    DHD1    DND2    DHD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
      N      CA      CB      CG  dih_HIS_chi1_N_C_C_C     
     CG      CB      CA       C  dih_HIS_chi1_C_C_C_CO    
     CA      CB      CG     ND1  dih_HIS_chi2_C_C_C_N     
-     N      CA      CB     DCG  dih_ASN_chi1_N_C_C_C     
-   DCG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
-    CA      CB     DCG    DND2  dih_ASN_chi2_C_C_CO_N    
+    CA      CB      CG    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ H2O ] ; His1 -> Lys
 
@@ -10618,20 +10692,18 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_136      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DCD   DUM_opls_136      0.00000  23
-  DHD1   DUM_opls_140      0.00000  24
-  DHD2   DUM_opls_140      0.00000  25
-   DCE   DUM_opls_906      0.00000  26
-  DHE1   DUM_opls_911      0.00000  27
-  DHE2   DUM_opls_911      0.00000  28
-   DNZ   DUM_opls_900      0.00000  29
-  DHZ1   DUM_opls_909      0.00000  30
-  DHZ2   DUM_opls_909      0.00000  31
+   DCG   DUM_opls_136      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DCD   DUM_opls_136      0.00000  21
+  DHD1   DUM_opls_140      0.00000  22
+  DHD2   DUM_opls_140      0.00000  23
+   DCE   DUM_opls_906      0.00000  24
+  DHE1   DUM_opls_911      0.00000  25
+  DHE2   DUM_opls_911      0.00000  26
+   DNZ   DUM_opls_900      0.00000  27
+  DHZ1   DUM_opls_909      0.00000  28
+  DHZ2   DUM_opls_909      0.00000  29
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10639,11 +10711,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10704,16 +10774,14 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_136      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DCD   DUM_opls_235      0.00000  23
-  DOE1   DUM_opls_236      0.00000  24
-  DNE2   DUM_opls_237      0.00000  25
-  DHE1   DUM_opls_240      0.00000  26
-  DHE2   DUM_opls_240      0.00000  27
+   DCG   DUM_opls_136      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DCD   DUM_opls_235      0.00000  21
+  DOE1   DUM_opls_236      0.00000  22
+  DNE2   DUM_opls_237      0.00000  23
+  DHE1   DUM_opls_240      0.00000  24
+  DHE2   DUM_opls_240      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10721,11 +10789,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10783,23 +10849,21 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_308      0.00000  20
-  DHG1   DUM_opls_140      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-   DCD   DUM_opls_307      0.00000  23
-  DHD1   DUM_opls_140      0.00000  24
-  DHD2   DUM_opls_140      0.00000  25
-   DNE   DUM_opls_303      0.00000  26
-   DHE   DUM_opls_304      0.00000  27
-   DCZ   DUM_opls_302      0.00000  28
-  DNH1   DUM_opls_300      0.00000  29
-  DHH1   DUM_opls_301      0.00000  30
-  DHH2   DUM_opls_301      0.00000  31
-  DNH2   DUM_opls_300      0.00000  32
-  DHH3   DUM_opls_301      0.00000  33
-  DHH4   DUM_opls_301      0.00000  34
+   DCG   DUM_opls_308      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+   DCD   DUM_opls_307      0.00000  21
+  DHD1   DUM_opls_140      0.00000  22
+  DHD2   DUM_opls_140      0.00000  23
+   DNE   DUM_opls_303      0.00000  24
+   DHE   DUM_opls_304      0.00000  25
+   DCZ   DUM_opls_302      0.00000  26
+  DNH1   DUM_opls_300      0.00000  27
+  DHH1   DUM_opls_301      0.00000  28
+  DHH2   DUM_opls_301      0.00000  29
+  DNH2   DUM_opls_300      0.00000  30
+  DHH3   DUM_opls_301      0.00000  31
+  DHH4   DUM_opls_301      0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10807,11 +10871,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10877,10 +10939,8 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DOG   DUM_opls_154      0.00000  20
-   DHG   DUM_opls_155      0.00000  21
+   DOG   DUM_opls_154      0.00000  18
+   DHG   DUM_opls_155      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10888,11 +10948,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DOG ; (    CB      OG)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -10942,13 +11000,11 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-   DHB   DUM_opls_140      0.00000  18
-  DOG1   DUM_opls_154      0.00000  19
-  DHG1   DUM_opls_155      0.00000  20
-  DCG2   DUM_opls_135      0.00000  21
-  DHG2   DUM_opls_140      0.00000  22
-  DHG3   DUM_opls_140      0.00000  23
-  DHG4   DUM_opls_140      0.00000  24
+  DOG1   DUM_opls_154      0.00000  18
+  DHG1   DUM_opls_155      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+  DHG3   DUM_opls_140      0.00000  21
+  DHG4   DUM_opls_140      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10956,12 +11012,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB      HB)
+    CB     HB2 ; (    CB     CG2)
     CB      CG ; (    CB  CG.gone)
-    CB     DHB ; (    CB      HB)
     CB    DOG1 ; (    CB     OG1)
-    CB    DCG2 ; (    CB     CG2)
+   HB2    DHG2 ; (   CG2    HG21)
+   HB2    DHG3 ; (   CG2    HG22)
+   HB2    DHG4 ; (   CG2    HG23)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
    ND1     HD1 ; (ND1.gone  HD1.gone)
@@ -10972,9 +11029,6 @@
    CE1     NE2 ; (CE1.gone  NE2.gone)
      C       O ; (     C       O)
   DOG1    DHG1 ; (   OG1     HG1)
-  DCG2    DHG2 ; (   CG2    HG21)
-  DCG2    DHG3 ; (   CG2    HG22)
-  DCG2    DHG4 ; (   CG2    HG23)
     -C       N  
 
  [ impropers ]
@@ -11013,15 +11067,13 @@
    NE2   opls_511         -0.56400  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-   DHB   DUM_opls_140      0.00000  18
-  DCG1   DUM_opls_135      0.00000  19
-  DHG1   DUM_opls_140      0.00000  20
-  DHG2   DUM_opls_140      0.00000  21
-  DHG3   DUM_opls_140      0.00000  22
-  DCG2   DUM_opls_135      0.00000  23
-  DHG4   DUM_opls_140      0.00000  24
-  DHG5   DUM_opls_140      0.00000  25
-  DHG6   DUM_opls_140      0.00000  26
+  DCG1   DUM_opls_135      0.00000  18
+  DHG1   DUM_opls_140      0.00000  19
+  DHG2   DUM_opls_140      0.00000  20
+  DHG3   DUM_opls_140      0.00000  21
+  DHG4   DUM_opls_140      0.00000  22
+  DHG5   DUM_opls_140      0.00000  23
+  DHG6   DUM_opls_140      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -11029,12 +11081,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     CG2)
+    CB     HB2 ; (    CB      HB)
     CB      CG ; (    CB  CG.gone)
-    CB     DHB ; (    CB      HB)
     CB    DCG1 ; (    CB     CG1)
-    CB    DCG2 ; (    CB     CG2)
+   HB1    DHG4 ; (   CG2    HG21)
+   HB1    DHG5 ; (   CG2    HG22)
+   HB1    DHG6 ; (   CG2    HG23)
     CG     ND1 ; (CG.gone  ND1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
    ND1     HD1 ; (ND1.gone  HD1.gone)
@@ -11047,9 +11100,6 @@
   DCG1    DHG1 ; (   CG1    HG11)
   DCG1    DHG2 ; (   CG1    HG12)
   DCG1    DHG3 ; (   CG1    HG13)
-  DCG2    DHG4 ; (   CG2    HG21)
-  DCG2    DHG5 ; (   CG2    HG22)
-  DCG2    DHG6 ; (   CG2    HG23)
     -C       N  
 
  [ impropers ]
@@ -11065,9 +11115,9 @@
     CG      CB      CA       C  dih_HIS_chi1_C_C_C_CO    
     CA      CB      CG     ND1  dih_HIS_chi2_C_C_C_N     
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB    DCG2  dih_VAL_chi1_N_C_C_C     
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-  DCG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ H2W ] ; His1 -> Trp
 
@@ -11415,6 +11465,9 @@
   HD13   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
+  DHB1   DUM_opls_140      0.00000  20
+  DHB2   DUM_opls_140      0.00000  21
+  DHB3   DUM_opls_140      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -11422,15 +11475,18 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB3)
-    CB     CG1 ; (    CB     HB2)
-    CB     CG2 ; (    CB     HB1)
-   CG1    HG11 ; (   HB2  HG1.gone1)
-   CG1    HG12 ; (   HB2  HG1.gone2)
-   CG1     CD1 ; (   HB2  CD1.gone)
-   CG2    HG21 ; (   HB1  HG2.gone1)
-   CG2    HG22 ; (   HB1  HG2.gone2)
-   CG2    HG23 ; (   HB1  HG2.gone3)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG1 ; (    CB  CG1.gone)
+    CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+   CG1    HG11 ; (CG1.gone  HG1.gone1)
+   CG1    HG12 ; (CG1.gone  HG1.gone2)
+   CG1     CD1 ; (CG1.gone  CD1.gone)
+   CG2    HG21 ; (CG2.gone  HG2.gone1)
+   CG2    HG22 ; (CG2.gone  HG2.gone2)
+   CG2    HG23 ; (CG2.gone  HG2.gone3)
    CD1    HD11 ; (CD1.gone  HD1.gone1)
    CD1    HD12 ; (CD1.gone  HD1.gone2)
    CD1    HD13 ; (CD1.gone  HD1.gone3)
@@ -11538,8 +11594,10 @@
   HD13   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
-   DSG   DUM_opls_200      0.00000  20
-   DHG   DUM_opls_204      0.00000  21
+  DHB1   DUM_opls_140      0.00000  20
+  DHB2   DUM_opls_140      0.00000  21
+   DSG   DUM_opls_200      0.00000  22
+   DHG   DUM_opls_204      0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -11547,13 +11605,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB2)
-    CB     CG1 ; (    CB     HB1)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG1 ; (    CB  CG1.gone)
     CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
-   CG1    HG11 ; (   HB1  HG1.gone1)
-   CG1    HG12 ; (   HB1  HG1.gone2)
-   CG1     CD1 ; (   HB1  CD1.gone)
+   CG1    HG11 ; (CG1.gone  HG1.gone1)
+   CG1    HG12 ; (CG1.gone  HG1.gone2)
+   CG1     CD1 ; (CG1.gone  CD1.gone)
    CG2    HG21 ; (CG2.gone  HG2.gone1)
    CG2    HG22 ; (CG2.gone  HG2.gone2)
    CG2    HG23 ; (CG2.gone  HG2.gone3)
@@ -11859,16 +11919,15 @@
   HD13   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
-  DHB1   DUM_opls_140      0.00000  20
-  DHB2   DUM_opls_140      0.00000  21
-   DCG   DUM_opls_508      0.00000  22
-  DND1   DUM_opls_503      0.00000  23
-  DHD1   DUM_opls_504      0.00000  24
-  DCD2   DUM_opls_507      0.00000  25
-  DHD2   DUM_opls_146      0.00000  26
-  DCE1   DUM_opls_506      0.00000  27
-  DHE1   DUM_opls_146      0.00000  28
-  DNE2   DUM_opls_511      0.00000  29
+  DHB2   DUM_opls_140      0.00000  20
+   DCG   DUM_opls_508      0.00000  21
+  DND1   DUM_opls_503      0.00000  22
+  DHD1   DUM_opls_504      0.00000  23
+  DCD2   DUM_opls_507      0.00000  24
+  DHD2   DUM_opls_146      0.00000  25
+  DCE1   DUM_opls_506      0.00000  26
+  DHE1   DUM_opls_146      0.00000  27
+  DNE2   DUM_opls_511      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -11876,10 +11935,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB  HB.gone)
+    CB      HB ; (    CB     HB1)
     CB     CG1 ; (    CB  CG1.gone)
     CB     CG2 ; (    CB  CG2.gone)
-    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
    CG1    HG11 ; (CG1.gone  HG1.gone1)
@@ -12008,12 +12066,15 @@
   HD13   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
-  DHE1   DUM_opls_140      0.00000  20
-  DHE2   DUM_opls_140      0.00000  21
-   DNZ   DUM_opls_287      0.00000  22
-  DHZ1   DUM_opls_290      0.00000  23
-  DHZ2   DUM_opls_290      0.00000  24
-  DHZ3   DUM_opls_290      0.00000  25
+  DHD1   DUM_opls_140      0.00000  20
+  DHD2   DUM_opls_140      0.00000  21
+   DCE   DUM_opls_292      0.00000  22
+  DHE1   DUM_opls_140      0.00000  23
+  DHE2   DUM_opls_140      0.00000  24
+   DNZ   DUM_opls_287      0.00000  25
+  DHZ1   DUM_opls_290      0.00000  26
+  DHZ2   DUM_opls_290      0.00000  27
+  DHZ3   DUM_opls_290      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -12030,13 +12091,16 @@
    CG2    HG21 ; (   HB2  HG2.gone1)
    CG2    HG22 ; (   HB2  HG2.gone2)
    CG2    HG23 ; (   HB2  HG2.gone3)
-   CD1    HD11 ; (    CD      CE)
-   CD1    HD12 ; (    CD     HD1)
-   CD1    HD13 ; (    CD     HD2)
-  HD11    DHE1 ; (    CE     HE1)
-  HD11    DHE2 ; (    CE     HE2)
-  HD11     DNZ ; (    CE      NZ)
+   CD1    HD11 ; (    CD  HD1.gone1)
+   CD1    HD12 ; (    CD  HD1.gone2)
+   CD1    HD13 ; (    CD  HD1.gone3)
+   CD1    DHD1 ; (    CD     HD1)
+   CD1    DHD2 ; (    CD     HD2)
+   CD1     DCE ; (    CD      CE)
      C       O ; (     C       O)
+   DCE    DHE1 ; (    CE     HE1)
+   DCE    DHE2 ; (    CE     HE2)
+   DCE     DNZ ; (    CE      NZ)
    DNZ    DHZ1 ; (    NZ     HZ1)
    DNZ    DHZ2 ; (    NZ     HZ2)
    DNZ    DHZ3 ; (    NZ     HZ3)
@@ -12051,9 +12115,9 @@
    CG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
      N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   CD1    HD11     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
-   CD1    HD11     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
-   CD1    HD11     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
+   CD1     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
+   CD1     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
+   CD1     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
 
 [ I2L ] ; Ile -> Leu
 
@@ -12640,8 +12704,8 @@
    CG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
      N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-     N      CA      CB      HB  undefined                
-    HB      CB      CA       C  undefined                
+     N      CA      CB      HB  undefined_dih_VAL_chi1_N_C_C_C
+    HB      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ I2W ] ; Ile -> Trp
 
@@ -13002,6 +13066,9 @@
    HE2   opls_270          0.45000  14
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
+  DHB1   DUM_opls_140      0.00000  17
+  DHB2   DUM_opls_140      0.00000  18
+  DHB3   DUM_opls_140      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -13009,12 +13076,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB     HB3)
-    CG     HG1 ; (   HB3  HG.gone1)
-    CG     HG2 ; (   HB3  HG.gone2)
-    CG      CD ; (   HB3  CD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     OE1 ; (CD.gone  OE1.gone)
     CD     OE2 ; (CD.gone  OE2.gone)
    OE2     HE2 ; (OE2.gone  HE.gone2)
@@ -13113,8 +13183,10 @@
    HE2   opls_270          0.45000  14
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
-   DSG   DUM_opls_200      0.00000  17
-   DHG   DUM_opls_204      0.00000  18
+  DHB1   DUM_opls_140      0.00000  17
+  DHB2   DUM_opls_140      0.00000  18
+   DSG   DUM_opls_200      0.00000  19
+   DHG   DUM_opls_204      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -13123,12 +13195,14 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
-    CG     HG1 ; (   HB2  HG.gone1)
-    CG     HG2 ; (   HB2  HG.gone2)
-    CG      CD ; (   HB2  CD.gone)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     OE1 ; (CD.gone  OE1.gone)
     CD     OE2 ; (CD.gone  OE2.gone)
    OE2     HE2 ; (OE2.gone  HE.gone2)
@@ -13402,16 +13476,14 @@
    HE2   opls_270          0.45000  14
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
-  DHB1   DUM_opls_140      0.00000  17
-  DHB2   DUM_opls_140      0.00000  18
-   DCG   DUM_opls_508      0.00000  19
-  DND1   DUM_opls_503      0.00000  20
-  DHD1   DUM_opls_504      0.00000  21
-  DCD2   DUM_opls_507      0.00000  22
-  DHD2   DUM_opls_146      0.00000  23
-  DCE1   DUM_opls_506      0.00000  24
-  DHE1   DUM_opls_146      0.00000  25
-  DNE2   DUM_opls_511      0.00000  26
+   DCG   DUM_opls_508      0.00000  17
+  DND1   DUM_opls_503      0.00000  18
+  DHD1   DUM_opls_504      0.00000  19
+  DCD2   DUM_opls_507      0.00000  20
+  DHD2   DUM_opls_146      0.00000  21
+  DCE1   DUM_opls_506      0.00000  22
+  DHE1   DUM_opls_146      0.00000  23
+  DNE2   DUM_opls_511      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -13419,11 +13491,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -13900,7 +13970,7 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CG     OE1      CD     OE2  improper_O_C_X_Y         
-    CG     OE2      CD     OE1  improper_O_C_X_Y         
+    CG     OE2      CD     OE1  undefined                
     CD    DHE1     OE2    DHE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
@@ -13908,7 +13978,7 @@
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
     CG      CD     OE2     HE2  dih_sidechain_COOH_C_C_O_H
    OE1      CD     OE2     HE2  dih_sidechain_COOH_O_C_O_H
-    CB      CG      CD     OE2  undefined                
+    CB      CG      CD     OE2  undefined_dih_GLN_chi3_C_C_CO_N
 
 [ J2R ] ; Gluh -> Arg
 
@@ -14511,6 +14581,9 @@
    HZ3   opls_290          0.33000  20
      C   opls_235          0.50000  21
      O   opls_236         -0.50000  22
+  DHB1   DUM_opls_140      0.00000  23
+  DHB2   DUM_opls_140      0.00000  24
+  DHB3   DUM_opls_140      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -14518,12 +14591,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB     HB3)
-    CB      CG ; (    CB     HB1)
-    CG     HG1 ; (   HB1  HG.gone1)
-    CG     HG2 ; (   HB1  HG.gone2)
-    CG      CD ; (   HB1  CD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     HD1 ; (CD.gone  HD.gone1)
     CD     HD2 ; (CD.gone  HD.gone2)
     CD      CE ; (CD.gone  CE.gone)
@@ -14646,8 +14722,10 @@
    HZ3   opls_290          0.33000  20
      C   opls_235          0.50000  21
      O   opls_236         -0.50000  22
-   DSG   DUM_opls_200      0.00000  23
-   DHG   DUM_opls_204      0.00000  24
+  DHB1   DUM_opls_140      0.00000  23
+  DHB2   DUM_opls_140      0.00000  24
+   DSG   DUM_opls_200      0.00000  25
+   DHG   DUM_opls_204      0.00000  26
 
  [ bonds ]
      N       H ; (     N       H)
@@ -14655,9 +14733,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -15002,16 +15082,14 @@
    HZ3   opls_290          0.33000  20
      C   opls_235          0.50000  21
      O   opls_236         -0.50000  22
-  DHB1   DUM_opls_140      0.00000  23
-  DHB2   DUM_opls_140      0.00000  24
-   DCG   DUM_opls_508      0.00000  25
-  DND1   DUM_opls_503      0.00000  26
-  DHD1   DUM_opls_504      0.00000  27
-  DCD2   DUM_opls_507      0.00000  28
-  DHD2   DUM_opls_146      0.00000  29
-  DCE1   DUM_opls_506      0.00000  30
-  DHE1   DUM_opls_146      0.00000  31
-  DNE2   DUM_opls_511      0.00000  32
+   DCG   DUM_opls_508      0.00000  23
+  DND1   DUM_opls_503      0.00000  24
+  DHD1   DUM_opls_504      0.00000  25
+  DCD2   DUM_opls_507      0.00000  26
+  DHD2   DUM_opls_146      0.00000  27
+  DCE1   DUM_opls_506      0.00000  28
+  DHE1   DUM_opls_146      0.00000  29
+  DNE2   DUM_opls_511      0.00000  30
 
  [ bonds ]
      N       H ; (     N       H)
@@ -15019,11 +15097,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -15094,6 +15170,9 @@
   DHG1   DUM_opls_140      0.00000  23
   DHG2   DUM_opls_140      0.00000  24
   DHG3   DUM_opls_140      0.00000  25
+  DHD1   DUM_opls_140      0.00000  26
+  DHD2   DUM_opls_140      0.00000  27
+  DHD3   DUM_opls_140      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -15110,12 +15189,15 @@
     CG     HG1 ; (   CG1    HG11)
     CG     HG2 ; (   CG1    HG12)
     CG      CD ; (   CG1     CD1)
-    CD     HD1 ; (   CD1    HD12)
-    CD     HD2 ; (   CD1    HD13)
-    CD      CE ; (   CD1    HD11)
-    CE     HE1 ; (  HD11  HE.gone1)
-    CE     HE2 ; (  HD11  HE.gone2)
-    CE      NZ ; (  HD11  NZ.gone)
+    CD     HD1 ; (   CD1  HD.gone1)
+    CD     HD2 ; (   CD1  HD.gone2)
+    CD      CE ; (   CD1  CE.gone)
+    CD    DHD1 ; (   CD1    HD11)
+    CD    DHD2 ; (   CD1    HD12)
+    CD    DHD3 ; (   CD1    HD13)
+    CE     HE1 ; (CE.gone  HE.gone1)
+    CE     HE2 ; (CE.gone  HE.gone2)
+    CE      NZ ; (CE.gone  NZ.gone)
     NZ     HZ1 ; (NZ.gone  HZ.gone1)
     NZ     HZ2 ; (NZ.gone  HZ.gone2)
     NZ     HZ3 ; (NZ.gone  HZ.gone3)
@@ -15132,8 +15214,8 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ K2J ] ; Lysh -> Gluh
 
@@ -15855,8 +15937,8 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ K2W ] ; Lysh -> Trp
 
@@ -16246,6 +16328,9 @@
   HD23   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
+  DHB1   DUM_opls_140      0.00000  20
+  DHB2   DUM_opls_140      0.00000  21
+  DHB3   DUM_opls_140      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -16253,12 +16338,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB3)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
-    CG      HG ; (   HB2  HG.gone)
-    CG     CD1 ; (   HB2  CD1.gone)
-    CG     CD2 ; (   HB2  CD2.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG      HG ; (CG.gone  HG.gone)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
    CD1    HD11 ; (CD1.gone  HD1.gone1)
    CD1    HD12 ; (CD1.gone  HD1.gone2)
    CD1    HD13 ; (CD1.gone  HD1.gone3)
@@ -16364,8 +16452,9 @@
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
   DHB1   DUM_opls_140      0.00000  20
-   DSG   DUM_opls_200      0.00000  21
-   DHG   DUM_opls_204      0.00000  22
+  DHB2   DUM_opls_140      0.00000  21
+   DSG   DUM_opls_200      0.00000  22
+   DHG   DUM_opls_204      0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -16373,10 +16462,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
     CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
     CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG      HG ; (CG.gone  HG.gone)
     CG     CD1 ; (CG.gone  CD1.gone)
@@ -16676,16 +16766,14 @@
   HD23   opls_140          0.06000  17
      C   opls_235          0.50000  18
      O   opls_236         -0.50000  19
-  DHB1   DUM_opls_140      0.00000  20
-  DHB2   DUM_opls_140      0.00000  21
-   DCG   DUM_opls_508      0.00000  22
-  DND1   DUM_opls_503      0.00000  23
-  DHD1   DUM_opls_504      0.00000  24
-  DCD2   DUM_opls_507      0.00000  25
-  DHD2   DUM_opls_146      0.00000  26
-  DCE1   DUM_opls_506      0.00000  27
-  DHE1   DUM_opls_146      0.00000  28
-  DNE2   DUM_opls_511      0.00000  29
+   DCG   DUM_opls_508      0.00000  20
+  DND1   DUM_opls_503      0.00000  21
+  DHD1   DUM_opls_504      0.00000  22
+  DCD2   DUM_opls_507      0.00000  23
+  DHD2   DUM_opls_146      0.00000  24
+  DCE1   DUM_opls_506      0.00000  25
+  DHE1   DUM_opls_146      0.00000  26
+  DNE2   DUM_opls_511      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -16693,11 +16781,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG      HG ; (CG.gone  HG.gone)
     CG     CD1 ; (CG.gone  CD1.gone)
@@ -16791,8 +16877,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ L2J ] ; Leu -> Gluh
 
@@ -17443,8 +17529,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ L2W ] ; Leu -> Trp
 
@@ -17796,6 +17882,9 @@
    HE3   opls_140          0.06000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
+  DHB1   DUM_opls_140      0.00000  18
+  DHB2   DUM_opls_140      0.00000  19
+  DHB3   DUM_opls_140      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -17803,12 +17892,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB3)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
-    CG     HG1 ; (   HB2  HG.gone1)
-    CG     HG2 ; (   HB2  HG.gone2)
-    CG      SD ; (   HB2  SD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      SD ; (CG.gone  SD.gone)
     SD      CE ; (SD.gone  CE.gone)
     CE     HE1 ; (CE.gone  HE.gone1)
     CE     HE2 ; (CE.gone  HE.gone2)
@@ -17905,8 +17997,10 @@
    HE3   opls_140          0.06000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-   DSG   DUM_opls_200      0.00000  18
-   DHG   DUM_opls_204      0.00000  19
+  DHB1   DUM_opls_140      0.00000  18
+  DHB2   DUM_opls_140      0.00000  19
+   DSG   DUM_opls_200      0.00000  20
+   DHG   DUM_opls_204      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -17914,13 +18008,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
     CB     HB2 ; (    CB  HB.gone2)
-    CB      CG ; (    CB     HB1)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
-    CG     HG1 ; (   HB1  HG.gone1)
-    CG     HG2 ; (   HB1  HG.gone2)
-    CG      SD ; (   HB1  SD.gone)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      SD ; (CG.gone  SD.gone)
     SD      CE ; (SD.gone  CE.gone)
     CE     HE1 ; (CE.gone  HE.gone1)
     CE     HE2 ; (CE.gone  HE.gone2)
@@ -18196,16 +18292,14 @@
    HE3   opls_140          0.06000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_508      0.00000  20
-  DND1   DUM_opls_503      0.00000  21
-  DHD1   DUM_opls_504      0.00000  22
-  DCD2   DUM_opls_507      0.00000  23
-  DHD2   DUM_opls_146      0.00000  24
-  DCE1   DUM_opls_506      0.00000  25
-  DHE1   DUM_opls_146      0.00000  26
-  DNE2   DUM_opls_511      0.00000  27
+   DCG   DUM_opls_508      0.00000  18
+  DND1   DUM_opls_503      0.00000  19
+  DHD1   DUM_opls_504      0.00000  20
+  DCD2   DUM_opls_507      0.00000  21
+  DHD2   DUM_opls_146      0.00000  22
+  DCE1   DUM_opls_506      0.00000  23
+  DHE1   DUM_opls_146      0.00000  24
+  DNE2   DUM_opls_511      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -18213,11 +18307,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -18313,8 +18405,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ M2J ] ; Met -> Gluh
 
@@ -18947,8 +19039,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ M2W ] ; Met -> Trp
 
@@ -19281,6 +19373,9 @@
   HD22   opls_240          0.38000  12
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
+  DHB1   DUM_opls_140      0.00000  15
+  DHB2   DUM_opls_140      0.00000  16
+  DHB3   DUM_opls_140      0.00000  17
 
  [ bonds ]
      N       H ; (     N       H)
@@ -19288,11 +19383,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB3)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
-    CG     OD1 ; (   HB2  OD1.gone)
-    CG     ND2 ; (   HB2  ND2.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     OD1 ; (CG.gone  OD1.gone)
+    CG     ND2 ; (CG.gone  ND2.gone)
    ND2    HD21 ; (ND2.gone  HD2.gone1)
    ND2    HD22 ; (ND2.gone  HD2.gone2)
      C       O ; (     C       O)
@@ -19348,14 +19446,14 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CB     ND2      CG     OD1  improper_O_C_X_Y         
     CG    HD21     ND2    HD22  improper_Z_N_X_Y         
-    CB     OD1      CG     ND2  improper_O_C_X_Y         
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-    CB      CG     ND2    HD22  undefined                
-   OD1      CG     ND2    HD22  undefined                
+    CB      CG     ND2    HD22  undefined_dih_sidechain_COOH_C_C_O_H
+   OD1      CG     ND2    HD22  undefined_dih_sidechain_COOH_O_C_O_H
 
 [ N2C ] ; Asn -> Cysh
 
@@ -19375,8 +19473,9 @@
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
   DHB1   DUM_opls_140      0.00000  15
-   DSG   DUM_opls_200      0.00000  16
-   DHG   DUM_opls_204      0.00000  17
+  DHB2   DUM_opls_140      0.00000  16
+   DSG   DUM_opls_200      0.00000  17
+   DHG   DUM_opls_204      0.00000  18
 
  [ bonds ]
      N       H ; (     N       H)
@@ -19384,10 +19483,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
     CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
     CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     OD1 ; (CG.gone  OD1.gone)
     CG     ND2 ; (CG.gone  ND2.gone)
@@ -19449,7 +19549,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CB     ND2      CG     OD1  improper_O_C_X_Y         
     CG    HD21     ND2    HD22  improper_Z_N_X_Y         
-    CB     OD1      CG     ND2  improper_O_C_X_Y         
+    CB     OD1      CG     ND2  undefined                
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
@@ -19652,16 +19752,13 @@
   HD22   opls_240          0.38000  12
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
-  DHB1   DUM_opls_140      0.00000  15
-  DHB2   DUM_opls_140      0.00000  16
-   DCG   DUM_opls_508      0.00000  17
-  DND1   DUM_opls_503      0.00000  18
-  DHD1   DUM_opls_504      0.00000  19
-  DCD2   DUM_opls_507      0.00000  20
-  DHD2   DUM_opls_146      0.00000  21
-  DCE1   DUM_opls_506      0.00000  22
-  DHE1   DUM_opls_146      0.00000  23
-  DNE2   DUM_opls_511      0.00000  24
+  DND1   DUM_opls_503      0.00000  15
+  DHD1   DUM_opls_504      0.00000  16
+  DCD2   DUM_opls_507      0.00000  17
+  DHD2   DUM_opls_146      0.00000  18
+  DCE1   DUM_opls_506      0.00000  19
+  DHE1   DUM_opls_146      0.00000  20
+  DNE2   DUM_opls_511      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -19669,19 +19766,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
-    CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
-    CB     DCG ; (    CB      CG)
-    CG     OD1 ; (CG.gone  OD1.gone)
-    CG     ND2 ; (CG.gone  ND2.gone)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
+    CB      CG ; (    CB      CG)
+    CG     OD1 ; (    CG  OD1.gone)
+    CG     ND2 ; (    CG  ND2.gone)
+    CG    DND1 ; (    CG     ND1)
+    CG    DCD2 ; (    CG     CD2)
    ND2    HD21 ; (ND2.gone  HD2.gone1)
    ND2    HD22 ; (ND2.gone  HD2.gone2)
      C       O ; (     C       O)
-   DCG    DND1 ; (    CG     ND1)
-   DCG    DCD2 ; (    CG     CD2)
   DND1    DHD1 ; (   ND1     HD1)
   DND1    DCE1 ; (   ND1     CE1)
   DCD2    DHD2 ; (   CD2     HD2)
@@ -19695,18 +19789,16 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CB     ND2      CG     OD1  improper_O_C_X_Y         
     CG    HD21     ND2    HD22  improper_Z_N_X_Y         
-  DND1    DCD2     DCG      CB  improper_Z_CA_X_Y        
-   DCG    DCE1    DND1    DHD1  improper_Z_N_X_Y         
-   DCG    DNE2    DCD2    DHD2  improper_Z_CA_X_Y        
+  DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
+    CG    DCE1    DND1    DHD1  improper_Z_N_X_Y         
+    CG    DNE2    DCD2    DHD2  improper_Z_CA_X_Y        
   DND1    DNE2    DCE1    DHE1  improper_Z_CA_X_Y        
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     N      CA      CB     DCG  dih_HIS_chi1_N_C_C_C     
-   DCG      CB      CA       C  dih_HIS_chi1_C_C_C_CO    
-    CA      CB     DCG    DND1  dih_HIS_chi2_C_C_C_N     
+    CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ N2I ] ; Asn -> Ile
 
@@ -19773,9 +19865,9 @@
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ N2J ] ; Asn -> Gluh
 
@@ -20436,9 +20528,9 @@
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ N2W ] ; Asn -> Trp
 
@@ -20758,6 +20850,9 @@
    HZ2   opls_909          0.36000  19
      C   opls_235          0.50000  20
      O   opls_236         -0.50000  21
+  DHB1   DUM_opls_140      0.00000  22
+  DHB2   DUM_opls_140      0.00000  23
+  DHB3   DUM_opls_140      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -20765,12 +20860,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB     HB3)
-    CB      CG ; (    CB     HB1)
-    CG     HG1 ; (   HB1  HG.gone1)
-    CG     HG2 ; (   HB1  HG.gone2)
-    CG      CD ; (   HB1  CD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     HD1 ; (CD.gone  HD.gone1)
     CD     HD2 ; (CD.gone  HD.gone2)
     CD      CE ; (CD.gone  CE.gone)
@@ -20887,8 +20985,10 @@
    HZ2   opls_909          0.36000  19
      C   opls_235          0.50000  20
      O   opls_236         -0.50000  21
-   DSG   DUM_opls_200      0.00000  22
-   DHG   DUM_opls_204      0.00000  23
+  DHB1   DUM_opls_140      0.00000  22
+  DHB2   DUM_opls_140      0.00000  23
+   DSG   DUM_opls_200      0.00000  24
+   DHG   DUM_opls_204      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -20896,9 +20996,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -21228,16 +21330,14 @@
    HZ2   opls_909          0.36000  19
      C   opls_235          0.50000  20
      O   opls_236         -0.50000  21
-  DHB1   DUM_opls_140      0.00000  22
-  DHB2   DUM_opls_140      0.00000  23
-   DCG   DUM_opls_508      0.00000  24
-  DND1   DUM_opls_503      0.00000  25
-  DHD1   DUM_opls_504      0.00000  26
-  DCD2   DUM_opls_507      0.00000  27
-  DHD2   DUM_opls_146      0.00000  28
-  DCE1   DUM_opls_506      0.00000  29
-  DHE1   DUM_opls_146      0.00000  30
-  DNE2   DUM_opls_511      0.00000  31
+   DCG   DUM_opls_508      0.00000  22
+  DND1   DUM_opls_503      0.00000  23
+  DHD1   DUM_opls_504      0.00000  24
+  DCD2   DUM_opls_507      0.00000  25
+  DHD2   DUM_opls_146      0.00000  26
+  DCE1   DUM_opls_506      0.00000  27
+  DHE1   DUM_opls_146      0.00000  28
+  DNE2   DUM_opls_511      0.00000  29
 
  [ bonds ]
      N       H ; (     N       H)
@@ -21245,11 +21345,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -22047,8 +22145,8 @@
     CG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ O2W ] ; Lys -> Trp
 
@@ -22424,6 +22522,9 @@
   HE22   opls_240          0.38000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
+  DHB1   DUM_opls_140      0.00000  18
+  DHB2   DUM_opls_140      0.00000  19
+  DHB3   DUM_opls_140      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -22431,12 +22532,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB     HB3)
-    CB      CG ; (    CB     HB1)
-    CG     HG1 ; (   HB1  HG.gone1)
-    CG     HG2 ; (   HB1  HG.gone2)
-    CG      CD ; (   HB1  CD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     OE1 ; (CD.gone  OE1.gone)
     CD     NE2 ; (CD.gone  NE2.gone)
    NE2    HE21 ; (NE2.gone  HE2.gone1)
@@ -22539,8 +22643,10 @@
   HE22   opls_240          0.38000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-   DSG   DUM_opls_200      0.00000  18
-   DHG   DUM_opls_204      0.00000  19
+  DHB1   DUM_opls_140      0.00000  18
+  DHB2   DUM_opls_140      0.00000  19
+   DSG   DUM_opls_200      0.00000  20
+   DHG   DUM_opls_204      0.00000  21
 
  [ bonds ]
      N       H ; (     N       H)
@@ -22548,9 +22654,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -22681,7 +22789,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CG     NE2      CD     OE1  improper_O_C_X_Y         
     CD    HE21     NE2    HE22  improper_Z_N_X_Y         
-    CG     OE1      CD     NE2  improper_O_C_X_Y         
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
@@ -22839,16 +22947,14 @@
   HE22   opls_240          0.38000  15
      C   opls_235          0.50000  16
      O   opls_236         -0.50000  17
-  DHB1   DUM_opls_140      0.00000  18
-  DHB2   DUM_opls_140      0.00000  19
-   DCG   DUM_opls_508      0.00000  20
-  DND1   DUM_opls_503      0.00000  21
-  DHD1   DUM_opls_504      0.00000  22
-  DCD2   DUM_opls_507      0.00000  23
-  DHD2   DUM_opls_146      0.00000  24
-  DCE1   DUM_opls_506      0.00000  25
-  DHE1   DUM_opls_146      0.00000  26
-  DNE2   DUM_opls_511      0.00000  27
+   DCG   DUM_opls_508      0.00000  18
+  DND1   DUM_opls_503      0.00000  19
+  DHD1   DUM_opls_504      0.00000  20
+  DCD2   DUM_opls_507      0.00000  21
+  DHD2   DUM_opls_146      0.00000  22
+  DCE1   DUM_opls_506      0.00000  23
+  DHE1   DUM_opls_146      0.00000  24
+  DNE2   DUM_opls_511      0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -22856,11 +22962,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -22962,8 +23066,8 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ Q2J ] ; Gln -> Gluh
 
@@ -23012,7 +23116,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CG     NE2      CD     OE1  improper_O_C_X_Y         
     CD    HE21     NE2    HE22  improper_Z_N_X_Y         
-    CG     OE1      CD     NE2  improper_O_C_X_Y         
+    CG     OE1      CD     NE2  undefined                
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
@@ -23617,8 +23721,8 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ Q2W ] ; Gln -> Trp
 
@@ -23973,6 +24077,9 @@
   HH22   opls_301          0.46000  22
      C   opls_235          0.50000  23
      O   opls_236         -0.50000  24
+  DHB1   DUM_opls_140      0.00000  25
+  DHB2   DUM_opls_140      0.00000  26
+  DHB3   DUM_opls_140      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -23980,12 +24087,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB     HB3)
-    CB      CG ; (    CB     HB1)
-    CG     HG1 ; (   HB1  HG.gone1)
-    CG     HG2 ; (   HB1  HG.gone2)
-    CG      CD ; (   HB1  CD.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
     CD     HD1 ; (CD.gone  HD.gone1)
     CD     HD2 ; (CD.gone  HD.gone2)
     CD      NE ; (CD.gone  NE.gone)
@@ -24118,8 +24228,10 @@
   HH22   opls_301          0.46000  22
      C   opls_235          0.50000  23
      O   opls_236         -0.50000  24
-   DSG   DUM_opls_200      0.00000  25
-   DHG   DUM_opls_204      0.00000  26
+  DHB1   DUM_opls_140      0.00000  25
+  DHB2   DUM_opls_140      0.00000  26
+   DSG   DUM_opls_200      0.00000  27
+   DHG   DUM_opls_204      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -24127,9 +24239,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -24499,16 +24613,14 @@
   HH22   opls_301          0.46000  22
      C   opls_235          0.50000  23
      O   opls_236         -0.50000  24
-  DHB1   DUM_opls_140      0.00000  25
-  DHB2   DUM_opls_140      0.00000  26
-   DCG   DUM_opls_508      0.00000  27
-  DND1   DUM_opls_503      0.00000  28
-  DHD1   DUM_opls_504      0.00000  29
-  DCD2   DUM_opls_507      0.00000  30
-  DHD2   DUM_opls_146      0.00000  31
-  DCE1   DUM_opls_506      0.00000  32
-  DHE1   DUM_opls_146      0.00000  33
-  DNE2   DUM_opls_511      0.00000  34
+   DCG   DUM_opls_508      0.00000  25
+  DND1   DUM_opls_503      0.00000  26
+  DHD1   DUM_opls_504      0.00000  27
+  DCD2   DUM_opls_507      0.00000  28
+  DHD2   DUM_opls_146      0.00000  29
+  DCE1   DUM_opls_506      0.00000  30
+  DHE1   DUM_opls_146      0.00000  31
+  DNE2   DUM_opls_511      0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -24516,11 +24628,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      CG ; (    CB  CG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     CG     HG1 ; (CG.gone  HG.gone1)
     CG     HG2 ; (CG.gone  HG.gone2)
@@ -24637,8 +24747,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     N      CA      CB     HB2  undefined                
-   HB2      CB      CA       C  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ R2J ] ; Arg -> Gluh
 
@@ -25413,8 +25523,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     N      CA      CB     HB1  undefined                
-   HB1      CB      CA       C  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ R2W ] ; Arg -> Trp
 
@@ -25816,6 +25926,9 @@
     HG   opls_155          0.41800  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+  DHB3   DUM_opls_140      0.00000  14
 
  [ bonds ]
      N       H ; (     N       H)
@@ -25823,10 +25936,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB1)
-    CB     HB2 ; (    CB     HB2)
-    CB      OG ; (    CB     HB3)
-    OG      HG ; (   HB3  HG.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      OG ; (    CB  OG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    OG      HG ; (OG.gone  HG.gone)
      C       O ; (     C       O)
     -C       N  
 
@@ -25903,8 +26019,10 @@
     HG   opls_155          0.41800  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-   DSG   DUM_opls_200      0.00000  12
-   DHG   DUM_opls_204      0.00000  13
+  DHB1   DUM_opls_140      0.00000  12
+  DHB2   DUM_opls_140      0.00000  13
+   DSG   DUM_opls_200      0.00000  14
+   DHG   DUM_opls_204      0.00000  15
 
  [ bonds ]
      N       H ; (     N       H)
@@ -25913,10 +26031,12 @@
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB     HB1)
-    CB      OG ; (    CB     HB2)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      OG ; (    CB  OG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
-    OG      HG ; (   HB2  HG.gone)
+    OG      HG ; (OG.gone  HG.gone)
      C       O ; (     C       O)
    DSG     DHG ; (    SG      HG)
     -C       N  
@@ -26147,16 +26267,14 @@
     HG   opls_155          0.41800  9
      C   opls_235          0.50000  10
      O   opls_236         -0.50000  11
-  DHB1   DUM_opls_140      0.00000  12
-  DHB2   DUM_opls_140      0.00000  13
-   DCG   DUM_opls_508      0.00000  14
-  DND1   DUM_opls_503      0.00000  15
-  DHD1   DUM_opls_504      0.00000  16
-  DCD2   DUM_opls_507      0.00000  17
-  DHD2   DUM_opls_146      0.00000  18
-  DCE1   DUM_opls_506      0.00000  19
-  DHE1   DUM_opls_146      0.00000  20
-  DNE2   DUM_opls_511      0.00000  21
+   DCG   DUM_opls_508      0.00000  12
+  DND1   DUM_opls_503      0.00000  13
+  DHD1   DUM_opls_504      0.00000  14
+  DCD2   DUM_opls_507      0.00000  15
+  DHD2   DUM_opls_146      0.00000  16
+  DCE1   DUM_opls_506      0.00000  17
+  DHE1   DUM_opls_146      0.00000  18
+  DNE2   DUM_opls_511      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -26164,11 +26282,9 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB  HB.gone1)
-    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB1 ; (    CB     HB1)
+    CB     HB2 ; (    CB     HB2)
     CB      OG ; (    CB  OG.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
     OG      HG ; (OG.gone  HG.gone)
      C       O ; (     C       O)
@@ -26255,9 +26371,9 @@
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ S2J ] ; Ser -> Gluh
 
@@ -26839,9 +26955,9 @@
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ S2W ] ; Ser -> Trp
 
@@ -27130,6 +27246,9 @@
   HG23   opls_140          0.06000  12
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
+  DHB1   DUM_opls_140      0.00000  15
+  DHB2   DUM_opls_140      0.00000  16
+  DHB3   DUM_opls_140      0.00000  17
 
  [ bonds ]
      N       H ; (     N       H)
@@ -27137,13 +27256,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB3)
-    CB     OG1 ; (    CB     HB2)
-    CB     CG2 ; (    CB     HB1)
-   OG1     HG1 ; (   HB2  HG1.gone)
-   CG2    HG21 ; (   HB1  HG2.gone1)
-   CG2    HG22 ; (   HB1  HG2.gone2)
-   CG2    HG23 ; (   HB1  HG2.gone3)
+    CB      HB ; (    CB  HB.gone)
+    CB     OG1 ; (    CB  OG1.gone)
+    CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+   OG1     HG1 ; (OG1.gone  HG1.gone)
+   CG2    HG21 ; (CG2.gone  HG2.gone1)
+   CG2    HG22 ; (CG2.gone  HG2.gone2)
+   CG2    HG23 ; (CG2.gone  HG2.gone3)
      C       O ; (     C       O)
     -C       N  
 
@@ -27231,8 +27353,10 @@
   HG23   opls_140          0.06000  12
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
-   DSG   DUM_opls_200      0.00000  15
-   DHG   DUM_opls_204      0.00000  16
+  DHB1   DUM_opls_140      0.00000  15
+  DHB2   DUM_opls_140      0.00000  16
+   DSG   DUM_opls_200      0.00000  17
+   DHG   DUM_opls_204      0.00000  18
 
  [ bonds ]
      N       H ; (     N       H)
@@ -27240,11 +27364,13 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB2)
-    CB     OG1 ; (    CB     HB1)
+    CB      HB ; (    CB  HB.gone)
+    CB     OG1 ; (    CB  OG1.gone)
     CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
-   OG1     HG1 ; (   HB1  HG1.gone)
+   OG1     HG1 ; (OG1.gone  HG1.gone)
    CG2    HG21 ; (CG2.gone  HG2.gone1)
    CG2    HG22 ; (CG2.gone  HG2.gone2)
    CG2    HG23 ; (CG2.gone  HG2.gone3)
@@ -27507,16 +27633,14 @@
   HG23   opls_140          0.06000  12
      C   opls_235          0.50000  13
      O   opls_236         -0.50000  14
-  DHB1   DUM_opls_140      0.00000  15
-  DHB2   DUM_opls_140      0.00000  16
-   DCG   DUM_opls_508      0.00000  17
-  DND1   DUM_opls_503      0.00000  18
-  DHD1   DUM_opls_504      0.00000  19
-  DCD2   DUM_opls_507      0.00000  20
-  DHD2   DUM_opls_146      0.00000  21
-  DCE1   DUM_opls_506      0.00000  22
-  DHE1   DUM_opls_146      0.00000  23
-  DNE2   DUM_opls_511      0.00000  24
+   DCG   DUM_opls_508      0.00000  15
+  DND1   DUM_opls_503      0.00000  16
+  DHD1   DUM_opls_504      0.00000  17
+  DCD2   DUM_opls_507      0.00000  18
+  DHD2   DUM_opls_146      0.00000  19
+  DCE1   DUM_opls_506      0.00000  20
+  DHE1   DUM_opls_146      0.00000  21
+  DNE2   DUM_opls_511      0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -27524,16 +27648,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB  HB.gone)
+    CB      HB ; (    CB     HB1)
     CB     OG1 ; (    CB  OG1.gone)
-    CB     CG2 ; (    CB  CG2.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
+    CB     CG2 ; (    CB     HB2)
     CB     DCG ; (    CB      CG)
    OG1     HG1 ; (OG1.gone  HG1.gone)
-   CG2    HG21 ; (CG2.gone  HG2.gone1)
-   CG2    HG22 ; (CG2.gone  HG2.gone2)
-   CG2    HG23 ; (CG2.gone  HG2.gone3)
+   CG2    HG21 ; (   HB2  HG2.gone1)
+   CG2    HG22 ; (   HB2  HG2.gone2)
+   CG2    HG23 ; (   HB2  HG2.gone3)
      C       O ; (     C       O)
    DCG    DND1 ; (    CG     ND1)
    DCG    DCD2 ; (    CG     CD2)
@@ -27618,9 +27740,9 @@
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     CG2  undefined                
+     N      CA      CB     CG2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   CG2      CB      CA       C  undefined                
+   CG2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ T2J ] ; Thr -> Gluh
 
@@ -28260,9 +28382,9 @@
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB      HB  undefined                
+     N      CA      CB      HB  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-    HB      CB      CA       C  undefined                
+    HB      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ T2W ] ; Thr -> Trp
 
@@ -28577,7 +28699,9 @@
   HG23   opls_140          0.06000  14
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
-  DHB2   DUM_opls_140      0.00000  17
+  DHB1   DUM_opls_140      0.00000  17
+  DHB2   DUM_opls_140      0.00000  18
+  DHB3   DUM_opls_140      0.00000  19
 
  [ bonds ]
      N       H ; (     N       H)
@@ -28585,13 +28709,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB3)
-    CB     CG1 ; (    CB     HB1)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG1 ; (    CB  CG1.gone)
     CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
     CB    DHB2 ; (    CB     HB2)
-   CG1    HG11 ; (   HB1  HG1.gone1)
-   CG1    HG12 ; (   HB1  HG1.gone2)
-   CG1    HG13 ; (   HB1  HG1.gone3)
+    CB    DHB3 ; (    CB     HB3)
+   CG1    HG11 ; (CG1.gone  HG1.gone1)
+   CG1    HG12 ; (CG1.gone  HG1.gone2)
+   CG1    HG13 ; (CG1.gone  HG1.gone3)
    CG2    HG21 ; (CG2.gone  HG2.gone1)
    CG2    HG22 ; (CG2.gone  HG2.gone2)
    CG2    HG23 ; (CG2.gone  HG2.gone3)
@@ -28691,8 +28817,9 @@
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
   DHB1   DUM_opls_140      0.00000  17
-   DSG   DUM_opls_200      0.00000  18
-   DHG   DUM_opls_204      0.00000  19
+  DHB2   DUM_opls_140      0.00000  18
+   DSG   DUM_opls_200      0.00000  19
+   DHG   DUM_opls_204      0.00000  20
 
  [ bonds ]
      N       H ; (     N       H)
@@ -28700,10 +28827,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB2)
+    CB      HB ; (    CB  HB.gone)
     CB     CG1 ; (    CB  CG1.gone)
     CB     CG2 ; (    CB  CG2.gone)
     CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
    CG1    HG11 ; (CG1.gone  HG1.gone1)
    CG1    HG12 ; (CG1.gone  HG1.gone2)
@@ -28983,16 +29111,14 @@
   HG23   opls_140          0.06000  14
      C   opls_235          0.50000  15
      O   opls_236         -0.50000  16
-  DHB1   DUM_opls_140      0.00000  17
-  DHB2   DUM_opls_140      0.00000  18
-   DCG   DUM_opls_508      0.00000  19
-  DND1   DUM_opls_503      0.00000  20
-  DHD1   DUM_opls_504      0.00000  21
-  DCD2   DUM_opls_507      0.00000  22
-  DHD2   DUM_opls_146      0.00000  23
-  DCE1   DUM_opls_506      0.00000  24
-  DHE1   DUM_opls_146      0.00000  25
-  DNE2   DUM_opls_511      0.00000  26
+   DCG   DUM_opls_508      0.00000  17
+  DND1   DUM_opls_503      0.00000  18
+  DHD1   DUM_opls_504      0.00000  19
+  DCD2   DUM_opls_507      0.00000  20
+  DHD2   DUM_opls_146      0.00000  21
+  DCE1   DUM_opls_506      0.00000  22
+  DHE1   DUM_opls_146      0.00000  23
+  DNE2   DUM_opls_511      0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -29000,18 +29126,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB  HB.gone)
+    CB      HB ; (    CB     HB2)
     CB     CG1 ; (    CB  CG1.gone)
-    CB     CG2 ; (    CB  CG2.gone)
-    CB    DHB1 ; (    CB     HB1)
-    CB    DHB2 ; (    CB     HB2)
+    CB     CG2 ; (    CB     HB1)
     CB     DCG ; (    CB      CG)
    CG1    HG11 ; (CG1.gone  HG1.gone1)
    CG1    HG12 ; (CG1.gone  HG1.gone2)
    CG1    HG13 ; (CG1.gone  HG1.gone3)
-   CG2    HG21 ; (CG2.gone  HG2.gone1)
-   CG2    HG22 ; (CG2.gone  HG2.gone2)
-   CG2    HG23 ; (CG2.gone  HG2.gone3)
+   CG2    HG21 ; (   HB1  HG2.gone1)
+   CG2    HG22 ; (   HB1  HG2.gone2)
+   CG2    HG23 ; (   HB1  HG2.gone3)
      C       O ; (     C       O)
    DCG    DND1 ; (    CG     ND1)
    DCG    DCD2 ; (    CG     CD2)
@@ -29101,8 +29225,8 @@
    CG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
      N      CA      CB     CG2  dih_VAL_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-     N      CA      CB      HB  undefined                
-    HB      CB      CA       C  undefined                
+     N      CA      CB      HB  undefined_dih_ILE_chi1_N_C_C_C
+    HB      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ V2J ] ; Val -> Gluh
 
@@ -30081,6 +30205,9 @@
    HH2   opls_146          0.11500  22
      C   opls_235          0.50000  23
      O   opls_236         -0.50000  24
+  DHB1   DUM_opls_140      0.00000  25
+  DHB2   DUM_opls_140      0.00000  26
+  DHB3   DUM_opls_140      0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -30088,11 +30215,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB3)
-    CB     HB2 ; (    CB     HB1)
-    CB      CG ; (    CB     HB2)
-    CG     CD1 ; (   HB2  CD1.gone)
-    CG     CD2 ; (   HB2  CD2.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
    CD1     NE1 ; (CD1.gone  NE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
@@ -30237,8 +30367,9 @@
      C   opls_235          0.50000  23
      O   opls_236         -0.50000  24
   DHB1   DUM_opls_140      0.00000  25
-   DSG   DUM_opls_200      0.00000  26
-   DHG   DUM_opls_204      0.00000  27
+  DHB2   DUM_opls_140      0.00000  26
+   DSG   DUM_opls_200      0.00000  27
+   DHG   DUM_opls_204      0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -30246,10 +30377,11 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
+    CB     HB1 ; (    CB  HB.gone1)
     CB     HB2 ; (    CB  HB.gone2)
     CB      CG ; (    CB  CG.gone)
     CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
     CB     DSG ; (    CB      SG)
     CG     CD1 ; (CG.gone  CD1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
@@ -30805,9 +30937,9 @@
      N      CA      CB      CG  dih_TRP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_TRP_chi1_C_C_C_CO    
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ W2J ] ; Trp -> Gluh
 
@@ -31814,9 +31946,9 @@
      N      CA      CB      CG  dih_TRP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_TRP_chi1_C_C_C_CO    
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ W2X ] ; Trp -> Hise
 
@@ -32720,9 +32852,9 @@
     CG      CB      CA       C  dih_HIS_chi1_C_C_C_CO    
     CA      CB      CG     ND1  dih_HIS_chi2_C_C_C_N     
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ X2J ] ; Hise -> Gluh
 
@@ -33538,9 +33670,9 @@
     CG      CB      CA       C  dih_HIS_chi1_C_C_C_CO    
     CA      CB      CG     ND1  dih_HIS_chi2_C_C_C_N     
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ X2W ] ; Hise -> Trp
 
@@ -34344,8 +34476,8 @@
   DND1    DNE2    DCE1    DHE1  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIS_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIS_chi1_C_C_C_CO
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ Y2I ] ; Tyr -> Ile
@@ -34429,9 +34561,9 @@
 
  [ dihedrals ]
      N      CA      CB    DCG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     HB2  undefined                
+     N      CA      CB     HB2  undefined_dih_ILE_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-   HB2      CB      CA       C  undefined                
+   HB2      CB      CA       C  undefined_dih_ILE_chi1_C_C_C_CO
 
 [ Y2J ] ; Tyr -> Gluh
 
@@ -35328,9 +35460,9 @@
 
  [ dihedrals ]
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ Y2W ] ; Tyr -> Trp
 
@@ -35429,8 +35561,8 @@
   DCD1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_TRP_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_TRP_chi1_C_C_C_CO
 
 [ Y2X ] ; Tyr -> Hise
 
@@ -35511,8 +35643,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIS_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIS_chi1_C_C_C_CO
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ Y2Z ] ; Tyr -> Hish
@@ -35597,8 +35729,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  undefined                
-    CG      CB      CA       C  undefined                
+     N      CA      CB      CG  undefined_dih_HIP_chi1_N_C_C_C
+    CG      CB      CA       C  undefined_dih_HIP_chi1_C_C_C_CO
 
 [ Z2A ] ; Hish -> Ala
 
@@ -37058,9 +37190,9 @@
      N      CA      CB      CG  dih_HIP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_HIP_chi1_C_C_C_CO    
      N      CA      CB    DCG1  dih_VAL_chi1_N_C_C_C     
-     N      CA      CB     HB1  undefined                
+     N      CA      CB     HB1  undefined_dih_VAL_chi1_N_C_C_C
   DCG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   HB1      CB      CA       C  undefined                
+   HB1      CB      CA       C  undefined_dih_VAL_chi1_C_C_C_CO
 
 [ Z2W ] ; Hish -> Trp
 

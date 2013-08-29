@@ -181,15 +181,15 @@ def check_dih_ILDN_OPLS( topol, rlist, rdic, a1, a2, a3, a4 ):
                    a3.id == al[1].id and \
                    a4.id == al[0].id):
                     ##### checks for OPLS #####
-                    if( ('dih_' in d[4]) and ('dih_' in d[5]) ):
+                    if( (d[4].startswith('dih_')) and (d[5].startswith('dih_')) ):
 #                       print 'torsion %s %s' % (d[4],d[5])
                         counter = 42
                         break
-                    elif( ('dih_' in d[4]) and ('undefined' in d[5]) ):
+                    elif( d[4].startswith('dih_') and ('undefined' in d[5]) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 2
                         break
-                    elif( ('undefined' in d[4]) and ('dih_' in d[5]) ):
+                    elif( ('undefined' in d[4]) and (d[5].startswith('dih_')) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 3
                         break
@@ -488,6 +488,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
     dih9 = [] # here I will accumulate multiple entries of type 9 dihedrals
     explicit_def = explicit_defined_dihedrals(ffbonded,ff)
     ildn_used = [] # ildn dihedrals that already were encountered
+    opls_used = [] # opls dihedrals that already were encountered
 
     for r in rlist:
         idx = r.id - 1
@@ -508,9 +509,6 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                 else:
                     atom = r.fetch(name)[0]
                     al.append(atom)
-
-	    ildn_already_found = 0 #switch for ildn
-	    opls_already_found = 0 #switch for opls
 
             for dx in topol.dihedrals:
                 func = dx[4]
@@ -536,15 +534,21 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 		    encountered = is_ildn_dih_encountered(ildn_used,foobar,encountered)
 		    if( encountered==1 ):
 			continue
-		    if( ildn_already_found==1 ):
-                        break
-		    #opls
 		    if ( 'torsion' in d[4] ):#'torsion' in dx[5] ):
 			if ( ('torsion' not in dx[5]) ):
 			   continue
+
 		    #check for opls
-                    if( opls_already_found==1 ):
-                        break
+                    encountered = 0
+                    foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[4] ]
+                    encountered = is_ildn_dih_encountered(opls_used,foobar,encountered)
+                    foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[5] ]
+                    encountered = is_ildn_dih_encountered(opls_used,foobar,encountered)
+                    if( encountered==1 ):
+                        continue
+                    if ( 'dih_' in d[4] ):#'dih_' in dx[5] ):
+                        if ( ('dih_' not in dx[5]) ):
+                           continue
 
                     A,B =  check_case(al[:4])
                     paramA = topol.BondedParams.get_dihedral_param(al[0].type,al[1].type,al[2].type,al[3].type, func)
@@ -579,21 +583,23 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 			foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[4] ]
 			ildn_used.append(foobar)
 			func = 9
-		    elif 'dih_' in d[4]: #opls proper
+		    elif d[4].startswith('dih_'): #opls proper
                         if 'undefined' in d[5]:
                             backup_dx2.append('undefB')
 			dih_predef_default.append(backup_dx2)
 			foo = explicit_def[d[4]]
 			astate.append(foo)
-			opls_already_found = 1
+			foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[4] ]
+			opls_used.append(foobar)
 			func = 3
-                    elif 'improper_' in d[4]: #opls improper
+                    elif d[4].startswith('improper_'): #opls improper
                         if 'undefined' in d[5]:
                             backup_dx2.append('undefB')
                         dih_predef_default.append(backup_dx2)
                         foo = explicit_def[d[4]]
                         astate.append(foo)
-                        opls_already_found = 1
+                        foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[4] ]
+                        opls_used.append(foobar)
                         func = 1
                     elif 'undefined' in d[4]: #amber99sb-ildn and opls and others
 			if d[5].startswith('torsion_'):
@@ -619,17 +625,18 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 			bstate.append(foo)
 			foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[5] ]
 			ildn_used.append(foobar)
-#			ildn_already_found = 1
 			func = 9
-                    elif 'dih_' in d[5]: #opls proper
+                    elif d[5].startswith('dih_'): #opls proper
                         foo = explicit_def[d[5]]
                         bstate.append(foo)
-                        opls_already_found = 1
+                        foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[5] ]
+                        opls_used.append(foobar)
                         func = 3
-                    elif 'improper_' in d[5]: #opls improper
+                    elif d[5].startswith('improper_'): #opls improper
                         foo = explicit_def[d[5]]
                         bstate.append(foo)
-                        opls_already_found = 1
+                        foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[5] ]
+                        ildn_used.append(foobar)
                         func = 1
                     elif 'undefined' in d[5]: #amber99sb-ildn and opls and others
                         bstate = ''

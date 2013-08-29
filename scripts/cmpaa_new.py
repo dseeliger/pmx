@@ -491,7 +491,10 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( i1[4] )
 		else:
                     im_new.append( i1[4] )
-                    if( 'torsion' in i1[4] ):
+                    if( 'torsion' in i1[4] ):	#ildn
+                        foo = 'undefined_' + i1[4]
+                        im_new.append( foo )
+                    elif( 'dih_' in i1[4] ):	#opls
                         foo = 'undefined_' + i1[4]
                         im_new.append( foo )
                     else:
@@ -511,9 +514,12 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( i2[4] )
                     im_new.append( i2[4] )
                 else:
-                    if( 'torsion' in i2[4] ):
+                    if( 'torsion' in i2[4] ):	#ildn
 			foo = 'undefined_' + i2[4]
 			im_new.append( foo )
+                    if( 'dih_' in i2[4] ):   #opls
+                        foo = 'undefined_' + i2[4]
+                        im_new.append( foo )
 		    else:
 		        im_new.append( 'undefined' )
                     im_new.append( i2[4] )

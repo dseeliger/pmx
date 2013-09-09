@@ -37,7 +37,8 @@ from pylab import *
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
-from random import gauss, randint
+from random import gauss, randint, sample, choice
+#from numpy import std
 
 
 debug = True
@@ -329,7 +330,7 @@ def BAR(res_ab, res_ba, T = 298):
     avA = average(res_ab)
     avB = average(res_ba)
     x0 = (avA+avB)/2.
-    result=fmin(func,x0 = x0, args = (res_ab, res_ba))
+    result=fmin(func,x0 = x0, args = (res_ab, res_ba),disp=0)
     return result
 
 def BAR_err(dG, res_ab, res_ba, T = 298):
@@ -349,6 +350,23 @@ def BAR_err(dG, res_ab, res_ba, T = 298):
     err/=float(N)
     tot = 1/(beta**2*N)*(1./err-(N/nf+N/nr))
     return sqrt(tot)
+
+def BAR_err_boot(res_ab, res_ba, nruns, T=298):
+    res = []
+    nf = int(len(res_ab))
+    nr = int(len(res_ba))
+    for k in range(nruns):
+	sys.stdout.write('\rBAR error bootstrap: iteration %s/%s' % (k,nruns) )
+	sys.stdout.flush()
+	for i in range(nf):
+	    valA = [choice(res_ab) for _ in xrange(nf)]
+        for i in range(nr):
+            valB = [choice(res_ab) for _ in xrange(nr)]
+	foo = BAR(valA, valB, T)
+	res.append(foo)
+    sys.stdout.write('\n')
+    err = std(res)
+    return(err)
 
 def gauss_func( A, mean, dev, x):
     x = array(x)
@@ -476,7 +494,7 @@ def select_random_subset( lst, n):
 
 def main(argv):
 
-    version = "1.1"
+    version = "1.2"
 
     options = [
         Option( "-nbins", "int", 10, "number of histograms bins for plot"),
@@ -490,6 +508,7 @@ def main(argv):
         Option( "-rand", "int", 50, "take a random subset of trajectories"),
         Option( "-integ_only", "bool", False, "Do integration only. Skip analysis."),
         Option( "-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
+        Option( "-nruns", "int", 100, "number of runs for bootstrapped BAR error"),
         ]
     
     files = [
@@ -631,8 +650,10 @@ def main(argv):
     bar_result = BAR( res_ab, res_ba, T)
     tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar_result)
     bar_err = BAR_err( bar_result, res_ab, res_ba, T)
+    bar_err_boot = BAR_err_boot( res_ab, res_ba, cmdl['-nruns'], T)
     
-    tee(out, '  RESULT: error_dG (BAR ) = %8.4f kJ/mol' % bar_err)
+    tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
+    tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
     tee(out, ' ------------------------------------------------------')
     diff = abs( cgi_result - bar_result )
     mean = (cgi_result+bar_result)*.5

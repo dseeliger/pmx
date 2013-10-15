@@ -40,8 +40,19 @@ standard_pair_listB = [
     ('HA','HA'),
     ('CB','CB'),
     ('1HB','1HB'),
-    ('2HB','2HB'),
-    ('CG','CG')
+    ('2HB','2HB')
+    ]
+
+standard_pair_list_charmmB = [
+    ('N','N'),
+    ('HN','HN'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB'),
+    ('1HB','1HB'),
+    ('2HB','2HB')
     ]
 
 standard_pair_listC = [
@@ -51,10 +62,17 @@ standard_pair_listC = [
     ('C','C'),
     ('O','O'),
     ('HA','HA'),
-    ('CB','CB'),
-    ('1HB','1HB'),
-    ('2HB','2HB'),
-    ('CG','CG')
+    ('CB','CB')
+    ]
+
+standard_pair_list_charmmC = [
+    ('N','N'),
+    ('HN','HN'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O'),
+    ('HA','HA'),
+    ('CB','CB')
     ]
 
 standard_pair_listD = [
@@ -62,12 +80,15 @@ standard_pair_listD = [
     ('H','H'),
     ('CA','CA'),
     ('C','C'),
-    ('O','O'),
-    ('HA','HA'),
-    ('CB','CB'),
-    ('1HB','1HB'),
-    ('2HB','2HB'),
-    ('CG','CG')
+    ('O','O')
+    ]
+
+standard_pair_list_charmmD = [
+    ('N','N'),
+    ('HN','HN'),
+    ('CA','CA'),
+    ('C','C'),
+    ('O','O')
     ]
     
 use_standard_pair_list = {
@@ -84,6 +105,13 @@ use_standard_pair_list = {
     'HISE': [ 'TRP','PHE','TYR','HIP','HID','HIE','HISH','HIS1'],
     'HISH': [ 'TRP','PHE','TYR','HIP','HID','HIE','HIS1','HISE']
     }
+
+res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP'
+		   'PHE','TYR','TRP','PRO' ]
+
+res_diff_Cb = [ 'THR', 'ALA', 'VAL', 'ILE' ]
+
+res_gly_pro = [ 'GLY', 'PRO' ]
 
 merge_by_name_list = {
     'PHE':['TYR'],
@@ -126,6 +154,86 @@ mol_branch = {
     'LYS':5,
     'LYN':5,
     }
+
+def max_rotation(dihedrals):
+    m = 0
+    for d in dihedrals:
+        if d[-2] == 1 and d[-1]>0: m = d[-1]
+        if d[-2] == 0 and d[-1]!=-1: return d[-1]
+    return m+1
+
+def get_dihedrals(resname):
+    return library._aa_dihedrals[resname]
+
+def set_dihedral(atoms,mol,phi):
+    a1 = atoms[0]
+    a2 = atoms[1]
+    a3 = atoms[2]
+    a4 = atoms[3]
+#    a1,a2,a3,a4 = atoms
+    d = a1.dihedral(a2,a3,a4)
+    r = Rotation(a2.x,a3.x)
+    rot = d-phi
+#    print a2.name, a3.name
+    for atom in mol.atoms:
+        if atom.order > a3.order:
+            if a3.long_name[3]==' ':
+#                print 'rotating', atom.name
+                atom.x = r.apply(atom.x,-rot)
+            else:
+                if atom.long_name[3]==a3.long_name[3] \
+                   or atom.long_name[3]==' ':
+#                    print 'rotating', atom.name
+                    atom.x = r.apply(atom.x,-rot)
+#    print a1.dihedral(a2,a3,a4)
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+def do_fit(m1,dihed1,m2,dihed2):
+    bonds = []
+    diheds = []
+    #if not diheds: # we take the chi's
+    diheds = []
+    for dih in dihed1:
+        chi = dih[-1]
+        if chi  > 0:
+            for dih2 in dihed2:
+                if dih2[-1] == chi and dih2[-2] == 1:
+                    diheds.append((dih,dih2))
+    for dih1, dih2 in diheds:
+#	for d in range(0,4):
+#	   foo = dih2[d]
+#	   if is_number(foo[-1]) and is_number(foo[-2]):
+#		dih2[d] = foo[-1] + foo[0] + foo[1] + foo[2]
+#	   elif foo[0]=='H' and foo[1]=='B':
+#		dih2[d] = foo[-1] + foo[0] + foo[1]
+#           foo = dih1[d]
+#           if is_number(foo[-1]) and is_number(foo[-2]):
+#                dih1[d] = foo[-1] + foo[0] + foo[1] + foo[2]
+#           elif foo[0]=='H' and foo[1]=='B':
+#                dih1[d] = foo[-1] + foo[0] + foo[1]
+
+        atoms1 = m1.fetchm(dih1)
+        atoms2 = m2.fetchm(dih2)
+#	print dih2
+#	print atoms2
+        a1,a2,a3,a4 = atoms1
+        if (a2.name, a3.name) not in bonds:
+            phi = a1.dihedral(a2,a3,a4)
+#            print phi
+#            print 'rot1', a1.name,a2.name,a3.name,a4.name
+	    set_dihedral(atoms2,m2,phi)
+#            a1,a2,a3,a4 = atoms1
+#            print a1.dihedral(a2,a3,a4)
+    op = open('check.pdb','w')
+    for atom in m2.atoms:
+        print >>op, atom
+
 
 def tag(atom):
     s = '%s|%s|%s|%s' %( atom.resname, atom.name, atom.atomtype, atom.atype)
@@ -223,11 +331,12 @@ def cmp_mol2_types( type1, type2 ):
         
         
 def find_closest_atom( atom1, atom_list, merged_atoms ):
-    min_d = .55
+    min_d = 0.55
     idx = 99
     for i, atom in enumerate(atom_list):
         if atom not in merged_atoms:
             d = atom1 - atom
+	    print "%s %s %f" %(atom1.name,atom.name,d)
             if d < min_d:
                 min_d = d
                 idx = i
@@ -329,16 +438,16 @@ def make_pairs( mol1, mol2,bCharmm ):
                     print '-- Checking atom...', at1.name
                     candidates = []
                     for at2 in atoms2:
-                        if cmp_mol2_types( at1.atype, at2.atype):
-                            candidates.append( at2 )
+                        #if cmp_mol2_types( at1.atype, at2.atype):
+                        candidates.append( at2 )
                     aa, d = find_closest_atom( at1, candidates, merged_atoms2 )
                     if aa:
                         merged_atoms2.append( aa )
                         merged_atoms1.append( at1 )
                         atom_pairs.append( [ at1, aa] )
                         print '--> Define atom pair: ', tag(at1), '- >', tag(aa),  '(d = %4.2f A)' % d
-##                 else:
-##                     print 'No partner found for atom ', at1.name
+                    else:
+                       print 'No partner found for atom ', at1.name
 ##                     print '-- done branch', k
 ##                     done_branch = True
 ##                     break # done with this branch
@@ -749,6 +858,19 @@ def rename_to_gmx( r ):
     res = False
     while not res:
         res = check_double_atom_names( r )
+
+def rename_to_match_library( m ):
+    name_hash = {}
+    for atom in m.atoms:
+	foo = atom.name
+        if atom.name[0].isdigit():
+            atom.name = atom.name[1:]+atom.name[0]
+	name_hash[atom.name] = foo
+    return name_hash
+	    
+def rename_back( m, name_hash ):
+    for atom in m.atoms:
+        atom.name = name_hash[atom.name]
         
 def improps_as_atoms( im, r, use_b = False):
     im_new = []
@@ -764,6 +886,7 @@ def improps_as_atoms( im, r, use_b = False):
                         if atom.nameB == name:
                             a = atom
                 else:
+		    print name 
                     a = r.fetch( name )[0]
             new_ii.append( a )
         new_ii.extend( ii[4:] )
@@ -939,8 +1062,8 @@ if(align):
 r1.resnA = r1.resname[0]+r1.resname[1:].lower()
 r1.resnB = r2.resname[0]+r2.resname[1:].lower()
 
-r1.write(cmdl['-opdb1'])
-r2.write(cmdl['-opdb2'])
+#r1.write(cmdl['-opdb1'])
+#r2.write(cmdl['-opdb2'])
 
 #rtp = RTPParser('amber99sb-star-ildn.ff/aminoacids.rtp')
 rtp = RTPParser(rtpfile)
@@ -949,27 +1072,102 @@ assign_rtp_entries( r2, rtp )
 assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
 
 
+#######################
+resn1_dih = m1.residues[0].resname
+if resn1_dih=='HIS' or resn1_dih=='HID' or resn1_dih=='HIE' or\
+    resn1_dih=='HIP':
+    resn1_dih = 'HIS'
+elif resn1_dih=='LYN':
+    resn1_dih = 'LYS'
+elif resn1_dih=='ASH':
+    resn1_dih = 'ASP'
+elif resn1_dih=='GLH':
+    resn1_dih = 'GLU'
+
+resn2_dih = m2.residues[0].resname
+if resn2_dih=='HIS' or resn2_dih=='HID' or resn2_dih=='HIE' or\
+    resn2_dih=='HIP':
+    resn2_dih = 'HIS'
+elif resn2_dih=='LYN':
+    resn2_dih = 'LYS'
+elif resn2_dih=='ASH':
+    resn2_dih = 'ASP'
+elif resn2_dih=='GLH':
+    resn2_dih = 'GLU'
+#######################
+
+hash1 = {}
+hash2 = {}
+if align:
+    dihed1 = get_dihedrals(resn1_dih)
+    dihed2 = get_dihedrals(resn2_dih)
+    #dihed1 = get_dihedrals(m1.residues[0].resname)
+    #dihed2 = get_dihedrals(m2.residues[0].resname)
+    max_rot = max_rotation(dihed2)
+    max_rot1 = max_rotation(dihed1)
+
+    for atom in m2.atoms:
+        atom.max_rot = max_rot
+    for atom in m1.atoms:
+        atom.max_rot = max_rot1
+    hash1 = rename_to_match_library(m1)
+    hash2 = rename_to_match_library(m2)
+    do_fit(m1.residues[0],dihed1,m2.residues[0],dihed2)
+    rename_back(m1,hash1)
+    rename_back(m2,hash2)
+
+r1.write(cmdl['-opdb1'])
+r2.write(cmdl['-opdb2'])
+
 assign_branch( r1 )
 assign_branch( r2 )
 
+
+
+######################################################################################
+############################### selecting pair lists #################################
+######################################################################################
+#ring-res 2 ring-res
 if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
     if bCharmm :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
     else :
-        if(len(r1.resname)==3 and len(r2.resname)==3):
-            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
-        elif(len(r1.resname)==4 and len(r2.resname)==3):
-            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
-        elif(len(r1.resname)==3 and len(r2.resname)==4):
-            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
-        elif(len(r1.resname)==4 and len(r2.resname)==4):
-            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
-
-elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]: 
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
+#ring-res 2 non-ring-res: T,A,V,I
+elif (r1.resname in res_with_rings and r2.resname in res_diff_Cb ) or \
+     (r2.resname in res_with_rings and r1.resname in res_diff_Cb ):
+    print "ENTERED T,A,V,I"
+    if bCharmm :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
+    else :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+#ring-res 2 non-ring-res: G,P
+elif (r1.resname in res_with_rings and r2.resname in res_gly_pro ) or \
+     (r2.resname in res_with_rings and r1.resname in res_gly_pro ):
+    print "ENTERED G,P"
+    if bCharmm :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmD)
+    else :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
+#ringed residues by atom names 
+elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]:
     atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
+#ring-res 2 non-ring-res
+elif r1.resname in res_with_rings or \
+     r2.resname in res_with_rings:
+    print "ENTERED RINGS"
+    if bCharmm :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmB)
+    else :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
 else:    
     atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
+######################################################################################
+######################################################################################
+######################################################################################
+
+
 
 merge_molecules( r1, dummies )
 make_bstate_dummies( r1 )

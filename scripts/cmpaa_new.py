@@ -626,7 +626,7 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     if( 'torsion' in i2[4] ):	#ildn
 			foo = 'undefined_' + i2[4]
 			im_new.append( foo )
-                    if( 'dih_' in i2[4] ):   #opls
+                    elif( 'dih_' in i2[4] ):   #opls
                         foo = 'undefined_' + i2[4]
                         im_new.append( foo )
 		    else:

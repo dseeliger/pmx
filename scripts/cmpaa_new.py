@@ -787,28 +787,54 @@ def primitive_check( atom, rot_atom ):
 def find_higher_atoms( rot_atom, r, order, branch ):
     res = []
     for atom in r.atoms:
-        if atom.order >= order and \
-           (atom.branch == branch or branch == 0):
+        print "1level: %s %s %s" % (atom.name,atom.order,atom.branch)
+#        if atom.order >= order and \
+#           (atom.branch == branch or branch == 0):
+        if atom.order >= order:
+            print "2level: %s %s %s" % (atom.name,atom.order,atom.branch)
             if atom.order ==  rot_atom.order+1:
+	        print "3level: %s %s %s" % (atom.name,atom.order,atom.branch)
                 if primitive_check( atom, rot_atom ):
+        	    print "4level: %s %s %s" % (atom.name,atom.order,atom.branch)
                     res.append( atom )
             else:
-                res.append( atom )
-                
+                res.append( atom )            
     return res
 
-def make_rotations( r ):
+
+def make_rotations( r, resn1_dih, resn2_dih ):
+    dihed1 = get_dihedrals(resn1_dih)
+    dihed2 = get_dihedrals(resn2_dih)
+    rots = []
+    done = []
+    for d in dihed1:
+        if d[-2] != 0 and d[-1] > 0:
+            key =  d[1]+'-'+d[2]
+            if key not in done:
+                rots.append(d)
+                done.append(key)
+    for d in dihed1:
+        if d[-2] != 0 and d[-1] != 0 and d[2] not in ['N','C','CA']:
+            key =  d[1]+'-'+d[2]
+            if key not in done:
+                rots.append(d)
+                done.append(key)
+
     rotations = []
-    for chi in range(1, r.nchi() + 1):
+#    for chi in range(1, r.nchi() + 1):
+    for chi in rots:
         rot_list = []
-        dih_atoms = r.fetchm( _aa_chi[r.real_resname][chi][0] )
-        rot_atoms = [ dih_atoms[1], dih_atoms[2] ]
-        atom1 = rot_atoms[0]
-        atom2 = rot_atoms[1]
+#        dih_atoms = r.fetchm( _aa_chi[r.real_resname][chi][0] )
+#        rot_atoms = [ dih_atoms[1], dih_atoms[2] ]
+#        atom1 = rot_atoms[0]
+#        atom2 = rot_atoms[1]
+	atom1 = r.fetchm( chi )[1]
+	atom2 = r.fetchm( chi )[2]
         rot_list.append( atom1 )
         rot_list.append( atom2 )
         oo = atom2.order
         bb = atom2.branch
+        print "AAAAAAAAA %s %s %s" %(atom2,oo+1,bb)
         atoms_to_rotate = []
         atoms_to_rotate =  find_higher_atoms(atom2,  r, oo+1, bb ) 
         for atom in atoms_to_rotate:
@@ -1212,7 +1238,7 @@ dihi_list = generate_dihedral_entries(dih1, dih2, r1, atom_pairs)
 # impropers #
 ii_list = generate_improp_entries(im1, im2, r1)
 
-rot = make_rotations(r1)
+rot = make_rotations(r1,resn1_dih,resn2_dih)
 
 r1.set_resname( rr_name )
 rename_to_gmx( r1 )

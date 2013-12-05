@@ -3887,19 +3887,19 @@
     N     CA     C    +N    105.4       0.75       1
 
 
-;[ NaS ]
-; [ atoms ]
-;   NaS     amber99_143   1.00000     1
-;[ NaJ ]
-; [ atoms ]
-;  NaJ      amber99_338    1.000     1
-;[ ClS ]
-; [ atoms ]
-;   ClS     amber99_144   -1.00000     1
-;[ ClJ ]
-; [ atoms ]
-;   ClJ    amber99_333   -1.000      1
-;[ KJ ]
-; [ atoms ]
-;   KJ     amber99_337   1.000      1
+[ NaS ]
+ [ atoms ]
+   NaS     amber99_143   1.00000     1
+[ NaJ ]
+ [ atoms ]
+  NaJ      amber99_338    1.000     1
+[ ClS ]
+ [ atoms ]
+   ClS     amber99_144   -1.00000     1
+[ ClJ ]
+ [ atoms ]
+   ClJ    amber99_333   -1.000      1
+[ KJ ]
+ [ atoms ]
+   KJ     amber99_337   1.000      1
 

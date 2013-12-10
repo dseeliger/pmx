@@ -351,8 +351,19 @@ def make_predefined_pairs( mol1, mol2, pair_list ):
     merged_atoms1 = []
     merged_atoms2 = []
     for name1, name2 in pair_list:
-        at1 = mol1.fetch( name1 )[0]
-        at2 = mol2.fetch( name2 )[0]
+	try:
+	    at1 = mol1.fetch( name1 )[0]
+	except IndexError:
+	    at1 = mol1.fetch( reformat_atom_name(name1) )[0]
+        try:
+            at2 = mol2.fetch( name2 )[0]
+        except IndexError:
+            at2 = mol2.fetch( reformat_atom_name(name2) )[0]
+	at1.name = reformat_atom_name(name1)
+        at2.name = reformat_atom_name(name2)
+#	print name1,name2
+#	at1 = mol1.fetch( reformat_atom_name(name1) )[0]
+#	at2 = mol2.fetch( name2 )[0]
         at1.atomtypeB = at2.atomtype
         at1.qB = at2.q
         at1.mB = at2.m
@@ -897,6 +908,11 @@ def rename_to_match_library( m ):
 def rename_back( m, name_hash ):
     for atom in m.atoms:
         atom.name = name_hash[atom.name]
+
+def reformat_atom_name( name ):
+    if name[0].isdigit():
+        name = name[1:]+name[0]
+    return name
         
 def improps_as_atoms( im, r, use_b = False):
     im_new = []
@@ -1101,25 +1117,31 @@ assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
 #######################
 resn1_dih = m1.residues[0].resname
 if resn1_dih=='HIS' or resn1_dih=='HID' or resn1_dih=='HIE' or\
-    resn1_dih=='HIP':
+    resn1_dih=='HIP' or resn1_dih=='HISE' or resn1_dih=='HISD' or\
+    resn1_dih=='HISH' or resn1_dih=='HIS1':
     resn1_dih = 'HIS'
-elif resn1_dih=='LYN':
+elif resn1_dih=='LYN' or resn1_dih=='LYSH':
     resn1_dih = 'LYS'
-elif resn1_dih=='ASH':
+elif resn1_dih=='ASH' or resn1_dih=='ASPH':
     resn1_dih = 'ASP'
-elif resn1_dih=='GLH':
+elif resn1_dih=='GLH' or resn1_dih=='GLUH':
     resn1_dih = 'GLU'
+elif resn1_dih=='CYSH':
+    resn1_dih = 'CYS'
 
 resn2_dih = m2.residues[0].resname
 if resn2_dih=='HIS' or resn2_dih=='HID' or resn2_dih=='HIE' or\
-    resn2_dih=='HIP':
+    resn2_dih=='HIP' or resn2_dih=='HISE' or resn2_dih=='HISD' or\
+    resn2_dih=='HISH' or resn2_dih=='HIS1':
     resn2_dih = 'HIS'
-elif resn2_dih=='LYN':
+elif resn2_dih=='LYN' or resn2_dih=='LYSH':
     resn2_dih = 'LYS'
-elif resn2_dih=='ASH':
+elif resn2_dih=='ASH' or resn2_dih=='ASPH':
     resn2_dih = 'ASP'
-elif resn2_dih=='GLH':
+elif resn2_dih=='GLH' or resn2_dih=='GLUH':
     resn2_dih = 'GLU'
+elif resn2_dih=='CYSH':
+    resn2_dih = 'CYS'
 #######################
 
 hash1 = {}

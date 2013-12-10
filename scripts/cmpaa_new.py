@@ -101,9 +101,9 @@ use_standard_pair_list = {
     'HSD': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HSE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HSP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
-    'HIS1': [ 'TRP','PHE','TYR','HIP','HID','HIE','HISH','HISE'],
-    'HISE': [ 'TRP','PHE','TYR','HIP','HID','HIE','HISH','HIS1'],
-    'HISH': [ 'TRP','PHE','TYR','HIP','HID','HIE','HIS1','HISE']
+    'HIS1': [ 'TRP','PHE','TYR'],
+    'HISE': [ 'TRP','PHE','TYR'],
+    'HISH': [ 'TRP','PHE','TYR']
     }
 
 res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP'
@@ -377,7 +377,7 @@ def make_predefined_pairs( mol1, mol2, pair_list ):
     return atom_pairs, dummies
 
 def merge_by_names( mol1, mol2 ):
-    print 'Making atom pairs.........'
+    print 'Making atom pairs.........MERGE BY NAMES......'
     atom_pairs = []
     merged_atoms1 = []
     merged_atoms2 = []
@@ -1178,6 +1178,7 @@ assign_branch( r2 )
 #ring-res 2 ring-res
 if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
+    print "ENTERED STANDARD"
     if bCharmm :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
     else :
@@ -1200,6 +1201,7 @@ elif (r1.resname in res_with_rings and r2.resname in res_gly_pro ) or \
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
 #ringed residues by atom names 
 elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]:
+    print "ENTERED MERGE BY NAMES"
     atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
 #ring-res 2 non-ring-res
 elif r1.resname in res_with_rings or \
@@ -1210,6 +1212,7 @@ elif r1.resname in res_with_rings or \
     else :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
 else:    
+    print "ENTERED SIMPLE"
     atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
 ######################################################################################
 ######################################################################################

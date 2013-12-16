@@ -106,7 +106,7 @@ use_standard_pair_list = {
     'HISH': [ 'TRP','PHE','TYR']
     }
 
-res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP'
+res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP',
 		   'PHE','TYR','TRP','PRO' ]
 
 res_diff_Cb = [ 'THR', 'ALA', 'VAL', 'ILE' ]
@@ -166,6 +166,7 @@ def get_dihedrals(resname):
     return library._aa_dihedrals[resname]
 
 def set_dihedral(atoms,mol,phi):
+    print atoms[0].name,atoms[1].name,atoms[2].name
     a1 = atoms[0]
     a2 = atoms[1]
     a3 = atoms[2]
@@ -219,9 +220,10 @@ def do_fit(m1,dihed1,m2,dihed2):
 #                dih1[d] = foo[-1] + foo[0] + foo[1]
 
         atoms1 = m1.fetchm(dih1)
+	print "fetching"
         atoms2 = m2.fetchm(dih2)
-#	print dih2
-#	print atoms2
+	print dih2
+	print atoms2
         a1,a2,a3,a4 = atoms1
         if (a2.name, a3.name) not in bonds:
             phi = a1.dihedral(a2,a3,a4)
@@ -896,12 +898,18 @@ def rename_to_gmx( r ):
     while not res:
         res = check_double_atom_names( r )
 
-def rename_to_match_library( m ):
+def rename_to_match_library( m, bCharmm=False ):
     name_hash = {}
     for atom in m.atoms:
 	foo = atom.name
         if atom.name[0].isdigit():
             atom.name = atom.name[1:]+atom.name[0]
+	if bCharmm:
+	    print atom.name
+	    if (atom.resname == 'CYS') and (atom.name == 'HG1'):
+		atom.name = 'HG'
+            if (atom.resname == 'SER') and (atom.name == 'HG1'):
+                atom.name = 'HG'
 	name_hash[atom.name] = foo
     return name_hash
 	    
@@ -1118,13 +1126,14 @@ assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
 resn1_dih = m1.residues[0].resname
 if resn1_dih=='HIS' or resn1_dih=='HID' or resn1_dih=='HIE' or\
     resn1_dih=='HIP' or resn1_dih=='HISE' or resn1_dih=='HISD' or\
-    resn1_dih=='HISH' or resn1_dih=='HIS1':
+    resn1_dih=='HISH' or resn1_dih=='HIS1' or resn1_dih=='HSD' or\
+    resn1_dih=='HSE' or resn1_dih=='HSP':
     resn1_dih = 'HIS'
-elif resn1_dih=='LYN' or resn1_dih=='LYSH':
+elif resn1_dih=='LYN' or resn1_dih=='LYSH' or resn1_dih=='LSN':
     resn1_dih = 'LYS'
-elif resn1_dih=='ASH' or resn1_dih=='ASPH':
+elif resn1_dih=='ASH' or resn1_dih=='ASPH' or resn1_dih=='ASPP':
     resn1_dih = 'ASP'
-elif resn1_dih=='GLH' or resn1_dih=='GLUH':
+elif resn1_dih=='GLH' or resn1_dih=='GLUH' or resn1_dih=='GLUP':
     resn1_dih = 'GLU'
 elif resn1_dih=='CYSH':
     resn1_dih = 'CYS'
@@ -1132,13 +1141,14 @@ elif resn1_dih=='CYSH':
 resn2_dih = m2.residues[0].resname
 if resn2_dih=='HIS' or resn2_dih=='HID' or resn2_dih=='HIE' or\
     resn2_dih=='HIP' or resn2_dih=='HISE' or resn2_dih=='HISD' or\
-    resn2_dih=='HISH' or resn2_dih=='HIS1':
+    resn2_dih=='HISH' or resn2_dih=='HIS1' or resn2_dih=='HSD' or\
+    resn2_dih=='HSE' or resn2_dih=='HSP':
     resn2_dih = 'HIS'
-elif resn2_dih=='LYN' or resn2_dih=='LYSH':
+elif resn2_dih=='LYN' or resn2_dih=='LYSH' or resn2_dih=='LSN':
     resn2_dih = 'LYS'
-elif resn2_dih=='ASH' or resn2_dih=='ASPH':
+elif resn2_dih=='ASH' or resn2_dih=='ASPH' or resn2_dih=='ASPP':
     resn2_dih = 'ASP'
-elif resn2_dih=='GLH' or resn2_dih=='GLUH':
+elif resn2_dih=='GLH' or resn2_dih=='GLUH' or resn2_dih=='GLUP':
     resn2_dih = 'GLU'
 elif resn2_dih=='CYSH':
     resn2_dih = 'CYS'
@@ -1158,8 +1168,8 @@ if align:
         atom.max_rot = max_rot
     for atom in m1.atoms:
         atom.max_rot = max_rot1
-    hash1 = rename_to_match_library(m1)
-    hash2 = rename_to_match_library(m2)
+    hash1 = rename_to_match_library(m1, bCharmm)
+    hash2 = rename_to_match_library(m2, bCharmm)
     do_fit(m1.residues[0],dihed1,m2.residues[0],dihed2)
     rename_back(m1,hash1)
     rename_back(m2,hash2)

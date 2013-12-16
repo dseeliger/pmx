@@ -248,6 +248,28 @@ def convert_aa_name( aa ):
     elif len(aa) == 4: return ext_one_letter[aa.upper()]
     else: raise UnkownResidueError(aa)
     
+def rename_to_match_library(res):
+    name_hash = {}
+    atoms = res.atoms
+    for atom in atoms:
+	foo = atom.name
+	## for serine
+	if (atom.resname == 'SER') and (atom.name == 'HG1'):
+	    atom.name = 'HG'
+        if ('S2' in atom.resname) and (atom.name == 'HG1'):
+            atom.name = 'HG'
+	## for cysteine
+        if (atom.resname == 'CYS') and (atom.name == 'HG1'):
+            atom.name = 'HG'
+        if ('C2' in atom.resname) and (atom.name == 'HG1'):
+            atom.name = 'HG'
+#	print atom.resname,atom.name
+	name_hash[atom.name] = foo
+    return name_hash
+
+def rename_back( res, name_hash ):
+    for atom in res.atoms:
+        atom.name = name_hash[atom.name]
 
 def set_conformation(old_res, new_res, rotdic):
     old_res.get_real_resname()
@@ -307,7 +329,15 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file):
     hybrid_res, bonds, imps, diheds, rotdic = get_hybrid_residue(hybrid_residue_name, mtp_file)
     #hybrid_res.nm2a()
     bb_super(residue, hybrid_res )
+
+    ## VG rename residue atoms
+    hash1 = rename_to_match_library(residue)
+    hash2 = rename_to_match_library(hybrid_res)
     set_conformation(residue, hybrid_res, rotdic)
+    rename_back(residue,hash1)
+    rename_back(hybrid_res,hash2)
+    ## VG rename residue atoms back
+
     m.replace_residue( residue, hybrid_res)
     print 'log_> Inserted hybrid residue %s at position %d (chain %s)' %\
           (hybrid_res.resname, hybrid_res.id, hybrid_res.chain_id)

@@ -178,16 +178,19 @@
    HB3   HC                0.06030  8
      C   C                 0.59730  9
      O   O                -0.56790  10
-  DCD1   DUM_CA            0.00000  11
-  DHD1   DUM_HA            0.00000  12
-  DCD2   DUM_CA            0.00000  13
-  DHD2   DUM_HA            0.00000  14
-  DCE1   DUM_CA            0.00000  15
-  DHE1   DUM_HA            0.00000  16
-  DCE2   DUM_CA            0.00000  17
-  DHE2   DUM_HA            0.00000  18
-   DCZ   DUM_CA            0.00000  19
-   DHZ   DUM_HA            0.00000  20
+  DHB1   DUM_HC            0.00000  11
+  DHB2   DUM_HC            0.00000  12
+   DCG   DUM_CA            0.00000  13
+  DCD1   DUM_CA            0.00000  14
+  DHD1   DUM_HA            0.00000  15
+  DCD2   DUM_CA            0.00000  16
+  DHD2   DUM_HA            0.00000  17
+  DCE1   DUM_CA            0.00000  18
+  DHE1   DUM_HA            0.00000  19
+  DCE2   DUM_CA            0.00000  20
+  DHE2   DUM_HA            0.00000  21
+   DCZ   DUM_CA            0.00000  22
+   DHZ   DUM_HA            0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -195,12 +198,15 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      CG)
-    CB     HB2 ; (    CB     HB1)
-    CB     HB3 ; (    CB     HB2)
-   HB1    DCD1 ; (    CG     CD1)
-   HB1    DCD2 ; (    CG     CD2)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB     HB3 ; (    CB  HB.gone3)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
   DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
@@ -215,12 +221,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-   HB1    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
   DCD1     DCZ    DCE1    DHE1 
-   HB1    DCE1    DCD1    DHD1 
-  DCD1    DCD2     HB1      CB 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -1326,14 +1332,17 @@
    HD2   HO                0.47470  11
      C   C                 0.59730  12
      O   O                -0.56790  13
-  DHD1   DUM_HA            0.00000  14
-  DHD2   DUM_HA            0.00000  15
-  DCE1   DUM_CA            0.00000  16
-  DHE1   DUM_HA            0.00000  17
-  DCE2   DUM_CA            0.00000  18
-  DHE2   DUM_HA            0.00000  19
-   DCZ   DUM_CA            0.00000  20
-   DHZ   DUM_HA            0.00000  21
+   DCG   DUM_CA            0.00000  14
+  DCD1   DUM_CA            0.00000  15
+  DHD1   DUM_HA            0.00000  16
+  DCD2   DUM_CA            0.00000  17
+  DHD2   DUM_HA            0.00000  18
+  DCE1   DUM_CA            0.00000  19
+  DHE1   DUM_HA            0.00000  20
+  DCE2   DUM_CA            0.00000  21
+  DHE2   DUM_HA            0.00000  22
+   DCZ   DUM_CA            0.00000  23
+   DHZ   DUM_HA            0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -1343,15 +1352,18 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     OD1 ; (    CG     CD1)
-    CG     OD2 ; (    CG     CD2)
-   OD1    DHD1 ; (   CD1     HD1)
-   OD1    DCE1 ; (   CD1     CE1)
-   OD2     HD2 ; (   CD2  HD2.gone)
-   OD2    DHD2 ; (   CD2     HD2)
-   OD2    DCE2 ; (   CD2     CE2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     OD1 ; (CG.gone  OD1.gone)
+    CG     OD2 ; (CG.gone  OD2.gone)
+   OD2     HD2 ; (OD2.gone  HD2.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
+  DCD2    DCE2 ; (   CD2     CE2)
+  DCD2    DHD2 ; (   CD2     HD2)
   DCE1    DHE1 ; (   CE1     HE1)
   DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
@@ -1363,12 +1375,12 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CB     OD1      CG     OD2 
-    CG    DCE2     OD2    DHD2 
-   DCZ     OD2    DCE2    DHE2 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
-   OD1     DCZ    DCE1    DHE1 
-    CG    DCE1     OD1    DHD1 
-   OD1     OD2      CG      CB  undefined                
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -2546,15 +2558,17 @@
     HG   HS                0.19330  9
      C   C                 0.59730  10
      O   O                -0.56790  11
-  DHD1   DUM_HA            0.00000  12
-  DCD2   DUM_CA            0.00000  13
-  DHD2   DUM_HA            0.00000  14
-  DCE1   DUM_CA            0.00000  15
-  DHE1   DUM_HA            0.00000  16
-  DCE2   DUM_CA            0.00000  17
-  DHE2   DUM_HA            0.00000  18
-   DCZ   DUM_CA            0.00000  19
-   DHZ   DUM_HA            0.00000  20
+   DCG   DUM_CA            0.00000  12
+  DCD1   DUM_CA            0.00000  13
+  DHD1   DUM_HA            0.00000  14
+  DCD2   DUM_CA            0.00000  15
+  DHD2   DUM_HA            0.00000  16
+  DCE1   DUM_CA            0.00000  17
+  DHE1   DUM_HA            0.00000  18
+  DCE2   DUM_CA            0.00000  19
+  DHE2   DUM_HA            0.00000  20
+   DCZ   DUM_CA            0.00000  21
+   DHZ   DUM_HA            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -2564,12 +2578,14 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      SG ; (    CB      CG)
-    SG      HG ; (    CG     CD1)
-    SG    DCD2 ; (    CG     CD2)
-    HG    DHD1 ; (   CD1     HD1)
-    HG    DCE1 ; (   CD1     CE1)
+    CB      SG ; (    CB  SG.gone)
+    CB     DCG ; (    CB      CG)
+    SG      HG ; (SG.gone  HG.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
   DCE1    DHE1 ; (   CE1     HE1)
@@ -2582,12 +2598,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    SG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
-    HG     DCZ    DCE1    DHE1 
-    SG    DCE1      HG    DHD1 
-    HG    DCD2      SG      CB 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -3678,14 +3694,17 @@
    OD2   O2               -0.80140  10
      C   C                 0.53660  11
      O   O                -0.58190  12
-  DHD1   DUM_HA            0.00000  13
-  DHD2   DUM_HA            0.00000  14
-  DCE1   DUM_CA            0.00000  15
-  DHE1   DUM_HA            0.00000  16
-  DCE2   DUM_CA            0.00000  17
-  DHE2   DUM_HA            0.00000  18
-   DCZ   DUM_CA            0.00000  19
-   DHZ   DUM_HA            0.00000  20
+   DCG   DUM_CA            0.00000  13
+  DCD1   DUM_CA            0.00000  14
+  DHD1   DUM_HA            0.00000  15
+  DCD2   DUM_CA            0.00000  16
+  DHD2   DUM_HA            0.00000  17
+  DCE1   DUM_CA            0.00000  18
+  DHE1   DUM_HA            0.00000  19
+  DCE2   DUM_CA            0.00000  20
+  DHE2   DUM_HA            0.00000  21
+   DCZ   DUM_CA            0.00000  22
+   DHZ   DUM_HA            0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -3695,14 +3714,17 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     OD1 ; (    CG     CD1)
-    CG     OD2 ; (    CG     CD2)
-   OD1    DHD1 ; (   CD1     HD1)
-   OD1    DCE1 ; (   CD1     CE1)
-   OD2    DHD2 ; (   CD2     HD2)
-   OD2    DCE2 ; (   CD2     CE2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     OD1 ; (CG.gone  OD1.gone)
+    CG     OD2 ; (CG.gone  OD2.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
+  DCD2    DCE2 ; (   CD2     CE2)
+  DCD2    DHD2 ; (   CD2     HD2)
   DCE1    DHE1 ; (   CE1     HE1)
   DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
@@ -3714,12 +3736,12 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CB     OD1      CG     OD2 
-    CG    DCE2     OD2    DHD2 
-   DCZ     OD2    DCE2    DHE2 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
-   OD1     DCZ    DCE1    DHE1 
-    CG    DCE1     OD1    DHD1 
-   OD1     OD2      CG      CB  undefined                
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -4886,13 +4908,17 @@
    OE2   O2               -0.81880  13
      C   C                 0.53660  14
      O   O                -0.58190  15
-  DCD2   DUM_CA            0.00000  16
-  DHD2   DUM_HA            0.00000  17
-  DHE1   DUM_HA            0.00000  18
-  DCE2   DUM_CA            0.00000  19
-  DHE2   DUM_HA            0.00000  20
-   DCZ   DUM_CA            0.00000  21
-   DHZ   DUM_HA            0.00000  22
+   DCG   DUM_CA            0.00000  16
+  DCD1   DUM_CA            0.00000  17
+  DHD1   DUM_HA            0.00000  18
+  DCD2   DUM_CA            0.00000  19
+  DHD2   DUM_HA            0.00000  20
+  DCE1   DUM_CA            0.00000  21
+  DHE1   DUM_HA            0.00000  22
+  DCE2   DUM_CA            0.00000  23
+  DHE2   DUM_HA            0.00000  24
+   DCZ   DUM_CA            0.00000  25
+   DHZ   DUM_HA            0.00000  26
 
  [ bonds ]
      N       H ; (     N       H)
@@ -4902,18 +4928,22 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     OE1 ; (   CD1     HD1)
-    CD     OE2 ; (   CD1     CE1)
-   OE2    DHE1 ; (   CE1     HE1)
-   OE2     DCZ ; (   CE1      CZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     OE1 ; (CD.gone  OE1.gone)
+    CD     OE2 ; (CD.gone  OE2.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
@@ -4923,12 +4953,12 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CG     OE1      CD     OE2 
-    CG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
-   OE2    DCE2     DCZ     DHZ 
-    CD     DCZ     OE2    DHE1 
-    CG     OE2      CD     OE1  undefined                
-    CD    DCD2      CG      CB 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -5981,6 +6011,9 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
+  DHB1   DUM_HC            0.00000  21
+  DHB2   DUM_HC            0.00000  22
+  DHB3   DUM_HC            0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -5988,11 +6021,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB     HB2)
-    CB     HB2 ; (    CB     HB3)
-    CB      CG ; (    CB     HB1)
-    CG     CD1 ; (   HB1  CD1.gone)
-    CG     CD2 ; (   HB1  CD2.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB    DHB3 ; (    CB     HB3)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
    CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
@@ -6040,7 +6076,10 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHD2   DUM_HO            0.00000  21
+   DCG   DUM_C             0.00000  21
+  DOD1   DUM_O             0.00000  22
+  DOD2   DUM_OH            0.00000  23
+  DHD2   DUM_HO            0.00000  24
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6050,20 +6089,23 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG     OD1)
-    CG     CD2 ; (    CG     OD2)
-   CD1     HD1 ; (   OD1  HD1.gone)
-   CD1     CE1 ; (   OD1  CE1.gone)
-   CD2     CE2 ; (   OD2  CE2.gone)
-   CD2     HD2 ; (   OD2  HD2.gone)
-   CD2    DHD2 ; (   OD2     HD2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
+   CD2     CE2 ; (CD2.gone  CE2.gone)
+   CD2     HD2 ; (CD2.gone  HD2.gone)
    CE1     HE1 ; (CE1.gone  HE1.gone)
    CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DOD1 ; (    CG     OD1)
+   DCG    DOD2 ; (    CG     OD2)
+  DOD2    DHD2 ; (   OD2     HD2)
     -C       N  
 
  [ impropers ]
@@ -6075,7 +6117,7 @@
    CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-    CB     CD1      CG     CD2  undefined                
+    CB    DOD1     DCG    DOD2 
 
  [ dihedrals ]
 
@@ -6102,6 +6144,8 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
+   DSG   DUM_SH            0.00000  21
+   DHG   DUM_HS            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6111,11 +6155,12 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      SG)
-    CG     CD1 ; (    SG      HG)
-    CG     CD2 ; (    SG  CD2.gone)
-   CD1     HD1 ; (    HG  HD1.gone)
-   CD1     CE1 ; (    HG  CE1.gone)
+    CB      CG ; (    CB  CG.gone)
+    CB     DSG ; (    CB      SG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
    CE1     HE1 ; (CE1.gone  HE1.gone)
@@ -6124,6 +6169,7 @@
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DSG     DHG ; (    SG      HG)
     -C       N  
 
  [ impropers ]
@@ -6161,6 +6207,9 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
+   DCG   DUM_C             0.00000  21
+  DOD1   DUM_O2            0.00000  22
+  DOD2   DUM_O2            0.00000  23
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6170,19 +6219,22 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG     OD1)
-    CG     CD2 ; (    CG     OD2)
-   CD1     HD1 ; (   OD1  HD1.gone)
-   CD1     CE1 ; (   OD1  CE1.gone)
-   CD2     CE2 ; (   OD2  CE2.gone)
-   CD2     HD2 ; (   OD2  HD2.gone)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
+   CD2     CE2 ; (CD2.gone  CE2.gone)
+   CD2     HD2 ; (CD2.gone  HD2.gone)
    CE1     HE1 ; (CE1.gone  HE1.gone)
    CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DOD1 ; (    CG     OD1)
+   DCG    DOD2 ; (    CG     OD2)
     -C       N  
 
  [ impropers ]
@@ -6194,7 +6246,7 @@
    CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-    CB     CD1      CG     CD2  undefined                
+    CB    DOD1     DCG    DOD2 
 
  [ dihedrals ]
 
@@ -6221,8 +6273,12 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_C             0.00000  24
+  DOE1   DUM_O2            0.00000  25
+  DOE2   DUM_O2            0.00000  26
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6232,21 +6288,25 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD     OE1)
-   CD1     CE1 ; (    CD     OE2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (   OE2  HE1.gone)
-   CE1      CZ ; (   OE2  CZ.gone)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DOE1 ; (    CD     OE1)
+   DCD    DOE2 ; (    CD     OE2)
     -C       N  
 
  [ impropers ]
@@ -6258,7 +6318,7 @@
    CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-    CG     HD1     CD1     CE1  undefined                
+   DCG    DOE1     DCD    DOE2 
 
  [ dihedrals ]
 
@@ -6285,16 +6345,20 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
+  DHA1   DUM_H1            0.00000  21
+  DHA2   DUM_H1            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
      N      CA ; (     N      CA)
-    CA      HA ; (    CA     HA1)
-    CA      CB ; (    CA     HA2)
+    CA      HA ; (    CA  HA.gone)
+    CA      CB ; (    CA  CB.gone)
     CA       C ; (    CA       C)
-    CB     HB1 ; (   HA2  HB.gone1)
-    CB     HB2 ; (   HA2  HB.gone2)
-    CB      CG ; (   HA2  CG.gone)
+    CA    DHA1 ; (    CA     HA1)
+    CA    DHA2 ; (    CA     HA2)
+    CB     HB1 ; (CB.gone  HB.gone1)
+    CB     HB2 ; (CB.gone  HB.gone2)
+    CB      CG ; (CB.gone  CG.gone)
     CG     CD1 ; (CG.gone  CD1.gone)
     CG     CD2 ; (CG.gone  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
@@ -6422,13 +6486,18 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHG3   DUM_HC            0.00000  23
-  DHG4   DUM_HC            0.00000  24
-  DHG5   DUM_HC            0.00000  25
-  DHD2   DUM_HC            0.00000  26
-  DHD3   DUM_HC            0.00000  27
+   DHB   DUM_HC            0.00000  21
+  DCG1   DUM_CT            0.00000  22
+  DHG1   DUM_HC            0.00000  23
+  DHG2   DUM_HC            0.00000  24
+  DCG2   DUM_CT            0.00000  25
+  DHG3   DUM_HC            0.00000  26
+  DHG4   DUM_HC            0.00000  27
+  DHG5   DUM_HC            0.00000  28
+  DCD1   DUM_CT            0.00000  29
+  DHD1   DUM_HC            0.00000  30
+  DHD2   DUM_HC            0.00000  31
+  DHD3   DUM_HC            0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6436,28 +6505,33 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      HB)
-    CB     HB2 ; (    CB     CG2)
-    CB      CG ; (    CB     CG1)
-   HB2    DHG3 ; (   CG2    HG21)
-   HB2    DHG4 ; (   CG2    HG22)
-   HB2    DHG5 ; (   CG2    HG23)
-    CG     CD1 ; (   CG1     CD1)
-    CG     CD2 ; (   CG1  CD2.gone)
-    CG    DHG1 ; (   CG1    HG11)
-    CG    DHG2 ; (   CG1    HG12)
-   CD1     HD1 ; (   CD1  HD1.gone)
-   CD1     CE1 ; (   CD1    HD11)
-   CD1    DHD2 ; (   CD1    HD12)
-   CD1    DHD3 ; (   CD1    HD13)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DHB ; (    CB      HB)
+    CB    DCG1 ; (    CB     CG1)
+    CB    DCG2 ; (    CB     CG2)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (  HD11  HE1.gone)
-   CE1      CZ ; (  HD11  CZ.gone)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+  DCG1    DHG1 ; (   CG1    HG11)
+  DCG1    DHG2 ; (   CG1    HG12)
+  DCG1    DCD1 ; (   CG1     CD1)
+  DCG2    DHG3 ; (   CG2    HG21)
+  DCG2    DHG4 ; (   CG2    HG22)
+  DCG2    DHG5 ; (   CG2    HG23)
+  DCD1    DHD1 ; (   CD1    HD11)
+  DCD1    DHD2 ; (   CD1    HD12)
+  DCD1    DHD3 ; (   CD1    HD13)
     -C       N  
 
  [ impropers ]
@@ -6495,9 +6569,13 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHE2   DUM_HO            0.00000  23
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_C             0.00000  24
+  DOE1   DUM_O             0.00000  25
+  DOE2   DUM_OH            0.00000  26
+  DHE2   DUM_HO            0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6507,33 +6585,38 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD     OE2)
-   CD1     CE1 ; (    CD     OE1)
-   HD1    DHE2 ; (   OE2     HE2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (   OE1  HE1.gone)
-   CE1      CZ ; (   OE1  CZ.gone)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DOE1 ; (    CD     OE1)
+   DCD    DOE2 ; (    CD     OE2)
+  DOE2    DHE2 ; (   OE2     HE2)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CG     CE1     CD1     HD1 
     CG     CE2     CD2     HD2 
     CZ     CD2     CE2     HE2 
    CE1     CE2      CZ      HZ 
    CD1      CZ     CE1     HE1 
+    CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
+   DCG    DOE1     DCD    DOE2 
 
  [ dihedrals ]
 
@@ -6560,15 +6643,19 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHD1   DUM_HC            0.00000  23
-  DHD2   DUM_HC            0.00000  24
-  DHE1   DUM_HP            0.00000  25
-  DHE2   DUM_HP            0.00000  26
-  DHZ1   DUM_H             0.00000  27
-  DHZ2   DUM_H             0.00000  28
-  DHZ3   DUM_H             0.00000  29
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_CT            0.00000  24
+  DHD1   DUM_HC            0.00000  25
+  DHD2   DUM_HC            0.00000  26
+   DCE   DUM_CT            0.00000  27
+  DHE1   DUM_HP            0.00000  28
+  DHE2   DUM_HP            0.00000  29
+   DNZ   DUM_N3            0.00000  30
+  DHZ1   DUM_H             0.00000  31
+  DHZ2   DUM_H             0.00000  32
+  DHZ3   DUM_H             0.00000  33
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6578,28 +6665,32 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD  HD1.gone)
-   CD1     CE1 ; (    CD      CE)
-   CD1    DHD1 ; (    CD     HD1)
-   CD1    DHD2 ; (    CD     HD2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (    CE  HE1.gone)
-   CE1      CZ ; (    CE      NZ)
-   CE1    DHE1 ; (    CE     HE1)
-   CE1    DHE2 ; (    CE     HE2)
-   CE2      CZ ; (CE2.gone      NZ)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
+   CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
-    CZ      HZ ; (    NZ  HZ.gone)
-    CZ    DHZ1 ; (    NZ     HZ1)
-    CZ    DHZ2 ; (    NZ     HZ2)
-    CZ    DHZ3 ; (    NZ     HZ3)
+    CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DHD1 ; (    CD     HD1)
+   DCD    DHD2 ; (    CD     HD2)
+   DCD     DCE ; (    CD      CE)
+   DCE    DHE1 ; (    CE     HE1)
+   DCE    DHE2 ; (    CE     HE2)
+   DCE     DNZ ; (    CE      NZ)
+   DNZ    DHZ1 ; (    NZ     HZ1)
+   DNZ    DHZ2 ; (    NZ     HZ2)
+   DNZ    DHZ3 ; (    NZ     HZ3)
     -C       N  
 
  [ impropers ]
@@ -6637,13 +6728,16 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-   DHG   DUM_HC            0.00000  21
-  DHD1   DUM_HC            0.00000  22
-  DHD2   DUM_HC            0.00000  23
-  DCD2   DUM_CT            0.00000  24
-  DHD3   DUM_HC            0.00000  25
-  DHD4   DUM_HC            0.00000  26
-  DHD5   DUM_HC            0.00000  27
+   DCG   DUM_CT            0.00000  21
+   DHG   DUM_HC            0.00000  22
+  DCD1   DUM_CT            0.00000  23
+  DHD1   DUM_HC            0.00000  24
+  DHD2   DUM_HC            0.00000  25
+  DHD3   DUM_HC            0.00000  26
+  DCD2   DUM_CT            0.00000  27
+  DHD4   DUM_HC            0.00000  28
+  DHD5   DUM_HC            0.00000  29
+  DHD6   DUM_HC            0.00000  30
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6653,26 +6747,29 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG     CD1)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG     DHG ; (    CG      HG)
-    CG    DCD2 ; (    CG     CD2)
-   CD1     HD1 ; (   CD1  HD1.gone)
-   CD1     CE1 ; (   CD1    HD11)
-   CD1    DHD1 ; (   CD1    HD12)
-   CD1    DHD2 ; (   CD1    HD13)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (  HD11  HE1.gone)
-   CE1      CZ ; (  HD11  CZ.gone)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
-  DCD2    DHD3 ; (   CD2    HD21)
-  DCD2    DHD4 ; (   CD2    HD22)
-  DCD2    DHD5 ; (   CD2    HD23)
+   DCG     DHG ; (    CG      HG)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1    HD11)
+  DCD1    DHD2 ; (   CD1    HD12)
+  DCD1    DHD3 ; (   CD1    HD13)
+  DCD2    DHD4 ; (   CD2    HD21)
+  DCD2    DHD5 ; (   CD2    HD22)
+  DCD2    DHD6 ; (   CD2    HD23)
     -C       N  
 
  [ impropers ]
@@ -6710,10 +6807,14 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_H1            0.00000  21
-  DHG2   DUM_H1            0.00000  22
-  DHE2   DUM_H1            0.00000  23
-  DHE3   DUM_H1            0.00000  24
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_H1            0.00000  22
+  DHG2   DUM_H1            0.00000  23
+   DSD   DUM_S             0.00000  24
+   DCE   DUM_CT            0.00000  25
+  DHE1   DUM_H1            0.00000  26
+  DHE2   DUM_H1            0.00000  27
+  DHE3   DUM_H1            0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6723,23 +6824,27 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      SD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    SD  HD1.gone)
-   CD1     CE1 ; (    SD      CE)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (    CE  HE1.gone)
-   CE1      CZ ; (    CE     HE1)
-   CE1    DHE2 ; (    CE     HE2)
-   CE1    DHE3 ; (    CE     HE3)
-   CE2      CZ ; (CE2.gone     HE1)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
+   CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
-    CZ      HZ ; (   HE1  HZ.gone)
+    CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DSD ; (    CG      SD)
+   DSD     DCE ; (    SD      CE)
+   DCE    DHE1 ; (    CE     HE1)
+   DCE    DHE2 ; (    CE     HE2)
+   DCE    DHE3 ; (    CE     HE3)
     -C       N  
 
  [ impropers ]
@@ -6777,6 +6882,11 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
+   DCG   DUM_C             0.00000  21
+  DOD1   DUM_O             0.00000  22
+  DND2   DUM_N             0.00000  23
+  DHD1   DUM_H             0.00000  24
+  DHD2   DUM_H             0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6786,19 +6896,24 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG     OD1)
-    CG     CD2 ; (    CG     ND2)
-   CD1     HD1 ; (   OD1  HD1.gone)
-   CD1     CE1 ; (   OD1  CE1.gone)
-   CD2     CE2 ; (   ND2    HD22)
-   CD2     HD2 ; (   ND2    HD21)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
+   CD2     CE2 ; (CD2.gone  CE2.gone)
+   CD2     HD2 ; (CD2.gone  HD2.gone)
    CE1     HE1 ; (CE1.gone  HE1.gone)
    CE1      CZ ; (CE1.gone  CZ.gone)
-   CE2      CZ ; (  HD22  CZ.gone)
-   CE2     HE2 ; (  HD22  HE2.gone)
+   CE2      CZ ; (CE2.gone  CZ.gone)
+   CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DOD1 ; (    CG     OD1)
+   DCG    DND2 ; (    CG     ND2)
+  DND2    DHD1 ; (   ND2    HD21)
+  DND2    DHD2 ; (   ND2    HD22)
     -C       N  
 
  [ impropers ]
@@ -6810,8 +6925,8 @@
    CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-    CB     CD2      CG     CD1  undefined                
-    CG     HD2     CD2     CE2  undefined                
+    CB    DND2     DCG    DOD1 
+   DCG    DHD1    DND2    DHD2 
 
  [ dihedrals ]
 
@@ -6838,14 +6953,18 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHD1   DUM_HC            0.00000  23
-  DHD2   DUM_HC            0.00000  24
-  DHE1   DUM_HP            0.00000  25
-  DHE2   DUM_HP            0.00000  26
-  DHZ1   DUM_H             0.00000  27
-  DHZ2   DUM_H             0.00000  28
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_CT            0.00000  24
+  DHD1   DUM_HC            0.00000  25
+  DHD2   DUM_HC            0.00000  26
+   DCE   DUM_CT            0.00000  27
+  DHE1   DUM_HP            0.00000  28
+  DHE2   DUM_HP            0.00000  29
+   DNZ   DUM_N3            0.00000  30
+  DHZ1   DUM_H             0.00000  31
+  DHZ2   DUM_H             0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6855,27 +6974,31 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD  HD1.gone)
-   CD1     CE1 ; (    CD      CE)
-   CD1    DHD1 ; (    CD     HD1)
-   CD1    DHD2 ; (    CD     HD2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (    CE  HE1.gone)
-   CE1      CZ ; (    CE      NZ)
-   CE1    DHE1 ; (    CE     HE1)
-   CE1    DHE2 ; (    CE     HE2)
-   CE2      CZ ; (CE2.gone      NZ)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
+   CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
-    CZ      HZ ; (    NZ  HZ.gone)
-    CZ    DHZ1 ; (    NZ     HZ1)
-    CZ    DHZ2 ; (    NZ     HZ2)
+    CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DHD1 ; (    CD     HD1)
+   DCD    DHD2 ; (    CD     HD2)
+   DCD     DCE ; (    CD      CE)
+   DCE    DHE1 ; (    CE     HE1)
+   DCE    DHE2 ; (    CE     HE2)
+   DCE     DNZ ; (    CE      NZ)
+   DNZ    DHZ1 ; (    NZ     HZ1)
+   DNZ    DHZ2 ; (    NZ     HZ2)
     -C       N  
 
  [ impropers ]
@@ -6913,10 +7036,14 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHE1   DUM_H             0.00000  23
-  DHE2   DUM_H             0.00000  24
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_C             0.00000  24
+  DOE1   DUM_O             0.00000  25
+  DNE2   DUM_N             0.00000  26
+  DHE1   DUM_H             0.00000  27
+  DHE2   DUM_H             0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -6926,23 +7053,27 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD     NE2)
-   CD1     CE1 ; (    CD     OE1)
-   HD1    DHE1 ; (   NE2    HE21)
-   HD1    DHE2 ; (   NE2    HE22)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (   OE1  HE1.gone)
-   CE1      CZ ; (   OE1  CZ.gone)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
    CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DOE1 ; (    CD     OE1)
+   DCD    DNE2 ; (    CD     NE2)
+  DNE2    DHE1 ; (   NE2    HE21)
+  DNE2    DHE2 ; (   NE2    HE22)
     -C       N  
 
  [ impropers ]
@@ -6954,8 +7085,8 @@
    CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-    CG     HD1     CD1     CE1  undefined                
-   CD1    DHE1     HD1    DHE2 
+   DCG    DNE2     DCD    DOE1 
+   DCD    DHE1    DNE2    DHE2 
 
  [ dihedrals ]
 
@@ -6982,15 +7113,21 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHD1   DUM_H1            0.00000  23
-  DHD2   DUM_H1            0.00000  24
-  DNH1   DUM_N2            0.00000  25
-  DHH1   DUM_H             0.00000  26
-  DHH2   DUM_H             0.00000  27
-  DHH3   DUM_H             0.00000  28
-  DHH4   DUM_H             0.00000  29
+   DCG   DUM_CT            0.00000  21
+  DHG1   DUM_HC            0.00000  22
+  DHG2   DUM_HC            0.00000  23
+   DCD   DUM_CT            0.00000  24
+  DHD1   DUM_H1            0.00000  25
+  DHD2   DUM_H1            0.00000  26
+   DNE   DUM_N2            0.00000  27
+   DHE   DUM_H             0.00000  28
+   DCZ   DUM_CA            0.00000  29
+  DNH1   DUM_N2            0.00000  30
+  DHH1   DUM_H             0.00000  31
+  DHH2   DUM_H             0.00000  32
+  DNH2   DUM_N2            0.00000  33
+  DHH3   DUM_H             0.00000  34
+  DHH4   DUM_H             0.00000  35
 
  [ bonds ]
      N       H ; (     N       H)
@@ -7000,42 +7137,49 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     CD1 ; (    CG      CD)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DHG1 ; (    CG     HG1)
-    CG    DHG2 ; (    CG     HG2)
-   CD1     HD1 ; (    CD  HD1.gone)
-   CD1     CE1 ; (    CD      NE)
-   CD1    DHD1 ; (    CD     HD1)
-   CD1    DHD2 ; (    CD     HD2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
-   CE1     HE1 ; (    NE      HE)
-   CE1      CZ ; (    NE      CZ)
-   CE2      CZ ; (CE2.gone      CZ)
+   CE1     HE1 ; (CE1.gone  HE1.gone)
+   CE1      CZ ; (CE1.gone  CZ.gone)
+   CE2      CZ ; (CE2.gone  CZ.gone)
    CE2     HE2 ; (CE2.gone  HE2.gone)
-    CZ      HZ ; (    CZ     NH2)
-    CZ    DNH1 ; (    CZ     NH1)
-    HZ    DHH3 ; (   NH2    HH21)
-    HZ    DHH4 ; (   NH2    HH22)
+    CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DCG    DHG1 ; (    CG     HG1)
+   DCG    DHG2 ; (    CG     HG2)
+   DCG     DCD ; (    CG      CD)
+   DCD    DHD1 ; (    CD     HD1)
+   DCD    DHD2 ; (    CD     HD2)
+   DCD     DNE ; (    CD      NE)
+   DNE     DHE ; (    NE      HE)
+   DNE     DCZ ; (    NE      CZ)
+   DCZ    DNH1 ; (    CZ     NH1)
+   DCZ    DNH2 ; (    CZ     NH2)
   DNH1    DHH1 ; (   NH1    HH11)
   DNH1    DHH2 ; (   NH1    HH12)
+  DNH2    DHH3 ; (   NH2    HH21)
+  DNH2    DHH4 ; (   NH2    HH22)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-   CD1      CZ     CE1     HE1 
     CG     CE2     CD2     HD2 
     CZ     CD2     CE2     HE2 
    CE1     CE2      CZ      HZ 
+   CD1      CZ     CE1     HE1 
     CG     CE1     CD1     HD1 
    CD1     CD2      CG      CB 
-   CE1    DNH1      CZ      HZ 
-    CZ    DHH1    DNH1    DHH2 
-    CZ    DHH3      HZ    DHH4 
+   DNE    DNH1     DCZ    DNH2 
+   DCD     DCZ     DNE     DHE 
+   DCZ    DHH1    DNH1    DHH2 
+   DCZ    DHH3    DNH2    DHH4 
 
  [ dihedrals ]
 
@@ -7062,7 +7206,8 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-   DHG   DUM_HO            0.00000  21
+   DOG   DUM_OH            0.00000  21
+   DHG   DUM_HO            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -7072,10 +7217,10 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      OG)
-    CG     CD1 ; (    OG  CD1.gone)
-    CG     CD2 ; (    OG  CD2.gone)
-    CG     DHG ; (    OG      HG)
+    CB      CG ; (    CB  CG.gone)
+    CB     DOG ; (    CB      OG)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
    CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
@@ -7086,6 +7231,7 @@
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+   DOG     DHG ; (    OG      HG)
     -C       N  
 
  [ impropers ]
@@ -7123,10 +7269,13 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HO            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHG3   DUM_HC            0.00000  23
-  DHG4   DUM_HC            0.00000  24
+   DHB   DUM_H1            0.00000  21
+  DOG1   DUM_OH            0.00000  22
+  DHG1   DUM_HO            0.00000  23
+  DCG2   DUM_CT            0.00000  24
+  DHG2   DUM_HC            0.00000  25
+  DHG3   DUM_HC            0.00000  26
+  DHG4   DUM_HC            0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -7134,15 +7283,14 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      HB)
-    CB     HB2 ; (    CB     CG2)
-    CB      CG ; (    CB     OG1)
-   HB2    DHG2 ; (   CG2    HG21)
-   HB2    DHG3 ; (   CG2    HG22)
-   HB2    DHG4 ; (   CG2    HG23)
-    CG     CD1 ; (   OG1  CD1.gone)
-    CG     CD2 ; (   OG1  CD2.gone)
-    CG    DHG1 ; (   OG1     HG1)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DHB ; (    CB      HB)
+    CB    DOG1 ; (    CB     OG1)
+    CB    DCG2 ; (    CB     CG2)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
    CD1     HD1 ; (CD1.gone  HD1.gone)
    CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
@@ -7153,6 +7301,10 @@
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+  DOG1    DHG1 ; (   OG1     HG1)
+  DCG2    DHG2 ; (   CG2    HG21)
+  DCG2    DHG3 ; (   CG2    HG22)
+  DCG2    DHG4 ; (   CG2    HG23)
     -C       N  
 
  [ impropers ]
@@ -7190,11 +7342,15 @@
     HZ   HA                0.12970  18
      C   C                 0.59730  19
      O   O                -0.56790  20
-  DHG1   DUM_HC            0.00000  21
-  DHG2   DUM_HC            0.00000  22
-  DHG3   DUM_HC            0.00000  23
-  DHG4   DUM_HC            0.00000  24
-  DHG5   DUM_HC            0.00000  25
+   DHB   DUM_HC            0.00000  21
+  DCG1   DUM_CT            0.00000  22
+  DHG1   DUM_HC            0.00000  23
+  DHG2   DUM_HC            0.00000  24
+  DHG3   DUM_HC            0.00000  25
+  DCG2   DUM_CT            0.00000  26
+  DHG4   DUM_HC            0.00000  27
+  DHG5   DUM_HC            0.00000  28
+  DHG6   DUM_HC            0.00000  29
 
  [ bonds ]
      N       H ; (     N       H)
@@ -7202,18 +7358,16 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB     HB1 ; (    CB      HB)
-    CB     HB2 ; (    CB     CG1)
-    CB      CG ; (    CB     CG2)
-   HB2    DHG1 ; (   CG1    HG11)
-   HB2    DHG2 ; (   CG1    HG12)
-   HB2    DHG3 ; (   CG1    HG13)
-    CG     CD1 ; (   CG2    HG21)
-    CG     CD2 ; (   CG2  CD2.gone)
-    CG    DHG4 ; (   CG2    HG22)
-    CG    DHG5 ; (   CG2    HG23)
-   CD1     HD1 ; (  HG21  HD1.gone)
-   CD1     CE1 ; (  HG21  CE1.gone)
+    CB     HB1 ; (    CB  HB.gone1)
+    CB     HB2 ; (    CB  HB.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DHB ; (    CB      HB)
+    CB    DCG1 ; (    CB     CG1)
+    CB    DCG2 ; (    CB     CG2)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1     HD1 ; (CD1.gone  HD1.gone)
+   CD1     CE1 ; (CD1.gone  CE1.gone)
    CD2     CE2 ; (CD2.gone  CE2.gone)
    CD2     HD2 ; (CD2.gone  HD2.gone)
    CE1     HE1 ; (CE1.gone  HE1.gone)
@@ -7222,6 +7376,12 @@
    CE2     HE2 ; (CE2.gone  HE2.gone)
     CZ      HZ ; (CZ.gone  HZ.gone)
      C       O ; (     C       O)
+  DCG1    DHG1 ; (   CG1    HG11)
+  DCG1    DHG2 ; (   CG1    HG12)
+  DCG1    DHG3 ; (   CG1    HG13)
+  DCG2    DHG4 ; (   CG2    HG21)
+  DCG2    DHG5 ; (   CG2    HG22)
+  DCG2    DHG6 ; (   CG2    HG23)
     -C       N  
 
  [ impropers ]
@@ -7750,30 +7910,34 @@
    HA2   H1                0.06980  5
      C   C                 0.59730  6
      O   O                -0.56790  7
-  DHB1   DUM_HC            0.00000  8
-  DHB2   DUM_HC            0.00000  9
-   DCG   DUM_CA            0.00000  10
-  DCD1   DUM_CA            0.00000  11
-  DHD1   DUM_HA            0.00000  12
-  DCD2   DUM_CA            0.00000  13
-  DHD2   DUM_HA            0.00000  14
-  DCE1   DUM_CA            0.00000  15
-  DHE1   DUM_HA            0.00000  16
-  DCE2   DUM_CA            0.00000  17
-  DHE2   DUM_HA            0.00000  18
-   DCZ   DUM_CA            0.00000  19
-   DHZ   DUM_HA            0.00000  20
+   DHA   DUM_H1            0.00000  8
+   DCB   DUM_CT            0.00000  9
+  DHB1   DUM_HC            0.00000  10
+  DHB2   DUM_HC            0.00000  11
+   DCG   DUM_CA            0.00000  12
+  DCD1   DUM_CA            0.00000  13
+  DHD1   DUM_HA            0.00000  14
+  DCD2   DUM_CA            0.00000  15
+  DHD2   DUM_HA            0.00000  16
+  DCE1   DUM_CA            0.00000  17
+  DHE1   DUM_HA            0.00000  18
+  DCE2   DUM_CA            0.00000  19
+  DHE2   DUM_HA            0.00000  20
+   DCZ   DUM_CA            0.00000  21
+   DHZ   DUM_HA            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
      N      CA ; (     N      CA)
-    CA     HA1 ; (    CA      HA)
-    CA     HA2 ; (    CA      CB)
+    CA     HA1 ; (    CA  HA.gone1)
+    CA     HA2 ; (    CA  HA.gone2)
     CA       C ; (    CA       C)
-   HA2    DHB1 ; (    CB     HB1)
-   HA2    DHB2 ; (    CB     HB2)
-   HA2     DCG ; (    CB      CG)
+    CA     DHA ; (    CA      HA)
+    CA     DCB ; (    CA      CB)
      C       O ; (     C       O)
+   DCB    DHB1 ; (    CB     HB1)
+   DCB    DHB2 ; (    CB     HB2)
+   DCB     DCG ; (    CB      CG)
    DCG    DCD1 ; (    CG     CD1)
    DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
@@ -7795,7 +7959,7 @@
   DCE1    DCE2     DCZ     DHZ 
   DCD1     DCZ    DCE1    DHE1 
    DCG    DCE1    DCD1    DHD1 
-  DCD1    DCD2     DCG     HA2 
+  DCD1    DCD2     DCG     DCB 
 
  [ dihedrals ]
 
@@ -10503,14 +10667,19 @@
   HD13   HC                0.01860  17
      C   C                 0.59730  18
      O   O                -0.56790  19
-  DHD1   DUM_HA            0.00000  20
-  DCD2   DUM_CA            0.00000  21
-  DHD2   DUM_HA            0.00000  22
-  DHE1   DUM_HA            0.00000  23
-  DCE2   DUM_CA            0.00000  24
-  DHE2   DUM_HA            0.00000  25
-   DCZ   DUM_CA            0.00000  26
-   DHZ   DUM_HA            0.00000  27
+  DHB1   DUM_HC            0.00000  20
+  DHB2   DUM_HC            0.00000  21
+   DCG   DUM_CA            0.00000  22
+  DCD1   DUM_CA            0.00000  23
+  DHD1   DUM_HA            0.00000  24
+  DCD2   DUM_CA            0.00000  25
+  DHD2   DUM_HA            0.00000  26
+  DCE1   DUM_CA            0.00000  27
+  DHE1   DUM_HA            0.00000  28
+  DCE2   DUM_CA            0.00000  29
+  DHE2   DUM_HA            0.00000  30
+   DCZ   DUM_CA            0.00000  31
+   DHZ   DUM_HA            0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -10518,25 +10687,30 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB1)
-    CB     CG2 ; (    CB     HB2)
-    CB     CG1 ; (    CB      CG)
-   CG1    HG11 ; (    CG  HG1.gone1)
-   CG1    HG12 ; (    CG  HG1.gone2)
-   CG1     CD1 ; (    CG     CD1)
-   CG1    DCD2 ; (    CG     CD2)
-   CG2    HG21 ; (   HB2  HG2.gone1)
-   CG2    HG22 ; (   HB2  HG2.gone2)
-   CG2    HG23 ; (   HB2  HG2.gone3)
-   CD1    HD11 ; (   CD1     CE1)
-   CD1    HD12 ; (   CD1  HD1.gone2)
-   CD1    HD13 ; (   CD1  HD1.gone3)
-   CD1    DHD1 ; (   CD1     HD1)
-  HD11    DHE1 ; (   CE1     HE1)
-  HD11     DCZ ; (   CE1      CZ)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG2 ; (    CB  CG2.gone)
+    CB     CG1 ; (    CB  CG1.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
+   CG1    HG11 ; (CG1.gone  HG1.gone1)
+   CG1    HG12 ; (CG1.gone  HG1.gone2)
+   CG1     CD1 ; (CG1.gone  CD1.gone)
+   CG2    HG21 ; (CG2.gone  HG2.gone1)
+   CG2    HG22 ; (CG2.gone  HG2.gone2)
+   CG2    HG23 ; (CG2.gone  HG2.gone3)
+   CD1    HD11 ; (CD1.gone  HD1.gone1)
+   CD1    HD12 ; (CD1.gone  HD1.gone2)
+   CD1    HD13 ; (CD1.gone  HD1.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
@@ -10545,12 +10719,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-   CG1    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
-  HD11    DCE2     DCZ     DHZ 
-   CD1     DCZ    HD11    DHE1 
-   CG1    HD11     CD1    DHD1 
-   CD1    DCD2     CG1      CB 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -11897,13 +12071,17 @@
    HE2   HO                0.46410  14
      C   C                 0.59730  15
      O   O                -0.56790  16
-  DCD2   DUM_CA            0.00000  17
-  DHD2   DUM_HA            0.00000  18
-  DHE1   DUM_HA            0.00000  19
-  DCE2   DUM_CA            0.00000  20
-  DHE2   DUM_HA            0.00000  21
-   DCZ   DUM_CA            0.00000  22
-   DHZ   DUM_HA            0.00000  23
+   DCG   DUM_CA            0.00000  17
+  DCD1   DUM_CA            0.00000  18
+  DHD1   DUM_HA            0.00000  19
+  DCD2   DUM_CA            0.00000  20
+  DHD2   DUM_HA            0.00000  21
+  DCE1   DUM_CA            0.00000  22
+  DHE1   DUM_HA            0.00000  23
+  DCE2   DUM_CA            0.00000  24
+  DHE2   DUM_HA            0.00000  25
+   DCZ   DUM_CA            0.00000  26
+   DHZ   DUM_HA            0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -11913,19 +12091,23 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     OE1 ; (   CD1     CE1)
-    CD     OE2 ; (   CD1     HD1)
-   OE1    DHE1 ; (   CE1     HE1)
-   OE1     DCZ ; (   CE1      CZ)
-   OE2     HE2 ; (   HD1  HE2.gone)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     OE1 ; (CD.gone  OE1.gone)
+    CD     OE2 ; (CD.gone  OE2.gone)
+   OE2     HE2 ; (OE2.gone  HE2.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
@@ -11935,11 +12117,12 @@
     -C      CA       N       H 
     CA      +N       C       O 
     CG     OE1      CD     OE2 
-    CG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
-   OE1    DCE2     DCZ     DHZ 
-    CD     DCZ     OE1    DHE1 
-    CD    DCD2      CG      CB 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -13276,13 +13459,17 @@
    HZ3   H                 0.34000  20
      C   C                 0.73410  21
      O   O                -0.58940  22
-  DHD1   DUM_HA            0.00000  23
-  DCD2   DUM_CA            0.00000  24
-  DHD2   DUM_HA            0.00000  25
-  DHE1   DUM_HA            0.00000  26
-  DCE2   DUM_CA            0.00000  27
-  DHE2   DUM_HA            0.00000  28
-   DHZ   DUM_HA            0.00000  29
+   DCG   DUM_CA            0.00000  23
+  DCD1   DUM_CA            0.00000  24
+  DHD1   DUM_HA            0.00000  25
+  DCD2   DUM_CA            0.00000  26
+  DHD2   DUM_HA            0.00000  27
+  DCE1   DUM_CA            0.00000  28
+  DHE1   DUM_HA            0.00000  29
+  DCE2   DUM_CA            0.00000  30
+  DHE2   DUM_HA            0.00000  31
+   DCZ   DUM_CA            0.00000  32
+   DHZ   DUM_HA            0.00000  33
 
  [ bonds ]
      N       H ; (     N       H)
@@ -13292,39 +13479,43 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     HD1 ; (   CD1  HD.gone1)
-    CD     HD2 ; (   CD1  HD.gone2)
-    CD      CE ; (   CD1     CE1)
-    CD    DHD1 ; (   CD1     HD1)
-    CE     HE1 ; (   CE1  HE.gone1)
-    CE     HE2 ; (   CE1  HE.gone2)
-    CE      NZ ; (   CE1      CZ)
-    CE    DHE1 ; (   CE1     HE1)
-    NZ     HZ1 ; (    CZ  HZ.gone1)
-    NZ     HZ2 ; (    CZ  HZ.gone2)
-    NZ     HZ3 ; (    CZ  HZ.gone3)
-    NZ    DCE2 ; (    CZ     CE2)
-    NZ     DHZ ; (    CZ      HZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     HD1 ; (CD.gone  HD.gone1)
+    CD     HD2 ; (CD.gone  HD.gone2)
+    CD      CE ; (CD.gone  CE.gone)
+    CE     HE1 ; (CE.gone  HE.gone1)
+    CE     HE2 ; (CE.gone  HE.gone2)
+    CE      NZ ; (CE.gone  NZ.gone)
+    NZ     HZ1 ; (NZ.gone  HZ.gone1)
+    NZ     HZ2 ; (NZ.gone  HZ.gone2)
+    NZ     HZ3 ; (NZ.gone  HZ.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
+  DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
+   DCZ     DHZ ; (    CZ      HZ)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CG    DCE2    DCD2    DHD2 
-    NZ    DCD2    DCE2    DHE2 
-    CE    DCE2      NZ     DHZ 
-    CD      NZ      CE    DHE1 
-    CG      CE      CD    DHD1 
-    CD    DCD2      CG      CB 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -14768,14 +14959,17 @@
   HD23   HC                0.10000  17
      C   C                 0.59730  18
      O   O                -0.56790  19
-  DHD1   DUM_HA            0.00000  20
-  DCD2   DUM_CA            0.00000  21
-  DHD2   DUM_HA            0.00000  22
-  DHE1   DUM_HA            0.00000  23
-  DCE2   DUM_CA            0.00000  24
-  DHE2   DUM_HA            0.00000  25
-   DCZ   DUM_CA            0.00000  26
-   DHZ   DUM_HA            0.00000  27
+   DCG   DUM_CA            0.00000  20
+  DCD1   DUM_CA            0.00000  21
+  DHD1   DUM_HA            0.00000  22
+  DCD2   DUM_CA            0.00000  23
+  DHD2   DUM_HA            0.00000  24
+  DCE1   DUM_CA            0.00000  25
+  DHE1   DUM_HA            0.00000  26
+  DCE2   DUM_CA            0.00000  27
+  DHE2   DUM_HA            0.00000  28
+   DCZ   DUM_CA            0.00000  29
+   DHZ   DUM_HA            0.00000  30
 
  [ bonds ]
      N       H ; (     N       H)
@@ -14785,23 +14979,26 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG      HG ; (    CG  HG.gone)
-    CG     CD1 ; (    CG     CD1)
-    CG     CD2 ; (    CG  CD2.gone)
-    CG    DCD2 ; (    CG     CD2)
-   CD1    HD11 ; (   CD1     CE1)
-   CD1    HD12 ; (   CD1  HD1.gone2)
-   CD1    HD13 ; (   CD1  HD1.gone3)
-   CD1    DHD1 ; (   CD1     HD1)
-  HD11    DHE1 ; (   CE1     HE1)
-  HD11     DCZ ; (   CE1      CZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG      HG ; (CG.gone  HG.gone)
+    CG     CD1 ; (CG.gone  CD1.gone)
+    CG     CD2 ; (CG.gone  CD2.gone)
+   CD1    HD11 ; (CD1.gone  HD1.gone1)
+   CD1    HD12 ; (CD1.gone  HD1.gone2)
+   CD1    HD13 ; (CD1.gone  HD1.gone3)
    CD2    HD21 ; (CD2.gone  HD2.gone1)
    CD2    HD22 ; (CD2.gone  HD2.gone2)
    CD2    HD23 ; (CD2.gone  HD2.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
@@ -14810,12 +15007,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
-  HD11    DCE2     DCZ     DHZ 
-   CD1     DCZ    HD11    DHE1 
-    CG    HD11     CD1    DHD1 
-   CD1    DCD2      CG      CB 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -16161,13 +16358,17 @@
    HE3   H1                0.06840  15
      C   C                 0.59730  16
      O   O                -0.56790  17
-  DHD1   DUM_HA            0.00000  18
-  DCD2   DUM_CA            0.00000  19
-  DHD2   DUM_HA            0.00000  20
-  DHE1   DUM_HA            0.00000  21
-  DCE2   DUM_CA            0.00000  22
-  DHE2   DUM_HA            0.00000  23
-   DHZ   DUM_HA            0.00000  24
+   DCG   DUM_CA            0.00000  18
+  DCD1   DUM_CA            0.00000  19
+  DHD1   DUM_HA            0.00000  20
+  DCD2   DUM_CA            0.00000  21
+  DHD2   DUM_HA            0.00000  22
+  DCE1   DUM_CA            0.00000  23
+  DHE1   DUM_HA            0.00000  24
+  DCE2   DUM_CA            0.00000  25
+  DHE2   DUM_HA            0.00000  26
+   DCZ   DUM_CA            0.00000  27
+   DHZ   DUM_HA            0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -16177,34 +16378,38 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      SD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    SD      CE ; (   CD1     CE1)
-    SD    DHD1 ; (   CD1     HD1)
-    CE     HE1 ; (   CE1      CZ)
-    CE     HE2 ; (   CE1  HE.gone2)
-    CE     HE3 ; (   CE1  HE.gone3)
-    CE    DHE1 ; (   CE1     HE1)
-   HE1    DCE2 ; (    CZ     CE2)
-   HE1     DHZ ; (    CZ      HZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      SD ; (CG.gone  SD.gone)
+    SD      CE ; (SD.gone  CE.gone)
+    CE     HE1 ; (CE.gone  HE.gone1)
+    CE     HE2 ; (CE.gone  HE.gone2)
+    CE     HE3 ; (CE.gone  HE.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
+  DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
+   DCZ     DHZ ; (    CZ      HZ)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CG    DCE2    DCD2    DHD2 
-   HE1    DCD2    DCE2    DHE2 
-    CE    DCE2     HE1     DHZ 
-    SD     HE1      CE    DHE1 
-    CG      CE      SD    DHD1 
-    SD    DCD2      CG      CB 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -17475,12 +17680,17 @@
   HD22   H                 0.41960  12
      C   C                 0.59730  13
      O   O                -0.56790  14
-  DHD1   DUM_HA            0.00000  15
-  DCE1   DUM_CA            0.00000  16
-  DHE1   DUM_HA            0.00000  17
-  DHE2   DUM_HA            0.00000  18
-   DCZ   DUM_CA            0.00000  19
-   DHZ   DUM_HA            0.00000  20
+   DCG   DUM_CA            0.00000  15
+  DCD1   DUM_CA            0.00000  16
+  DHD1   DUM_HA            0.00000  17
+  DCD2   DUM_CA            0.00000  18
+  DHD2   DUM_HA            0.00000  19
+  DCE1   DUM_CA            0.00000  20
+  DHE1   DUM_HA            0.00000  21
+  DCE2   DUM_CA            0.00000  22
+  DHE2   DUM_HA            0.00000  23
+   DCZ   DUM_CA            0.00000  24
+   DHZ   DUM_HA            0.00000  25
 
  [ bonds ]
      N       H ; (     N       H)
@@ -17490,18 +17700,23 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     OD1 ; (    CG     CD1)
-    CG     ND2 ; (    CG     CD2)
-   OD1    DHD1 ; (   CD1     HD1)
-   OD1    DCE1 ; (   CD1     CE1)
-   ND2    HD21 ; (   CD2     HD2)
-   ND2    HD22 ; (   CD2     CE2)
-  HD22    DHE2 ; (   CE2     HE2)
-  HD22     DCZ ; (   CE2      CZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     OD1 ; (CG.gone  OD1.gone)
+    CG     ND2 ; (CG.gone  ND2.gone)
+   ND2    HD21 ; (ND2.gone  HD2.gone1)
+   ND2    HD22 ; (ND2.gone  HD2.gone2)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
+  DCD2    DCE2 ; (   CD2     CE2)
+  DCD2    DHD2 ; (   CD2     HD2)
   DCE1    DHE1 ; (   CE1     HE1)
   DCE1     DCZ ; (   CE1      CZ)
+  DCE2     DCZ ; (   CE2      CZ)
+  DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
     -C       N  
 
@@ -17510,12 +17725,12 @@
     CA      +N       C       O 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CG    HD22     ND2    HD21  undefined                
-   DCZ     ND2    HD22    DHE2 
-  DCE1    HD22     DCZ     DHZ 
-   OD1     DCZ    DCE1    DHE1 
-    CG    DCE1     OD1    DHD1 
-   OD1     ND2      CG      CB  undefined                
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -18831,13 +19046,17 @@
    HZ2   H                 0.38604  19
      C   C                 0.59730  20
      O   O                -0.56790  21
-  DHD1   DUM_HA            0.00000  22
-  DCD2   DUM_CA            0.00000  23
-  DHD2   DUM_HA            0.00000  24
-  DHE1   DUM_HA            0.00000  25
-  DCE2   DUM_CA            0.00000  26
-  DHE2   DUM_HA            0.00000  27
-   DHZ   DUM_HA            0.00000  28
+   DCG   DUM_CA            0.00000  22
+  DCD1   DUM_CA            0.00000  23
+  DHD1   DUM_HA            0.00000  24
+  DCD2   DUM_CA            0.00000  25
+  DHD2   DUM_HA            0.00000  26
+  DCE1   DUM_CA            0.00000  27
+  DHE1   DUM_HA            0.00000  28
+  DCE2   DUM_CA            0.00000  29
+  DHE2   DUM_HA            0.00000  30
+   DCZ   DUM_CA            0.00000  31
+   DHZ   DUM_HA            0.00000  32
 
  [ bonds ]
      N       H ; (     N       H)
@@ -18847,38 +19066,42 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     HD1 ; (   CD1  HD.gone1)
-    CD     HD2 ; (   CD1  HD.gone2)
-    CD      CE ; (   CD1     CE1)
-    CD    DHD1 ; (   CD1     HD1)
-    CE     HE1 ; (   CE1  HE.gone1)
-    CE     HE2 ; (   CE1  HE.gone2)
-    CE      NZ ; (   CE1      CZ)
-    CE    DHE1 ; (   CE1     HE1)
-    NZ     HZ1 ; (    CZ  HZ.gone1)
-    NZ     HZ2 ; (    CZ  HZ.gone2)
-    NZ    DCE2 ; (    CZ     CE2)
-    NZ     DHZ ; (    CZ      HZ)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     HD1 ; (CD.gone  HD.gone1)
+    CD     HD2 ; (CD.gone  HD.gone2)
+    CD      CE ; (CD.gone  CE.gone)
+    CE     HE1 ; (CE.gone  HE.gone1)
+    CE     HE2 ; (CE.gone  HE.gone2)
+    CE      NZ ; (CE.gone  NZ.gone)
+    NZ     HZ1 ; (NZ.gone  HZ.gone1)
+    NZ     HZ2 ; (NZ.gone  HZ.gone2)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
+  DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
+   DCZ     DHZ ; (    CZ      HZ)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CG    DCE2    DCD2    DHD2 
-    NZ    DCD2    DCE2    DHE2 
-    CE    DCE2      NZ     DHZ 
-    CD      NZ      CE    DHE1 
-    CG      CE      CD    DHD1 
-    CD    DCD2      CG      CB 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -20280,13 +20503,17 @@
   HE22   H                 0.42510  15
      C   C                 0.59730  16
      O   O                -0.56790  17
-  DCD2   DUM_CA            0.00000  18
-  DHD2   DUM_HA            0.00000  19
-  DHE1   DUM_HA            0.00000  20
-  DCE2   DUM_CA            0.00000  21
-  DHE2   DUM_HA            0.00000  22
-   DCZ   DUM_CA            0.00000  23
-   DHZ   DUM_HA            0.00000  24
+   DCG   DUM_CA            0.00000  18
+  DCD1   DUM_CA            0.00000  19
+  DHD1   DUM_HA            0.00000  20
+  DCD2   DUM_CA            0.00000  21
+  DHD2   DUM_HA            0.00000  22
+  DCE1   DUM_CA            0.00000  23
+  DHE1   DUM_HA            0.00000  24
+  DCE2   DUM_CA            0.00000  25
+  DHE2   DUM_HA            0.00000  26
+   DCZ   DUM_CA            0.00000  27
+   DHZ   DUM_HA            0.00000  28
 
  [ bonds ]
      N       H ; (     N       H)
@@ -20296,20 +20523,24 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     OE1 ; (   CD1     CE1)
-    CD     NE2 ; (   CD1     HD1)
-   OE1    DHE1 ; (   CE1     HE1)
-   OE1     DCZ ; (   CE1      CZ)
-   NE2    HE21 ; (   HD1  HE2.gone1)
-   NE2    HE22 ; (   HD1  HE2.gone2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     OE1 ; (CD.gone  OE1.gone)
+    CD     NE2 ; (CD.gone  NE2.gone)
+   NE2    HE21 ; (NE2.gone  HE2.gone1)
+   NE2    HE22 ; (NE2.gone  HE2.gone2)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
   DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
    DCZ     DHZ ; (    CZ      HZ)
@@ -20320,12 +20551,12 @@
     CA      +N       C       O 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
-   OE1    DCE2     DCZ     DHZ 
-    CD     DCZ     OE1    DHE1 
-    CG     OE1      CD     NE2  undefined                
-    CD    DCD2      CG      CB 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -21746,11 +21977,17 @@
   HH22   H                 0.44780  22
      C   C                 0.73410  23
      O   O                -0.58940  24
-  DHD1   DUM_HA            0.00000  25
-  DCD2   DUM_CA            0.00000  26
-  DHD2   DUM_HA            0.00000  27
-  DCE2   DUM_CA            0.00000  28
-  DHE2   DUM_HA            0.00000  29
+   DCG   DUM_CA            0.00000  25
+  DCD1   DUM_CA            0.00000  26
+  DHD1   DUM_HA            0.00000  27
+  DCD2   DUM_CA            0.00000  28
+  DHD2   DUM_HA            0.00000  29
+  DCE1   DUM_CA            0.00000  30
+  DHE1   DUM_HA            0.00000  31
+  DCE2   DUM_CA            0.00000  32
+  DHE2   DUM_HA            0.00000  33
+   DCZ   DUM_CA            0.00000  34
+   DHZ   DUM_HA            0.00000  35
 
  [ bonds ]
      N       H ; (     N       H)
@@ -21760,42 +21997,49 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      CG ; (    CB      CG)
-    CG     HG1 ; (    CG  HG.gone1)
-    CG     HG2 ; (    CG  HG.gone2)
-    CG      CD ; (    CG     CD1)
-    CG    DCD2 ; (    CG     CD2)
-    CD     HD1 ; (   CD1  HD.gone1)
-    CD     HD2 ; (   CD1  HD.gone2)
-    CD      NE ; (   CD1     CE1)
-    CD    DHD1 ; (   CD1     HD1)
-    NE      HE ; (   CE1     HE1)
-    NE      CZ ; (   CE1      CZ)
-    CZ     NH1 ; (    CZ  NH1.gone)
-    CZ     NH2 ; (    CZ      HZ)
-    CZ    DCE2 ; (    CZ     CE2)
+    CB      CG ; (    CB  CG.gone)
+    CB     DCG ; (    CB      CG)
+    CG     HG1 ; (CG.gone  HG.gone1)
+    CG     HG2 ; (CG.gone  HG.gone2)
+    CG      CD ; (CG.gone  CD.gone)
+    CD     HD1 ; (CD.gone  HD.gone1)
+    CD     HD2 ; (CD.gone  HD.gone2)
+    CD      NE ; (CD.gone  NE.gone)
+    NE      HE ; (NE.gone  HE.gone)
+    NE      CZ ; (NE.gone  CZ.gone)
+    CZ     NH1 ; (CZ.gone  NH1.gone)
+    CZ     NH2 ; (CZ.gone  NH2.gone)
    NH1    HH11 ; (NH1.gone  HH1.gone1)
    NH1    HH12 ; (NH1.gone  HH1.gone2)
-   NH2    HH21 ; (    HZ  HH2.gone1)
-   NH2    HH22 ; (    HZ  HH2.gone2)
+   NH2    HH21 ; (NH2.gone  HH2.gone1)
+   NH2    HH22 ; (NH2.gone  HH2.gone2)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
+  DCE1    DHE1 ; (   CE1     HE1)
+  DCE1     DCZ ; (   CE1      CZ)
+  DCE2     DCZ ; (   CE2      CZ)
   DCE2    DHE2 ; (   CE2     HE2)
+   DCZ     DHZ ; (    CZ      HZ)
     -C       N  
 
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    CD      CZ      NE      HE 
     NE     NH1      CZ     NH2 
+    CD      CZ      NE      HE 
     CZ    HH11     NH1    HH12 
     CZ    HH21     NH2    HH22 
-    CG    DCE2    DCD2    DHD2 
-    CZ    DCD2    DCE2    DHE2 
-    NE    DCE2      CZ     NH2 
-    CG      NE      CD    DHD1 
-    CD    DCD2      CG      CB 
+   DCG    DCE2    DCD2    DHD2 
+   DCZ    DCD2    DCE2    DHE2 
+  DCE1    DCE2     DCZ     DHZ 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -23297,16 +23541,17 @@
     HG   HO                0.42750  9
      C   C                 0.59730  10
      O   O                -0.56790  11
-  DCD1   DUM_CA            0.00000  12
-  DHD1   DUM_HA            0.00000  13
-  DCD2   DUM_CA            0.00000  14
-  DHD2   DUM_HA            0.00000  15
-  DCE1   DUM_CA            0.00000  16
-  DHE1   DUM_HA            0.00000  17
-  DCE2   DUM_CA            0.00000  18
-  DHE2   DUM_HA            0.00000  19
-   DCZ   DUM_CA            0.00000  20
-   DHZ   DUM_HA            0.00000  21
+   DCG   DUM_CA            0.00000  12
+  DCD1   DUM_CA            0.00000  13
+  DHD1   DUM_HA            0.00000  14
+  DCD2   DUM_CA            0.00000  15
+  DHD2   DUM_HA            0.00000  16
+  DCE1   DUM_CA            0.00000  17
+  DHE1   DUM_HA            0.00000  18
+  DCE2   DUM_CA            0.00000  19
+  DHE2   DUM_HA            0.00000  20
+   DCZ   DUM_CA            0.00000  21
+   DHZ   DUM_HA            0.00000  22
 
  [ bonds ]
      N       H ; (     N       H)
@@ -23316,11 +23561,12 @@
     CA       C ; (    CA       C)
     CB     HB1 ; (    CB     HB1)
     CB     HB2 ; (    CB     HB2)
-    CB      OG ; (    CB      CG)
-    OG      HG ; (    CG  HG.gone)
-    OG    DCD1 ; (    CG     CD1)
-    OG    DCD2 ; (    CG     CD2)
+    CB      OG ; (    CB  OG.gone)
+    CB     DCG ; (    CB      CG)
+    OG      HG ; (OG.gone  HG.gone)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
   DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
@@ -23335,12 +23581,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-    OG    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
   DCD1     DCZ    DCE1    DHE1 
-    OG    DCE1    DCD1    DHD1 
-  DCD1    DCD2      OG      CB 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -24479,16 +24725,19 @@
   HG23   HC                0.06420  12
      C   C                 0.59730  13
      O   O                -0.56790  14
-  DCD1   DUM_CA            0.00000  15
-  DHD1   DUM_HA            0.00000  16
-  DCD2   DUM_CA            0.00000  17
-  DHD2   DUM_HA            0.00000  18
-  DCE1   DUM_CA            0.00000  19
-  DHE1   DUM_HA            0.00000  20
-  DCE2   DUM_CA            0.00000  21
-  DHE2   DUM_HA            0.00000  22
-   DCZ   DUM_CA            0.00000  23
-   DHZ   DUM_HA            0.00000  24
+  DHB1   DUM_HC            0.00000  15
+  DHB2   DUM_HC            0.00000  16
+   DCG   DUM_CA            0.00000  17
+  DCD1   DUM_CA            0.00000  18
+  DHD1   DUM_HA            0.00000  19
+  DCD2   DUM_CA            0.00000  20
+  DHD2   DUM_HA            0.00000  21
+  DCE1   DUM_CA            0.00000  22
+  DHE1   DUM_HA            0.00000  23
+  DCE2   DUM_CA            0.00000  24
+  DHE2   DUM_HA            0.00000  25
+   DCZ   DUM_CA            0.00000  26
+   DHZ   DUM_HA            0.00000  27
 
  [ bonds ]
      N       H ; (     N       H)
@@ -24496,16 +24745,19 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB1)
-    CB     CG2 ; (    CB     HB2)
-    CB     OG1 ; (    CB      CG)
-   OG1     HG1 ; (    CG  HG1.gone)
-   OG1    DCD1 ; (    CG     CD1)
-   OG1    DCD2 ; (    CG     CD2)
-   CG2    HG21 ; (   HB2  HG2.gone1)
-   CG2    HG22 ; (   HB2  HG2.gone2)
-   CG2    HG23 ; (   HB2  HG2.gone3)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG2 ; (    CB  CG2.gone)
+    CB     OG1 ; (    CB  OG1.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
+   OG1     HG1 ; (OG1.gone  HG1.gone)
+   CG2    HG21 ; (CG2.gone  HG2.gone1)
+   CG2    HG22 ; (CG2.gone  HG2.gone2)
+   CG2    HG23 ; (CG2.gone  HG2.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
   DCD1    DHD1 ; (   CD1     HD1)
   DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
@@ -24520,12 +24772,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-   OG1    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
   DCD1     DCZ    DCE1    DHE1 
-   OG1    DCE1    DCD1    DHD1 
-  DCD1    DCD2     OG1      CB 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 
@@ -25786,15 +26038,19 @@
   HG23   HC                0.07910  14
      C   C                 0.59730  15
      O   O                -0.56790  16
-  DHD1   DUM_HA            0.00000  17
-  DCD2   DUM_CA            0.00000  18
-  DHD2   DUM_HA            0.00000  19
-  DCE1   DUM_CA            0.00000  20
-  DHE1   DUM_HA            0.00000  21
-  DCE2   DUM_CA            0.00000  22
-  DHE2   DUM_HA            0.00000  23
-   DCZ   DUM_CA            0.00000  24
-   DHZ   DUM_HA            0.00000  25
+  DHB1   DUM_HC            0.00000  17
+  DHB2   DUM_HC            0.00000  18
+   DCG   DUM_CA            0.00000  19
+  DCD1   DUM_CA            0.00000  20
+  DHD1   DUM_HA            0.00000  21
+  DCD2   DUM_CA            0.00000  22
+  DHD2   DUM_HA            0.00000  23
+  DCE1   DUM_CA            0.00000  24
+  DHE1   DUM_HA            0.00000  25
+  DCE2   DUM_CA            0.00000  26
+  DHE2   DUM_HA            0.00000  27
+   DCZ   DUM_CA            0.00000  28
+   DHZ   DUM_HA            0.00000  29
 
  [ bonds ]
      N       H ; (     N       H)
@@ -25802,19 +26058,23 @@
     CA      HA ; (    CA      HA)
     CA      CB ; (    CA      CB)
     CA       C ; (    CA       C)
-    CB      HB ; (    CB     HB1)
-    CB     CG1 ; (    CB     HB2)
-    CB     CG2 ; (    CB      CG)
-   CG1    HG11 ; (   HB2  HG1.gone1)
-   CG1    HG12 ; (   HB2  HG1.gone2)
-   CG1    HG13 ; (   HB2  HG1.gone3)
-   CG2    HG21 ; (    CG     CD1)
-   CG2    HG22 ; (    CG  HG2.gone2)
-   CG2    HG23 ; (    CG  HG2.gone3)
-   CG2    DCD2 ; (    CG     CD2)
-  HG21    DHD1 ; (   CD1     HD1)
-  HG21    DCE1 ; (   CD1     CE1)
+    CB      HB ; (    CB  HB.gone)
+    CB     CG1 ; (    CB  CG1.gone)
+    CB     CG2 ; (    CB  CG2.gone)
+    CB    DHB1 ; (    CB     HB1)
+    CB    DHB2 ; (    CB     HB2)
+    CB     DCG ; (    CB      CG)
+   CG1    HG11 ; (CG1.gone  HG1.gone1)
+   CG1    HG12 ; (CG1.gone  HG1.gone2)
+   CG1    HG13 ; (CG1.gone  HG1.gone3)
+   CG2    HG21 ; (CG2.gone  HG2.gone1)
+   CG2    HG22 ; (CG2.gone  HG2.gone2)
+   CG2    HG23 ; (CG2.gone  HG2.gone3)
      C       O ; (     C       O)
+   DCG    DCD1 ; (    CG     CD1)
+   DCG    DCD2 ; (    CG     CD2)
+  DCD1    DHD1 ; (   CD1     HD1)
+  DCD1    DCE1 ; (   CD1     CE1)
   DCD2    DCE2 ; (   CD2     CE2)
   DCD2    DHD2 ; (   CD2     HD2)
   DCE1    DHE1 ; (   CE1     HE1)
@@ -25827,12 +26087,12 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-   CG2    DCE2    DCD2    DHD2 
+   DCG    DCE2    DCD2    DHD2 
    DCZ    DCD2    DCE2    DHE2 
   DCE1    DCE2     DCZ     DHZ 
-  HG21     DCZ    DCE1    DHE1 
-   CG2    DCE1    HG21    DHD1 
-  HG21    DCD2     CG2      CB 
+  DCD1     DCZ    DCE1    DHE1 
+   DCG    DCE1    DCD1    DHD1 
+  DCD1    DCD2     DCG      CB 
 
  [ dihedrals ]
 

@@ -615,7 +615,10 @@ class TopolBase:
         print >>fp,'\n [ constraints ]'
         print >>fp, ';  ai    aj funct            c0            c1            c2            c3'
         for p in self.constraints:
-            print >>fp, '%6d %6d %6d' % (p[0].id, p[1].id, p[2])
+	    if(len(p)==3):
+                print >>fp, '%6d %6d %6d' % (p[0].id, p[1].id, p[2])
+	    else:
+                print >>fp, '%6d %6d %6d %8s' % (p[0].id, p[1].id, p[2], p[3])
 
     def write_angles(self,fp, state='AB'):
         print >>fp,'\n [ angles ]'    

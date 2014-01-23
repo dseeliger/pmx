@@ -740,6 +740,16 @@ class NBParser:
                         'mass':float(entr[3]),
                         'sigma':entr[6]*10, # nm -> A
                         'eps':entr[7]
+			}
+            elif self.ff.startswith('gaff'):
+                lst = parseList('ssffsff',lst)
+                for entr in lst:
+                    self.atomtypes[entr[0]] = {
+                        'bond_type':entr[1],
+                        'mass':float(entr[2]),
+			'charge':float(entr[3]),
+                        'sigma':entr[5]*10, # nm -> A
+                        'eps':entr[6]
                         }
                 
     def assign_params(self, model):

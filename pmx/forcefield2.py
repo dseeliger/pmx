@@ -627,6 +627,12 @@ class TopolBase:
             if len(ang) == 4:
                 print >>fp, '%6d %6d %6d %6d' % (ang[0].id, ang[1].id, ang[2].id,ang[3])
             else:
+                if state == 'A':
+                    if ang[3]==1 :
+			print >>fp, '%6d %6d %6d %6d %14.6f %14.6f' % (ang[0].id, ang[1].id, ang[2].id,ang[3],ang[4][0],ang[4][1])
+                    else :
+                        print "Don't know how to print angletype %d" % ang[3]
+                        exit()
                 if state == 'AB':
 #		    print ang[0].id, ang[1].id, ang[2].id
 #		    print state

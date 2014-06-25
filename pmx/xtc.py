@@ -66,6 +66,7 @@ class Trajectory:
     
       
     def open_xtc(self, filename):
+	self.libgmx.open_xtc.restype = c_char_p
         self.fp = self.libgmx.open_xtc(filename, "r")
         
     def close_xtc(self):

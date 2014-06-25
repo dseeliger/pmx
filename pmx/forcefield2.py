@@ -444,8 +444,11 @@ class TopolBase:
             print >>fp, line
 
     def write_footer(self,fp):
-        for line in self.footer:
-            print >>fp, line
+	try:
+            for line in self.footer:
+                print >>fp, line
+	except:
+	    print "No footer in itp\n"
 
     def write_moleculetype(self, fp):
         print >>fp, '[ moleculetype ]'

@@ -246,6 +246,11 @@ class Atomselection:
                 for k in key:
                     if atom.symbol == k:
                         result.append(atom)
+        elif how == 'byid':
+            for atom in self.atoms:
+                for k in key:
+                    if atom.id == int(k):
+                        result.append(atom)
         if inv:
             r = []
             for atom in self.atoms:

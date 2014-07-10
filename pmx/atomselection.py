@@ -76,6 +76,12 @@ class Atomselection:
             box_line = _pmx.box_as_cryst1( self.box )
             print >>fp, box_line
         for atom in self.atoms:
+            if( len(atom.name) > 4): # too long atom name
+                foo = cp.deepcopy(atom)
+                foo.name = foo.name[:4]
+                print >>fp, foo
+            else:
+                print >>fp, atom
             print >>fp, atom
         print >>fp, 'ENDMDL'
         fp.close()

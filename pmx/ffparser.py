@@ -761,7 +761,8 @@ class NBParser:
                             'charge':float(entr[3]),
                             'sigma':entr[5]*10, # nm -> A
                             'eps':entr[6]
-                
+               		    }
+ 
     def assign_params(self, model):
         for atom in model.atoms:
             atom.bond_type = self.atomtypes[atom.atomtype]['bond_type']

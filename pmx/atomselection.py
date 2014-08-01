@@ -82,7 +82,6 @@ class Atomselection:
                 print >>fp, foo
             else:
                 print >>fp, atom
-            print >>fp, atom
         print >>fp, 'ENDMDL'
         fp.close()
 

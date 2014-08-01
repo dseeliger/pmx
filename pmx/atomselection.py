@@ -40,6 +40,7 @@ import random
 from atom import *
 from geometry import Rotation
 import library
+import copy as cp
 import _pmx
 #import _gridns
 

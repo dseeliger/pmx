@@ -72,6 +72,7 @@ ext_one_letter = {
     'CYN':'C',
     'CYX':'C',
     'CYM':'C',
+    'CYSH':'C',
     'GLU':'E',
     'GLUH':'J',
     'GLUP':'J',
@@ -196,7 +197,7 @@ def select_nuc_mutation(residue):
 def select_aa_mutation(residue,ffpath):
     check_residue_name( residue )
     print '\nSelect new amino acid for %s-%s: ' % (residue.id,residue.resname) 
-    sys.stdout.write('Three- or one-letter code: ')
+    sys.stdout.write('Three- or one-letter code (or four-letter for ff specific residues): ')
     if residue.resname in ['HIE','HISE','HSE']: rol = 'X'
     elif residue.resname in ['HIP','HISH','HSP']: rol = 'Z'
     elif residue.resname in ['GLH','GLUH','GLUP']: rol = 'J'
@@ -219,13 +220,13 @@ def select_aa_mutation(residue,ffpath):
 
     while aa is None:
         aa = raw_input().upper()
-        if len(aa) != 1 and len(aa)!=3:
-            sys.stdout.write('Nope!\nThree- or one-letter code: ')
+        if len(aa) != 1 and len(aa)!=3 and len(aa)!=4:
+            sys.stdout.write('Nope!\nThree- or one-letter code (or four-letter for ff specific residues): ')
             aa = None
-        elif (len(aa) == 1 and aa not in ol+['B','J','O','X','Z']) or (len(aa)==3 and aa not in tl):
-            sys.stdout.write('Unknown aa "%s"!\nThree- or one-letter code: ' % aa)
+        elif (len(aa) == 1 and aa not in ol+['B','J','O','X','Z']) or (len(aa)==3 and aa not in tl) or (len(aa)==4 and aa not in tl):
+            sys.stdout.write('Unknown aa "%s"!\nThree- or one-letter code (or four-letter for ff specific residues): ' % aa)
             aa = None
-        if aa and len(aa) == 3: aa = ext_one_letter[aa]
+        if aa and (len(aa)==3 or len(aa)==4): aa = ext_one_letter[aa]
     print 'Will apply mutation %s->%s on residue %s-%d' % (rol,aa,residue.resname,residue.id)
     return aa
 

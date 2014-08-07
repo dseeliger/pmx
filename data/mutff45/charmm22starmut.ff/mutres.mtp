@@ -2655,7 +2655,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CG     CB    OD2    OD1     default-A                 default-B                  
-     CG    OD2     CB    OD1     undefined                 default-B                  
+     CG    OD2     CB    OD1     un                 default-B                  
     OD2     CG   DHD1    HD2     default-B                 default-B                  
     OD2     CG    HD2   DHD1     default-B                 default-B                  
 
@@ -6158,7 +6158,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CG     CB    OD2    OD1     default-A                 default-B                  
-     CG    OD2     CB    OD1     undefined                 default-B                  
+     CG    OD2     CB    OD1     un                 default-B                  
     OD2     CG   DHD1   DHD2     default-B                 default-B                  
     OD2     CG   DHD2   DHD1     default-B                 default-B                  
 
@@ -8176,7 +8176,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CD     CG    OE2    OE1     default-A                 default-B                  
-     CD    OE2     CG    OE1     undefined                 default-B                  
+     CD    OE2     CG    OE1     un                 default-B                  
     OE2     CD   DHE1   DHE2     default-B                 default-B                  
     OE2     CD   DHE2   DHE1     default-B                 default-B                  
 
@@ -15134,10 +15134,10 @@
     ND1    CE1     CG    HD1     default-A                 default-B                  
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
-    CD2     CG    NE2    HD2     default-A                 undefined                  
-    CE1    ND1    NE2    HE1     default-A                 undefined                  
-    CD2    NE2     CG    HD2     default-A                 undefined                  
-    CE1    NE2    ND1    HE1     default-A                 undefined                  
+    CD2     CG    NE2    HD2     default-A                 un                  
+    CE1    ND1    NE2    HE1     default-A                 un                  
+    CD2    NE2     CG    HD2     default-A                 un                  
+    CE1    NE2    ND1    HE1     default-A                 un                  
     NE2    CD2    CE1   DHE2     default-B                 default-B                  
     NE2    CE1    CD2   DHE2     default-B                 default-B                  
 
@@ -18569,7 +18569,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CD     CG    OE2    OE1     default-A                 default-B                  
-     CD    OE2     CG    OE1     undefined                 default-B                  
+     CD    OE2     CG    OE1     un                 default-B                  
     OE2     CD   DHE1    HE2     default-B                 default-B                  
     OE2     CD    HE2   DHE1     default-B                 default-B                  
 
@@ -26070,7 +26070,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CG     CB    ND2    OD1     default-A                 default-B                  
-     CG    ND2     CB    OD1     default-A                 undefined                  
+     CG    ND2     CB    OD1     default-A                 un                  
     ND2     CG   HD21   HD22     default-A                 default-A                  
     ND2     CG   HD22   HD21     default-A                 default-A                  
 
@@ -26202,7 +26202,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CG     CB    ND2    OD1     default-A                 default-B                  
-     CG    ND2     CB    OD1     default-A                 undefined                  
+     CG    ND2     CB    OD1     default-A                 un                  
     ND2     CG   HD21   HD22     default-A                 default-A                  
     ND2     CG   HD22   HD21     default-A                 default-A                  
 
@@ -30602,7 +30602,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CD     CG    NE2    OE1     default-A                 default-B                  
-     CD    NE2     CG    OE1     default-A                 undefined                  
+     CD    NE2     CG    OE1     default-A                 un                  
     NE2     CD   HE21   HE22     default-A                 default-A                  
     NE2     CD   HE22   HE21     default-A                 default-A                  
 
@@ -31060,7 +31060,7 @@
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
      CD     CG    NE2    OE1     default-A                 default-B                  
-     CD    NE2     CG    OE1     default-A                 undefined                  
+     CD    NE2     CG    OE1     default-A                 un                  
     NE2     CD   HE21   HE22     default-A                 default-A                  
     NE2     CD   HE22   HE21     default-A                 default-A                  
 
@@ -45489,10 +45489,10 @@
     NE2    CE1    CD2    HE2     default-A                 default-B                  
       N     -C     CA     HN     default-A                 default-B                  
       C     CA     +N      O     default-A                 default-B                  
-    CD2     CG    NE2    HD2     default-A                 undefined                  
-    CE1    ND1    NE2    HE1     default-A                 undefined                  
-    CD2    NE2     CG    HD2     default-A                 undefined                  
-    CE1    NE2    ND1    HE1     default-A                 undefined                  
+    CD2     CG    NE2    HD2     default-A                 un                  
+    CE1    ND1    NE2    HE1     default-A                 un                  
+    CD2    NE2     CG    HD2     default-A                 un                  
+    CE1    NE2    ND1    HE1     default-A                 un                  
     ND1     CG    CE1   DHD1     default-B                 default-B                  
     ND1    CE1     CG   DHD1     default-B                 default-B                  
 
@@ -48668,10 +48668,10 @@
       C     CA     +N      O     default-A                 default-B                  
     NE2    CD2    CE1    HE2     default-A                 default-A                  
     NE2    CE1    CD2    HE2     default-A                 default-A                  
-    CD2     CG    NE2    HD2     undefined                 default-B                  
-    CE1    ND1    NE2    HE1     undefined                 default-B                  
-    CD2    NE2     CG    HD2     undefined                 default-B                  
-    CE1    NE2    ND1    HE1     undefined                 default-B                  
+    CD2     CG    NE2    HD2     un                 default-B                  
+    CE1    ND1    NE2    HE1     un                 default-B                  
+    CD2    NE2     CG    HD2     un                 default-B                  
+    CE1    NE2    ND1    HE1     un                 default-B                  
 
  [ dihedrals ]
 
@@ -50140,10 +50140,10 @@
       C     CA     +N      O     default-A                 default-B                  
     ND1     CG    CE1    HD1     default-A                 default-A                  
     ND1    CE1     CG    HD1     default-A                 default-A                  
-    CD2     CG    NE2    HD2     undefined                 default-B                  
-    CE1    ND1    NE2    HE1     undefined                 default-B                  
-    CD2    NE2     CG    HD2     undefined                 default-B                  
-    CE1    NE2    ND1    HE1     undefined                 default-B                  
+    CD2     CG    NE2    HD2     un                 default-B                  
+    CE1    ND1    NE2    HE1     un                 default-B                  
+    CD2    NE2     CG    HD2     un                 default-B                  
+    CE1    NE2    ND1    HE1     un                 default-B                  
 
  [ dihedrals ]
 

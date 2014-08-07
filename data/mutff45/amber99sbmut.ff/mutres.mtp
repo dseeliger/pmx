@@ -2673,8 +2673,8 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CB    OD1     CG    OD2     default-A                 undefined                  
-     CB    OD2     CG    OD1     undefined                 default-B                  
+     CB    OD1     CG    OD2     default-A                 un                  
+     CB    OD2     CG    OD1     un                 default-B                  
      CG   DHD1    OD2    HD2     default-B                 default-B                  
 
  [ dihedrals ]
@@ -6207,8 +6207,8 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CB    OD1     CG    OD2     default-A                 undefined                  
-     CB    OD2     CG    OD1     undefined                 default-B                  
+     CB    OD1     CG    OD2     default-A                 un                  
+     CB    OD2     CG    OD1     un                 default-B                  
      CG   DHD1    OD2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
@@ -8239,8 +8239,8 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CG    OE1     CD    OE2     default-A                 undefined                  
-     CG    OE2     CD    OE1     undefined                 default-B                  
+     CG    OE1     CD    OE2     default-A                 un                  
+     CG    OE2     CD    OE1     un                 default-B                  
      CD   DHE1    OE2   DHE2     default-B                 default-B                  
 
  [ dihedrals ]
@@ -18790,8 +18790,8 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CG    OE1     CD    OE2     default-A                 undefined                  
-     CG    OE2     CD    OE1     undefined                 default-B                  
+     CG    OE1     CD    OE2     default-A                 un                  
+     CG    OE2     CD    OE1     un                 default-B                  
      CD   DHE1    OE2    HE2     default-B                 default-B                  
 
  [ dihedrals ]
@@ -26348,9 +26348,9 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CB    ND2     CG    OD1     default-A                 undefined                  
+     CB    ND2     CG    OD1     default-A                 un                  
      CG   HD21    ND2   HD22     default-A                 default-A                  
-     CB    OD1     CG    ND2     undefined                 default-B                  
+     CB    OD1     CG    ND2     un                 default-B                  
 
  [ dihedrals ]
 
@@ -26477,9 +26477,9 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CB    ND2     CG    OD1     default-A                 undefined                  
+     CB    ND2     CG    OD1     default-A                 un                  
      CG   HD21    ND2   HD22     default-A                 default-A                  
-     CB    OD1     CG    ND2     undefined                 default-B                  
+     CB    OD1     CG    ND2     un                 default-B                  
 
  [ dihedrals ]
 
@@ -30862,9 +30862,9 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CG    NE2     CD    OE1     default-A                 undefined                  
+     CG    NE2     CD    OE1     default-A                 un                  
      CD   HE21    NE2   HE22     default-A                 default-A                  
-     CG    OE1     CD    NE2     undefined                 default-B                  
+     CG    OE1     CD    NE2     un                 default-B                  
 
  [ dihedrals ]
 
@@ -31315,9 +31315,9 @@
  [ impropers ]
      -C     CA      N      H     default-A                 default-B                  
      CA     +N      C      O     default-A                 default-B                  
-     CG    NE2     CD    OE1     default-A                 undefined                  
+     CG    NE2     CD    OE1     default-A                 un                  
      CD   HE21    NE2   HE22     default-A                 default-A                  
-     CG    OE1     CD    NE2     undefined                 default-B                  
+     CG    OE1     CD    NE2     un                 default-B                  
 
  [ dihedrals ]
 

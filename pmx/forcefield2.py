@@ -46,7 +46,8 @@ import _pmx as _p
 def TR ( s ):
     print "pmx.forcefield_> " + s 
 
-def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')+'/top'] ):
+#def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')+'/top'] ):
+def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')] ):
 
     defs = []
     incs = []
@@ -848,7 +849,8 @@ class ITPFile( TopolBase ):
 
 class Topology( TopolBase ):
 
-    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')+'/top'], cpp_defs = [], version = 'old', ff = 'amber' ):
+#    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')+'/top'], cpp_defs = [], version = 'old', ff = 'amber' ):
+    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXLIB')], cpp_defs = [], version = 'old', ff = 'amber' ):
         TopolBase.__init__(self, filename, version)
         if not topfile:
             topfile = filename

@@ -606,7 +606,7 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                 if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
                     im_new.append( 'default-A' )
                 else:
-                    im_new.append( 'undefined' )
+                    im_new.append( 'un' )
             else:
 		if ( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
   	            im_new.append( i1[4] )
@@ -614,13 +614,13 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
 		else:
                     im_new.append( i1[4] )
                     if( 'torsion' in i1[4] ):	#ildn
-                        foo = 'undefined_' + i1[4]
+                        foo = 'un_' + i1[4]
                         im_new.append( foo )
                     elif( 'dih_' in i1[4] ):	#opls
-                        foo = 'undefined_' + i1[4]
+                        foo = 'un_' + i1[4]
                         im_new.append( foo )
                     else:
-                        im_new.append( 'undefined' )
+                        im_new.append( 'un' )
             new_ii.append( im_new )
     for i2 in im2:
         if i2 not in done_i2:
@@ -629,7 +629,7 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                 if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( 'default-B' )
                 else:
-                    im_new.append( 'undefined' )
+                    im_new.append( 'un' )
 		im_new.append( 'default-B' )
             else: 
                 if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
@@ -637,13 +637,13 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( i2[4] )
                 else:
                     if( 'torsion' in i2[4] ):	#ildn
-			foo = 'undefined_' + i2[4]
+			foo = 'un_' + i2[4]
 			im_new.append( foo )
                     elif( 'dih_' in i2[4] ):   #opls
-                        foo = 'undefined_' + i2[4]
+                        foo = 'un_' + i2[4]
                         im_new.append( foo )
 		    else:
-		        im_new.append( 'undefined' )
+		        im_new.append( 'un' )
                     im_new.append( i2[4] )
             new_ii.append( im_new )
     
@@ -684,16 +684,16 @@ def generate_improp_entries( im1, im2, r ):
 		if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
 	            im_new.append( 'default-A' )
 		else:
-		    im_new.append( 'undefined' )
+		    im_new.append( 'un' )
             elif( i1[4] == '105.4' ): #star
                 im_new.append( 'default-star' )
-                im_new.append( 'undefined' )
+                im_new.append( 'un' )
             else: 
 		im_new.append( i1[4] )
                 if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
                     im_new.append( i1[4] )
                 else:
-                    im_new.append( 'undefined' )
+                    im_new.append( 'un' )
             new_ii.append( im_new )
     for i2 in im2:
         if i2 not in done_i2:
@@ -703,16 +703,16 @@ def generate_improp_entries( im1, im2, r ):
                 if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( 'default-B' )
                 else:
-                    im_new.append( 'undefined' )
+                    im_new.append( 'un' )
 	        im_new.append( 'default-B' )
             elif( i2[4] == '105.4' ): #star
-                im_new.append( 'undefined' )
+                im_new.append( 'un' )
                 im_new.append( 'default-star' )
             else:
                 if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( i2[4] )
                 else:
-                    im_new.append( 'undefined' )
+                    im_new.append( 'un' )
 		im_new.append( i2[4] )
             new_ii.append( im_new )
 ##     for ii in new_ii:

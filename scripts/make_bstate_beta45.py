@@ -185,11 +185,11 @@ def check_dih_ILDN_OPLS( topol, rlist, rdic, a1, a2, a3, a4 ):
 #                       print 'torsion %s %s' % (d[4],d[5])
                         counter = 42
                         break
-                    elif( d[4].startswith('dih_') and ('undefined' in d[5]) ):
+                    elif( d[4].startswith('dih_') and ('un' in d[5]) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 2
                         break
-                    elif( ('undefined' in d[4]) and (d[5].startswith('dih_')) ):
+                    elif( ('un' in d[4]) and (d[5].startswith('dih_')) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 3
                         break
@@ -198,15 +198,15 @@ def check_dih_ILDN_OPLS( topol, rlist, rdic, a1, a2, a3, a4 ):
 #		        print 'torsion %s %s' % (d[4],d[5])
 			counter = 42
 			break
-		    elif( (d[4].startswith('torsion')) and ('undefined' in d[5]) ):
+		    elif( (d[4].startswith('torsion')) and ('un' in d[5]) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 2
                         break
-                    elif( ('undefined' in d[4]) and (d[5].startswith('torsion')) ):
+                    elif( ('un' in d[4]) and (d[5].startswith('torsion')) ):
 #                        print 'torsion_undef %s %s' % (d[4],d[5])
                         counter = 3
                         break
-		    elif( 'undefined' in d[4] ):
+		    elif( 'un' in d[4] ):
 #			print 'undef %s' %d[4]
 			counter = 1
 			break
@@ -562,12 +562,12 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 		    multA = 0
 		    multB = 0
                     if d[4] == 'default-A': #amber99sb
-			if 'undefined' in d[5]:
+			if 'un' in d[5]:
 			    backup_dx2.append('undefB')
 			dih_predef_default.append(backup_dx2)
                         astate = paramA
                     elif d[4] == 'default-B': #amber99sb
-                        if 'undefined' in d[5]:
+                        if 'un' in d[5]:
                             backup_dx2.append('undefB')
                         dih_predef_default.append(backup_dx2)
                         astate = paramB
@@ -575,7 +575,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 			foo  = [4, 105.4, 0.75, 1]
 			astate.append(foo)
 		    elif d[4].startswith('torsion_'): #amber99sb-ildn
-                        if 'undefined' in d[5]:
+                        if 'un' in d[5]:
                             backup_dx2.append('undefB_ildn')
                         dih_predef_default.append(backup_dx2)
 			foo = explicit_def[d[4]]
@@ -584,7 +584,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 			ildn_used.append(foobar)
 			func = 9
 		    elif d[4].startswith('dih_'): #opls proper
-                        if 'undefined' in d[5]:
+                        if 'un' in d[5]:
                             backup_dx2.append('undefB')
 			dih_predef_default.append(backup_dx2)
 			foo = explicit_def[d[4]]
@@ -593,7 +593,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 			opls_used.append(foobar)
 			func = 3
                     elif d[4].startswith('improper_'): #opls improper
-                        if 'undefined' in d[5]:
+                        if 'un' in d[5]:
                             backup_dx2.append('undefB')
                         dih_predef_default.append(backup_dx2)
                         foo = explicit_def[d[4]]
@@ -601,7 +601,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                         foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[4] ]
                         opls_used.append(foobar)
                         func = 1
-                    elif 'undefined' in d[4]: #amber99sb-ildn and opls and others
+                    elif 'un' in d[4]: #amber99sb-ildn and opls and others
 			if d[5].startswith('torsion_'):
                             backup_dx2.append('undefA_ildn')
 			else:
@@ -638,7 +638,7 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
                         foobar = [ dx[0].id, dx[1].id, dx[2].id, dx[3].id, d[5] ]
                         ildn_used.append(foobar)
                         func = 1
-                    elif 'undefined' in d[5]: #amber99sb-ildn and opls and others
+                    elif 'un' in d[5]: #amber99sb-ildn and opls and others
                         bstate = ''
                     else:
                         bstate = d[5]
@@ -801,10 +801,10 @@ def get_ff_path( ff ):
     ff_path = None
     if not os.path.isdir(ff):
 	### VG ###
-	gmxlib = os.environ.get('GMXDATA') 
+	gmxlib = os.environ.get('GMXLIB') 
     #    gmxlib = os.environ.get('GMXDATA')
-   #	p = os.path.join(gmxlib,ff)
-        p = os.path.join( os.path.join(gmxlib,'top'), ff)
+   	p = os.path.join(gmxlib,ff)
+   #     p = os.path.join( os.path.join(gmxlib,'top'), ff)
 	### VG ###
         if not os.path.isdir(p):
             print >>sys.stderr,' Error: forcefield path "%s" not found' % ff

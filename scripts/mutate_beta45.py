@@ -197,11 +197,11 @@ def select_aa_mutation(residue,ffpath):
     check_residue_name( residue )
     print '\nSelect new amino acid for %s-%s: ' % (residue.id,residue.resname) 
     sys.stdout.write('Three- or one-letter code: ')
-    if residue.resname in ['HIE','HISE']: rol = 'X'
-    elif residue.resname in ['HIP','HISH']: rol = 'Z'
-    elif residue.resname in ['GLH','GLUH']: rol = 'J'
-    elif residue.resname in ['ASH','ASPH']: rol = 'B'
-    elif residue.resname in ['LYN','LYS']: rol = 'O'
+    if residue.resname in ['HIE','HISE','HSE']: rol = 'X'
+    elif residue.resname in ['HIP','HISH','HSP']: rol = 'Z'
+    elif residue.resname in ['GLH','GLUH','GLUP']: rol = 'J'
+    elif residue.resname in ['ASH','ASPH','ASPP']: rol = 'B'
+    elif residue.resname in ['LYN','LYS','LSN']: rol = 'O'
     else:
         rol = library._one_letter[residue.resname]
     aa = None
@@ -399,9 +399,9 @@ def get_ff_path( ff ):
     if not os.path.isdir(ff):
 	### VG ###
 #        gmxlib = os.environ.get('GMXDATA')
-	gmxlib = os.environ.get('GMXDATA')
-#	p = os.path.join(gmxlib,ff)
-        p = os.path.join( os.path.join(gmxlib,'top'), ff)
+	gmxlib = os.environ.get('GMXLIB')
+	p = os.path.join(gmxlib,ff)
+#        p = os.path.join( os.path.join(gmxlib,'top'), ff)
 	### VG ###
         if not os.path.isdir(p):
             print >>sys.stderr,' Error: forcefield path "%s" not found' % ff

@@ -49,21 +49,11 @@
   HR2     1     1.008000    0.000  A  0.124725820540  0.19246
   HR3     1     1.008000    0.000  A  0.261567863646  0.03264
    HS     1     1.008000    0.000  A  0.080180884633  0.41840
-#ifdef CHARMM_TIP3P
 #ifdef HEAVY_H
-HT	1	4.032		0.000	A	0.0400013524445	0.192464 
+HT	1	4.032		0.417	A	0.0400013524445	0.192464 
 #else 
 ; CHARMM_TIP3P, but not HEAVY_H 
 HT	1	1.008000	0.417	A	0.0400013524445	0.192464 
-#endif
-#else 
-; normal TIP3p : no LJ on H
-#ifdef HEAVY_H
-HT	1	4.032		0.000	A	0.0	0.0 
-#else 
-; normal TIP3P, but not HEAVY_H 
-HT	1	1.008000	0.000	A	0.0	0.0 
-#endif
 #endif
    HX     1     1.008000    0.000  A  0.040001352445  0.19246
   LIT     3     6.941000    0.000  A  0.231188217357  0.00975
@@ -98,12 +88,16 @@ OT	8	9.951400	-0.834	A	0.315057422683	0.6363864
 ; The following atom types are NOT part of the CHARMM distribution
 ; atomtypes for additional water models
 #ifdef HEAVY_H
+OWT3    8       9.951400    -0.834      A       3.15058e-01     6.36386e-01 ; TIP3p O
+HWT3    1       4.032000    0.417       A       0.0             0.0         ; TIP3p H
 OWT4	8	9.951400	0.0	A	3.15365e-01	6.48520e-01	; TIP4p O
 HWT4	1	4.032000	0.52	A	0.0	0.0	; TIP4p H
 MWT4	0	0.000000	-1.04	A	0.0	0.0	; TIP 4p vsite
 OW	8	9.951400	-0.82	A	3.16557e-01	6.50194e-01	; SPC 0
 HW	1	4.032000	0.41	A	0.0	0.0; SPC H
 #else
+OWT3    8       15.999400   -0.834      A       3.15058e-01     6.36386e-01 ; TIP3p O
+HWT3    1       1.008000    0.417       A       0.0             0.0         ; TIP3p H
 OWT4	8	15.999400	0.0	A	3.15365e-01	6.48520e-01	; TIP4p O
 HWT4	1	1.008000	0.52	A	0.0	0.0	; TIP4p H
 MWT4	0	0.000000	-1.04	A	0.0	0.0	; TIP4p vsite

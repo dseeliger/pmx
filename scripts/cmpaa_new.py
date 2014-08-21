@@ -571,9 +571,17 @@ def update_bond_lists(r1, badic):
             print
 
 def improp_entries_match( lst1, lst2 ):
+    res = True
     for a1, a2 in zip(lst1, lst2):
-        if a1.name != a2.name: return False
-    return True
+#	print "foo ",a1.name,a2.name
+        if a1.name != a2.name: res=False
+    if( res==True ):
+	return res
+    res = True
+    for a1, a2 in zip(lst1, list(reversed(lst2))):
+#	print "foo ",a1.name,a2.name
+        if a1.name != a2.name: res=False
+    return res
 
 def generate_dihedral_entries( im1, im2, r, pairs ):
     print 'Updating dihedrals...........'

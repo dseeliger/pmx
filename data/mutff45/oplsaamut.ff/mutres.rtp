@@ -48,8 +48,8 @@
     CB    DOD1     HB1    DOD2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_ASP_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_ASP_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO 
     CB     HB1    DOD2    DHD2  dih_sidechain_COOH_C_C_O_H
   DOD1     HB1    DOD2    DHD2  dih_sidechain_COOH_O_C_O_H
 
@@ -127,8 +127,8 @@
     CB    DOD1     HB1    DOD2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_ASP_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_ASP_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO 
 
 [ A2E ] ; Ala -> Glu
 
@@ -172,8 +172,8 @@
    HB1    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_GLU_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_GLU_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO 
 
 [ A2F ] ; Ala -> Phe
 
@@ -381,10 +381,10 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_ILE_chi1_N_C_C_C
-     N      CA      CB     HB3  un_dih_ILE_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
-   HB3      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_ILE_chi1_N_C_C_C  
+     N      CA      CB     HB3  un_dih_ILE_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
+   HB3      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ A2J ] ; Ala -> Gluh
 
@@ -430,8 +430,8 @@
    HB1    DOE1     DCD    DOE2  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_GLU_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_GLU_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO 
    HB1     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1     DCD    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
@@ -490,8 +490,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_LYS_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_LYS_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO 
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
@@ -545,8 +545,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_LEU_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_LEU_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_LEU_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_LEU_chi1_C_C_C_CO 
 
 [ A2M ] ; Ala -> Met
 
@@ -593,8 +593,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_MET_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_MET_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_MET_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_MET_chi1_C_C_C_CO 
 
 [ A2N ] ; Ala -> Asn
 
@@ -637,8 +637,8 @@
    HB1    DHD1    DND2    DHD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_ASN_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_ASN_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_ASN_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_ASN_chi1_C_C_C_CO 
     CA      CB     HB1    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ A2O ] ; Ala -> Lys
@@ -694,8 +694,8 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_LYS_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_LYS_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO 
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
 
@@ -746,8 +746,8 @@
    DCD    DHE1    DNE2    DHE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_GLN_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_GLN_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_GLN_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_GLN_chi1_C_C_C_CO 
     CB     HB1     DCD    DNE2  dih_GLN_chi3_C_C_CO_N    
 
 [ A2R ] ; Ala -> Arg
@@ -813,8 +813,8 @@
    DCZ    DHH3    DNH2    DHH4  improper_Z_N_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB1  un_dih_ARG_chi1_N_C_C_C
-   HB1      CB      CA       C  un_dih_ARG_chi1_C_C_C_CO
+     N      CA      CB     HB1  un_dih_ARG_chi1_N_C_C_C  
+   HB1      CB      CA       C  un_dih_ARG_chi1_C_C_C_CO 
 
 [ A2S ] ; Ala -> Ser
 
@@ -939,10 +939,10 @@
     CA      +N       C       O  improper_O_C_X_Y         
 
  [ dihedrals ]
-     N      CA      CB     HB3  un_dih_VAL_chi1_N_C_C_C
-     N      CA      CB     HB1  un_dih_VAL_chi1_N_C_C_C
-   HB3      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
-   HB1      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB3  un_dih_VAL_chi1_N_C_C_C  
+     N      CA      CB     HB1  un_dih_VAL_chi1_N_C_C_C  
+   HB3      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
+   HB1      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ A2W ] ; Ala -> Trp
 
@@ -1295,7 +1295,6 @@
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
     CB      CG     OD2     HD2  dih_sidechain_COOH_C_C_O_H
    OD1      CG     OD2     HD2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ B2D ] ; Asph -> Asp
 
@@ -1913,7 +1912,7 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CB     OD1      CG     OD2  improper_O_C_X_Y         
-    CB     OD2      CG     OD1  un                
+    CB     OD2      CG     OD1  un                       
     CG    DHD1     OD2     HD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
@@ -1921,7 +1920,7 @@
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
     CB      CG     OD2     HD2  dih_sidechain_COOH_C_C_O_H
    OD1      CG     OD2     HD2  dih_sidechain_COOH_O_C_O_H
-    CA      CB      CG     OD2  un_dih_ASN_chi2_C_C_CO_N
+    CA      CB      CG     OD2  un_dih_ASN_chi2_C_C_CO_N 
 
 [ B2O ] ; Asph -> Lys
 
@@ -2161,7 +2160,6 @@
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
     CB      CG     OD2     HD2  dih_sidechain_COOH_C_C_O_H
    OD1      CG     OD2     HD2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ B2T ] ; Asph -> Thr
@@ -2214,7 +2212,6 @@
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
     CB      CG     OD2     HD2  dih_sidechain_COOH_C_C_O_H
    OD1      CG     OD2     HD2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ B2V ] ; Asph -> Val
@@ -2646,7 +2643,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
     CB      SG    DOD2    DHD2  dih_sidechain_COOH_C_C_O_H
     HG      SG    DOD2    DHD2  dih_sidechain_COOH_O_C_O_H
 
@@ -2688,7 +2684,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
 
 [ C2E ] ; Cysh -> Glu
 
@@ -2734,7 +2729,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
 
 [ C2F ] ; Cysh -> Phe
 
@@ -2948,9 +2942,8 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-    SG      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ C2J ] ; Cysh -> Gluh
 
@@ -2998,7 +2991,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
     SG      HG    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1      HG    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
@@ -3059,7 +3051,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
     HG     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
     HG     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
     HG     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
@@ -3115,7 +3106,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_LEU_chi1_C_C_C_CO
 
 [ C2M ] ; Cysh -> Met
 
@@ -3164,7 +3154,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_MET_chi1_C_C_C_CO
 
 [ C2N ] ; Cysh -> Asn
 
@@ -3209,7 +3198,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_ASN_chi1_C_C_C_CO
     CA      CB      SG    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ C2O ] ; Cysh -> Lys
@@ -3267,7 +3255,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
     HG     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
     HG     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
 
@@ -3320,7 +3307,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_GLN_chi1_C_C_C_CO
     CB      SG      HG    DNE2  dih_GLN_chi3_C_C_CO_N    
 
 [ C2R ] ; Cysh -> Arg
@@ -3388,7 +3374,6 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-    SG      CB      CA       C  un_dih_ARG_chi1_C_C_C_CO
 
 [ C2S ] ; Cysh -> Ser
 
@@ -3515,9 +3500,8 @@
  [ dihedrals ]
      N      CA      CB      SG  dih_CYS_chi1_N_C_C_S     
      C      CA      CB      SG  dih_CYS_chi1_CO_C_C_S    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
-    SG      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ C2W ] ; Cysh -> Trp
 
@@ -3905,7 +3889,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ D2E ] ; Asp -> Glu
 
@@ -4179,8 +4162,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ D2J ] ; Asp -> Gluh
 
@@ -4442,13 +4425,13 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CB     OD1      CG     OD2  improper_O_C_X_Y         
-    CB     OD2      CG     OD1  un                
+    CB     OD2      CG     OD1  un                       
     CG    DHD1     OD2    DHD2  improper_Z_N_X_Y         
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-    CA      CB      CG     OD2  un_dih_ASN_chi2_C_C_CO_N
+    CA      CB      CG     OD2  un_dih_ASN_chi2_C_C_CO_N 
 
 [ D2O ] ; Asp -> Lys
 
@@ -4672,7 +4655,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ D2T ] ; Asp -> Thr
@@ -4719,7 +4701,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ D2V ] ; Asp -> Val
@@ -4770,8 +4751,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ASP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASP_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ D2W ] ; Asp -> Trp
 
@@ -5192,7 +5173,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ E2D ] ; Glu -> Asp
 
@@ -5484,8 +5464,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ E2J ] ; Glu -> Gluh
 
@@ -5867,13 +5847,13 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CG     OE1      CD     OE2  improper_O_C_X_Y         
-    CG     OE2      CD     OE1  un                
+    CG     OE2      CD     OE1  un                       
     CD    DHE1     OE2    DHE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-    CB      CG      CD     OE2  un_dih_GLN_chi3_C_C_CO_N
+    CB      CG      CD     OE2  un_dih_GLN_chi3_C_C_CO_N 
 
 [ E2R ] ; Glu -> Arg
 
@@ -5990,7 +5970,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ E2T ] ; Glu -> Thr
@@ -6047,7 +6026,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ E2V ] ; Glu -> Val
@@ -6100,8 +6078,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_GLU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ E2W ] ; Glu -> Trp
 
@@ -6889,8 +6867,8 @@
   DND1    DNE2    DCE1    DHE1  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO 
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ F2I ] ; Phe -> Ile
@@ -7960,8 +7938,8 @@
   DCD1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_TRP_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_TRP_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_TRP_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_TRP_chi1_C_C_C_CO 
 
 [ F2X ] ; Phe -> Hise
 
@@ -8040,8 +8018,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO 
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ F2Y ] ; Phe -> Tyr
@@ -8188,8 +8166,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIP_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIP_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIP_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIP_chi1_C_C_C_CO 
 
 [ G2A ] ; Gly -> Ala
 
@@ -11202,10 +11180,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
+     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-     C      CA      CB     CG1  un_dih_CYS_chi1_CO_C_C_S
 
 [ I2D ] ; Ile -> Asp
 
@@ -12118,10 +12095,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
+     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-     C      CA      CB     CG1  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB     CG1     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ I2T ] ; Ile -> Thr
@@ -12176,10 +12152,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG1  dih_ILE_chi1_N_C_C_C     
-     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
+     N      CA      CB     CG2  dih_ILE_chi1_N_C_C_C     
    CG2      CB      CA       C  dih_ILE_chi1_C_C_C_CO    
-     C      CA      CB     CG1  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB     CG1    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ I2V ] ; Ile -> Val
@@ -12743,7 +12718,6 @@
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
     CG      CD     OE2     HE2  dih_sidechain_COOH_C_C_O_H
    OE1      CD     OE2     HE2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ J2D ] ; Gluh -> Asp
 
@@ -13460,7 +13434,7 @@
     -C      CA       N       H  improper_Z_N_X_Y         
     CA      +N       C       O  improper_O_C_X_Y         
     CG     OE1      CD     OE2  improper_O_C_X_Y         
-    CG     OE2      CD     OE1  un                
+    CG     OE2      CD     OE1  un                       
     CD    DHE1     OE2     HE2  improper_Z_N_X_Y         
 
  [ dihedrals ]
@@ -13468,7 +13442,7 @@
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
     CG      CD     OE2     HE2  dih_sidechain_COOH_C_C_O_H
    OE1      CD     OE2     HE2  dih_sidechain_COOH_O_C_O_H
-    CB      CG      CD     OE2  un_dih_GLN_chi3_C_C_CO_N
+    CB      CG      CD     OE2  un_dih_GLN_chi3_C_C_CO_N 
 
 [ J2R ] ; Gluh -> Arg
 
@@ -13593,7 +13567,6 @@
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
     CG      CD     OE2     HE2  dih_sidechain_COOH_C_C_O_H
    OE1      CD     OE2     HE2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ J2T ] ; Gluh -> Thr
@@ -13654,7 +13627,6 @@
     CG      CB      CA       C  dih_GLU_chi1_C_C_C_CO    
     CG      CD     OE2     HE2  dih_sidechain_COOH_C_C_O_H
    OE1      CD     OE2     HE2  dih_sidechain_COOH_O_C_O_H
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ J2V ] ; Gluh -> Val
@@ -14223,7 +14195,6 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ K2D ] ; Lysh -> Asp
 
@@ -14655,8 +14626,8 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ K2J ] ; Lysh -> Gluh
 
@@ -15198,7 +15169,6 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ K2T ] ; Lysh -> Thr
@@ -15269,7 +15239,6 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ K2V ] ; Lysh -> Val
@@ -15338,8 +15307,8 @@
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ3  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ K2W ] ; Lysh -> Trp
 
@@ -15869,7 +15838,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ L2D ] ; Leu -> Asp
 
@@ -16247,8 +16215,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ L2J ] ; Leu -> Gluh
 
@@ -16747,7 +16715,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ L2T ] ; Leu -> Thr
@@ -16809,7 +16776,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ L2V ] ; Leu -> Val
@@ -16869,8 +16835,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_LEU_chi1_N_C_C_C     
     CG      CB      CA       C  dih_LEU_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ L2W ] ; Leu -> Trp
 
@@ -17352,7 +17318,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ M2D ] ; Met -> Asp
 
@@ -17714,8 +17679,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ M2J ] ; Met -> Gluh
 
@@ -18192,7 +18157,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ M2T ] ; Met -> Thr
@@ -18250,7 +18214,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ M2V ] ; Met -> Val
@@ -18308,8 +18271,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_MET_chi1_N_C_C_C     
     CG      CB      CA       C  dih_MET_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ M2W ] ; Met -> Trp
 
@@ -18709,7 +18672,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CB     ND2      CG     OD1  improper_O_C_X_Y         
     CG    HD21     ND2    HD22  improper_Z_N_X_Y         
-    CB     OD1      CG     ND2  un                
+    CB     OD1      CG     ND2  un                       
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
@@ -18762,7 +18725,6 @@
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ N2D ] ; Asn -> Asp
 
@@ -18803,7 +18765,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CB     ND2      CG     OD1  improper_O_C_X_Y         
     CG    HD21     ND2    HD22  improper_Z_N_X_Y         
-    CB     OD1      CG     ND2  un                
+    CB     OD1      CG     ND2  un                       
 
  [ dihedrals ]
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
@@ -19112,8 +19074,8 @@
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ N2J ] ; Asn -> Gluh
 
@@ -19607,7 +19569,6 @@
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ N2T ] ; Asn -> Thr
@@ -19660,7 +19621,6 @@
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     OD1  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ N2V ] ; Asn -> Val
@@ -19717,8 +19677,8 @@
      N      CA      CB      CG  dih_ASN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ASN_chi1_C_C_C_CO    
     CA      CB      CG     ND2  dih_ASN_chi2_C_C_CO_N    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ N2W ] ; Asn -> Trp
 
@@ -20202,7 +20162,6 @@
     CG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ O2D ] ; Lys -> Asp
 
@@ -21140,7 +21099,6 @@
     CG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ O2T ] ; Lys -> Thr
@@ -21210,7 +21168,6 @@
     CG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ O2V ] ; Lys -> Val
@@ -21276,8 +21233,8 @@
     CG      CB      CA       C  dih_LYS_chi1_C_C_C_CO    
     CD      CE      NZ     HZ1  dih_LYS_chi5_C_C_N_H     
     CD      CE      NZ     HZ2  dih_LYS_chi5_C_C_N_H     
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ O2W ] ; Lys -> Trp
 
@@ -21792,7 +21749,6 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ Q2D ] ; Gln -> Asp
 
@@ -21893,7 +21849,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CG     NE2      CD     OE1  improper_O_C_X_Y         
     CD    HE21     NE2    HE22  improper_Z_N_X_Y         
-    CG     OE1      CD     NE2  un                
+    CG     OE1      CD     NE2  un                       
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
@@ -22166,8 +22122,8 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ Q2J ] ; Gln -> Gluh
 
@@ -22214,7 +22170,7 @@
     CA      +N       C       O  improper_O_C_X_Y         
     CG     NE2      CD     OE1  improper_O_C_X_Y         
     CD    HE21     NE2    HE22  improper_Z_N_X_Y         
-    CG     OE1      CD     NE2  un                
+    CG     OE1      CD     NE2  un                       
 
  [ dihedrals ]
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
@@ -22667,7 +22623,6 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ Q2T ] ; Gln -> Thr
@@ -22728,7 +22683,6 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ Q2V ] ; Gln -> Val
@@ -22787,8 +22741,8 @@
      N      CA      CB      CG  dih_GLN_chi1_N_C_C_C     
     CG      CB      CA       C  dih_GLN_chi1_C_C_C_CO    
     CB      CG      CD     NE2  dih_GLN_chi3_C_C_CO_N    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ Q2W ] ; Gln -> Trp
 
@@ -23320,7 +23274,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_CYS_chi1_CO_C_C_S
 
 [ R2D ] ; Arg -> Asp
 
@@ -23782,8 +23735,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ R2J ] ; Arg -> Gluh
 
@@ -24372,7 +24325,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG     DHG  dih_SER_THR_chi2_C_C_OH_HO
 
 [ R2T ] ; Arg -> Thr
@@ -24448,7 +24400,6 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     C      CA      CB      CG  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB      CG    DHG1  dih_SER_THR_chi2_C_C_OH_HO
 
 [ R2V ] ; Arg -> Val
@@ -24522,8 +24473,8 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_ARG_chi1_N_C_C_C     
     CG      CB      CA       C  dih_ARG_chi1_C_C_C_CO    
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ R2W ] ; Arg -> Trp
 
@@ -24989,7 +24940,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
     CB      OG    DOD2    DHD2  dih_sidechain_COOH_C_C_O_H
     HG      OG    DOD2    DHD2  dih_sidechain_COOH_O_C_O_H
 
@@ -25069,7 +25019,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
 
 [ S2E ] ; Ser -> Glu
 
@@ -25118,7 +25067,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
 
 [ S2F ] ; Ser -> Phe
 
@@ -25338,9 +25286,8 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C
-    OG      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
-   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_ILE_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ S2J ] ; Ser -> Gluh
 
@@ -25391,7 +25338,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
     OG     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1     DCD    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
@@ -25455,7 +25401,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
@@ -25514,7 +25459,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_LEU_chi1_C_C_C_CO
 
 [ S2M ] ; Ser -> Met
 
@@ -25566,7 +25510,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_MET_chi1_C_C_C_CO
 
 [ S2N ] ; Ser -> Asn
 
@@ -25612,7 +25555,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_ASN_chi1_C_C_C_CO
     CA      CB      OG    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ S2O ] ; Ser -> Lys
@@ -25673,7 +25615,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
 
@@ -25729,7 +25670,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_GLN_chi1_C_C_C_CO
     CB      OG     DCD    DNE2  dih_GLN_chi3_C_C_CO_N    
 
 [ S2R ] ; Ser -> Arg
@@ -25800,7 +25740,6 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-    OG      CB      CA       C  un_dih_ARG_chi1_C_C_C_CO
 
 [ S2T ] ; Ser -> Thr
 
@@ -25891,9 +25830,8 @@
      N      CA      CB      OG  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB      OG  dih_SER_THR_chi1_CO_C_C_O
     CA      CB      OG      HG  dih_SER_THR_chi2_C_C_OH_HO
-     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C
-   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
-    OG      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     HB2  un_dih_VAL_chi1_N_C_C_C  
+   HB2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ S2W ] ; Ser -> Trp
 
@@ -26257,7 +26195,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
     CB     OG1    DOD2    DHD2  dih_sidechain_COOH_C_C_O_H
    HG1     OG1    DOD2    DHD2  dih_sidechain_COOH_O_C_O_H
 
@@ -26349,7 +26286,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_ASP_chi1_C_C_C_CO
 
 [ T2E ] ; Thr -> Glu
 
@@ -26406,7 +26342,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
 
 [ T2F ] ; Thr -> Phe
 
@@ -26652,9 +26587,8 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-     N      CA      CB     CG2  un_dih_ILE_chi1_N_C_C_C
-   OG1      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
-   CG2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO
+     N      CA      CB     CG2  un_dih_ILE_chi1_N_C_C_C  
+   CG2      CB      CA       C  un_dih_ILE_chi1_C_C_C_CO 
 
 [ T2J ] ; Thr -> Gluh
 
@@ -26713,7 +26647,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_GLU_chi1_C_C_C_CO
    OG1     DCD    DOE2    DHE2  dih_sidechain_COOH_C_C_O_H
   DOE1     DCD    DOE2    DHE2  dih_sidechain_COOH_O_C_O_H
 
@@ -26783,7 +26716,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ3  dih_LYS_chi5_C_C_N_H     
@@ -26848,7 +26780,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_LEU_chi1_C_C_C_CO
 
 [ T2M ] ; Thr -> Met
 
@@ -26906,7 +26837,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_MET_chi1_C_C_C_CO
 
 [ T2N ] ; Thr -> Asn
 
@@ -26958,7 +26888,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_ASN_chi1_C_C_C_CO
     CA      CB     OG1    DND2  dih_ASN_chi2_C_C_CO_N    
 
 [ T2O ] ; Thr -> Lys
@@ -27027,7 +26956,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_LYS_chi1_C_C_C_CO
    DCD     DCE     DNZ    DHZ1  dih_LYS_chi5_C_C_N_H     
    DCD     DCE     DNZ    DHZ2  dih_LYS_chi5_C_C_N_H     
 
@@ -27089,7 +27017,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_GLN_chi1_C_C_C_CO
     CB     OG1     DCD    DNE2  dih_GLN_chi3_C_C_CO_N    
 
 [ T2R ] ; Thr -> Arg
@@ -27166,7 +27093,6 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-   OG1      CB      CA       C  un_dih_ARG_chi1_C_C_C_CO
 
 [ T2S ] ; Thr -> Ser
 
@@ -27257,9 +27183,8 @@
      N      CA      CB     OG1  dih_SER_THR_chi1_N_C_C_O 
      C      CA      CB     OG1  dih_SER_THR_chi1_CO_C_C_O
     CA      CB     OG1     HG1  dih_SER_THR_chi2_C_C_OH_HO
-     N      CA      CB     CG2  un_dih_VAL_chi1_N_C_C_C
-   CG2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
-   OG1      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO
+     N      CA      CB     CG2  un_dih_VAL_chi1_N_C_C_C  
+   CG2      CB      CA       C  un_dih_VAL_chi1_C_C_C_CO 
 
 [ T2W ] ; Thr -> Trp
 
@@ -27720,10 +27645,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG2  dih_VAL_chi1_N_C_C_C     
+   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
      N      CA      CB     CG1  dih_VAL_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-     C      CA      CB     CG2  un_dih_CYS_chi1_CO_C_C_S
 
 [ V2D ] ; Val -> Asp
 
@@ -28634,10 +28558,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG2  dih_VAL_chi1_N_C_C_C     
+   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
      N      CA      CB     CG1  dih_VAL_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-     C      CA      CB     CG2  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB     CG2    HG21  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ V2T ] ; Val -> Thr
@@ -28684,10 +28607,9 @@
 
  [ dihedrals ]
      N      CA      CB     CG2  dih_VAL_chi1_N_C_C_C     
+   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
      N      CA      CB     CG1  dih_VAL_chi1_N_C_C_C     
    CG1      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-   CG2      CB      CA       C  dih_VAL_chi1_C_C_C_CO    
-     C      CA      CB     CG2  un_dih_SER_THR_chi1_CO_C_C_O
     CA      CB     CG2    HG21  un_dih_SER_THR_chi2_C_C_OH_HO
 
 [ V2W ] ; Val -> Trp
@@ -33308,8 +33230,8 @@
   DND1    DNE2    DCE1    DHE1  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO 
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ Y2I ] ; Tyr -> Ile
@@ -34405,8 +34327,8 @@
   DCD1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_TRP_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_TRP_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_TRP_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_TRP_chi1_C_C_C_CO 
 
 [ Y2X ] ; Tyr -> Hise
 
@@ -34487,8 +34409,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIS_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIS_chi1_C_C_C_CO 
     CA      CB      CG    DND1  dih_HIS_chi2_C_C_C_N     
 
 [ Y2Z ] ; Tyr -> Hish
@@ -34573,8 +34495,8 @@
   DND1    DCD2      CG      CB  improper_Z_CA_X_Y        
 
  [ dihedrals ]
-     N      CA      CB      CG  un_dih_HIP_chi1_N_C_C_C
-    CG      CB      CA       C  un_dih_HIP_chi1_C_C_C_CO
+     N      CA      CB      CG  un_dih_HIP_chi1_N_C_C_C  
+    CG      CB      CA       C  un_dih_HIP_chi1_C_C_C_CO 
 
 [ Z2A ] ; Hish -> Ala
 
@@ -35103,7 +35025,7 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_HIP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_HIP_chi1_C_C_C_CO    
-    CA      CB      CG     ND1  un_dih_HIS_chi2_C_C_C_N
+    CA      CB      CG     ND1  un_dih_HIS_chi2_C_C_C_N  
 
 [ Z2I ] ; Hish -> Ile
 
@@ -36189,7 +36111,7 @@
  [ dihedrals ]
      N      CA      CB      CG  dih_HIP_chi1_N_C_C_C     
     CG      CB      CA       C  dih_HIP_chi1_C_C_C_CO    
-    CA      CB      CG     ND1  un_dih_HIS_chi2_C_C_C_N
+    CA      CB      CG     ND1  un_dih_HIS_chi2_C_C_C_N  
 
 [ Z2Y ] ; Hish -> Tyr
 

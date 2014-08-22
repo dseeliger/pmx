@@ -809,6 +809,8 @@ def find_higher_atoms( rot_atom, r, order, branch ):
     res = []
     for atom in r.atoms:
         print "1level: %s %s %s" % (atom.name,atom.order,atom.branch)
+	if( ('gone' in rot_atom.nameB) and atom.name.startswith('D') ):
+	    continue
 #        if atom.order >= order and \
 #           (atom.branch == branch or branch == 0):
         if atom.order >= order:

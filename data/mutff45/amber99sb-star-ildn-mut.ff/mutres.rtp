@@ -1889,7 +1889,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1  un                
+    CB     OD2      CG     OD1  un                       
     CG    DHD1     OD2     HD2 
 
  [ dihedrals ]
@@ -4548,7 +4548,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CB     OD1      CG     OD2 
-    CB     OD2      CG     OD1  un                
+    CB     OD2      CG     OD1  un                       
     CG    DHD1     OD2    DHD2 
 
  [ dihedrals ]
@@ -6154,7 +6154,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1  un                
+    CG     OE2      CD     OE1  un                       
     CD    DHE1     OE2    DHE2 
 
  [ dihedrals ]
@@ -8482,7 +8482,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8522,7 +8522,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
    HA2    DOD1     DCG    DOD2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8557,7 +8557,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8595,7 +8595,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
    HA2    DOD1     DCG    DOD2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
      N      CA     HA2     DCG  torsion_ASP_N_CA_CB_CG_mult1
@@ -8657,7 +8657,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
    DCG    DOE1     DCD    DOE2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8721,7 +8721,7 @@
   DCD1     DCZ    DCE1    DHE1 
    DCG    DCE1    DCD1    DHD1 
   DCD1    DCD2     DCG     DCB 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8777,7 +8777,7 @@
    DCG    DNE2    DCD2    DHD2 
   DND1    DNE2    DCE1    DHE1 
   DND1    DCD2     DCG     DCB 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8828,7 +8828,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
      N      CA     HA2    DCG2  torsion_ILE_N_CA_CB_CG2_mult1
@@ -8876,7 +8876,7 @@
     -C      CA       N       H 
     CA      +N       C       O 
    DCG    DOE1     DCD    DOE2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8933,7 +8933,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -8984,7 +8984,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
      C      CA     HA2     DCG  torsion_LEU_C_CA_CB_CG_mult1
@@ -9034,7 +9034,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9077,7 +9077,7 @@
     CA      +N       C       O 
    HA2    DND2     DCG    DOD1 
    DCG    DHD1    DND2    DHD2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
      C      CA     HA2     DCG  torsion_ASN_C_CA_CB_CG_mult1
@@ -9144,7 +9144,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9193,7 +9193,7 @@
     CA      +N       C       O 
    DCG    DNE2     DCD    DOE1 
    DCD    DHE1    DNE2    DHE2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9258,7 +9258,7 @@
    DCD     DCZ     DNE     DHE 
    DCZ    DHH1    DNH1    DHH2 
    DCZ    DHH3    DNH2    DHH4 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9293,7 +9293,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9334,7 +9334,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9379,7 +9379,7 @@
  [ impropers ]
     -C      CA       N       H 
     CA      +N       C       O 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9453,7 +9453,7 @@
   DCZ3    DCD2    DCE3    DHE3 
    DCG    DNE1    DCD1    DHD1 
   DCD1     DCG     DCB    DCD2 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9509,7 +9509,7 @@
    DCG    DNE2    DCD2    DHD2 
   DND1    DNE2    DCE1    DHE1 
   DND1    DCD2     DCG     DCB 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9575,7 +9575,7 @@
    DCG    DCE1    DCD1    DHD1 
   DCD1    DCD2     DCG     DCB 
   DCE1    DCE2     DCZ     DOH 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -9634,7 +9634,7 @@
    DCG    DNE2    DCD2    DHD2 
   DND1    DNE2    DCE1    DHE1 
   DND1    DCD2     DCG     DCB 
-     N      CA       C      +N  un                
+     N      CA       C      +N  un                       
 
  [ dihedrals ]
 
@@ -13625,7 +13625,7 @@
     CA      +N       C       O 
      N      CA       C      +N 
     CG     OE1      CD     OE2 
-    CG     OE2      CD     OE1  un                
+    CG     OE2      CD     OE1  un                       
     CD    DHE1     OE2     HE2 
 
  [ dihedrals ]
@@ -18788,7 +18788,7 @@
      N      CA       C      +N 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2  un                
+    CB     OD1      CG     ND2  un                       
 
  [ dihedrals ]
      C      CA      CB      CG  torsion_ASN_C_CA_CB_CG_mult1
@@ -18899,7 +18899,7 @@
      N      CA       C      +N 
     CB     ND2      CG     OD1 
     CG    HD21     ND2    HD22 
-    CB     OD1      CG     ND2  un                
+    CB     OD1      CG     ND2  un                       
 
  [ dihedrals ]
     CA      CB      CG     ND2  torsion_ASN_CA_CB_CG_ND2_mult1
@@ -22124,7 +22124,7 @@
      N      CA       C      +N 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2  un                
+    CG     OE1      CD     NE2  un                       
 
  [ dihedrals ]
 
@@ -22432,7 +22432,7 @@
      N      CA       C      +N 
     CG     NE2      CD     OE1 
     CD    HE21     NE2    HE22 
-    CG     OE1      CD     NE2  un                
+    CG     OE1      CD     NE2  un                       
 
  [ dihedrals ]
 

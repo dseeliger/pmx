@@ -145,6 +145,13 @@ def bb_super(mol1,mol2, use_orig_mc_coords = True):
     N1,CA1,C1 = mol1.fetchm(['N','CA','C'])
     N2,CA2,C2 = mol2.fetchm(['N','CA','C'])
 
+    if( (mol1.resname=='GLY') or (mol2.resname=='GLY') or (mol2.resname[:2]=='G2') ):
+        fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
+    else:
+        N1,CA1,C1,CB1 = mol1.fetchm(['N','CA','C','CB'])
+        N2,CA2,C2,CB2 = mol2.fetchm(['N','CA','C','CB'])
+        fit_atoms( [N1,CA1,C1,CB1], [N2,CA2,C2,CB2], mol2.atoms )
+
     fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
 
     if use_orig_mc_coords:

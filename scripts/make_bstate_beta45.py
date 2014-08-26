@@ -824,7 +824,7 @@ def main(argv):
     
     files = [
         FileOption("-p", "r",["top"],"topol.top", "Input Topology File"),
-        FileOption("-itp", "r",["itp"],"topol.top", "Optional Input ITP  File"),
+        FileOption("-itp", "r",["itp"],"topol.itp", "Optional Input ITP  File"),
         FileOption("-o", "w",["top","itp"],"newtop.top", "Topology or ITP output file "),
         FileOption("-ff", "dir",["ff"],"amber99sbmut.ff, amber99sb-star-ildn-mut.ff, oplsaamut.ff", "Mutation force field "),
         FileOption("-log", "w",["log"],"bstate.log", "Log file"),

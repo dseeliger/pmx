@@ -437,7 +437,7 @@ def main(argv):
                 'this script is to take a pdb/gro file that has been written with pdb2gmx',
                 'with all hydrogen atoms present.'
                 'The program can either be executed interactively or via script.',
-                'The script file simply has to consist of "resi number - target residue." pairs.',
+                'The script file simply has to consist of "resi_number target_residue." pairs.',
                 'The script uses an extended one-letter code for amino acids to account for',
                 'different protonation states. Use the -resinfo flag to print the dictionary.'
                 '',

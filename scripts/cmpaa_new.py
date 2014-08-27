@@ -893,6 +893,19 @@ def assign_mass(r1, r2,ffnonbonded,bCharmm,ff):
     for atom in r1.atoms+r2.atoms:
 #        print atom.atomtype, atom.name
         atom.m =  NBParams.atomtypes[atom.atomtype]['mass']
+
+def assign_mass_atp(r1, r2,ffatomtypes):
+    fp = open(ffatomtypes,"r")
+    lst = fp.readlines()
+    lst = kickOutComments(lst,';')
+    fp.close()
+    mass = {}
+    for l in lst:
+        foo = l.split()
+        mass[foo[0]] = float(foo[1])
+    for atom in r1.atoms+r2.atoms:
+        atom.m = mass[atom.atomtype]
+#        print atom.atomtype, atom.name, atom.m
         
 def rename_to_gmx( r ):
     for atom in r1.atoms:
@@ -1064,6 +1077,7 @@ files= [
    FileOption("-opdb2", "w",["pdb"],"r2.pdb",""),
    FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
    FileOption("-ffnb", "r",["itp"],"ffnonbonded.rtp",""),
+   FileOption("-ffatp", "r",["atp"],"atomtypes.atp",""),
    FileOption("-fatp", "w",["atp"],"types.atp",""),
    FileOption("-fnb", "w",["itp"],"fnb.itp",""),
 ]
@@ -1129,7 +1143,8 @@ r1.resnB = r2.resname[0]+r2.resname[1:].lower()
 rtp = RTPParser(rtpfile)
 bond_neigh=assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
-assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
+#assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
+assign_mass_atp( r1, r2 ,cmdl['-ffatp'])
 
 
 #######################

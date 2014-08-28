@@ -1621,3 +1621,12 @@
  [ impropers ]
         N       -C      CH3     HN
         -C      CH3     N       -O
+
+[ NA ]
+ [ atoms ]
+        NA      SOD     1       1
+
+[ CL ]
+ [ atoms ]
+        CL      CLA    -1       1
+

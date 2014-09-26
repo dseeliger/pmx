@@ -167,12 +167,12 @@
      CB   DOD1    HB1   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB    HB1     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB    HB1     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
      CA     CB    HB1   DOD1     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB    HB1   DOD1     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB    HB1   DOD1     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -557,8 +557,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    HB3     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB3     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB3     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB3     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 HB3 DHG1 DHG2 DHG3 DHG4 DHG5 DCD1 DHD1 DHD2 DHD3
@@ -791,9 +791,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB    HB1     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB    HB1     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB    HB1     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB    HB1     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB    HB1     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB    HB1     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 HB3 DHG DCD1 DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -929,12 +929,12 @@
     HB1   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB    HB1     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB    HB1     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB    HB1   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB    HB1   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB    HB1   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -1936,24 +1936,24 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD2     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD2     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 HD2
@@ -2624,9 +2624,9 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 HD2 DHG DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -2772,18 +2772,18 @@
      CG   DHD1    OD2    HD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult4 torsion_ASN_CA_CB_CG_ND2_mult4  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult5 torsion_ASN_CA_CB_CG_ND2_mult5  
-     CA     CB     CG    OD2     un_torsion_ASN_CA_CB_CG_ND2_mult6 torsion_ASN_CA_CB_CG_ND2_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult4 torsion_ASN_CA_CB_CG_ND2_mult4  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult5 torsion_ASN_CA_CB_CG_ND2_mult5  
+     CA     CB     CG    OD2     untorsion_ASN_CA_CB_CG_ND2_mult6 torsion_ASN_CA_CB_CG_ND2_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 HD2 DHD1
@@ -3847,18 +3847,18 @@
      CB     HG     SG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     SG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     SG     HG     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     SG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     SG     HG     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     SG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     SG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     SG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -4239,8 +4239,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 SG HG DHG1 DHG2 DHG3 DHG4 DHG5 DHD1 DHD2 DHD3
@@ -4476,9 +4476,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     SG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     SG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     SG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     SG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     SG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     SG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 SG HG DHG DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -4616,12 +4616,12 @@
      SG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     SG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     SG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     SG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     SG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     SG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -5497,12 +5497,12 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
      CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -5576,24 +5576,24 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 DHD2
@@ -5652,18 +5652,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -5741,18 +5741,18 @@
      CG   DOE1    OD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6136,26 +6136,26 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 DHG1 DHG2 DHG3 DHG4 DHG5 DHD1 DHD2 DHD3
@@ -6230,18 +6230,18 @@
      CG   DOE1    OD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6339,18 +6339,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6439,27 +6439,27 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 DHG DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -6536,18 +6536,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6626,24 +6626,24 @@
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASN_CA_CB_CG_ND2_mult4  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASN_CA_CB_CG_ND2_mult5  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASN_CA_CB_CG_ND2_mult6  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 OD2 DHD1 DHD2
@@ -6732,18 +6732,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6828,18 +6828,18 @@
     OD1   DHE1   DNE2   DHE2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -6947,18 +6947,18 @@
     DCZ   DHH3   DNH2   DHH4     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -7023,18 +7023,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -7108,18 +7108,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -7199,18 +7199,18 @@
      CB    OD1     CG    OD2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 un_torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 un_torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 un_torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 un_torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 un_torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 un_torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 un_torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 un_torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 un_torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 un_torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 un_torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 un_torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult1 untorsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult2 untorsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult3 untorsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult4 untorsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult5 untorsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     torsion_ASP_N_CA_CB_CG_mult6 untorsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult1 untorsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult2 untorsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult3 untorsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult4 untorsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult5 untorsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     torsion_ASP_CA_CB_CG_OD_mult6 untorsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG    OD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -7957,18 +7957,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -8329,8 +8329,8 @@
      CG    OE1     CD    OE2     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD OE1 OE2 DHG1 DHG2 DHG3 DHD2 DHD3
@@ -8577,9 +8577,9 @@
      CG    OE1     CD    OE2     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD OE1 OE2 DHD1 DHD2 DHD3 DHD4 DHD5
@@ -8739,12 +8739,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -16279,8 +16279,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13
@@ -16453,8 +16453,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13
@@ -16539,20 +16539,20 @@
      CB    CD1    CG1   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB    CG1     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB    CG1    CD1     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB    CG1     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB    CG1    CD1     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB    CG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB    CG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB    CG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -16643,8 +16643,8 @@
     CG1   HD11    CD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DOE2
@@ -17160,8 +17160,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DHE1 DHE2 DNZ DHZ1 DHZ2 DHZ3
@@ -17251,11 +17251,11 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
-      C     CA     CB    CG1     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB    CG1     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB    CG1     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
+      C     CA     CB    CG1     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB    CG1     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB    CG1     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DHD1 DHD2 DHD3
@@ -17348,8 +17348,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DCE DHE1 DHE2 DHE3
@@ -17441,14 +17441,14 @@
     CG1   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB    CG1     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB    CG1     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB    CG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB    CG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB    CG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -17646,8 +17646,8 @@
     CD1   DHE1   DNE2   DHE2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DNE2 DHE1 DHE2
@@ -17756,8 +17756,8 @@
     DCZ   DHH3   DNH2   DHH4     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DHE DCZ DNH1 DHH1 DHH2 DNH2 DHH3 DHH4
@@ -17841,8 +17841,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DHG
@@ -17926,8 +17926,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13 DHG1
@@ -18008,8 +18008,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 un_torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 un_torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult1 untorsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     torsion_ILE_N_CA_CB_CG2_mult2 untorsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 CG2 HG21 HG22 HG23 CD1 HD11 HD12 HD13
@@ -18812,18 +18812,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -19453,9 +19453,9 @@
      CG    OE1     CD    OE2     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD OE1 OE2 HE2 DHD1 DHD2 DHD3 DHD4 DHD5
@@ -19621,12 +19621,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -20956,18 +20956,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -21504,8 +21504,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD HD1 HD2 CE HE1 HE2 NZ HZ1 HZ2 HZ3 DHG1 DHG2 DHG3
@@ -21702,9 +21702,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD HD1 HD2 CE HE1 HE2 NZ HZ1 HZ2 HZ3 DHD1 DHD2 DHD3
@@ -21899,12 +21899,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -23106,9 +23106,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23
@@ -23196,9 +23196,9 @@
      CB    CD1     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DOD2 DHD2
@@ -23279,9 +23279,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23
@@ -23366,21 +23366,21 @@
      CB    CD1     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    CD1     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    CD1     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -23471,9 +23471,9 @@
      CG   HD11    CD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DOE2
@@ -23879,11 +23879,11 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHG1 DHG2 DHG3
@@ -23971,9 +23971,9 @@
      CG   HD11    CD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DOE2 DHE2
@@ -24072,9 +24072,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHE1 DHE2 DNZ DHZ1 DHZ2 DHZ3
@@ -24167,9 +24167,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DCE DHE1 DHE2 DHE3
@@ -24264,9 +24264,9 @@
       C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
       C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
       C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -24368,9 +24368,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHE1 DHE2 DNZ DHZ1 DHZ2
@@ -24462,9 +24462,9 @@
     CD1   DHE1   DNE2   DHE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DNE2 DHE1 DHE2
@@ -24573,9 +24573,9 @@
     DCZ   DHH3   DNH2   DHH4     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHE DCZ DNH1 DHH1 DHH2 DNH2 DHH3 DHH4
@@ -24659,9 +24659,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHG
@@ -24754,9 +24754,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHG1 DHG2 DHG3 DHG4
@@ -24846,9 +24846,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 un_torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 un_torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 un_torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult1 untorsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult2 untorsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_LEU_C_CA_CB_CG_mult3 untorsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG CD1 HD11 HD12 HD13 CD2 HD21 HD22 HD23 DHG1 DHG2 DHG3
@@ -25642,18 +25642,18 @@
      CB     SD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     SD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     SD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -26122,8 +26122,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 SD CE HE1 HE2 HE3 DHG1 DHG2 DHG3 DHD1 DHD2 DHD3
@@ -26392,9 +26392,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 SD CE HE1 HE2 HE3 DHD1 DHD2 DHD3 DHD4 DHD5 DHD6
@@ -26480,12 +26480,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -27540,12 +27540,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -27618,18 +27618,18 @@
      CB    OD1     CG    ND2     un                        default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 un_torsion_ASN_CA_CB_CG_ND2_mult1  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 un_torsion_ASN_CA_CB_CG_ND2_mult2  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 un_torsion_ASN_CA_CB_CG_ND2_mult3  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult4 un_torsion_ASN_CA_CB_CG_ND2_mult4  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult5 un_torsion_ASN_CA_CB_CG_ND2_mult5  
-     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult6 un_torsion_ASN_CA_CB_CG_ND2_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 untorsion_ASN_CA_CB_CG_ND2_mult1  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 untorsion_ASN_CA_CB_CG_ND2_mult2  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 untorsion_ASN_CA_CB_CG_ND2_mult3  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult4 untorsion_ASN_CA_CB_CG_ND2_mult4  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult5 untorsion_ASN_CA_CB_CG_ND2_mult5  
+     CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult6 untorsion_ASN_CA_CB_CG_ND2_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 ND2 HD21 HD22
@@ -27695,12 +27695,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -27779,24 +27779,24 @@
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG    OD1     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG    OD1     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 ND2 HD21 HD22
@@ -27875,12 +27875,12 @@
      CG   DOE1    OD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28274,20 +28274,20 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult4 torsion_ASN_CA_CB_CG_ND2_mult4  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult5 torsion_ASN_CA_CB_CG_ND2_mult5  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult6 torsion_ASN_CA_CB_CG_ND2_mult6  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG OD1 ND2 HD21 HD22 DHG1 DHG2 DHG3 DHG4 DHG5 DHD1 DHD2 DHD3
@@ -28369,12 +28369,12 @@
      CG   DOE1    OD1   DOE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28479,12 +28479,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28583,9 +28583,9 @@
       C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
       C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
       C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28675,12 +28675,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28782,12 +28782,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28879,12 +28879,12 @@
     OD1   DHE1   DNE2   DHE2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -28999,12 +28999,12 @@
     DCZ   DHH3   DNH2   DHH4     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -29076,12 +29076,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -29162,12 +29162,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -29254,12 +29254,12 @@
      CG   HD21    ND2   HD22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 un_torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 un_torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 un_torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 un_torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 un_torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 un_torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult1 untorsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult2 untorsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult3 untorsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult4 untorsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult5 untorsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     torsion_ASN_C_CA_CB_CG_mult6 untorsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG    ND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -30084,18 +30084,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -30902,9 +30902,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD HD1 HD2 CE HE1 HE2 NZ HZ1 HZ2 DHD1 DHD2 DHD3
@@ -31093,12 +31093,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -32418,18 +32418,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -32894,8 +32894,8 @@
      CD   HE21    NE2   HE22     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD OE1 NE2 HE21 HE22 DHG1 DHG2 DHG3 DHD2 DHD3
@@ -33161,9 +33161,9 @@
      CD   HE21    NE2   HE22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD OE1 NE2 HE21 HE22 DHD1 DHD2 DHD3 DHD4 DHD5
@@ -33337,12 +33337,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -34663,18 +34663,18 @@
      CB     CD     CG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     CG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     CG     CD     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     CG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     CG     CD     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     CG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -35256,8 +35256,8 @@
      CZ   HH21    NH2   HH22     default-A                 default-A                  
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD HD1 HD2 NE HE CZ NH1 HH11 HH12 NH2 HH21 HH22 DHG1 DHG2 DHG3
@@ -35586,9 +35586,9 @@
      CZ   HH21    NH2   HH22     default-A                 default-A                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 CG HG1 HG2 CD HD1 HD2 NE HE CZ NH1 HH11 HH12 NH2 HH21 HH22 DHD1 DHD2 DHD3
@@ -35804,12 +35804,12 @@
      CG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     CG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     CG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     CG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -37137,18 +37137,18 @@
      CB     HG     OG   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB     OG     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB     OG     HG     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB     OG     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB     OG     HG     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB     OG   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB     OG   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB     OG   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -37535,8 +37535,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    HB2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    HB2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB1 HB2 OG HG DHG1 DHG2 DHG3 DHG4 DHG5 DCD1 DHD1 DHD2 DHD3
@@ -37781,9 +37781,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB     OG     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB     OG     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB     OG     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB     OG     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB     OG     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB     OG     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB1 HB2 OG HG DHG DCD1 DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -37924,12 +37924,12 @@
      OG   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB     OG     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB     OG     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB     OG   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB     OG   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB     OG   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -38971,18 +38971,18 @@
      CB    HG1    OG1   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB    OG1     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB    OG1    HG1     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB    OG1     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB    OG1    HG1     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB    OG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB    OG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB    OG1   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -39425,8 +39425,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG2     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG2     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG2     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG2     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB OG1 HG1 CG2 HG21 HG22 HG23 DHG1 DHG2 DCD1 DHD1 DHD2 DHD3
@@ -39704,9 +39704,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB    OG1     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB    OG1     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB    OG1     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB    OG1     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB    OG1     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB    OG1     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB OG1 HG1 CG2 HG21 HG22 HG23 DHG DCD1 DHD1 DHD2 DHD3 DCD2 DHD4 DHD5 DHD6
@@ -39867,12 +39867,12 @@
     OG1   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB    OG1     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB    OG1     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB    OG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB    OG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB    OG1   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  
@@ -41038,18 +41038,18 @@
      CB   HG21    CG2   DOD2     default-B                 default-B                  
 
  [ dihedrals ]
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
-      N     CA     CB    CG2     un_torsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
-     CA     CB    CG2   HG21     un_torsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult1 torsion_ASP_N_CA_CB_CG_mult1  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult2 torsion_ASP_N_CA_CB_CG_mult2  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult3 torsion_ASP_N_CA_CB_CG_mult3  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult4 torsion_ASP_N_CA_CB_CG_mult4  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult5 torsion_ASP_N_CA_CB_CG_mult5  
+      N     CA     CB    CG2     untorsion_ASP_N_CA_CB_CG_mult6 torsion_ASP_N_CA_CB_CG_mult6  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult4 torsion_ASP_CA_CB_CG_OD_mult4  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult5 torsion_ASP_CA_CB_CG_OD_mult5  
+     CA     CB    CG2   HG21     untorsion_ASP_CA_CB_CG_OD_mult6 torsion_ASP_CA_CB_CG_OD_mult6  
      CA     CB    CG2   DOD2     torsion_ASP_CA_CB_CG_OD_mult1 torsion_ASP_CA_CB_CG_OD_mult1  
      CA     CB    CG2   DOD2     torsion_ASP_CA_CB_CG_OD_mult2 torsion_ASP_CA_CB_CG_OD_mult2  
      CA     CB    CG2   DOD2     torsion_ASP_CA_CB_CG_OD_mult3 torsion_ASP_CA_CB_CG_OD_mult3  
@@ -41501,8 +41501,8 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      N     CA     CB    CG1     un_torsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
-      N     CA     CB    CG1     un_torsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
+      N     CA     CB    CG1     untorsion_ILE_N_CA_CB_CG2_mult1 torsion_ILE_N_CA_CB_CG2_mult1  
+      N     CA     CB    CG1     untorsion_ILE_N_CA_CB_CG2_mult2 torsion_ILE_N_CA_CB_CG2_mult2  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 HG13 CG2 HG21 HG22 HG23 DHD1 DHD2 DHD3
@@ -41771,9 +41771,9 @@
       N     CA      C     +N     default-star              default-star               
 
  [ dihedrals ]
-      C     CA     CB    CG2     un_torsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
-      C     CA     CB    CG2     un_torsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
-      C     CA     CB    CG2     un_torsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
+      C     CA     CB    CG2     untorsion_LEU_C_CA_CB_CG_mult1 torsion_LEU_C_CA_CB_CG_mult1  
+      C     CA     CB    CG2     untorsion_LEU_C_CA_CB_CG_mult2 torsion_LEU_C_CA_CB_CG_mult2  
+      C     CA     CB    CG2     untorsion_LEU_C_CA_CB_CG_mult3 torsion_LEU_C_CA_CB_CG_mult3  
 
  [ rotations ]
   CA-CB HB CG1 HG11 HG12 HG13 CG2 HG21 HG22 HG23 DHD1 DHD2 DHD3 DHD4 DHD5 DHD6
@@ -41940,12 +41940,12 @@
     CG2   DHD1   DND2   DHD2     default-B                 default-B                  
 
  [ dihedrals ]
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
-      C     CA     CB    CG2     un_torsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult1 torsion_ASN_C_CA_CB_CG_mult1  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult2 torsion_ASN_C_CA_CB_CG_mult2  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult3 torsion_ASN_C_CA_CB_CG_mult3  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult4 torsion_ASN_C_CA_CB_CG_mult4  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult5 torsion_ASN_C_CA_CB_CG_mult5  
+      C     CA     CB    CG2     untorsion_ASN_C_CA_CB_CG_mult6 torsion_ASN_C_CA_CB_CG_mult6  
      CA     CB    CG2   DND2     torsion_ASN_CA_CB_CG_ND2_mult1 torsion_ASN_CA_CB_CG_ND2_mult1  
      CA     CB    CG2   DND2     torsion_ASN_CA_CB_CG_ND2_mult2 torsion_ASN_CA_CB_CG_ND2_mult2  
      CA     CB    CG2   DND2     torsion_ASN_CA_CB_CG_ND2_mult3 torsion_ASN_CA_CB_CG_ND2_mult3  

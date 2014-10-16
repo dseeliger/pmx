@@ -402,7 +402,6 @@ def get_ff_path( ff ):
 #        gmxlib = os.environ.get('GMXDATA')
 	gmxlib = os.environ.get('GMXLIB')
 	p = os.path.join(gmxlib,ff)
-#        p = os.path.join( os.path.join(gmxlib,'top'), ff)
 	### VG ###
         if not os.path.isdir(p):
             print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
@@ -426,26 +425,36 @@ def main(argv):
    files = [
        FileOption("-f", "r",["pdb","gro"],"protein.pdb", "input structure file"),
        FileOption("-o", "w",["pdb","gro"],"out.pdb", "output structure file"),
-       FileOption("-ff", "dir",["ff"],"amber99sbmut.ff", "path to mutation forcefield"),
+       FileOption("-ff", "dir",["ff"],"amber99sbmut", "path to mutation forcefield"),
        FileOption("-script", "r",["txt"],"mutations.txt", "text file with mutations to insert"),
        ]
     
    help_text = ('This script applies mutations of residues in a structure file ',
                 'for subsequent free energy calculations like FEP, TI, etc.',
                 'The mutation information and dummy placements are taken from',
-                'the hybrid residue database "ffamber99sb.mtp". The best way to use',
+                'the hybrid residue database "mutres.mtp". The best way to use',
                 'this script is to take a pdb/gro file that has been written with pdb2gmx',
                 'with all hydrogen atoms present.'
                 'The program can either be executed interactively or via script.',
                 'The script file simply has to consist of "resi_number target_residue." pairs.',
                 'The script uses an extended one-letter code for amino acids to account for',
-                'different protonation states. Use the -resinfo flag to print the dictionary.'
-                '',
+                'different protonation states. Use the -resinfo flag to print the dictionary.',
+                'Currently available force fields:',
+                '    - amber99sbmut (Hornak et al, 2006)',
+                '    - amber99sb-star-ildn-mut (Best & Hummer, 2009; Lindorff-Larsen et al, 2010)',
+                '    - charmm22starmut.ff (Piana et al, 2011)',
+                '    - charmm36mut (Best et al, 2012)',
+                '    - oplsaamut (Jorgensen et al, 1996; Kaminski et al, 2001)',
                 '',
                 '',
                 'Please cite:',
+		'Vytautas Gapsys, Servaas Michielssens, Daniel Seeliger and Bert L. de Groot.',
+		'Automated Protein Structure and Topology Generation for Alchemical Perturbations.',
+		'submitted',
+		'',
+		'Old pmx (pymacs) version:',
                 'Daniel Seeliger and Bert L. de Groot. Protein Thermostability Calculations Using',
-                'Alchemical Free Energy Simulations, Biophysical Journal, 98(10),:2309-2316 (2010)',
+                'Alchemical Free Energy Simulations, Biophysical Journal, 98(10):2309-2316 (2010)',
                 '',
                 '',
                 '',

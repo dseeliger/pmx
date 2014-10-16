@@ -826,11 +826,34 @@ def main(argv):
         FileOption("-p", "r",["top"],"topol.top", "Input Topology File"),
         FileOption("-itp", "r",["itp"],"topol.itp", "Optional Input ITP  File"),
         FileOption("-o", "w",["top","itp"],"newtop.top", "Topology or ITP output file "),
-        FileOption("-ff", "dir",["ff"],"amber99sbmut.ff, amber99sb-star-ildn-mut.ff, oplsaamut.ff", "Mutation force field "),
+        FileOption("-ff", "dir",["ff"],"amber99sbmut", "Mutation force field "),
         FileOption("-log", "w",["log"],"bstate.log", "Log file"),
         ]
-    
-    help_text = ['']
+   
+    help_text = ('This script adds a B state to an .itp or .top file for a hybrid residue.',
+		'Hybrid residues in the topology file are recognized automatically.',
+		'-scale_mass flag sets dummy masses to 1.0, this option is set to True by default.',
+		'Currently available force fields:',
+		'    - amber99sbmut (Hornak et al, 2006)',
+		'    - amber99sb-star-ildn-mut (Best & Hummer, 2009; Lindorff-Larsen et al, 2010)',
+		'    - charmm22starmut.ff (Piana et al, 2011)',
+		'    - charmm36mut (Best et al, 2012)',
+		'    - oplsaamut (Jorgensen et al, 1996; Kaminski et al, 2001)',
+                '',
+                '',
+                'Please cite:',
+                'Vytautas Gapsys, Servaas Michielssens, Daniel Seeliger and Bert L. de Groot.',
+                'Automated Protein Structure and Topology Generation for Alchemical Perturbations.',
+                'submitted',
+                '',
+		'Old pmx (pymacs) version:',
+                'Daniel Seeliger and Bert L. de Groot. Protein Thermostability Calculations Using',
+                'Alchemical Free Energy Simulations, Biophysical Journal, 98(10):2309-2316 (2010)',
+                '',
+                '',
+                '',
+                )
+
     cmdl = Commandline( argv, options = options,
                         fileoptions = files,
                         program_desc = help_text,

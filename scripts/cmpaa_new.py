@@ -970,6 +970,7 @@ def improps_as_atoms( im, r, use_b = False):
 def read_nbitp(fn):
     l = open(fn,'r').readlines()
     l = kickOutComments(l,';')
+    l = kickOutComments(l,'#')
     l = readSection(l,'[ atomtypes ]','[')
     l = parseList('ssiffsff',l)
     dic = {}
@@ -977,7 +978,7 @@ def read_nbitp(fn):
         dic[entry[0]]=entry[1:]
     return dic
 
-def write_atp_fnb(fn_atp,fn_nb,r,ff):
+def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
     types=[]
     if os.path.isfile(fn_atp) : 
         ifile=open(fn_atp,'r')
@@ -1016,7 +1017,7 @@ def write_atp_fnb(fn_atp,fn_nb,r,ff):
 
     # for opls need to extract the atom name
     if( 'opls' in ff):
-	dum_real_name = read_nbitp(cmdl['-ffnb'])
+	dum_real_name = read_nbitp(os.path.join(ffpath,'ffnonbonded.itp'))
 
     for atom in r.atoms:
         if atom.atomtype[0:3]=='DUM':
@@ -1069,15 +1070,34 @@ def rename_res_charmm(m):
 	    for atom in res.atoms:
 	        atom.resname=res.resname
 
+def get_ff_path( ff ):
+    ff_path = None
+    if not os.path.isdir(ff):
+        ### VG ###
+#        gmxlib = os.environ.get('GMXDATA')
+        gmxlib = os.environ.get('GMXLIB')
+        p = os.path.join(gmxlib,ff)
+        ### VG ###
+        if not os.path.isdir(p):
+            print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
+        else:
+            ff_path = p
+    else:
+        ff_path = ff
+    print 'Opening forcefield: %s' % ff_path
+    return ff_path
+
+
    
 files= [
    FileOption("-pdb1", "r",["pdb"],"a1.pdb",""),
    FileOption("-pdb2", "r",["pdb"],"a2.pdb",""),
    FileOption("-opdb1", "w",["pdb"],"r1.pdb",""),
    FileOption("-opdb2", "w",["pdb"],"r2.pdb",""),
-   FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
-   FileOption("-ffnb", "r",["itp"],"ffnonbonded.rtp",""),
-   FileOption("-ffatp", "r",["atp"],"atomtypes.atp",""),
+   FileOption("-ff", "dir",["ff"],"amber99sbmut", "path to mutation forcefield"),
+#   FileOption("-ff", "r",["rtp"],"aminoacids.rtp",""),
+#   FileOption("-ffnb", "r",["itp"],"ffnonbonded.itp",""),
+#   FileOption("-ffatp", "r",["atp"],"atomtypes.atp",""),
    FileOption("-fatp", "w",["atp"],"types.atp",""),
    FileOption("-fnb", "w",["itp"],"fnb.itp",""),
 ]
@@ -1086,8 +1106,25 @@ options=[
    Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa"),
    Option( "-align", "bool", True, "align side chains"),
 	]
-help_text = ("cmpaa.py reads two pdb files aligned on the backbone togheter with an rtp file.",
-		"This is used to generate a hybrid residue.\n")
+
+help_text = ('The script creates hybrid structure (.pdb) and topology database entries (.rtp, .mtp).',
+                'Input: two pdb files aligned on the backbone and path to the force field files.',
+                'Output: hybrid structure, hybrid topology entries as .rtp and .mtp files.',
+                'Also, atomtype and non-bonded parameter files for the introduced dummies are generated.',
+                '',
+                '',
+                'Please cite:',
+                'Vytautas Gapsys, Servaas Michielssens, Daniel Seeliger and Bert L. de Groot.',
+                'Automated Protein Structure and Topology Generation for Alchemical Perturbations.',
+                'submitted',
+                '',
+                'Old pmx (pymacs) version:',
+                'Daniel Seeliger and Bert L. de Groot. Protein Thermostability Calculations Using',
+                'Alchemical Free Energy Simulations, Biophysical Journal, 98(10):2309-2316 (2010)',
+                '',
+                '',
+                '',
+            )
 
 #options=[Option("-ff", "string", False ,"aminoacids.rtp")]
 cmdl = Commandline( sys.argv, options = options, 
@@ -1100,7 +1137,9 @@ else :
     bCharmm=False
 align = cmdl['-align']
 
-rtpfile=cmdl['-ff']
+ffpath = get_ff_path(cmdl['-ff'])
+
+rtpfile=os.path.join(ffpath,'aminoacids.rtp')
 m1 = Model(cmdl['-pdb1'])
 m2 = Model(cmdl['-pdb2'])
 nm1=cmdl['-pdb1']
@@ -1144,7 +1183,7 @@ rtp = RTPParser(rtpfile)
 bond_neigh=assign_rtp_entries( r1, rtp )
 assign_rtp_entries( r2, rtp )
 #assign_mass( r1, r2 ,cmdl['-ffnb'],bCharmm,cmdl['-ft'])
-assign_mass_atp( r1, r2 ,cmdl['-ffatp'])
+assign_mass_atp( r1, r2 ,os.path.join(ffpath,'atomtypes.atp'))
 
 
 #######################
@@ -1258,7 +1297,7 @@ else:
 merge_molecules( r1, dummies )
 make_bstate_dummies( r1 )
 
-write_atp_fnb(cmdl["-fatp"],cmdl["-fnb"],r1,cmdl['-ft'])
+write_atp_fnb(cmdl["-fatp"],cmdl["-fnb"],r1,cmdl['-ft'],ffpath)
 abdic, badic = make_transition_dics( atom_pairs, r1)
 
 update_bond_lists( r1, badic )

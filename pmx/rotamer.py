@@ -162,7 +162,7 @@ def load_bbdep():
     return pmx_data_file('bbdep.pkl')
 
 def real_resname(r):
-    dic = {'LYP':'LYS','LYSH':'LYS','LYN':'LYS','CYM':'CYS',
+    dic = {'LYP':'LYS','LYSH':'LYS','LYN':'LYS','LSN':'LYS','CYM':'CYS',
            'CYS2':'CYS','CYN':'CYS','HIE':'HIS','HIP':'HIS',
            'HID':'HIS','HISA':'HIS','HISB':'HIS',
            'HISH':'HIS','ASH':'ASP','GLH':'GLU','GLUH':'GLU',

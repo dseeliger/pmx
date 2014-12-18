@@ -2,7 +2,7 @@
 ;GMX   Force-field
 ;      main  N-ter C-ter 2-ter
 ALA    ALA   NALA  CALA  -
-ARG    ARG   NAR   CAR   -
+ARG    ARG   NARG  CARG  -
 ARGN   -     -     -     -
 ASN    ASN   NASN  CASN  -
 ASP    ASP   NASP  CASP  -
@@ -24,9 +24,9 @@ LEU    LEU   NLEU  CLEU  -
 MET    MET   NMET  CMET  -
 PHE    PHE   NPHE  CPHE  -
 PRO    PRO   NPRO  CPRO  -
-SER    SER   NSE   CSE   -
-SEP    SEP   NSE   CSE   -
-SEQ    SEQ   NSE   CSE   -
+SER    SER   NSER  CSER  -
+SEP    SEP   NSER  CSER  -
+SEQ    SEQ   NSER  CSER  -
 THR    THR   NTHR  CTHR  -
 TRP    TRP   NTRP  CTRP  -
 TYR    TYR   NTYR  CTYR  -

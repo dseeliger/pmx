@@ -225,7 +225,7 @@ CGLY	3
 1	1	H	N	-C	CA	
 2	6	HA	CA	N	C	
 1       1       OC1     C       CA      OC2
-CSE	5
+CSER	5
 1	1	H	N	-C	CA	
 1	5	HA	CA	N	CB	C	
 2	6	HB	CB	CA	OG	
@@ -280,7 +280,7 @@ CGLN	6
 2	6	HG	CG	CB	CD	
 2	3	HE2	NE2	CD	CG	
 1       1       OC1     C       CA      OC2
-CAR	9
+CARG	9
 1	1	H	N	-C	CA	
 1	5	HA	CA	N	CB	C	
 2	6	HB	CB	CA	CG	
@@ -397,7 +397,7 @@ NALA	3
 NGLY 	2
 3	4	H	N	CA	C	
 2	6	HA	CA	N	C	
-NSE 	4
+NSER 	4
 3	4	H	N	CA	CB	
 1	5	HA	CA	N	CB	C	
 2	6	HB	CB	CA	OG	
@@ -439,7 +439,7 @@ NGLN 	5
 2	6	HB	CB	CA	CG	
 2	6	HG	CG	CB	CD	
 2	3	HE2	NE2	CD	CG	
-NAR 	8
+NARG 	8
 3	4	H	N	CA	CB	
 1	5	HA	CA	N	CB	C	
 2	6	HB	CB	CA	CG	

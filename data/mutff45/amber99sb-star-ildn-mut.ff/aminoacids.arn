@@ -2,14 +2,14 @@
 ; residue   gromacs  forcefield
   NALA	     H               H1
   NGLY	     H		     H1
-  NSE	     H		     H1
+  NSER	     H		     H1
   NTHR	     H		     H1
   NLEU	     H		     H1
   NILE	     H		     H1
   NVAL	     H		     H1
   NASN	     H		     H1
   NGLN	     H		     H1
-  NAR	     H		     H1
+  NARG	     H		     H1
   NHID	     H		     H1
   NHIE	     H		     H1
   NHIP	     H		     H1
@@ -33,8 +33,8 @@
   CALA       OXT             OC1
   CGLY       O               OC2
   CGLY	     OXT             OC1
-  CSE        O               OC2
-  CSE 	     OXT             OC1
+  CSER       O               OC2
+  CSER 	     OXT             OC1
   CTHR       O               OC2
   CTHR	     OXT             OC1
   CLEU       O               OC2
@@ -47,8 +47,8 @@
   CASN	     OXT             OC1
   CGLN       O               OC2
   CGLN	     OXT             OC1
-  CAR        O               OC2
-  CAR 	     OXT             OC1
+  CARG       O               OC2
+  CARG 	     OXT             OC1
   CHID       O               OC2
   CHID	     OXT             OC1
   CHIE       O               OC2

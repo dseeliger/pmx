@@ -844,7 +844,7 @@ def main(argv):
                 'Please cite:',
                 'Vytautas Gapsys, Servaas Michielssens, Daniel Seeliger and Bert L. de Groot.',
                 'Automated Protein Structure and Topology Generation for Alchemical Perturbations.',
-                'submitted',
+		'J. Comput. Chem. 2015, 36, 348-354. DOI: 10.1002/jcc.23804',
                 '',
 		'Old pmx (pymacs) version:',
                 'Daniel Seeliger and Bert L. de Groot. Protein Thermostability Calculations Using',

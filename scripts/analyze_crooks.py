@@ -303,6 +303,38 @@ def dump_integ_file( fn, data):
         print >>fp, fn, w
     fp.close()
     
+def Jarz(res, T=298):
+    kb=0.00831447215
+    beta = 1./(kb*T)
+    n = float(len(res))
+    mexp = 0.0
+    m = 0.0
+    m2 = 0.0
+    for w in res:
+	mexp = mexp + exp(-beta*w)
+	m = m + w
+	m2 = m2 + w*w
+    mexp = mexp/n
+    m = m/n
+    m2 = m2/n
+    var = (m2-m*m)*(n/(n-1))
+    dG1 = -kb*T*log(mexp) # Jarzynski estimator
+    dG2 = m - beta*var/2.0 # Fluctuation-Dissipation estimator
+    return(dG1)
+
+def Jarz_err_boot(res, nruns, T=298):
+    out = []
+    n = int(len(res))
+    for k in range(nruns):
+        sys.stdout.write('\rJarzynski error bootstrap: iteration %s/%s' % (k,nruns) )
+        sys.stdout.flush()
+        for i in range(n):
+            val = [choice(res) for _ in xrange(n)]
+        foo = Jarz(val, T)
+        out.append(foo)
+    sys.stdout.write('\n')
+    err = std(out)
+    return(err)
 
 def BAR(res_ab, res_ba, T = 298):
     kb=0.00831447215
@@ -508,6 +540,7 @@ def main(argv):
         Option( "-rand", "int", 50, "take a random subset of trajectories"),
         Option( "-integ_only", "bool", False, "Do integration only. Skip analysis."),
         Option( "-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
+        Option( "-jarz", "bool", False, "Jarzynski estimation"),
         Option( "-nruns", "int", 100, "number of runs for bootstrapped BAR error"),
         ]
     
@@ -631,7 +664,7 @@ def main(argv):
     cgi_result = gauss_intersection( [Af, mf, devf], [Ab, mb, devb ] )
     intersection = True
     if not cgi_result:
-        tee(out, '\n  Gaussians to close for intersection calculation')
+        tee(out, '\n  Gaussians too close for intersection calculation')
         tee(out, '   --> Taking difference of mean values')
         cgi_result = (mf+mb)*.5
         intersection = False
@@ -660,7 +693,25 @@ def main(argv):
     tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff ) 
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean )
     tee(out, ' ------------------------------------------------------')
-    
+   
+    if cmdl['-jarz']:
+        tee(out, ' --------------------------------------------------------')
+        tee(out, '             ANALYSIS: Jarzynski estimator     ')
+        tee(out, ' --------------------------------------------------------')
+        jarz_resultA = Jarz( res_ab, T)
+	jarz_resultB = Jarz( res_ba, T)
+        tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_resultA)
+        tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_resultB)
+        jarz_err_bootA = Jarz_err_boot( res_ab, cmdl['-nruns'], T)
+        jarz_err_bootB = Jarz_err_boot( res_ba, cmdl['-nruns'], T)
+#        tee(out, '  RESULT: error_dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_errA)
+        tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootA)
+#        tee(out, '  RESULT: error_dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_errB)
+        tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootB)
+        tee(out, ' ------------------------------------------------------')
+    	mean = (jarz_resultA+jarz_resultB)*.5
+    	tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean )
+	tee(out, ' ------------------------------------------------------')
 
     print '\n   Plotting histograms......'
     make_plot( cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'] )

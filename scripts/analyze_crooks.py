@@ -303,7 +303,7 @@ def dump_integ_file( fn, data):
         print >>fp, fn, w
     fp.close()
     
-def Jarz(res, T=298):
+def Jarz(res, c=1.0, T=298):
     kb=0.00831447215
     beta = 1./(kb*T)
     n = float(len(res))
@@ -311,8 +311,8 @@ def Jarz(res, T=298):
     m = 0.0
     m2 = 0.0
     for w in res:
-	mexp = mexp + exp(-beta*w)
-	m = m + w
+	mexp = mexp + exp(-beta*c*w)
+	m = m + c*w
 	m2 = m2 + w*w
     mexp = mexp/n
     m = m/n
@@ -322,7 +322,7 @@ def Jarz(res, T=298):
     dG2 = m - beta*var/2.0 # Fluctuation-Dissipation estimator
     return(dG1)
 
-def Jarz_err_boot(res, nruns, T=298):
+def Jarz_err_boot(res, nruns, c=1.0, T=298):
     out = []
     n = int(len(res))
     for k in range(nruns):
@@ -330,7 +330,7 @@ def Jarz_err_boot(res, nruns, T=298):
         sys.stdout.flush()
         for i in range(n):
             val = [choice(res) for _ in xrange(n)]
-        foo = Jarz(val, T)
+        foo = -1.0*Jarz(val, c, T)
         out.append(foo)
     sys.stdout.write('\n')
     err = std(out)
@@ -698,12 +698,12 @@ def main(argv):
         tee(out, ' --------------------------------------------------------')
         tee(out, '             ANALYSIS: Jarzynski estimator     ')
         tee(out, ' --------------------------------------------------------')
-        jarz_resultA = Jarz( res_ab, T)
-	jarz_resultB = Jarz( res_ba, T)
+        jarz_resultA = Jarz( res_ab, 1.0, T)
+	jarz_resultB = -1.0*Jarz( res_ba, -1.0, T)
         tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_resultA)
         tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_resultB)
-        jarz_err_bootA = Jarz_err_boot( res_ab, cmdl['-nruns'], T)
-        jarz_err_bootB = Jarz_err_boot( res_ba, cmdl['-nruns'], T)
+        jarz_err_bootA = Jarz_err_boot( res_ab, cmdl['-nruns'], 1.0, T)
+        jarz_err_bootB = Jarz_err_boot( res_ba, cmdl['-nruns'], -1.0, T)
 #        tee(out, '  RESULT: error_dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_errA)
         tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootA)
 #        tee(out, '  RESULT: error_dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_errB)

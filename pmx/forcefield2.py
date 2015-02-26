@@ -513,7 +513,7 @@ class TopolBase:
                         atom.qqB = atom.q
                 qA_tot = sum(map(lambda a: a.qqA, r.atoms))
                 qB_tot = sum(map(lambda a: a.qqB, r.atoms))
-                if qB_tot != target_chargeB:
+                if round(qB_tot,5) != round(target_chargeB,5):
                     TR('State B has total charge of %g' % round(qB_tot,5))
                     TR('Applying charge correction to ensure integer charges')
                     latom = self.__last_perturbed_atom(r)

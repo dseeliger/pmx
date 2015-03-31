@@ -19,7 +19,7 @@ I mostly use pmx to write short scripts which perform some changes in pdb files,
 
 Checkout the source code and run the usual python installation
 ```
-git clone https://code.google.com/p/pmx/
+git clone https://github.com/dseeliger/pmx/ pmx
 cd pmx 
 sudo python setup.py install
 ```

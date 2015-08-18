@@ -37,7 +37,7 @@ Quite fancy is the interface to the GROMACS command line parsing
 functionality. Take a look at the example scripts.
 
 """
-__version__ = '1.0.0'
+__version__ = '1.1.0dev'
 
 PMX_VERSION = __version__
 

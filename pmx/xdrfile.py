@@ -27,20 +27,17 @@
 #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #  DEALINGS IN THE SOFTWARE.
 # 
+#  Adapted by Daniel Seeliger for use in the pmx package (Aug 2015)
+#
 
 from ctypes import *
 import os.path
 
 mTrr,mNumPy=1,2
-try:
-    from numpy import *
-    from numpy.ctypeslib import ndpointer
-    auto_mode=mNumPy                 
-except:
-    auto_mode=0
+auto_mode=0
 
 
-class frame:
+class Frame:
     #variables
     #x: rvec*natoms / numpy array if installed
     #box DIM*DIM
@@ -51,6 +48,7 @@ class frame:
 
     def __init__(self,n,mode):
         #create vector for x
+		self.natoms = n
         if mode&mNumPy:
             self.x=empty((n,3),dtype=float32)
             self.box = empty((3,3),float32)
@@ -59,7 +57,48 @@ class frame:
             self.box = (c_float*3*3)()
 
 
-class xdrfile:
+    def update_box( self, box ):
+        for i in range(3):
+            for k in range(3):
+                box[i][k] = self.box[i][k]
+
+    def update_atoms( self, atom_sel ):
+        for i, atom in enumerate(atom_sel.atoms):
+            if atom_sel.unity == 'A':
+                atom.x[0] = self.x[i][0]*10
+                atom.x[1] = self.x[i][1]*10
+                atom.x[2] = self.x[i][2]*10
+            else:
+                atom.x[0] = self.x[i][0]
+                atom.x[1] = self.x[i][1]
+                atom.x[2] = self.x[i][2]
+
+    def update( self, atom_sel ):
+        self.update_atoms(atom_sel )
+        self.update_box( atom_sel.box )
+
+
+    def get_natoms(self):
+        return self.natoms
+    def get_time(self):
+        return self.time
+    def get_step(self):
+        return self.step
+    def get_prec(self):
+        return self.prec
+	def get_box(self):
+		return self.box
+
+
+    def __str__(self):
+
+        s = '< xdrlib.Frame: natoms = %d | step = %d | time = %8.2f >' % (self.get_natoms(), self.get_step(), self.get_time())
+        return s
+
+
+
+
+class XDRFile:
     exdrOK, exdrHEADER, exdrSTRING, exdrDOUBLE, exdrINT, exdrFLOAT, exdrUINT, exdr3DX, exdrCLOSE, exdrMAGIC, exdrNOMEM, exdrENDOFFILE, exdrNR = range(13)
 
     #
@@ -118,7 +157,7 @@ class xdrfile:
              
         
     def __iter__(self):
-        f = frame(self.natoms,self.mode)
+        f = Frame(self.natoms,self.mode)
         #temporary c_type variables (frame variables are python type)
         step = c_int()
         time = c_float()

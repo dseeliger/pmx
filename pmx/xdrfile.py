@@ -29,7 +29,7 @@
 # 
 #  Adapted by Daniel Seeliger for use in the pmx package (Aug 2015)
 #
-
+import numpy as np
 from ctypes import *
 import os.path
 
@@ -86,8 +86,18 @@ class Frame:
         return self.step
     def get_prec(self):
         return self.prec
-	def get_box(self):
-		return self.box
+	def get_box(self, mode='std'):
+		if mode == 'std':
+			box = [[0.,0.,0.],
+				   [0.,0.,0.],
+				   [0.,0.,0.]]
+		elif mode == 'numpy':
+			box = np.zeros((3,3))
+		for i in range(3):
+			for k in range(3):
+				box[i][k] = self.box[i][k]
+		return box
+
 
 
     def __str__(self):

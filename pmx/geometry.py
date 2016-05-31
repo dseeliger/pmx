@@ -152,7 +152,7 @@ def bb_super(mol1,mol2, use_orig_mc_coords = True):
         N2,CA2,C2,CB2 = mol2.fetchm(['N','CA','C','CB'])
         fit_atoms( [N1,CA1,C1,CB1], [N2,CA2,C2,CB2], mol2.atoms )
 
-    fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
+#    fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
 
     if use_orig_mc_coords:
         atom_set = ['N','CA','C','H','O','HA','HN']

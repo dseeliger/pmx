@@ -487,6 +487,7 @@ def main(argv):
    if cmdl.opt['-script'].is_set:
        mutations_to_make = read_script( cmdl['-script'] )
        for mut in mutations_to_make:
+	   check_residue_name( m.residues[ mut[0]-1 ] )
            apply_mutation( m, mut, mtp_file )
    else:
        do_more = True

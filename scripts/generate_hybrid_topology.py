@@ -534,8 +534,8 @@ def find_predefined_dihedrals(topol, rlist, rdic, ffbonded, dih_predef_default, 
 		    encountered = is_ildn_dih_encountered(ildn_used,foobar,encountered)
 		    if( encountered==1 ):
 			continue
-		    if ( 'torsion' in d[4] ):#'torsion' in dx[5] ):
-			if ( ('torsion' not in dx[5]) ):
+		    if ( 'tors' in d[4] ):#'torsion' in dx[5] ):
+			if ( ('tors' not in dx[5]) ):
 			   continue
 
 		    #check for opls

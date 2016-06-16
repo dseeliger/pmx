@@ -60,8 +60,10 @@ class Atomselection:
             setattr(self,key,val)
 
     def writePDB(self,fname,title="",nr=1):
-
-        fp = open(fname,'w')
+	if nr > 1:
+	    fp = open(fname,'a')
+	else:
+            fp = open(fname,'w')
         if not title:
             if hasattr(self,"title"):
                 title = self.title

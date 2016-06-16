@@ -128,6 +128,12 @@ def check_residue_name( res ):
     elif res.resname == 'CYS':
         if not res.has_atom('HG'):
             print >>sys.stderr,' Cannot mutate SS-bonded Cys %d' % res.id
+
+def check_OPLS_LYS( res ):
+    if res.has_atom( 'HZ3'):
+        return('K')
+    else:
+	return('O')
     
 def get_restype(r):
     if r.resname in ['DA','DT','DC','DG']:
@@ -323,6 +329,13 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file):
 
     if residue.resname == 'ILE': rename_ile( residue )
     olkey = convert_aa_name( residue.resname )
+
+    # olkey should contain the correct one letter name of the WT residue
+    # however, due to the different namings of the residues in the FFs
+    # Lys needs to be checked once again: in OPLS Lys is non-protonated, while in the other FFs it is protonated
+    if ('opls' in mtp_file) and ('LYS' in residue.resname):
+        olkey = check_OPLS_LYS( residue )
+
     hybrid_residue_name = olkey+'2'+new_aa_name
     print 'log_> Residue to mutate: %d | %s | %s ' % ( residue.id, residue.resname, residue.chain_id)
     print 'log_> Mutation to apply: %s->%s' % (olkey, new_aa_name)

@@ -622,7 +622,9 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
 		else:
                     im_new.append( i1[4] )
                     if( 'torsion' in i1[4] ):	#ildn
-                        foo = 'un' + i1[4]
+			tors = copy.deepcopy(i1[4])
+			tors = tors.replace('torsion','tors')
+                        foo = 'un' + tors
                         im_new.append( foo )
                     elif( 'dih_' in i1[4] ):	#opls
                         foo = 'un' + i1[4]
@@ -645,7 +647,9 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( i2[4] )
                 else:
                     if( 'torsion' in i2[4] ):	#ildn
-			foo = 'un' + i2[4]
+                        tors = copy.deepcopy(i2[4])
+                        tors = tors.replace('torsion','tors')
+			foo = 'un' + tors
 			im_new.append( foo )
                     elif( 'dih_' in i2[4] ):   #opls
                         foo = 'un' + i2[4]
@@ -980,12 +984,14 @@ def read_nbitp(fn):
 
 def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
     types=[]
-    if os.path.isfile(fn_atp) : 
+    if os.path.isfile(fn_atp) :
         ifile=open(fn_atp,'r')
-	for line in ifile:
-	    sp=line.split()
-	    types.append(sp[0])
-	ifile.close()
+        for line in ifile:
+            line = line.lstrip()
+            if(not (line.startswith(';') or line.startswith('#') or (line.strip()=='')) ):
+                sp=line.split()
+                types.append(sp[0])
+        ifile.close()
     if os.path.isfile(fn_atp) :
         ofile=open(fn_atp,'a')
     else :
@@ -1003,12 +1009,14 @@ def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
     ofile.close()
 
     types=[]
-    if os.path.isfile(fn_nb) : 
+    if os.path.isfile(fn_nb) :
         ifile=open(fn_nb,'r')
-	for line in ifile:
-	    sp=line.split()
-	    types.append(sp[0])
-	ifile.close()
+        for line in ifile:
+            line = line.lstrip()
+            if(not (line.startswith(';') or line.startswith('#') or (line.strip()=='')) ):
+                sp=line.split()
+                types.append(sp[0])
+        ifile.close()
     if os.path.isfile(fn_nb) :
         ofile=open(fn_nb,'a')
     else :
@@ -1105,6 +1113,7 @@ files= [
 options=[
    Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa"),
    Option( "-align", "bool", True, "align side chains"),
+   Option( "-cbeta", "bool", False, "morphing up to Cbeta atom"),
 	]
 
 help_text = ('The script creates hybrid structure (.pdb) and topology database entries (.rtp, .mtp).',
@@ -1136,6 +1145,7 @@ if cmdl['-ft']=="charmm":
 else :
     bCharmm=False
 align = cmdl['-align']
+cbeta = cmdl['-cbeta']
 
 ffpath = get_ff_path(cmdl['-ff'])
 
@@ -1254,9 +1264,15 @@ if use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
     print "ENTERED STANDARD"
     if bCharmm :
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
+	if cbeta:
+	    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmm)
     else :
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
+	if cbeta:
+	    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list)
 #ring-res 2 non-ring-res: T,A,V,I
 elif (r1.resname in res_with_rings and r2.resname in res_diff_Cb ) or \
      (r2.resname in res_with_rings and r1.resname in res_diff_Cb ):
@@ -1275,19 +1291,43 @@ elif (r1.resname in res_with_rings and r2.resname in res_gly_pro ) or \
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
 #ringed residues by atom names 
 elif merge_by_name_list.has_key( r1.resname ) and r2.resname in merge_by_name_list[r1.resname]:
-    print "ENTERED MERGE BY NAMES"
-    atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
+    if cbeta:
+        if bCharmm :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
+        else :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+    else:
+        print "ENTERED MERGE BY NAMES"
+        atom_pairs, dummies = merge_by_names( r1, r2 ) #make_predefined_pairs( r1, r2, standard_pair_list) 
 #ring-res 2 non-ring-res
 elif r1.resname in res_with_rings or \
      r2.resname in res_with_rings:
     print "ENTERED RINGS"
     if bCharmm :
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmB)
+	if cbeta:
+	    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmB)
     else :
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
+	if cbeta:
+	    atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listB)
 else:    
     print "ENTERED SIMPLE"
-    atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
+    if cbeta:
+	if (r1.resname=='GLY') or (r2.resname=='GLY'):
+            if bCharmm :
+                atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmD)
+            else :
+                atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listD)
+	else:
+            if bCharmm :
+                atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
+            else :
+                atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
+    else:
+        atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
 ######################################################################################
 ######################################################################################
 ######################################################################################

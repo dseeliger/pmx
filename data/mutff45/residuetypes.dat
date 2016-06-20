@@ -181,6 +181,14 @@ T5P	Water
 T3H	Water
 K	Ion
 NA	Ion
+NaJ	Ion
+ClJ	Ion
+KJ	Ion
+NaS	Ion
+ClS	Ion
+NaE	Ion
+ClE	Ion
+KE	Ion
 CA	Ion
 MK	Ion
 CL	Ion

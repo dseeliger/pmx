@@ -164,9 +164,10 @@ def load_bbdep():
 def real_resname(r):
     dic = {'LYP':'LYS','LYSH':'LYS','LYN':'LYS','LSN':'LYS','CYM':'CYS',
            'CYS2':'CYS','CYN':'CYS','HIE':'HIS','HIP':'HIS',
-           'HID':'HIS','HISA':'HIS','HISB':'HIS',
-           'HISH':'HIS','ASH':'ASP','GLH':'GLU','GLUH':'GLU',
-           'ASPH':'ASP'}
+           'HID':'HIS','HISA':'HIS','HISB':'HIS','HSE':'HIS','HSP':'HIS',
+           'HSD':'HIS','HISH':'HIS','HISD':'HIS','ASH':'ASP','ASPP':'ASP','ASPH':'ASP',
+           'GLH':'GLU','GLUH':'GLU','GLUP':'GLU',
+           }
     if dic.has_key(r): return dic[r]
     else: return r
 

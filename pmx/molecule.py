@@ -131,7 +131,7 @@ class Molecule(Atomselection):
         dic = {'LYP':'LYS','LYSH':'LYS','LYN':'LYS','LSN':'LYS','CYM':'CYS',
                'CYS2':'CYS','CYN':'CYS','HIE':'HIS','HIP':'HIS',
                'HID':'HIS','HISA':'HIS','HISB':'HIS','HSE':'HIS','HSP':'HIS',
-	       'HSD':'HIS','HISH':'HIS','ASH':'ASP','ASPP':'ASP','ASPH':'ASP',
+	       'HSD':'HIS','HISH':'HIS','HISD':'HIS','ASH':'ASP','ASPP':'ASP','ASPH':'ASP',
 	       'GLH':'GLU','GLUH':'GLU','GLUP':'GLU',
                }
         if dic.has_key(self.resname): self.real_resname =  dic[self.resname]

@@ -219,7 +219,7 @@ def select_aa_mutation(residue,ffpath):
 	    tl = library._aacids_ext_amber.values()
     if('opls' in ffpath):
             ol = library._aacids_ext_oplsaa.keys()
-            tl = library._aacids_ext_oplsaa.values()
+            tl = library._aacids_ext_oplsaa.values()+['ASPP','GLUP']
     if('charmm' in ffpath):
             ol = library._aacids_ext_charmm.keys()
             tl = library._aacids_ext_charmm.values()

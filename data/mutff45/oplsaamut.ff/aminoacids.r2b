@@ -2,4 +2,6 @@
 ;GMX   Force-field
 CYS    CYSH
 LYS    LYSH
-LYSN   LYS
+LYSN   LSN
+ASPH   ASPP
+GLUH   GLUP

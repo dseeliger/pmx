@@ -298,7 +298,7 @@
     CA    +N     C     O    improper_O_C_X_Y 
     CB   OD1    CG   OD2    improper_O_C_X_Y     
 
-[ ASPH ]
+[ ASPP ]
  [ atoms ]
      N     opls_238  -0.500     1
      H     opls_241   0.300     2
@@ -584,7 +584,7 @@
 ;    CG   OE1    CD   OE2    improper_O_C_X_Y   
 
 
-[ GLUH ]
+[ GLUP ]
  [ atoms ]
      N     opls_238  -0.500     1
      H     opls_241   0.300     2
@@ -989,7 +989,7 @@
     -C    CA     N     H    improper_Z_N_X_Y 
     CA    +N     C     O    improper_O_C_X_Y 
 
-[ LYS ]
+[ LSN ]
  [ atoms ]
      N     opls_238  -0.500     1
      H     opls_241   0.300     2

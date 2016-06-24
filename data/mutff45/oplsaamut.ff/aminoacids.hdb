@@ -35,7 +35,7 @@ ASP     3
 1	1	H	N	-C	CA
 1	5	HA	CA	N	C	CB
 2	6	HB	CB	CG	CA
-ASPH    4       
+ASPP    4       
 1	1	H	N	-C	CA
 1	5	HA	CA	N	C	CB
 2	6	HB	CB	CG	CA
@@ -72,7 +72,7 @@ PGLU    4
 1	5	HA	CA	N	C	CB
 2	6	HB	CB	CG	CA
 2	6	HG	CG	CD	CB
-GLUH    5       
+GLUP    5       
 1	1	H	N	-C	CA
 1	5	HA	CA	N	C	CB
 2	6	HB	CB	CG	CA
@@ -130,7 +130,7 @@ LEU     6
 1	5	HG	CG	CB	CD1	CD2
 3	4	HD1	CD1	CG	CB
 3	4	HD2	CD2	CG	CB
-LYS     7       
+LSN     7       
 1	1	H	N	-C	CA
 1	5	HA	CA	N	C	CB
 2	6	HB	CB	CG	CA

@@ -83,7 +83,7 @@ ZZ       =  2
 class Model(Atomselection):
 
     def __init__(self, filename = None, pdbline = None, renumber_atoms=True,
-                 renumber_residues = True, **kwargs):
+                 renumber_residues = True, bPDBTER= False, **kwargs):
         
         Atomselection.__init__(self)
         self.title = 'PMX MODEL'
@@ -100,7 +100,7 @@ class Model(Atomselection):
             setattr(self,key,val)
 
         if filename is not None:
-            self.read(filename)
+            self.read(filename,bPDBTER)
         if pdbline is not None:
             self.__readPDB(pdbline = pdbline)
         if self.atoms:
@@ -328,7 +328,42 @@ class Model(Atomselection):
         self.unity  = 'A'
         return self
     
-    
+    def __readPDBTER(self,fname=None, pdbline=None):
+        if pdbline:
+            l = pdbline.split('\n')
+        else:
+            l = open(fname,'r').readlines()
+
+ 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	bNewChain = True
+	chainID = ' '
+	usedChainIDs = ''
+        for line in l:
+	    if 'TER' in line:
+		bNewChain = True
+            if (line[:4]=='ATOM') or (line[:6]=='HETATM'):
+                a = Atom().readPDBString(line)
+		if bNewChain==True:
+		    if (a.chain_id==' ') or (a.chain_id==chainID):
+			# find a new chain id
+			bFound = False
+			while bFound==False:
+			    foo = chainIDstring[0]
+			    chainIDstring = chainIDstring.lstrip(chainIDstring[0])
+			    if foo not in usedChainIDs:
+				bFound=True
+				usedChainIDs = usedChainIDs+foo
+				chainID = foo
+		a.chain_id = chainID
+                self.atoms.append(a)
+		bNewChain = False
+            if line[:6] == 'CRYST1':
+                self.box = _p.box_from_cryst1( line )
+        self.make_chains()
+        self.make_residues()
+        self.unity  = 'A'
+        return self
+
     def __readGRO(self, filename):
         l = open(filename).readlines()
         # first line is name/comment
@@ -388,10 +423,13 @@ class Model(Atomselection):
         self.unity = 'nm'
         return self
 
-    def read(self, filename ):
+    def read(self, filename, bPDBTER ):
         ext = filename.split('.')[-1]
         if ext == 'pdb':
-            return self.__readPDB( filename )
+	    if bPDBTER:
+                return self.__readPDBTER( filename )
+	    else:
+                return self.__readPDB( filename )
         elif ext == 'gro':
             return self.__readGRO( filename )
         else:

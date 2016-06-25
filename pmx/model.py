@@ -214,10 +214,10 @@ class Model(Atomselection):
 ##         fp.close()
 
 
-    def write(self,fn, title = '', nr = 1):
+    def write(self,fn, title = '', nr = 1, bPDBTER=False):
         ext = fn.split('.')[-1]
         if ext == 'pdb':
-            self.writePDB( fn, title, nr )
+            self.writePDB( fn, title, nr, bPDBTER )
         elif ext == 'gro':
             self.writeGRO( fn, title )
         elif ext == 'pir':

@@ -356,6 +356,7 @@ class Model(Atomselection):
 				chainID = foo
 		    else:
 			chainID = a.chain_id
+			usedChainIDs = usedChainIDs + chainID
 		a.chain_id = chainID
                 self.atoms.append(a)
 		bNewChain = False

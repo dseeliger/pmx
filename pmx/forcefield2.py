@@ -47,7 +47,7 @@ def TR ( s ):
     print "pmx.forcefield_> " + s 
 
 #def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXDATA')+'/top'] ):
-def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')] ):
+def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')], itp=False, ffpath=None ):
 
     defs = []
     incs = []
@@ -55,8 +55,16 @@ def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')] ):
         defs.append('-D%s' % d)
     for i in cpp_path:
         incs.append('-I%s' % i)
-    cmd = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),fn)
-    return os.popen(cmd,'r').readlines()
+    if itp:
+        cmd1 = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),fn)
+	l1 = os.popen(cmd1,'r').readlines()
+	ffname = ffpath+'/forcefield.itp'
+        cmd2 = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),ffname)
+	l2 = os.popen(cmd2,'r').readlines()
+	return(l1+l2)
+    else:
+        cmd = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),fn)
+    	return os.popen(cmd,'r').readlines()
 
 
 
@@ -850,12 +858,14 @@ class ITPFile( TopolBase ):
 class Topology( TopolBase ):
 
 #    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXDATA')+'/top'], cpp_defs = [], version = 'old', ff = 'amber' ):
-    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXLIB')], cpp_defs = [], version = 'old', ff = 'amber' ):
+    def __init__(self, filename, topfile = None, assign_types = True, cpp_path = [os.environ.get('GMXLIB')], cpp_defs = [], version = 'old', ff = 'amber', ffpath=None ):
         TopolBase.__init__(self, filename, version)
+	bItp = False
         if not topfile:
             topfile = filename
+	    bItp = True
         if assign_types:
-            l = cpp_parse_file(topfile, cpp_defs = cpp_defs, cpp_path = cpp_path)
+            l = cpp_parse_file(topfile, cpp_defs = cpp_defs, cpp_path = cpp_path, itp = bItp, ffpath = ffpath)
             l = kickOutComments(l,'#')
             l = kickOutComments(l,';')
             self.BondedParams = BondedParser( l )

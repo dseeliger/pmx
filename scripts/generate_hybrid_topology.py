@@ -882,7 +882,7 @@ def main(argv):
         topol = Topology( input_itp,  topfile = None, version = 'new', ff = cmdl['-ff'], ffpath=get_ff_path(cmdl['-ff']) )
     else:
         print 'log_> Reading input .top file "%s"' % (top_file)
-        topol = Topology( top_file, version = 'new', ff = cmdl['-ff'] )
+        topol = Topology( top_file, topfile=top_file, version = 'new', ff = cmdl['-ff'] )
 
 #    for i in topol.dihedrals:
 #        print  i[0].id,i[1].id,i[2].id,i[3].id

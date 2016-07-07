@@ -876,10 +876,12 @@ def main(argv):
         print 'log_> Setting outfile name to %s' % out_file
 
     if input_itp:
-        print 'log_> Reading input files "%s" and "%s"' % (top_file, input_itp)
-        topol = Topology( input_itp,  topfile = top_file, version = 'new', ff = cmdl['-ff'] )
+#        print 'log_> Reading input files "%s" and "%s"' % (top_file, input_itp)
+#        topol = Topology( input_itp,  topfile = top_file, version = 'new', ff = cmdl['-ff'] )
+        print 'log_> Reading input .itp file "%s""' % (input_itp)
+        topol = Topology( input_itp,  topfile = None, version = 'new', ff = cmdl['-ff'], ffpath=get_ff_path(cmdl['-ff']) )
     else:
-        print 'log_> Reading input file "%s"' % (top_file)
+        print 'log_> Reading input .top file "%s"' % (top_file)
         topol = Topology( top_file, version = 'new', ff = cmdl['-ff'] )
 
 #    for i in topol.dihedrals:

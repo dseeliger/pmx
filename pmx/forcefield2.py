@@ -58,10 +58,13 @@ def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')], itp=False
     if itp:
         cmd1 = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),fn)
 	l1 = os.popen(cmd1,'r').readlines()
-	ffname = ffpath+'/forcefield.itp'
-        cmd2 = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),ffname)
-	l2 = os.popen(cmd2,'r').readlines()
-	return(l1+l2)
+	if ffpath != None:
+	    ffname = ffpath+'/forcefield.itp'
+            cmd2 = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),ffname)
+	    l2 = os.popen(cmd2,'r').readlines()
+	    return(l1+l2)
+	else:
+	    return(l1)
     else:
         cmd = 'cpp -traditional %s %s %s ' % (' '.join(defs),' '.join(incs),fn)
     	return os.popen(cmd,'r').readlines()

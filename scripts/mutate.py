@@ -411,15 +411,16 @@ def get_restype(r):
 def get_ff_path( ff ):
     ff_path = None
     if not os.path.isdir(ff):
-	### VG ###
-#        gmxlib = os.environ.get('GMXDATA')
-	gmxlib = os.environ.get('GMXLIB')
-	p = os.path.join(gmxlib,ff)
-	### VG ###
-        if not os.path.isdir(p):
-            print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
-        else:
+        gmxlib = os.environ.get('GMXLIB')
+        p = os.path.join(gmxlib,ff)
+        pff = p+'.ff'
+        if os.path.isdir(p):
             ff_path = p
+        elif os.path.isdir(pff):
+            ff_path = pff
+        else:
+            print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
+            sys.exit(0)
     else:
         ff_path = ff
     print 'Opening forcefield: %s' % ff_path

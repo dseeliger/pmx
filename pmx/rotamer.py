@@ -206,7 +206,7 @@ def mini_nb(model, mol, cutoff):
     c = mol.com(vector_only = True)
     nb_list = []
     for atom in model.atoms:
-        if atom.resname not in ['SOL','NaS','ClS'] and atom not in mol.atoms and \
+        if atom.resname not in ['SOL','NaS','ClS','NA','CL','NaJ','ClJ'] and atom not in mol.atoms and \
            atom.x[0] >= c[0] - cutoff and atom.x[0] <= c[0]+cutoff and \
            atom.x[1] >= c[1] - cutoff and atom.x[1] <= c[1]+cutoff and \
            atom.x[2] >= c[2] - cutoff and atom.x[2] <= c[2]+cutoff:

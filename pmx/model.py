@@ -430,7 +430,7 @@ class Model(Atomselection):
         self.unity = 'nm'
         return self
 
-    def read(self, filename, bPDBTER ):
+    def read(self, filename, bPDBTER=False ):
         ext = filename.split('.')[-1]
         if ext == 'pdb':
 	    if bPDBTER:

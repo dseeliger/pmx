@@ -1024,13 +1024,14 @@ def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
     print types
 
     # for opls need to extract the atom name
-    if( 'opls' in ff):
+    ffnamelower = ff.lower()
+    if( 'opls' in ffnamelower):
 	dum_real_name = read_nbitp(os.path.join(ffpath,'ffnonbonded.itp'))
 
     for atom in r.atoms:
         if atom.atomtype[0:3]=='DUM':
 	    if atom.atomtype not in types:
-		if( 'opls' in ff):
+		if( 'opls' in ffnamelower):
 		    foo = dum_real_name['opls_'+atom.atomtype.split('_')[2]]
                     ofile.write("%-13s\t\t%3s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
 		     % (atom.atomtype,foo[0],atom.m))
@@ -1040,7 +1041,7 @@ def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
 		types.append(atom.atomtype)
         if atom.atomtypeB[0:3]=='DUM':
 	    if atom.atomtypeB not in types:
-		if( 'opls' in ff):
+		if( 'opls' in ffnamelower):
                     foo = dum_real_name['opls_'+atom.atomtypeB.split('_')[2]]
                     ofile.write("%-13s\t\t%3s\t0\t%4.2f\t   0.0000  A   0.00000e+00 0.00000e+00\n" \
                      % (atom.atomtypeB,foo[0],atom.mB))

@@ -214,13 +214,14 @@ def select_aa_mutation(residue,ffpath):
     aa = None
     ol = library._aacids_dic.keys()
     tl = library._aacids_dic.values()
-    if('amber' in ffpath):
+    ffpathlower = ffpath.lower()
+    if('amber' in ffpathlower):
 	    ol = library._aacids_ext_amber.keys()
 	    tl = library._aacids_ext_amber.values()
-    if('opls' in ffpath):
+    if('opls' in ffpathlower):
             ol = library._aacids_ext_oplsaa.keys()
             tl = library._aacids_ext_oplsaa.values()+['ASPP','GLUP','LSN']
-    if('charmm' in ffpath):
+    if('charmm' in ffpathlower):
             ol = library._aacids_ext_charmm.keys()
             tl = library._aacids_ext_charmm.values()
 

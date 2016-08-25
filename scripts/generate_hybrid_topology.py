@@ -460,13 +460,14 @@ def get_torsion_multiplicity( name ):
 def explicit_defined_dihedrals(filename,ff):
     l = open(filename).readlines()
     output = {}
+    ffnamelower = ff.lower()
     for line in l:
         if line.startswith('#define'):
             entr = line.split()
             name = entr[1]
-	    if( ff.startswith('amber') ):
+	    if( ffnamelower.startswith('amber') ):
 	        params = [9,float(entr[2]),float(entr[3]),int(entr[4])]
-  	    elif( ff.startswith('opls') ):
+  	    elif( ffnamelower.startswith('opls') ):
 		if( len(entr) == 8): #dihedral
 	            params = [3,float(entr[2]),float(entr[3]),float(entr[4]),float(entr[5]),float(entr[6]),float(entr[7])]
 		elif( len(entr) == 5):

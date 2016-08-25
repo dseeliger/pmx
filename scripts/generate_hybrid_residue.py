@@ -332,11 +332,18 @@ def cmp_mol2_types( type1, type2 ):
 #        sys.exit(1)
         
         
-def find_closest_atom( atom1, atom_list, merged_atoms ):
+def find_closest_atom( atom1, atom_list, merged_atoms, bH2heavy=True ):
     min_d = 0.55
     idx = 99
     for i, atom in enumerate(atom_list):
         if atom not in merged_atoms:
+	    if bH2heavy==False:
+                ### check for H2heavy morphe ###
+                if(atom1.atomtype.startswith('H') and (not atom.atomtype.startswith('H')) ):
+                    continue
+                if(atom.atomtype.startswith('H') and (not atom1.atomtype.startswith('H')) ):
+                    continue
+
             d = atom1 - atom
 	    print "%s %s %f" %(atom1.name,atom.name,d)
             if d < min_d:
@@ -402,7 +409,7 @@ def merge_by_names( mol1, mol2 ):
 
     
 
-def make_pairs( mol1, mol2,bCharmm ):
+def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
     # make main chain + cb pairs
     print 'Making atom pairs.........'
     mol1.batoms = []
@@ -453,7 +460,7 @@ def make_pairs( mol1, mol2,bCharmm ):
                     for at2 in atoms2:
                         #if cmp_mol2_types( at1.atype, at2.atype):
                         candidates.append( at2 )
-                    aa, d = find_closest_atom( at1, candidates, merged_atoms2 )
+                    aa, d = find_closest_atom( at1, candidates, merged_atoms2, bH2heavy )
                     if aa:
                         merged_atoms2.append( aa )
                         merged_atoms1.append( at1 )
@@ -1116,6 +1123,7 @@ options=[
    Option( "-ft", "string", "charmm" , "force field type (charmm, amber99sb, amber99sb*-ildn, oplsaa"),
    Option( "-align", "bool", True, "align side chains"),
    Option( "-cbeta", "bool", False, "morphing up to Cbeta atom"),
+   Option( "-H2heavy", "bool", True, "allow morphing between hydrogens and heavy atoms"),
 	]
 
 help_text = ('The script creates hybrid structure (.pdb) and topology database entries (.rtp, .mtp).',
@@ -1148,6 +1156,7 @@ else :
     bCharmm=False
 align = cmdl['-align']
 cbeta = cmdl['-cbeta']
+bH2heavy = cmdl['-H2heavy']
 
 ffpath = get_ff_path(cmdl['-ff'])
 
@@ -1329,7 +1338,7 @@ else:
             else :
                 atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
     else:
-        atom_pairs, dummies = make_pairs( r1, r2,bCharmm )
+        atom_pairs, dummies = make_pairs( r1, r2,bCharmm, bH2heavy )
 ######################################################################################
 ######################################################################################
 ######################################################################################

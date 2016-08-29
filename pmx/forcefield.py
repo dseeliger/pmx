@@ -267,20 +267,57 @@ class ITPFile:
 
         print >>fp, '\n [ bonds ]'
         for bond in self.bonds:
-            print >>fp, "%8s %8s %4d "% \
-                  (bond[0].name, bond[1].name, bond[2])
+	    if len(bond)<=3:
+                print >>fp, "%8s %8s "% \
+                      (bond[0].name, bond[1].name)
+	    else:
+                print >>fp, "%8s %8s %8.4f %8.4f "% \
+                      (bond[0].name, bond[1].name, bond[3], bond[4])
 
             
         print >>fp, '\n [ angles ]'
         for angle in self.angles:
-            print >>fp, "%8s %8s %8s %4d "% \
-                  (angle[0].name, angle[1].name,angle[2].name, angle[3])
+	    if len(angle)<=4:
+                print >>fp, "%8s %8s %8s "% \
+                      (angle[0].name, angle[1].name,angle[2].name)
+	    elif angle[3]==5: # U-B
+                print >>fp, "%8s %8s %8s %8.4f %8.4f %8.4f %8.4f "% \
+                      (angle[0].name, angle[1].name,angle[2].name,
+			angle[4],angle[5],angle[6],angle[7])
+	    else:
+                print >>fp, "%8s %8s %8s %8.4f %8.4f "% \
+                      (angle[0].name, angle[1].name,angle[2].name,angle[4],angle[5])
+		
 
         print >>fp, '\n [ dihedrals ]'
         for dih in self.dihedrals:
-            print >>fp, "%8s %8s %8s %s %4d %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f "% \
-                  (dih[0].name, dih[1].name,dih[2].name, dih[3].name, dih[4],
-                   dih[5], dih[6], dih[7], dih[8], dih[9], dih[10])
+	    if len(dih)<=5: # no parameters
+                print >>fp, "%8s %8s %8s %s "% \
+                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name) 
+	    elif dih[4]==3:
+                print >>fp, "%8s %8s %8s %s %8.4f %8.4f %8.4f %8.4f %8.4f %8.4f "% \
+                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name,
+                       dih[5], dih[6], dih[7], dih[8], dih[9], dih[10])
+	    elif (dih[4]==1) or (dih[4]==4) or (dih[4]==9):
+                print >>fp, "%8s %8s %8s %s %8.4f %8.4f %8.4f "% \
+                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name,
+                       dih[5], dih[6], dih[7])
+            elif (dih[4]==2) or (dih[4]==11):
+                print >>fp, "%8s %8s %8s %s %8.4f %8.4f "% \
+                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name,
+                       dih[5], dih[6])
+
+#        print >>fp, '\n [ impropers ]'
+#        for dih in self.impropers:
+#            if len(dih)<=5: # no parameters
+#                print >>fp, "%8s %8s %8s %s "% \
+#                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name)
+#            elif dih[4]==2:
+#                print >>fp, "%8s %8s %8s %s %8.4f %8.4f "% \
+#                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name, dih[5], dih[6])
+#            elif dih[4]==4:
+#                print >>fp, "%8s %8s %8s %s %8.4f %8.4f %8.4f "% \
+#                      (dih[0].name, dih[1].name,dih[2].name, dih[3].name, dih[5], dih[6], dih[7])
             
 
     def read_vsites2(self, lines):

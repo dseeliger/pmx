@@ -646,14 +646,16 @@ class Chain(Atomselection):
     def create(self, seq, phi_psi = [], ss = []):
 ##         print 'seq = ', seq
 ##         print 'phi_psi', phi_psi
-##         if ss:
-##             assert len(seq) == len(ss)
-##             phi_psi = []
-##             for i in range(len(seq)):
-##                 if ss[i] == 'H':
-##                     phi_psi.append( [-57,-47] )
-##                 elif ss[i] == 'E':
-##                     phi_psi.append( [-139, 135] )
+        if ss:
+            assert len(seq) == len(ss) or len(ss) == 1
+            if len(ss) == 1:
+                ss = ss[0]*len(seq)
+            phi_psi = []
+            for i in range(len(seq)):
+                if ss[i] == 'H':
+                    phi_psi.append( [-57,-47] )
+                elif ss[i] == 'E':
+                    phi_psi.append( [-139, 135] )
                     
 ##         if not phi_psi:
 ##             print seq, len(seq)
@@ -677,6 +679,11 @@ class Chain(Atomselection):
         self.al_from_resl()
         for i, aa in enumerate(seq[1:]):
             self.cbuild(aa) #, phi_psi[i+1][0], phi_psi[i+1][1])
+        if phi_psi:
+            for i, mol in enumerate(self.residues):
+                mol.set_phi( phi_psi[i][0] )
+                mol.set_psi( phi_psi[i][0] )
+                
         return self
         
 

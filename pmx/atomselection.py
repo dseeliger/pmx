@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -42,12 +42,14 @@ from geometry import Rotation
 import library
 import copy as cp
 import _pmx
+import logging
 #import _gridns
 
 XX = 0
 YY = 1
 ZZ = 2
 
+logger = logging.getLogger()
 
 class Atomselection:
     """ Basic class to handle sets of atoms. Atoms are stored
@@ -59,10 +61,10 @@ class Atomselection:
         for key, val in kwargs.items():
             setattr(self,key,val)
 
-    def writePDB(self,fname,title="",nr=1,bPDBTER=False):
-	if nr > 1:
-	    fp = open(fname,'a')
-	else:
+    def write_pdb(self,fname,title="",nr=1,bPDBTER=False):
+    	if nr > 1:
+            fp = open(fname,'a')
+	    else:
             fp = open(fname,'w')
         if not title:
             if hasattr(self,"title"):
@@ -94,7 +96,7 @@ class Atomselection:
         fp.close()
 
 
-    def writeGRO( self, filename, title = ''):
+    def write_gro( self, filename, title = ''):
         fp = open(filename,'w')
         if self.unity == 'nm': fac = 1.
         else: fac = 0.1
@@ -142,11 +144,11 @@ class Atomselection:
     def write(self,fn, title = '', nr = 1):
         ext = fn.split('.')[-1]
         if ext == 'pdb':
-            self.writePDB( fn, title, nr )
+            self.write_pdb( fn, title, nr )
         elif ext == 'gro':
-            self.writeGRO( fn, title )
+            self.write_gro( fn, title )
         else:
-            print >>sys.stderr, 'pmx_Error_> Can only write pdb or gro!'
+            logger.error('Unknown file type: %s' % ext)
             sys.exit(1)
 
 
@@ -155,7 +157,7 @@ class Atomselection:
         """move atoms to center of mass or return vector only"""
         for atom in self.atoms:
             if atom.m == 0:
-                print >>sys.stderr, " Warning: Atom has zero mass: setting mass to 1."
+                logger.debug("Atom has zero mass: setting mass to 1.")
                 atom.m = 1.
         x = sum(map(lambda a: a.x[0]*a.m, self.atoms))
         y = sum(map(lambda a: a.x[1]*a.m, self.atoms))
@@ -336,7 +338,7 @@ class Atomselection:
                     newl.append((at1,at2,tp))
                     check = True
             if not check:
-                print 'bondtype %s-%s defaults to 1' % (at1.atype, at2.atype)
+                logger.info('bondtype %s-%s defaults to 1' % (at1.atype, at2.atype))
                 newl.append((at1,at2,'1'))
         self.bondlist = newl
                                 

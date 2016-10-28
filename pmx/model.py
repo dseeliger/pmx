@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -75,10 +75,13 @@ import chain
 from molecule import *
 from atom import *
 import _pmx as _p
+import logging
 XX       =  0             
 YY       =  1             
 ZZ       =  2
 
+
+logger = logging.getLogger()
 
 class Model(Atomselection):
 
@@ -134,23 +137,13 @@ class Model(Atomselection):
         return s
         
 
-##     def writePDB(self,fname,title="",nr=1):
+    def write_pir( self, filename, title=""):
+        """ Write model as pir entry. Not really tested.
 
-##         fp = open(fname,'w')
-##         if not title:
-##             title = self.title
-##         header = 'TITLE    '+title
-##         print >>fp, header
-##         print >>fp, 'MODEL%5d' % nr
-##         if self.box[XX][XX]*self.box[YY][YY]*self.box[ZZ][ZZ] != 0:
-##             box_line = _p.box_as_cryst1( self.box )
-##             print >>fp, box_line
-##         for atom in self.atoms:
-##             print >>fp, atom
-##         print >>fp, 'ENDMDL'
-##         fp.close()
+        :param filename: output file
+        :param title: optional title
 
-    def writePIR( self, filename, title=""):
+        """
         fp = open(filename,"w")
         if not title: title = '_'.join(self.title.split())
         print >>fp, '>P1;%s' % title
@@ -160,7 +153,13 @@ class Model(Atomselection):
         print >>fp, self.chains[-1].get_sequence()+'*'
         fp.close()
 
-    def writeFASTA( self, filename, title = ""):
+    def write_fasta( self, filename, title = ""):
+        """ Write model in fasta sequence format.
+
+        :param filename: output file
+        :param title: optional title
+
+        """
         fp = open(filename,"w")
         if not title: title = '_'.join(self.title.split())
         if len(self.chains) == 1:
@@ -173,59 +172,19 @@ class Model(Atomselection):
                 
     
 
-##     def writeGRO( self, filename, title = ''):
-##         fp = open(filename,'w')
-##         if self.unity == 'nm': fac = 1.
-##         else: fac = 0.1
-##         if not title:
-##             title = self.title
-##         print >>fp, title
-##         print >>fp, "%5d" % len(self.atoms)
-##         if self.atoms[0].v[0] != 0.000 : bVel = True
-##         else: bVel = False
-##         if bVel:
-##             gro_format = "%8.3f%8.3f%8.3f%8.4f%8.4f%8.4f"
-##         else:
-##             gro_format = "%8.3f%8.3f%8.3f"
-##         for atom in self.atoms:
-##             resid = (atom.resnr)%100000
-##             at_id = (atom.id)%100000
-##             ff = "%5d%-5.5s%5.5s%5d" % (resid, atom.resname, atom.name, at_id)
-##             if bVel:
-##                 ff+=gro_format % (atom.x[XX]*fac, atom.x[YY]*fac, atom.x[ZZ]*fac,
-##                                   atom.v[XX], atom.v[YY], atom.v[ZZ])
-##             else:
-##                 ff+=gro_format % (atom.x[XX]*fac, atom.x[YY]*fac, atom.x[ZZ]*fac )
-##             print >>fp, ff
-            
-##         if self.box[XX][YY] or self.box[XX][ZZ] or self.box[YY][XX] or \
-##                self.box[YY][ZZ] or self.box[ZZ][XX] or self.box[ZZ][YY]:
-##             bTric = False
-##             ff = "%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f%10.5f"
-##         else:
-##             bTric = True
-##             ff = "%10.5f%10.5f%10.5f"
-##         if bTric:
-##             print >>fp, ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ])
-##         else:
-##             print >>fp, ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ],
-##                               self.box[XX][YY],self.box[XX][ZZ],self.box[YY][XX],
-##                               self.box[YY][ZZ],self.box[ZZ][XX],self.box[ZZ][YY])
-##         fp.close()
-
 
     def write(self,fn, title = '', nr = 1, bPDBTER=False):
         ext = fn.split('.')[-1]
         if ext == 'pdb':
-            self.writePDB( fn, title, nr, bPDBTER )
+            self.write_pdb( fn, title, nr, bPDBTER )
         elif ext == 'gro':
-            self.writeGRO( fn, title )
+            self.write_gro( fn, title )
         elif ext == 'pir':
-            self.writePIR( fn, title )
+            self.write_pir( fn, title )
         elif ext == 'fasta':
-            self.writeFASTA( fn, title )
+            self.write_fasta( fn, title )
         else:
-            print >>sys.stderr, 'pmx_Error_> Can only write pdb or gro!'
+            logger.error('Unknown file format: %s' % ext)
             sys.exit(1)
 
 
@@ -311,7 +270,7 @@ class Model(Atomselection):
                 r.chain = ch
                 r.chain_id = ch.id
                 
-    def __readPDB(self,fname=None, pdbline=None):
+    def read_pdb(self,fname=None, pdbline=None):
         if pdbline:
             l = pdbline.split('\n')
         else:
@@ -328,7 +287,7 @@ class Model(Atomselection):
         self.unity  = 'A'
         return self
     
-    def __readPDBTER(self,fname=None, pdbline=None):
+    def read_pdb_ter(self,fname=None, pdbline=None):
         if pdbline:
             l = pdbline.split('\n')
         else:
@@ -371,7 +330,7 @@ class Model(Atomselection):
         self.unity  = 'A'
         return self
 
-    def __readGRO(self, filename):
+    def read_gro(self, filename):
         l = open(filename).readlines()
         # first line is name/comment
         name = l[0].rstrip()
@@ -434,13 +393,13 @@ class Model(Atomselection):
         ext = filename.split('.')[-1]
         if ext == 'pdb':
 	    if bPDBTER:
-                return self.__readPDBTER( filename )
+                return self.read_pdb_ter( filename )
 	    else:
-                return self.__readPDB( filename )
+                return self.read_pdb( filename )
         elif ext == 'gro':
-            return self.__readGRO( filename )
+            return self.read_gro( filename )
         else:
-            print >>sys.stderr, 'ERROR: Can only read pdb or gro!'
+            logger.error('Unknown file type: %s' % ext)
             sys.exit(1)
 
     def renumber_residues(self):
@@ -475,12 +434,7 @@ class Model(Atomselection):
 
     def __delitem__(self,key):
         self.remove_chain(key)
-    
-##     def insert_sequence(self,pos,new_chain,chain_id):
-##         """insert a sequence"""
-##         ch = self.chdic[chain_id]
-##         ch.insert_chain(pos,new_chain)
-        
+            
 
     def insert_residue(self,pos,res,chain_id):
         ch = self.chdic[chain_id]
@@ -492,8 +446,8 @@ class Model(Atomselection):
         
     def insert_chain(self,pos,new_chain):
         if self.chdic.has_key(new_chain.id):
-            print 'Chain identifier %s already in use!' % new_chain.id
-            print 'Changing chain identifier to 0'
+            logger.warning('Chain identifier %s already in use!' % new_chain.id)
+            logger.warning('Changing chain identifier to 0')
             new_chain.set_chain_id('0')
         self.chains.insert(pos,new_chain)
         self.resl_from_chains()
@@ -542,63 +496,6 @@ class Model(Atomselection):
         return copy.deepcopy(self)
 
 
-        
-##     def get_bonded(self):
-##         for ch in self.chains:
-##             ch.get_bonded()
-##         cysl = self.fetch_residues('CYS')
-##         for i, cys1 in enumerate(cysl[:-1]):
-##             for j, cys2 in enumerate(cysl[i+1:]):
-##                 sg1 = cys1.fetch('SG')[0]
-##                 sg2 = cys2.fetch('SG')[0]
-##                 d= sg1-sg2
-##                 if self.unity=='A':
-##                     d*=.1
-##                 if d < 0.25:
-##                     sg1.bonds.append(sg2)
-##                     sg2.bonds.append(sg1)
-
-##     def get_b13(self):
-##         for atom in self.atoms:
-##             for at2 in atom.bonds:
-##                 for at3 in at2.bonds:
-##                     if atom.id > at3.id:
-##                         atom.b13.append(at3)
-##                         at3.b13.append(atom)
-
-##     def get_b14(self):
-##         for atom in self.atoms:
-##             for at2 in atom.b13:
-##                 for at3 in at2.bonds:
-##                     if atom.id > at3.id and at3 not in \
-##                            atom.bonds+atom.b13:
-##                         atom.b14.append(at3)
-##                         at3.b14.append(atom)
-
-
-                    
-##     def get_connections(self,cutoff=.8):
-##         if self.atoms[0].symbol == '':
-##             self.get_symbol()
-##         self.get_bonded()
-##         self.get_b13()
-##         self.get_b14()
-##         self.get_nlist(cutoff)
-
-
-##     def update(self,frame,trj='xtc'):
-##         """ update the coordinates in a model
-##         from trajectory data"""
-##         if trj=='xtc':
-##             nat = len(self.atoms)
-##             if nat != frame['natoms']:
-##                 print 'Error: Number of atoms in trajectory\n \
-##                 doesn\'t match topology\n'
-##                 sys.exit(1)
-                
-##             for i in range(nat):
-##                 self.atoms[i].x=frame['x'][i]
-##             self.box = frame['box']
         
     def get_mol2_types(self):
         if self.atoms[0].symbol == '':

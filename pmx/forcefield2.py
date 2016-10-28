@@ -457,8 +457,8 @@ class TopolBase:
 
     def write_footer(self,fp):
 	try:
-            for line in self.footer:
-                print >>fp, line
+        for line in self.footer:
+            print >>fp, line
 	except:
 	    print "No footer in itp\n"
 

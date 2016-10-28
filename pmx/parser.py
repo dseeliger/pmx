@@ -45,13 +45,12 @@ Usage:
 """
 
 import sys
-from odict import *
+from collections import OrderedDict
+import logging
 
-class ParserError(Exception):
-    def __init__(self, s):
-        self.s = s
-    def __str__(self):
-        return repr(self.s)
+logger = logging.getLogger()
+
+
 
 
 def kickOutComments( lines, comment = '#'):
@@ -80,12 +79,9 @@ def readSection(lines, begin, end):
     return ret
 
 def __parse_error(msg, line):
-    s = "pmx_Error_> %s" % msg
-    s+= "\nTrouble is here -> %s" % line
-    raise ParserError(s)
-##     print >>sys.stderr, "pmx_Error_> %s" % msg
-##     print >>sys.stderr, "pmx_Error_> Trouble is here -> %s" % line 
-##     sys.exit(1)
+	logger.error('Error while parsing line: %s' % line)
+	logger.error(msg)
+	sys.exit(1)
 
 def __parse_entry(entr, tp):
     new = None
@@ -105,6 +101,19 @@ def __parse_entry(entr, tp):
     
 
 def parseList(format_string, lst, ignore_missing = False):
+
+	""" Read a list of lines into a defined format.
+	The format_string can contain i, f and s (for integer, float and string)
+	e.g. 'ssifff' would expect 6 entries and these would be imported as string, string,
+	integer, float, float. By default the function throws an error if data is missing. This can be
+	switched off by setting ignore_missing to True.
+
+	:param format_string: e.g. 'sffiiff'
+	:param lst: list of lines
+	:param ignore_missing: Ignore if a line does not match the format string
+	:returns: formatted list of lists
+	"""
+
     ret = []
     format_list = [ a for a in format_string ]
     for line in lst:
@@ -120,6 +129,16 @@ def parseList(format_string, lst, ignore_missing = False):
             
 
 def read_and_format(filename, format_string, comment = '#', ignore_missing = False):
+	""" A shortcut function to read a file into a defined format.
+
+	:param filename: filename
+	:param format_string: same is in parseList, e.g. 'siffiff'
+	:param comment: content after this character is ignored, e.g. the line '1 2 3 # XX' will be parsed as [1,2,3]
+	:param ignore_missing:  Ignore if a line does not match format string 
+	:returns: formatted list of lists
+
+	"""
+
     l = open(filename).readlines()
     if comment is not None:
         l = kickOutComments(l, comment)

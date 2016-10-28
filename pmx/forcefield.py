@@ -34,7 +34,7 @@ import sys,os,re, copy
 from parser import *
 import cpp
 from atom import Atom
-from odict import *
+from collections import OrderedDict
 from library import _aliases
 from ffparser import *
 import _pmx as _p

@@ -28,7 +28,8 @@
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # ----------------------------------------------------------------------
 __doc__="""
-This file contains the Rotation class.
+This file contains the tools to do basic operations on molecule geometries
+like rotating around abound or computing deviation from planarity from a set of atoms.
 A Rotation instance is built with two vectors.
 Usage:
      >>> v1 = [1,2,3]
@@ -44,59 +45,17 @@ from numpy import *
 from atom import Atom
 import _pmx as _p
 
-class Rotation2:
-
-    def __init__(self,v1,v2):
-        """ creates a rotation object
-        around the vector v2-v1"""
-        
-        self.v1 = array(v1)
-        self.v2 = array(v2)
-        tmp = array(v2)
-        self.vec = tmp-self.v1
-        self.m1 = None
-        self.m2 = None
-        x = 1./linalg.norm(self.vec)
-        self.norm_vec = self.vec*x
-        self.__rm1()
-        self.__rm2()
-
-    def __rm1(self):
-
-        a = self.norm_vec
-        self.m1 = matrix( [
-            [ a[0]*a[0], a[0]*a[1], a[0]*a[2]], 
-            [ a[1]*a[0], a[1]*a[1], a[1]*a[2]], 
-            [ a[2]*a[0], a[2]*a[1], a[2]*a[2]] 
-            ] )
-        
-    def __rm2(self):
-
-        a = self.norm_vec
-        self.m2 = matrix( [
-            [ 0.0, -a[2], a[1]],
-            [ a[2], 0.0, -a[0]],
-            [ -a[1], a[0], 0.0]
-            ] )
-
-    def apply(self,v, phi):
-
-        vec = v - self.v2
-        b = dot(self.m1,vec)
-        d = dot(self.m2,vec)
-        a = cos(phi) * vec
-        c = -cos(phi) * b
-        e = sin(phi) * d
-        vec  = a + b + c + e
-        v = self.v2 + vec
-        # ?
-        return [x for x in v.getA()[0]]
 
 class Rotation:
 
     def __init__(self,v1,v2):
         """ creates a rotation object
-        around the vector v2-v1"""
+        around the vector v2-v1.
+
+        :param v1: list or numpy array of length 3
+        :param v2: list or numpy array of length 3
+
+        """
         
         self.v1 = array(v1)
 #        self.v2 = array(v2)
@@ -135,12 +94,19 @@ class Rotation:
 
     
 def vec_ang(v1,v2):
+    """ compute the angle between to vectors """
     x1 = linalg.norm(v1)
     x2 = linalg.norm(v2)
     return arccos(inner(v1,v2)/(x1*x2))
 
 def bb_super(mol1,mol2, use_orig_mc_coords = True):
-    """ superpose mol2 on mol1"""
+    """ Superpose a protein residue on the backbone atoms of an existing one.
+
+    :param mol1: molecule instance to fit on
+    :param mol2: molecule instance to be fitted on mol1
+    :param use_orig_mc_coords: mol2 inherits the mainchain coordinates of molecule 1
+
+    """
 
     N1,CA1,C1 = mol1.fetchm(['N','CA','C'])
     N2,CA2,C2 = mol2.fetchm(['N','CA','C'])
@@ -170,7 +136,12 @@ def bb_super(mol1,mol2, use_orig_mc_coords = True):
             atom2.x = atom1.x
 
 def nuc_super(mol1,mol2):
-    """ superpose mol2 on mol1"""
+    """ Superpose a nucleic acid molecule on another
+    
+    :param mol1: molecule to fit on
+    :param mol2: molecule to be fitted
+
+    """
 
     if mol1.resname[:2] in ['DT','DC','RC','RU']:
         fit1_atoms = ['C1\'', 'C6','N1','C2','C5','N3']
@@ -188,57 +159,27 @@ def nuc_super(mol1,mol2):
     fit_atoms( atoms1, atoms2, mol2.atoms)
 
 
-##     N1,CA1,C1 = mol1.fetchm(['O4\'','C1\'','C2\''])
-##     N2,CA2,C2 = mol2.fetchm(['O4\'','C1\'','C2\''])
-
-##     fit_atoms( [N1,CA1,C1], [N2,CA2,C2], mol2.atoms )
-
-##     rotN1 = None
-##     rotC1 = None
-##     rotN2 = None
-##     rotC2 = None
-
-##     if mol1.resname in ['DT','DC','RC','RU']:
-##         rotN1, rotC1 = mol1.fetchm(['N1','C2'])
-##     elif mol1.resname in ['DG','DA','RG','RA']:
-##         rotN1, rotC1 = mol1.fetchm(['N9','C4'])
-##     if mol2.resname in ['DTG','DTA','DCA','DCG',
-##                         'DTC','DCT','RUC','RCU',
-##                         'RUG','RUA','RCA','RCG']:
-##         rotN2, rotC2 = mol2.fetchm(['N1','C2'])
-##     elif mol2.resname in ['DGT','DAT','DAC','DGC',
-##                           'DGA','DAG','RGA','RAG',
-##                           'RGU','RAU','RAC','RGC']:
-##         rotN2, rotC2 = mol2.fetchm(['N9','C4'])
-##     if rotN2 is not None and rotC2 is not None:
-##         print rotN1.name, rotC1.name, rotN2.name, rotC2.name
-##         v1 = array(rotN1.x)-array(rotC1.x)
-##         v2 = array(rotN2.x)-array(rotC2.x)
-##         ang = vec_ang(v1,v2)
-##         v3 = array(rotN1.x)-array(CA1.x)
-## #        print 'ang2 = ' , ang, ang*180/pi
-##         if linalg.det(matrix([v1,v3,v2])) < 0:
-##  #           print 'DET =', linalg.det(matrix([v1,v3,v2]))
-##             ang *= -1
-##         r = Rotation(CA1.x, rotN1.x)
-##         for atom in mol2.atoms:
-##             atom.x = r.apply(atom.x,ang)
-##         v1 = array(rotN1.x)-array(rotC1.x)
-##         v2 = array(rotN2.x)-array(rotC2.x)
-##         ang = vec_ang(v1,v2)
-## #        print 'ang2 = ' , ang, ang*180/pi
-## #    else:
-## #        print 'No correction applied'
-## #
 
 def planarity(atom_list):
+    """ Computes the deviation from planarity for a set of atoms.
+    It computes the optimal plain and subsequently computes the average deviation
+    from the atoms to this plain.
+
+    :param atom_list: list of atom instances
+    :returns: average deviation from planarity
+    """
 
     coords = map(lambda a: a.x, atom_list)
     plan = _p.planarity(coords)
     return plan
 
 def apply_fit_R( atoms, R):
-    
+    """ Applies a fit matrix to a set of atoms
+
+    :param atoms: list with atom instances
+    :param R: fit matrix
+    """
+
     for atom in atoms:
         x_old = map(lambda x: x, atom.x)
         for r in range(3):
@@ -247,6 +188,14 @@ def apply_fit_R( atoms, R):
                 atom.x[r]+=R[r][c]*x_old[c]
 
 def fit(model1, model2, atom_names = []):
+    """ Fit a model onto another. model2 is fitted on model1.
+    
+    :param model1: an instance containing an atomlist (model, chain or molecule)
+    :param model2: an instance containing an atomlist (mode, chain or molecule)
+    :param atom_names: optionally a list with atom names can be provides which are used for fitting.
+    """
+
+
     if atom_names:
         subset1 = model1.fetch_atoms( atom_names )
         subset2 = model2.fetch_atoms( atom_names )
@@ -267,7 +216,14 @@ def fit(model1, model2, atom_names = []):
 
 
 def fit_atoms( fit_atoms1, fit_atoms2, rot_atoms2 ):
+    """ Computes a fit matrix for a list list of atoms to be fitted. Then the 
+    fit matrix is applied to second list of atoms.
 
+    :param fit_atoms1: list of atoms to fit on
+    :param fit_atoms2: list of atoms to fit on fit_atoms2
+    :param rot_atoms2: list of atoms to which transformation will be applied
+
+    """
     cs1 = map(lambda a: a.x, fit_atoms1)
     cs2 = map(lambda a: a.x, fit_atoms2)
     assert len(cs1) == len(cs2)

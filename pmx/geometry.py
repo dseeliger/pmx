@@ -41,10 +41,14 @@ Usage:
      
 
 """
+from __future__ import print_function
 from numpy import *
 from atom import Atom
 import _pmx as _p
 
+import logging
+
+logger = logging.getLogger()
 
 class Rotation:
 

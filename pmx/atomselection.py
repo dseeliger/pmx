@@ -83,18 +83,18 @@ class Atomselection:
             box_line = _pmx.box_as_cryst1( self.box )
             print(box_line, file = fp)
 
-	chainID = self.atoms[0].chain_id
+    	chainID = self.atoms[0].chain_id
         for atom in self.atoms:
-	    if (bPDBTER==True) and (atom.chain_id != chainID):
-		print >>fp, 'TER'
-		chainID = atom.chain_id
+    	    if (bPDBTER==True) and (atom.chain_id != chainID):
+                print('TER',file=fp)
+    	       	chainID = atom.chain_id
             if( len(atom.name) > 4): # too long atom name
-                foo = cp.deepcopy(atom)
+                foo = atom.copy()
                 foo.name = foo.name[:4]
-                print >>fp, foo
+                print(foo,file=fp)
             else:
-                print >>fp, atom
-        print >>fp, 'ENDMDL'
+                print(atom,file=fp)
+        print('ENDMDL',file=fp)
         fp.close()
 
 
@@ -107,8 +107,8 @@ class Atomselection:
                 title = self.title
             else:
                 title = str(self.__class__)+' '+str(self)
-        print >>fp, title
-        print >>fp, "%5d" % len(self.atoms)
+        print(title,file=fp)
+        print('{5d}'.format(len(self.atoms)), file=fp)
         if self.atoms[0].v[0] != 0.000 : bVel = True
         else: bVel = False
         if bVel:
@@ -124,7 +124,7 @@ class Atomselection:
                                   atom.v[XX], atom.v[YY], atom.v[ZZ])
             else:
                 ff+=gro_format % (atom.x[XX]*fac, atom.x[YY]*fac, atom.x[ZZ]*fac )
-            print >>fp, ff
+            print(ff,file=fp)
 
         if not hasattr(self,"box"):
             self.box = [ [0,0,0], [0,0,0], [0,0,0] ]
@@ -136,11 +136,13 @@ class Atomselection:
             bTric = True
             ff = "%10.5f%10.5f%10.5f"
         if bTric:
-            print >>fp, ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ])
+            s = ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ])
+            print(s,file=fp)
         else:
-            print >>fp, ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ],
+            s = ff % (self.box[XX][XX],self.box[YY][YY],self.box[ZZ][ZZ],
                               self.box[XX][YY],self.box[XX][ZZ],self.box[YY][XX],
                               self.box[YY][ZZ],self.box[ZZ][XX],self.box[ZZ][YY])
+            print(s, file=fp)
         fp.close()
 
     def write(self,fn, title = '', nr = 1):
@@ -176,16 +178,6 @@ class Atomselection:
                 atom.x[1]-=y
                 atom.x[2]-=z
         
-
-
-    def atomlistFromTop(self,topDic):
-        """ return a list of atom objects
-        found in topDic"""
-        self.atoms=[]
-        for idx in topDic['atoms'].keys():
-            at=Atom().atomFromTop(topDic,idx)
-            self.atoms.append(at)
-        return self
 
 
     def renumber_atoms(self, start=1):

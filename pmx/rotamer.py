@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -30,12 +30,18 @@
 __doc__="""
 This file contains stuff to deal with the Dunbrack rotamer
 library"""
+
+from __future__ import print_function
+
 import os, sys
 from library import pmx_data_file, _aacids_dic
 
 import molecule 
 import cPickle
 from geometry import *
+import logging
+
+logger = logging.getLogger()
 
 
 _aa_chi = { 'CYS' :
@@ -181,7 +187,7 @@ def get_rotamers(bbdep, resname, phi, psi, residue = False, hydrogens = True, fu
         nrot = len(rotamers)
         nchi = len(_aa_chi[real_res])
         res_list = []
-        fp = open('rot.pdb','w')
+#        fp = open('rot.pdb','w')
         for i in range(nrot):
             r = molecule.Molecule().new_aa(resname, hydrogens = hydrogens)
             r.get_long_name()
@@ -237,7 +243,7 @@ def select_best_rotamer(model, rotamers):
 #    print 'Checking %d rotamers....' % len(rotamers)
     for i, r in enumerate(rotamers):
         score = check_overlaps(model, r, nb_list)
-        print i, score
+#        print i, score
         if score < .2:
             return r
         if score < min_score:

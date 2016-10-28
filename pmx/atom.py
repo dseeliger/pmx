@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -48,10 +48,15 @@ Basic Usage:
       
 
 """
+from __future__ import print_function
+
 import _pmx as _p
 from numpy import *
 import copy, library
 from library import pdb_format, pdb_format2
+import logging
+
+logger = logging.getLogger()
 
 class Atom:
     """ class for storage of atom properties and methods"""
@@ -102,11 +107,11 @@ class Atom:
         for key, val in kwargs.items():
             setattr(self,key,val)
         if line is not None:
-            self.readPDBString(line)
+            self.read_pdb_string(line)
         if mol2line is not None:
             self.read_mol2_line(mol2line)
             
-    def readPDBString(self,line):
+    def read_pdb_string(self,line):
         """PDB String to Atom"""
 
         self.race=line[0:6]
@@ -339,7 +344,7 @@ class Atom:
         if self.symbol == '':
             self.get_symbol()
         if self.resname not in library._protein_residues:
-            print 'Sorry, implemented for proteins only'
+            logger.warning('Atom order only implemented for protein residues.')
             return
         
         el = self.symbol
@@ -394,8 +399,8 @@ class Atom:
             self.unity = 'A'
             self.symbol = self.atype.split('.')[0]
         else:
-            print 'Error: Cannot convert line to atom'
-            print line
+            logger.error('Cannot convert line to atom')
+            logger.error('->' % line)
             sys.exit(1)
         return self
     

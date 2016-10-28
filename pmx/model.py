@@ -68,6 +68,9 @@ Basic Usage:
     remove chain A
     >>> model.write(args['-o']) write new structure file
     """
+
+from __future__ import print_function
+
 from atomselection import *
 import sys,copy,library
 #from chain import *
@@ -146,11 +149,11 @@ class Model(Atomselection):
         """
         fp = open(filename,"w")
         if not title: title = '_'.join(self.title.split())
-        print >>fp, '>P1;%s' % title
-        print >>fp, 'sequence:::::::::'
+        print('>P1;%s' % title, file=fp)
+        print('sequence:::::::::',file=fp)
         for i in range( len(self.chains) - 1):
-            print >>fp, self.chains[i].get_sequence()+'/'
-        print >>fp, self.chains[-1].get_sequence()+'*'
+            print(self.chains[i].get_sequence()+'/',file=fp)
+        print(self.chains[-1].get_sequence()+'*',file=fp)
         fp.close()
 
     def write_fasta( self, filename, title = ""):
@@ -163,12 +166,12 @@ class Model(Atomselection):
         fp = open(filename,"w")
         if not title: title = '_'.join(self.title.split())
         if len(self.chains) == 1:
-            print >>fp, '> %s' % title
-            print >>fp, self.chains[0].get_sequence()
+            print('> %s' % title, file=fp)
+            print(self.chains[0].get_sequence(),file=fp)
         else:
             for chain in self.chains:
-                print >>fp, '> %s_chain_%s' % (title, chain.id )
-                print >>fp, chain.get_sequence()
+                print('> %s_chain_%s' % (title, chain.id ),file=fp)
+                print(chain.get_sequence(),file=fp)
                 
     
 
@@ -293,36 +296,37 @@ class Model(Atomselection):
         else:
             l = open(fname,'r').readlines()
 
- 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	bNewChain = True
-	chainID = ' '
-	prevID = ' '
-	usedChainIDs = ''
+        chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+        bNewChain = True
+        chainID = ' '
+        prevID = ' '
+        usedChainIDs = ''
         for line in l:
-	    if 'TER' in line:
-		bNewChain = True
+            if 'TER' in line:
+		      bNewChain = True
             if (line[:4]=='ATOM') or (line[:6]=='HETATM'):
-                a = Atom().readPDBString(line)
-		if (a.chain_id != prevID) and (a.chain_id != ' '): # identify chain change by ID (when no TER is there)
-		    bNewChain = True
-		prevID = a.chain_id
-		if bNewChain==True:
-		    if (a.chain_id==' ') or (a.chain_id==chainID):
-			# find a new chain id
-			bFound = False
-			while bFound==False:
-			    foo = chainIDstring[0]
-			    chainIDstring = chainIDstring.lstrip(chainIDstring[0])
-			    if foo not in usedChainIDs:
-				bFound=True
-				usedChainIDs = usedChainIDs+foo
-				chainID = foo
-		    else:
-			chainID = a.chain_id
-			usedChainIDs = usedChainIDs + chainID
-		a.chain_id = chainID
+                a = Atom( line = line)
+        		if (a.chain_id != prevID) and (a.chain_id != ' '): # identify chain change by ID (when no TER is there)
+                    bNewChain = True
+                    prevID = a.chain_id
+                if bNewChain==True:
+                    if (a.chain_id==' ') or (a.chain_id==chainID):
+                    # find a new chain id
+                        bFound = False
+                        while bFound==False:
+                            foo = chainIDstring[0]
+                            chainIDstring = chainIDstring.lstrip(chainIDstring[0])
+                            if foo not in usedChainIDs:
+				                bFound=True
+				                usedChainIDs = usedChainIDs+foo
+				                chainID = foo
+    		    else:
+	           		chainID = a.chain_id
+                    usedChainIDs = usedChainIDs + chainID
+                    a.chain_id = chainID
                 self.atoms.append(a)
-		bNewChain = False
+                bNewChain = False
             if line[:6] == 'CRYST1':
                 self.box = _p.box_from_cryst1( line )
         self.make_chains()
@@ -392,9 +396,9 @@ class Model(Atomselection):
     def read(self, filename, bPDBTER=False ):
         ext = filename.split('.')[-1]
         if ext == 'pdb':
-	    if bPDBTER:
+            if bPDBTER:
                 return self.read_pdb_ter( filename )
-	    else:
+            else:
                 return self.read_pdb( filename )
         elif ext == 'gro':
             return self.read_gro( filename )
@@ -418,9 +422,8 @@ class Model(Atomselection):
 
     def remove_chain(self,key):
         if not self.chdic.has_key(key):
-            print 'No chain %s to remove....' % key
-            print 'No changes applied.'
-            return
+            logger.error('No chain %s to remove....' % key)
+            sys.exit(1)
         for ch in self.chains:
             if ch.id == key:
                 idx = self.chains.index(ch)

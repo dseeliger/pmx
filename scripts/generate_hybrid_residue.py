@@ -1,9 +1,11 @@
+from __future__ import print_function
 import sys, os
 from pmx import *
 from pmx.ffparser import RTPParser, NBParser
 from pmx.rotamer import _aa_chi
 from pmx.parser import filter_comments, read_section, parse_list
 import tempfile
+import logging
 
 standard_pair_list = [
     ('N','N'),
@@ -166,7 +168,7 @@ def get_dihedrals(resname):
     return library._aa_dihedrals[resname]
 
 def set_dihedral(atoms,mol,phi):
-    print atoms[0].name,atoms[1].name,atoms[2].name
+    logger.debug(atoms[0].name,atoms[1].name,atoms[2].name)
     a1 = atoms[0]
     a2 = atoms[1]
     a3 = atoms[2]
@@ -195,7 +197,7 @@ def is_number(s):
     except ValueError:
         return False
 
-def do_fit(m1,dihed1,m2,dihed2):
+def do_fit(m1,dihed1,m2,dihed2,debug=False):
     bonds = []
     diheds = []
     #if not diheds: # we take the chi's
@@ -206,36 +208,20 @@ def do_fit(m1,dihed1,m2,dihed2):
             for dih2 in dihed2:
                 if dih2[-1] == chi and dih2[-2] == 1:
                     diheds.append((dih,dih2))
+
     for dih1, dih2 in diheds:
-#	for d in range(0,4):
-#	   foo = dih2[d]
-#	   if is_number(foo[-1]) and is_number(foo[-2]):
-#		dih2[d] = foo[-1] + foo[0] + foo[1] + foo[2]
-#	   elif foo[0]=='H' and foo[1]=='B':
-#		dih2[d] = foo[-1] + foo[0] + foo[1]
-#           foo = dih1[d]
-#           if is_number(foo[-1]) and is_number(foo[-2]):
-#                dih1[d] = foo[-1] + foo[0] + foo[1] + foo[2]
-#           elif foo[0]=='H' and foo[1]=='B':
-#                dih1[d] = foo[-1] + foo[0] + foo[1]
 
         atoms1 = m1.fetchm(dih1)
-	print "fetching"
         atoms2 = m2.fetchm(dih2)
-	print dih2
-	print atoms2
         a1,a2,a3,a4 = atoms1
         if (a2.name, a3.name) not in bonds:
             phi = a1.dihedral(a2,a3,a4)
-#            print phi
-#            print 'rot1', a1.name,a2.name,a3.name,a4.name
-	    set_dihedral(atoms2,m2,phi)
-#            a1,a2,a3,a4 = atoms1
-#            print a1.dihedral(a2,a3,a4)
-    op = open('check.pdb','w')
-    for atom in m2.atoms:
-        print >>op, atom
-
+    	    set_dihedral(atoms2,m2,phi)
+    if debug:
+        op = open('check.pdb','w')
+        for atom in m2.atoms:
+            print(atom,file=op)
+        op.close()
 
 def tag(atom):
     s = '%s|%s|%s|%s' %( atom.resname, atom.name, atom.atomtype, atom.atype)
@@ -263,18 +249,18 @@ def assign_rtp_entries( mol, rtp):
         atom.cgnr = atom_cgnr
     # bonds
     for a1, a2 in entr['bonds']:
-	#MS charmm uses next residue in bonds (+), amber pervious (-)
-	#MS also write rtp is affected now, since normally -C N is added
-	#MS charmm used C +N, problem is that you run into trouble on the
-	#MS termini
-	bmin=not '-' in a1 and not '-' in a2
-	bplus=not '+' in a1 and not '+' in a2
+    	#MS charmm uses next residue in bonds (+), amber pervious (-)
+    	#MS also write rtp is affected now, since normally -C N is added
+    	#MS charmm used C +N, problem is that you run into trouble on the
+    	#MS termini
+    	bmin=not '-' in a1 and not '-' in a2
+    	bplus=not '+' in a1 and not '+' in a2
         if bmin and bplus:
             atom1, atom2 = mol.fetchm( [a1, a2] )
             atom1.bonds.append( atom2 )
             atom2.bonds.append( atom1 )
-	else :
-	    neigh.append([a1,a2])
+	   else :
+	        neigh.append([a1,a2])
     return neigh
         
 
@@ -338,14 +324,14 @@ def find_closest_atom( atom1, atom_list, merged_atoms, bH2heavy=True ):
     for i, atom in enumerate(atom_list):
         if atom not in merged_atoms:
 	    if bH2heavy==False:
-                ### check for H2heavy morphe ###
-                if(atom1.atomtype.startswith('H') and (not atom.atomtype.startswith('H')) ):
-                    continue
-                if(atom.atomtype.startswith('H') and (not atom1.atomtype.startswith('H')) ):
-                    continue
+            ### check for H2heavy morphe ###
+            if(atom1.atomtype.startswith('H') and (not atom.atomtype.startswith('H')) ):
+                continue
+            if(atom.atomtype.startswith('H') and (not atom1.atomtype.startswith('H')) ):
+                continue
 
             d = atom1 - atom
-	    print "%s %s %f" %(atom1.name,atom.name,d)
+            logger.debug("%s %s %f" %(atom1.name,atom.name,d))
             if d < min_d:
                 min_d = d
                 idx = i
@@ -355,24 +341,21 @@ def find_closest_atom( atom1, atom_list, merged_atoms, bH2heavy=True ):
 
 def make_predefined_pairs( mol1, mol2, pair_list ):
     # make main chain + cb pairs
-    print 'Making atom pairs.........'
+    logger.info('Making atom pairs.........')
     atom_pairs = []
     merged_atoms1 = []
     merged_atoms2 = []
     for name1, name2 in pair_list:
-	try:
-	    at1 = mol1.fetch( name1 )[0]
-	except IndexError:
-	    at1 = mol1.fetch( reformat_atom_name(name1) )[0]
+    	try:
+            at1 = mol1.fetch( name1 )[0]
+        except IndexError:
+            at1 = mol1.fetch( reformat_atom_name(name1) )[0]
         try:
             at2 = mol2.fetch( name2 )[0]
         except IndexError:
             at2 = mol2.fetch( reformat_atom_name(name2) )[0]
-	at1.name = reformat_atom_name(name1)
+        at1.name = reformat_atom_name(name1)
         at2.name = reformat_atom_name(name2)
-#	print name1,name2
-#	at1 = mol1.fetch( reformat_atom_name(name1) )[0]
-#	at2 = mol2.fetch( name2 )[0]
         at1.atomtypeB = at2.atomtype
         at1.qB = at2.q
         at1.mB = at2.m
@@ -380,13 +363,11 @@ def make_predefined_pairs( mol1, mol2, pair_list ):
         merged_atoms1.append( at1 )
         merged_atoms2.append( at2 )
         atom_pairs.append( [at1, at2] )
-##         if atom.atomtypeB.startswith('DUM'):
-##             atom.nameB = atom.name+'.gone'
     dummies = mol2.fetch_atoms( map( lambda a: a.name, merged_atoms1), inv = True )
     return atom_pairs, dummies
 
 def merge_by_names( mol1, mol2 ):
-    print 'Making atom pairs.........MERGE BY NAMES......'
+    logger.info('Making atom pairs.........MERGE BY NAMES......')
     atom_pairs = []
     merged_atoms1 = []
     merged_atoms2 = []
@@ -402,8 +383,6 @@ def merge_by_names( mol1, mol2 ):
             atom_pairs.append( [at1, at2] )
         except:
             pass
-##         if atom.atomtypeB.startswith('DUM'):
-##             atom.nameB = atom.name+'.gone'
     dummies = mol2.fetch_atoms( map( lambda a: a.name, merged_atoms1), inv = True )
     return atom_pairs, dummies
 
@@ -411,7 +390,7 @@ def merge_by_names( mol1, mol2 ):
 
 def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
     # make main chain + cb pairs
-    print 'Making atom pairs.........'
+    logger.info('Making atom pairs.........')
     mol1.batoms = []
     merged_atoms1 = []
     merged_atoms2 = []
@@ -445,17 +424,17 @@ def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
 
 
     for k in [1,2]:
-        print '-- Searching branch', k
+        logger.info('-- Searching branch %d' % k)
         done_branch = False
         for i in range( 2, 8 ):
             if done_branch: break
-            print '-- Searching order', i
+            logger.info('-- Searching order %d' % i)
 
             atoms1 = get_atoms_by_order_and_branch( mol1, i, k, merged_atoms1 )
             atoms2 = get_atoms_by_order_and_branch( mol2, i, k, merged_atoms2 )
             for at1 in atoms1:
                 if last_atom_is_morphed( at1, merged_atoms1 ):
-                    print '-- Checking atom...', at1.name
+                    logger.info('-- Checking atom... %s' % at1.name)
                     candidates = []
                     for at2 in atoms2:
                         #if cmp_mol2_types( at1.atype, at2.atype):
@@ -465,21 +444,15 @@ def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
                         merged_atoms2.append( aa )
                         merged_atoms1.append( at1 )
                         atom_pairs.append( [ at1, aa] )
-                        print '--> Define atom pair: ', tag(at1), '- >', tag(aa),  '(d = %4.2f A)' % d
+                        logger.info('--> Define atom pair: %s -> %s (d = %4.2f A)' % (tag(at1), tag(aa),  d))
                     else:
-                       print 'No partner found for atom ', at1.name
-##                     print '-- done branch', k
-##                     done_branch = True
-##                     break # done with this branch
+                       logger.warning('No partner found for atom %s' % at1.name)
     for at1, at2 in atom_pairs:
         at1.atomtypeB = at2.atomtype
         at1.qB = at2.q
         at1.mB = at2.m
         at1.nameB = at2.name
         mol1.batoms.append( at2 )
-##     for atom in mol1.atoms:
-##         if atom.atomtypeB.startswith('DUM'):
-##             atom.nameB+='.gone'
     # now make list of dummies
     dummies = []
     for atom in mol2.atoms:
@@ -493,7 +466,7 @@ def check_double_atom_names( r ):
         alist = r.fetch_atoms( atom.name )
         if len(alist) != 1:
             alist = r.fetch_atoms( atom.name[:-1], wildcard = True )
-            print 'Renaming atoms (%s)' % alist[0].name[:-1]
+            logger.info('Renaming atoms (%s)' % alist[0].name[:-1])
             start = 1
             for atom in alist:
                 atom.name = atom.name[:3]+str(start)
@@ -551,15 +524,15 @@ def find_atom_by_nameB( r, name ):
 
 def update_bond_lists(r1, badic):
 
-    print 'Updating bond lists...........'
+    logger.info('Updating bond lists...........')
     for atom in r1.atoms:
         if atom.name[0] == 'D':
-            print 'atom', atom.name
-            print '  |  '
+            logger.debug('atom %s' % atom.name)
+            logger.debug('  |  ')
             new_list = []
             while atom.bonds:
                 at = atom.bonds.pop(0)
-                print atom.name, '->', at.name
+                logger.debug('%s -> %s' % (atom.name, at.name))
                 if badic.has_key(at.name):
                     aa = r1.fetch( badic[at.name] )[0]
                     new_list.append( aa )
@@ -568,13 +541,13 @@ def update_bond_lists(r1, badic):
                     if aa is not None:
                         new_list.append(aa)
                     else:
-                        print 'Atom not found', at.name, at.nameB
+                        logger.error('Atom not found %s -> %s' % ( at.name, at.nameB))
                         sys.exit(1)
             atom.bonds = new_list
             for at in atom.bonds:
                 if atom not in at.bonds:
                     at.bonds.append( atom )
-                print  '----bond--->', at.name
+                    logger.debug('----bond---> %s' %  at.name)
             print
 
 def improp_entries_match( lst1, lst2 ):
@@ -583,7 +556,7 @@ def improp_entries_match( lst1, lst2 ):
 #	print "foo ",a1.name,a2.name
         if a1.name != a2.name: res=False
     if( res==True ):
-	return res
+    	return res
     res = True
     for a1, a2 in zip(lst1, list(reversed(lst2))):
 #	print "foo ",a1.name,a2.name
@@ -591,7 +564,9 @@ def improp_entries_match( lst1, lst2 ):
     return res
 
 def generate_dihedral_entries( im1, im2, r, pairs ):
-    print 'Updating dihedrals...........'
+
+    # @Vytas: The identations in the function were strangly screwed in my editor. Please check!!! 
+    logger.info('Updating dihedrals...........')
     new_ii = []
     done_i1 = []
     done_i2 = []
@@ -602,17 +577,17 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
             if improp_entries_match(i1[:4], i2[:4]) and (i2 not in done_i2):
                 im_new = i1[:4]
                 if i1[4] == '': 
-		    im_new.append( 'default-A' )
+        		    im_new.append( 'default-A' )
                 else: 
-		    im_new.append( i1[4] )
+                    im_new.append( i1[4] )
                 if i2[4] == '': 
-		    im_new.append( 'default-B' )
+                    im_new.append( 'default-B' )
                 else: 
-		    im_new.append( i2[4] )
+                    im_new.append( i2[4] )
                 done_i1.append( i1 )
                 done_i2.append( i2 )
                 new_ii.append( im_new )
-		break
+                break
     for i1 in im1:
         if i1 not in done_i1:
             im_new =  i1[:4]
@@ -623,21 +598,21 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                 else:
                     im_new.append( 'un' )
             else:
-		if ( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
-  	            im_new.append( i1[4] )
+                if ( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
                     im_new.append( i1[4] )
+            im_new.append( i1[4] )
 		else:
-                    im_new.append( i1[4] )
-                    if( 'torsion' in i1[4] ):	#ildn
-			tors = copy.deepcopy(i1[4])
-			tors = tors.replace('torsion','tors')
-                        foo = 'un' + tors
-                        im_new.append( foo )
-                    elif( 'dih_' in i1[4] ):	#opls
-                        foo = 'un' + i1[4]
-                        im_new.append( foo )
-                    else:
-                        im_new.append( 'un' )
+            im_new.append( i1[4] )
+            if( 'torsion' in i1[4] ):	#ildn
+                tors = copy.deepcopy(i1[4])
+                tors = tors.replace('torsion','tors')
+                foo = 'un' + tors
+                im_new.append( foo )
+                elif( 'dih_' in i1[4] ):	#opls
+                    foo = 'un' + i1[4]
+                    im_new.append( foo )
+                else:
+                    im_new.append( 'un' )
             new_ii.append( im_new )
     for i2 in im2:
         if i2 not in done_i2:
@@ -647,7 +622,7 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     im_new.append( 'default-B' )
                 else:
                     im_new.append( 'un' )
-		im_new.append( 'default-B' )
+                im_new.append( 'default-B' )
             else: 
                 if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( i2[4] )
@@ -656,20 +631,22 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
                     if( 'torsion' in i2[4] ):	#ildn
                         tors = copy.deepcopy(i2[4])
                         tors = tors.replace('torsion','tors')
-			foo = 'un' + tors
-			im_new.append( foo )
+                        foo = 'un' + tors
+                        im_new.append( foo )
                     elif( 'dih_' in i2[4] ):   #opls
                         foo = 'un' + i2[4]
                         im_new.append( foo )
-		    else:
-		        im_new.append( 'un' )
-                    im_new.append( i2[4] )
+                    else:
+                        im_new.append( 'un' )
+                        im_new.append( i2[4] )
             new_ii.append( im_new )
     
     return new_ii
 
 def generate_improp_entries( im1, im2, r ):
-    print 'Updating impropers...........'
+    # @Vytas: The identations in the function were strangly screwed in my editor. Please check!!! 
+
+    logger.info('Updating impropers...........')
     
     new_ii = []
     done_i1 = []
@@ -678,20 +655,20 @@ def generate_improp_entries( im1, im2, r ):
     for i1 in im1:
         for i2 in im2:
             if improp_entries_match(i1[:4], i2[:4]):
-		print 'alus %s' % i1[4]
+        		logger.debug('alus %s' % i1[4])
                 im_new = i1[:4]
                 if i1[4] == '': 
-		    im_new.append( 'default-A' )
-		elif( i1[4] == '105.4' ): #star
-		    im_new.append( 'default-star' )
+                    im_new.append( 'default-A' )
+                elif( i1[4] == '105.4' ): #star
+                    im_new.append( 'default-star' )
                 else: 
-		    im_new.append( i1[4] )
+                    im_new.append( i1[4] )
                 if i2[4] == '': 
-		    im_new.append( 'default-B' )
+                    im_new.append( 'default-B' )
                 elif( i2[4] == '105.4' ): #star
                     im_new.append( 'default-star' )
                 else: 
-		    im_new.append( i2[4] )
+                    im_new.append( i2[4] )
                 done_i1.append( i1 )
                 done_i2.append( i2 )
                 new_ii.append( im_new )
@@ -699,16 +676,16 @@ def generate_improp_entries( im1, im2, r ):
         if i1 not in done_i1:
             im_new =  i1[:4] 
             if i1[4] == '': 
-	        im_new.append( 'default-A' )
-		if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
-	            im_new.append( 'default-A' )
-		else:
-		    im_new.append( 'un' )
+                im_new.append( 'default-A' )
+                if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+                    im_new.append( 'default-A' )
+                else:
+                    im_new.append( 'un' )
             elif( i1[4] == '105.4' ): #star
                 im_new.append( 'default-star' )
                 im_new.append( 'un' )
             else: 
-		im_new.append( i1[4] )
+                im_new.append( i1[4] )
                 if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
                     im_new.append( i1[4] )
                 else:
@@ -723,7 +700,7 @@ def generate_improp_entries( im1, im2, r ):
                     im_new.append( 'default-B' )
                 else:
                     im_new.append( 'un' )
-	        im_new.append( 'default-B' )
+                    im_new.append( 'default-B' )
             elif( i2[4] == '105.4' ): #star
                 im_new.append( 'un' )
                 im_new.append( 'default-star' )
@@ -732,54 +709,50 @@ def generate_improp_entries( im1, im2, r ):
                     im_new.append( i2[4] )
                 else:
                     im_new.append( 'un' )
-		im_new.append( i2[4] )
-            new_ii.append( im_new )
-##     for ii in new_ii:
-##         print '--->', ' '.join(ii)
-##     print
+            im_new.append( i2[4] )
+        new_ii.append( im_new )
     return new_ii
 
 def write_rtp( fp, r, ii_list, dihi_list,neigh_bonds,cmap):
-    print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
-    print >>fp,' [ atoms ]'
+    print('\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB),file=fp)
+    print(' [ atoms ]',file=fp)
     cgnr = 1
     for atom in r.atoms:
-        print >>fp, "%6s   %-15s  %8.5f  %d" % (atom.name, atom.atomtype, atom.q, cgnr)
-        cgnr+=1
-    print >>fp,'\n [ bonds ]'
+        print("%6s   %-15s  %8.5f  %d" % (atom.name, atom.atomtype, atom.q, cgnr),file=fp)
+    print('\n [ bonds ]',file=fp)
     for atom in r.atoms:
         for at  in atom.bonds:
             if atom.id < at.id:
-                print >>fp, "%6s  %6s ; (%6s  %6s)" % ( atom.name, at.name, atom.nameB, at.nameB )
+                print("%6s  %6s ; (%6s  %6s)" % ( atom.name, at.name, atom.nameB, at.nameB ),file=fp)
     #MS here there will have to be a check for FF, since for charmm we need to add C N
     #MSsave those bonds with previous and next residue as a seperate entry
     for i in neigh_bonds :
-        print >>fp, "%6s  %6s  " % (i[0],i[1])
+        print("%6s  %6s  " % (i[0],i[1]),file=fp)
 
     print >>fp,'\n [ impropers ]'
     for ii in ii_list:
         if not ii[4].startswith('default'):
-            print >>fp, "%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4])
+            print("%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4]),file=fp)
         else:
-            print >>fp, "%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name)
+            print("%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name),file=fp)
 
     print >>fp,'\n [ dihedrals ]'
     for ii in dihi_list:
         if not ii[4].startswith('default'):
-            print >>fp, "%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4])
+            print("%6s  %6s  %6s  %6s  %-25s" % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4]),file=fp)
         else:
-            print >>fp, "%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name)
+            print("%6s  %6s  %6s  %6s " % ( ii[0].name, ii[1].name, ii[2].name, ii[3].name),file=fp)
     if cmap :
-        print >>fp,'\n [ cmap ]'
+        print('\n [ cmap ]',file=fp)
     for i in cmap:
-        print >>fp, "%s  " % (i)
+        print("%s  " % (i),file=fp)
 
 def write_mtp( fp, r, ii_list, rotations, dihi_list ):
-    print >>fp,'\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB)
-    print >>fp,'\n [ morphes ]'
+    print('\n[ %s ] ; %s -> %s\n' % (r.resname, r.resnA, r.resnB),file=fp)
+    print('\n [ morphes ]',file=fp)
     for atom in r.atoms:
-        print >>fp, "%6s %10s -> %6s %10s" % ( atom.name, atom.atomtype, atom.nameB, atom.atomtypeB )
-    print >>fp,'\n [ atoms ]'
+        print("%6s %10s -> %6s %10s" % ( atom.name, atom.atomtype, atom.nameB, atom.atomtypeB ),file=fp)
+    print('\n [ atoms ]',file=fp)
     cgnr = 1
     for atom in r.atoms:
         ext = ' ; '
@@ -788,29 +761,29 @@ def write_mtp( fp, r, ii_list, rotations, dihi_list ):
         if atom.q != atom.qB: ext+= '| charge != '
         else: ext+= '| charge == '
 
-        print >>fp ,"%8s %10s %10.6f %6d %10.6f %10s %10.6f %10.6f  %-10s" % \
-              ( atom.name, atom.atomtype, atom.q, cgnr, atom.m, atom.atomtypeB, atom.qB, atom.mB, ext )
-    print >>fp,'\n [ coords ]'
+        print("%8s %10s %10.6f %6d %10.6f %10s %10.6f %10.6f  %-10s" % \
+              ( atom.name, atom.atomtype, atom.q, cgnr, atom.m, atom.atomtypeB, atom.qB, atom.mB, ext ),file=fp)
+    print('\n [ coords ]',file=fp)
     for atom in r.atoms:
-        print >>fp,"%8.3f %8.3f %8.3f" % (atom.x[0], atom.x[1], atom.x[2])
+        print("%8.3f %8.3f %8.3f" % (atom.x[0], atom.x[1], atom.x[2]),file=fp)
 
-    print >>fp,'\n [ impropers ]'
+    print('\n [ impropers ]',file=fp)
     for ii in ii_list:
-        print >>fp," %6s %6s %6s %6s     %-25s %-25s  " % \
-              ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] )
+        print(" %6s %6s %6s %6s     %-25s %-25s  " % \
+              ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] ),file=fp)
     print
 
-    print >>fp,'\n [ dihedrals ]'
+    print('\n [ dihedrals ]',file=fp)
     for ii in dihi_list:
-        print >>fp," %6s %6s %6s %6s     %-25s %-25s  " % \
-              ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] )
+        print(" %6s %6s %6s %6s     %-25s %-25s  " % \
+              ( ii[0].name, ii[1].name, ii[2].name, ii[3].name, ii[4], ii[5] ),file=fp)
     print
 
     if rotations:
-        print >>fp, '\n [ rotations ]'
+        print('\n [ rotations ]',file=fp)
         for rot in rotations:
-            print >>fp, '  %s-%s %s' % (rot[0].name, rot[1].name, ' '.join( map(lambda a: a.name, rot[2:]) ) )
-        print >>fp
+            print('  %s-%s %s' % (rot[0].name, rot[1].name, ' '.join( map(lambda a: a.name, rot[2:]) ) ),file=fp)
+        print('',file=fp)
 
 def primitive_check( atom, rot_atom ):
     if atom in rot_atom.bonds: return True
@@ -825,11 +798,11 @@ def find_higher_atoms( rot_atom, r, order, branch ):
 #        if atom.order >= order and \
 #           (atom.branch == branch or branch == 0):
         if atom.order >= order:
-            print "2level: %s %s %s" % (atom.name,atom.order,atom.branch)
+            logger.debug("2level: %s %s %s" % (atom.name,atom.order,atom.branch))
             if atom.order ==  rot_atom.order+1:
-	        print "3level: %s %s %s" % (atom.name,atom.order,atom.branch)
+                logger.debug("3level: %s %s %s" % (atom.name,atom.order,atom.branch))
                 if primitive_check( atom, rot_atom ):
-        	    print "4level: %s %s %s" % (atom.name,atom.order,atom.branch)
+            	    logger.debug("4level: %s %s %s" % (atom.name,atom.order,atom.branch))
                     res.append( atom )
             else:
                 res.append( atom )            
@@ -868,7 +841,7 @@ def make_rotations( r, resn1_dih, resn2_dih ):
         rot_list.append( atom2 )
         oo = atom2.order
         bb = atom2.branch
-        print "AAAAAAAAA %s %s %s" %(atom2,oo+1,bb)
+        logger.debug("AAAAAAAAA %s %s %s" %(atom2,oo+1,bb))
         atoms_to_rotate = []
         atoms_to_rotate =  find_higher_atoms(atom2,  r, oo+1, bb ) 
         for atom in atoms_to_rotate:
@@ -895,10 +868,10 @@ def assign_mass(r1, r2,ffnonbonded,bCharmm,ff):
     #MS open ffnonbonded, remove HEAVY_H, pass it to NBParser 
     if bCharmm : 
         f=tempfile.NamedTemporaryFile(delete=False)
-	parse_ffnonbonded_charmm(ffnonbonded,f)
-	print f.name
+        parse_ffnonbonded_charmm(ffnonbonded,f)
+        logger.debug(f.name)
         NBParams = NBParser(f.name,'new',ff)
-	f.close()
+        f.close()
     else : 
         NBParams = NBParser(ffnonbonded,'new',ff)
     for atom in r1.atoms+r2.atoms:
@@ -935,16 +908,16 @@ def rename_to_gmx( r ):
 def rename_to_match_library( m, bCharmm=False ):
     name_hash = {}
     for atom in m.atoms:
-	foo = atom.name
+        foo = atom.name
         if atom.name[0].isdigit():
             atom.name = atom.name[1:]+atom.name[0]
-	if bCharmm:
-	    print atom.name
-	    if (atom.resname == 'CYS') and (atom.name == 'HG1'):
-		atom.name = 'HG'
+        if bCharmm:
+            print atom.name
+            if (atom.resname == 'CYS') and (atom.name == 'HG1'):
+                atom.name = 'HG'
             if (atom.resname == 'SER') and (atom.name == 'HG1'):
                 atom.name = 'HG'
-	name_hash[atom.name] = foo
+        name_hash[atom.name] = foo
     return name_hash
 	    
 def rename_back( m, name_hash ):
@@ -970,7 +943,7 @@ def improps_as_atoms( im, r, use_b = False):
                         if atom.nameB == name:
                             a = atom
                 else:
-		    print name 
+        		    logger.debug(name) 
                     a = r.fetch( name )[0]
             new_ii.append( a )
         new_ii.extend( ii[4:] )
@@ -1028,7 +1001,7 @@ def write_atp_fnb(fn_atp,fn_nb,r,ff,ffpath):
         ofile=open(fn_nb,'a')
     else :
         ofile=open(fn_nb,'w')
-    print types
+    print (types)
 
     # for opls need to extract the atom name
     ffnamelower = ff.lower()

@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -31,8 +31,11 @@ __doc__="""
 Library for useful and less useful things needed by the pmx packages.
 """
 
+from __future__ import print_function
 import sys, os, cPickle
+import logging
 
+logger = logging.getLogger()
 #pdb_format="%6s%5d %-4s%1s%3s%2s%4d %11.3f %7.3f %7.3f %5.2f %5.2f\n"
 
 pdb_format = "%6s%5d %-4s%1s%4s%1s%4d    %8.3f%8.3f%8.3f%6.2f%6.2f"
@@ -51,9 +54,9 @@ def pmx_data_file( filename ):
         pth = PMX_DATA
         data_file = os.path.join(pth,filename)
     if not os.path.isfile(data_file):
-        print >>sys.stderr, "pmx_ERROR> data file \"%s\" not found " % data_file
+        logger.error('data file \"%s\" not found ' % data_file)
         sys.exit(1)
-    print >>sys.stderr,"pmx__> Loading data file \"%s\"" % data_file
+    logger.info('Loading data file \"%s\"' % data_file)
     if data_file.split('.')[-1] == 'pkl':
         return cPickle.load(open(data_file))
     else: return data_file

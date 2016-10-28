@@ -27,9 +27,15 @@
 # CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # ----------------------------------------------------------------------
+
+from __future__ import print_function
 from parser import *
 import re
 import sys    
+
+import logging
+
+logger = logging.getLogger()
 #---------------------------------------------------
 class IndexGroup:
     """ CLASS TO DEAL WITH GROMACS INDEX FILES"""
@@ -115,7 +121,7 @@ class IndexFile:
         if fn:
             fp = open(fn,'w')
         for gr in self.groups:
-            print >>fp, str(gr)+'\n'
+            print(str(gr)+'\n',file=fp)
 
 
     def __str__(self):
@@ -129,8 +135,8 @@ class IndexFile:
 
     def add_group( self, group ):
         if group.name in self.names:
-            print >> sys.stderr, "IndexFile has group %s !! " % group.name
-            print >> sys.stderr, "Group %s will be replaced !!" % group.name
+            logger.info("IndexFile has group %s !! " % group.name)
+            logger.info("Group %s will be replaced !!" % group.name)
             self.delete_group( group.name )
         self.names.append( group.name )
         self.groups.append( group )
@@ -158,7 +164,7 @@ class IndexFile:
 def get_index(atom_list = None, residue_list = None, chain_list = None):
     """ return atom indices from a list of atoms/residues/chains"""
     if not atom_list and not residue_list and not chain_list:
-        print 'Error: Need list~'
+        logger.error('Error: Need list')
         sys.exit(1)
     if atom_list:
         lst = map(lambda a: a.id, atom_list)

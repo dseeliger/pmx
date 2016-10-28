@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -37,7 +37,7 @@ Quite fancy is the interface to the GROMACS command line parsing
 functionality. Take a look at the example scripts.
 
 """
-__version__ = '1.1.0dev'
+__version__ = '1.2'
 
 PMX_VERSION = __version__
 

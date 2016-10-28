@@ -30,11 +30,13 @@
 __doc__="""
 Some (quite useless) functions
 """
-
+from __future__ import print_function
 import sys,os
 from glob import glob
 import types
+import logging
 
+logger = logging.getLogger()
 
 #=========================================
 
@@ -43,20 +45,20 @@ def ffopen(filename,mode='r',backup = True):
     if mode == 'w':
         if os.path.isfile(filename):
             if backup:
-                print 'Backing up %s to %s~' % (filename,filename)
+                logger.info('Backing up %s to %s~' % (filename,filename))
                 os.rename(filename,filename+'~')
         try:
             fp = open(filename,'w')
             return fp
         except:
-            print 'Error: Could not open file %s' % filename
+            logger.error('Could not open file %s' % filename)
                 
     elif mode == 'r':
         try:
             fp = open(filename,'r')
             return fp
         except:
-            print 'No such file %s' % filename
+            logger.error('Could not open file %s' % filename)
 
     else:
         return open(filename,mode)
@@ -102,8 +104,7 @@ def listFiles(dir='./',ext=None,abs=True,\
 
     elif type(ext) == types.StringType:
         if backups:
-            print dir+'*.'+ext+'~'
-            fl = glob(dir+'#*.'+ext+'*')
+            logger.info(dir+'*.'+ext+'~')
             fl+= glob(dir+'*.'+ext+'~')
         else:
             fl.extend(glob(dir+'*.'+ext))
@@ -147,9 +148,7 @@ def killBackups(arg,dirname,fname):
     l = listFiles(dirname,arg[0],arg[1],arg[2])
     if arg[3]:
         for f in l:
-            print '%s' % f
-#    print 'dir:', dirname
-#    print 'fname' ,fname
+            print('%s' % f)
 
 #=========================================
 

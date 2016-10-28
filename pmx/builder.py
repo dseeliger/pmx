@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -44,13 +44,17 @@ Usage:
     build chain with defined dihedral angles
     
 """
+from __future__ import print_function
+
 import sys, os
 from library import pmx_data_file
 from geometry import *
 from chain import *
 from atom import Atom
 from model import Model
+import logging
 
+logger = logging.getLogger()
 
 def cross(x,y):
     return array([x[1]*y[2]
@@ -145,7 +149,7 @@ def build_dna_strand(seq):
 def get_fragments():
     dic = pmx_data_file('fragments.pkl')
     n = len(dic.keys())
-    print >>sys.stderr,"pmx__> # Fragments loaded: %d" % n
+    logger.info('# Fragments loaded: %d' % n)
     return dic
 
 
@@ -171,14 +175,14 @@ def write_pdb_with_connect(mol, f, n = 1):
         fp = open(f,"w")
     else:
         fp = f
-    print >>fp, "MODEL%5d" % n
+    print("MODEL%5d" % n,file=fp)
     for atom in mol.atoms:
-        print  >>fp, atom
+        print(atom,file=fp)
     for atom in mol.atoms:
         s= "CONECT%5d" % atom.id
         for a in atom.bonds:
             s+='%5d' % a.id
-        print >>fp, s
+        print(s,file=fp)
 
 
 def attach_group(atom, mol):
@@ -229,7 +233,8 @@ def make_residue(key,hydrogens = True):
     default geometry"""
 
     if not library._aacids.has_key(key):
-        raise KeyError, "Residue %s not known" % key
+        logger.error("Residue %s not known" % key)
+        sys.exit(1)
     m = Molecule()
     m.unity = 'A'
     m.resname = key

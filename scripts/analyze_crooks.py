@@ -7,7 +7,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2011 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -29,6 +29,7 @@
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # ----------------------------------------------------------------------
 
+from __future__ import print_function
 import sys, os, time
 from copy import deepcopy
 from pmx import *
@@ -38,6 +39,11 @@ from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
 from random import gauss, randint, sample, choice
+
+import logging
+
+logger = logging.getLogger()
+
 #from numpy import std
 
 
@@ -54,9 +60,6 @@ params = {#'backend': 'ps',
 rcParams.update(params)
 
 
-def tee( fp, s ):
-    print >>fp, s
-    print s
     
 def cgi_error_from_mean(nruns, mu1, sig1, n1, mu2, sig2, n2):
     iseq = []
@@ -135,14 +138,14 @@ def process_dgdl( fn, ndata = -1, lambda0 = 0 ):
             try:
                 r.append( [ float(x) for x in line.split() ] )
             except:
-                print ' !! Skipping %s ' % (fn )
+                print (' !! Skipping %s ' % (fn ))
                 return None, None
                 
     if ndata != -1 and len(r) != ndata:
         try:
-            print ' !! Skipping %s ( read %d data points, should be %d )' % (fn, len(r), ndata )
+            print (' !! Skipping %s ( read %d data points, should be %d )' % (fn, len(r), ndata ))
         except:
-            print ' !! Skipping %s ' % (fn )
+            print (' !! Skipping %s ' % (fn ))
         return None, None
     # convert time to lambda
     ndata = len( r )
@@ -172,16 +175,16 @@ def check_first_dgdl( fn, lambda0 ):
     ndata = len( r )
     dlambda = 1./ float( ndata )
     if lambda0 == 1: dlambda*=-1
-    print '---------------------------------------------'
-    print '\t\t Checking simulation data.....'
-    print '\t\t File: %s' % fn
-    print '\t\t # data points: %d' % ndata
-    print '\t\t Length of trajectory: %8.3f ps' % r[-1][0]
-    print '\t\t Delta lambda: %8.5f' % dlambda
-    print '---------------------------------------------'
+    print ('---------------------------------------------')
+    print ('\t\t Checking simulation data.....')
+    print ('\t\t File: %s' % fn)
+    print ('\t\t # data points: %d' % ndata)
+    print ('\t\t Length of trajectory: %8.3f ps' % r[-1][0])
+    print ('\t\t Delta lambda: %8.5f' % dlambda)
+    print ('---------------------------------------------')
     
 def work_from_crooks( lst, lambda0 ):
-    print '\nProcessing simulation data......'
+    print ('\nProcessing simulation data......')
     output_data = []
     check_first_dgdl( lst[0], lambda0 )
     first_res, ndata = process_dgdl( lst[0], lambda0 = lambda0 )
@@ -192,7 +195,7 @@ def work_from_crooks( lst, lambda0 ):
         if res is not None:
             results.append( res )
             output_data.append( [ f, res] )
-    print
+    print()
     return results, output_data
 
 def data_to_gauss( data ):
@@ -300,7 +303,7 @@ def data_from_file( fn ):
 def dump_integ_file( fn, data):
     fp = open(fn,'w')
     for fn, w in data:
-        print >>fp, fn, w
+        print (fn, w,file=fp)
     fp.close()
     
 def Jarz(res, c=1.0, T=298):
@@ -526,7 +529,7 @@ def select_random_subset( lst, n):
 
 def main(argv):
 
-    version = "1.2"
+    version = "1.3"
 
     options = [
         Option( "-nbins", "int", 10, "number of histograms bins for plot"),
@@ -547,7 +550,7 @@ def main(argv):
     files = [
         FileOption("-pa", "r/m",["xvg"],"dgdl.xvg", "paths to 0->1 runs"),
         FileOption("-pb", "r/m",["xvg"],"dgdl.xvg", "paths to 1->0 runs"),
-        FileOption("-o", "w",["dat"],"results.dat", "results"),
+        FileOption("-log", "w",["log"],"results.log", "results"),
         FileOption("-cgi_plot", "w",["png","eps","svg","pdf"],"cgi.png", "plot work histograms "),
         FileOption("-W_over_t", "w",["png","eps","svg","pdf"],"W_over_t.png", "plot work over time "),
         FileOption("-i0", "r/m/o",["dat"],"integ0.dat", "read integrated W (0->1)"),
@@ -571,12 +574,23 @@ def main(argv):
                         program_desc = help_text,
                         check_for_existing_files = False, version = version)
 
-    out = open(cmdl['-o'],'w')
-    print >>out, "# analyze_crooks.py, version = %s" % version
-    print >>out, "# pwd = %s" % os.getcwd()
-    print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER') )
-    print >>out, "# command = %s" % ' '.join(argv)
-    print >>out, "#------------------------------------------------"
+ # set up logger
+    logger = logging.getLogger()
+    logger.setLevel( logging.DEBUG )
+    fh = logging.FileHandler(cmdl['-log'], mode='w')
+
+    formatter = logging.Formatter('[%(asctime)s | %(process)d] analyze_crooks_%(levelname)s> %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    fh.setFormatter( formatter)
+    ch = logging.StreamHandler()
+    ch.setFormatter( formatter )
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+    logger.info("Opened log file %s" % cmdl['-log'])
+
+    logger.info("# analyze_crooks.py, version = %s" % version)
+    logger.info("# pwd = %s" % os.getcwd())
+    logger.info("# command = %s" % ' '.join(argv))
+    logger.info("#------------------------------------------------")
     
     if not cmdl.opt['-i0'].is_set: 
         run_ab = cmdl['-pa']
@@ -591,15 +605,15 @@ def main(argv):
         res_ab = []
         res_ba = []
         for fn in cmdl['-i0']:
-            print '\t\tReading integrated values (0->1) from', fn
+            logger.info('\t\tReading integrated values (0->1) from %s' % fn)
             res_ab.extend(data_from_file( fn ) )
         for fn in cmdl['-i1']:
-            print '\t\tReading integrated values (1->0) from', fn
+            logger.info('\t\tReading integrated values (1->0) from %s' % fn)
             res_ba.extend(data_from_file( fn ) )
 
     if cmdl['-integ_only']:
-        print '\n    Integration done. Skipping analysis.'
-        print '\n    ......done........\n'
+        logger.info('    Integration done. Skipping analysis.')
+        logger.info('    ......done........'
         sys.exit(0) 
 
     firstA = 0
@@ -608,16 +622,16 @@ def main(argv):
     lastB = len(res_ba)
     if cmdl.opt['-firstA'].is_set:
         firstA = cmdl['-firstA']
-        tee(out, '   first trajectory to read from A: %d' % firstA)
+        logger.info('   first trajectory to read from A: %d' % firstA)
     if cmdl.opt['-lastA'].is_set:
         lastA = cmdl['-lastA']
-        tee(out, '   last trajectory to read from A : %d' % lastA)
+        logger.info('   last trajectory to read from A : %d' % lastA)
     if cmdl.opt['-firstB'].is_set:
         firstB = cmdl['-firstB']
-        tee(out, '   first trajectory to read from B: %d' % firstB)
+        logger.info('   first trajectory to read from B: %d' % firstB)
     if cmdl.opt['-lastB'].is_set:
         lastB = cmdl['-lastB']
-        tee(out, '   last trajectory to read from B : %d' % lastB)
+        logger.info('   last trajectory to read from B : %d' % lastB)
 
     res_ab = res_ab[firstA:lastA]
     res_ba = res_ba[firstB:lastB]
@@ -625,99 +639,99 @@ def main(argv):
 
     if cmdl.opt['-rand'].is_set:
         ntraj = cmdl['-rand']
-        tee(out, ' select random subset of trajectories: %d' % ntraj )
+        logger.info(' select random subset of trajectories: %d' % ntraj )
         res_ab = select_random_subset(res_ab, ntraj)
         res_ba = select_random_subset(res_ba, ntraj)
         
     mf, devf, Af = data_to_gauss( res_ab )
     mb, devb, Ab = data_to_gauss( res_ba )
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: NUMBER OF TRAJECTORIES:')
-    tee(out, '               0->1 : %d' % len(res_ab))
-    tee(out, '               1->0 : %d' % len(res_ba))
+    logger.info(' --------------------------------------------------------')
+    logger.info( '             ANALYSIS: NUMBER OF TRAJECTORIES:')
+    logger.info( '               0->1 : %d' % len(res_ab))
+    logger.info( '               1->0 : %d' % len(res_ba))
     
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: Crooks-Gaussian Intersection     ')
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % ( mf, devf ))
-    tee(out, '  Backward : mean = %8.3f  std = %8.3f' % ( mb, devb ))
+    logger.info( ' --------------------------------------------------------')
+    logger.info( '             ANALYSIS: Crooks-Gaussian Intersection     ')
+    logger.info( ' --------------------------------------------------------')
+    logger.info( '  Forward  : mean = %8.3f  std = %8.3f' % ( mf, devf ))
+    logger.info( '  Backward : mean = %8.3f  std = %8.3f' % ( mb, devb ))
 
     if cmdl['-KS']:
-        tee(out, '  Running KS-test ....')
+        logger.info( '  Running KS-test ....')
         q0, lam00, check0, bOk0 = ks(res_ab)
         q1, lam01, check1, bOk1 = ks(res_ba)
     
-        tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
+        logger.info( '  Forward  : gaussian quality = %3.2f' % q0)
         if bOk0:
-            tee(out, '             ---> KS-Test Ok')
+            logger.info( '             ---> KS-Test Ok')
         else: 
-            tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q0, check0 ))
-        tee(out, '  Backward : gaussian quality = %3.2f' % q1)
+            logger.info( '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q0, check0 ))
+        logger.info( '  Backward : gaussian quality = %3.2f' % q1)
         if bOk1:
-            tee(out, '             ---> KS-Test Ok')
+            logger.info( '             ---> KS-Test Ok')
         else: 
-            tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q1, check1 ))
+            logger.info( '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q1, check1 ))
        
    
 
-    tee(out, '  Calculating Intersection...')
+    logger.info( '  Calculating Intersection...')
     cgi_result = gauss_intersection( [Af, mf, devf], [Ab, mb, devb ] )
     intersection = True
     if not cgi_result:
-        tee(out, '\n  Gaussians too close for intersection calculation')
-        tee(out, '   --> Taking difference of mean values')
+        logger.info( '\n  Gaussians too close for intersection calculation')
+        logger.info( '   --> Taking difference of mean values')
         cgi_result = (mf+mb)*.5
         intersection = False
-    tee(out, '  RESULT: dG ( CGI )  = %8.4f kJ/mol' % cgi_result)
+    logger.info( '  RESULT: dG ( CGI )  = %8.4f kJ/mol' % cgi_result)
     if intersection:
         cgi_err = cgi_error( 1000, mf, devf, len( res_ab), mb, devb, len(res_ba ) )
     else:
         cgi_err = cgi_error_from_mean( 1000, mf, devf, len( res_ab), mb, devb, len(res_ba ) )
-    tee(out, '  RESULT: error_dG ( CGI ) = %8.4f kJ/mol' % cgi_err)
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: Bennett Acceptance Ratio     ')
-    tee(out, ' --------------------------------------------------------')
+    logger.info( '  RESULT: error_dG ( CGI ) = %8.4f kJ/mol' % cgi_err)
+    logger.info( ' --------------------------------------------------------')
+    logger.info( '             ANALYSIS: Bennett Acceptance Ratio     ')
+    logger.info( ' --------------------------------------------------------')
     T = cmdl['-T']
-    tee(out, '  Solving numerical equation with Nelder-Mead Simplex algorithm.. ')
-    tee(out, '  Temperature used: %8.2f K' % T)
+    logger.info( '  Solving numerical equation with Nelder-Mead Simplex algorithm.. ')
+    logger.info( '  Temperature used: %8.2f K' % T)
     bar_result = BAR( res_ab, res_ba, T)
-    tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar_result)
+    logger.info( '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar_result)
     bar_err = BAR_err( bar_result, res_ab, res_ba, T)
     bar_err_boot = BAR_err_boot( res_ab, res_ba, cmdl['-nruns'], T)
     
-    tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
-    tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
-    tee(out, ' ------------------------------------------------------')
+    logger.info( '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
+    logger.info( '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
+    logger.info( ' ------------------------------------------------------')
     diff = abs( cgi_result - bar_result )
     mean = (cgi_result+bar_result)*.5
-    tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff ) 
-    tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean )
-    tee(out, ' ------------------------------------------------------')
+    logger.info( '  Difference between BAR and CGI = %8.5f kJ/mol' % diff ) 
+    logger.info( '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean )
+    logger.info( ' ------------------------------------------------------')
    
     if cmdl['-jarz']:
-        tee(out, ' --------------------------------------------------------')
-        tee(out, '             ANALYSIS: Jarzynski estimator     ')
-        tee(out, ' --------------------------------------------------------')
+        logger.info( ' --------------------------------------------------------')
+        logger.info( '             ANALYSIS: Jarzynski estimator     ')
+        logger.info( ' --------------------------------------------------------')
         jarz_resultA = Jarz( res_ab, 1.0, T)
 	jarz_resultB = -1.0*Jarz( res_ba, -1.0, T)
-        tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_resultA)
-        tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_resultB)
+        logger.info( '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_resultA)
+        logger.info( '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_resultB)
         jarz_err_bootA = Jarz_err_boot( res_ab, cmdl['-nruns'], 1.0, T)
         jarz_err_bootB = Jarz_err_boot( res_ba, cmdl['-nruns'], -1.0, T)
-#        tee(out, '  RESULT: error_dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_errA)
-        tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootA)
-#        tee(out, '  RESULT: error_dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_errB)
-        tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootB)
-        tee(out, ' ------------------------------------------------------')
+#        logger.info( '  RESULT: error_dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_errA)
+        logger.info( '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootA)
+#        logger.info( '  RESULT: error_dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_errB)
+        logger.info( '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootB)
+        logger.info( ' ------------------------------------------------------')
     	mean = (jarz_resultA+jarz_resultB)*.5
-    	tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean )
-	tee(out, ' ------------------------------------------------------')
+    	logger.info( '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean )
+	logger.info( ' ------------------------------------------------------')
 
-    print '\n   Plotting histograms......'
+    logger.info('Plotting histograms......')
     make_plot( cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'] )
     make_W_over_time_plot( cmdl['-W_over_t'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'])
 
-    tee(out, '\n   ......done...........\n')
+    logger.info( '......done...........')
     
    
 main( sys.argv )

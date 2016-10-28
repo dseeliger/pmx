@@ -52,10 +52,16 @@ Basic Usage:
      .
      .
 """
+from __future__ import print_function
+
 import sys
 from atomselection import *
 import library, copy
 from rotamer import _aa_chi
+
+import logging
+logger = logging.getLogger()
+
 
 class Molecule(Atomselection):
     """ Storage class for a Molecule/residue"""
@@ -350,8 +356,8 @@ class Molecule(Atomselection):
     def insert_atom(self,pos,atom,id=True):
         """ insert atom at a certain position"""
         if pos not in range(len(self.atoms)+1):
-            print 'Molecule has only %d atoms' % len(self.atoms)
-            return
+            logger.error('Inserting atom at position %d failed. # atoms in molecule is %d' % (pos, len(self.atoms)))
+            sys.exit(1)
         else:
             if id:
                 atom.resnr = self.id
@@ -440,7 +446,8 @@ class Molecule(Atomselection):
     def append(self,atom):
         """ attach atom at the end"""
         if not isinstance(atom,Atom):
-            raise TypeError, "%s is not an Atom instance" % str(atom) 
+            logger.error('Cannot append object %s to atomlist' % str(atom))
+            sys.exit(1)
         else:
             n = len(self.atoms)
             if n == 0:
@@ -466,7 +473,7 @@ class Molecule(Atomselection):
 
     def get_mol2_types(self, nterminus = False):
         if not library._mol2_types.has_key(self.resname):
-            print 'No mol2 lib entry for residue %s' % self.resname
+            logger.error('No mol2 lib entry for residue %s' % self.resname)
             sys.exit(1)
         dic = library._mol2_types[self.resname]
         for atom in self.atoms:
@@ -529,14 +536,14 @@ class SDMolecule:
                         self.properties[prop]+=line
 
     def write( self, fp ):
-        print >>fp, self.name
-        print >>fp, self.name2,
-        print >>fp
-        print >>fp, self.molfile
+        print(self.name,file=fp)
+        print(self.name2,file=fp)
+        print("",file=fp)
+        print(self.molfile, file=fp)
         for k, v in self.properties.items():
-            print >>fp, '>', k
-            print >>fp, v,
-        print >>fp, '$$$$'
+            print('> ',k,file=fp)
+            print(v,file=fp)
+        print('$$$$',file=fp)
         
 
 class SDFile:
@@ -631,27 +638,27 @@ class Mol2Molecule:
             atom2 = self.atom_by_id( e[2] )
             bond_type = e[3]
             if atom1 is None or atom2 is None:
-                print >>sys.stderr,'Mol2Molecule: Error in bond parsing'
+                logger.error('Mol2Molecule: Error in bond parsing')
                 sys.exit(1)
             self.bonds.append( [atom1, atom2, bond_type] )
 
     def write(self, fp = sys.stdout):
-        print >>fp, '@<TRIPOS>MOLECULE'
-        print >>fp, self.name
-        print >>fp, self.num_atoms, self.num_bonds, self.num_substr, self.num_feat, self.num_sets
-        print >>fp, self.mol_type
-        print >>fp, self.charge_type
-        print >>fp
-        print >>fp, '@<TRIPOS>ATOM'
+        print('@<TRIPOS>MOLECULE', file=fp)
+        print(self.name, file=fp)
+        print(self.num_atoms, self.num_bonds, self.num_substr, self.num_feat, self.num_sets, file=fp)
+        print(self.mol_type, file=fp)
+        print(self.charge_type, file=fp)
+        print('',file=fp)
+        print('@<TRIPOS>ATOM',file=fp)
         for atom in self.atoms:
-            print >>fp, "%7d %-8s %9.4f %9.4f %9.4f %-6s %3d %-8s %9.4f" %\
+            print("%7d %-8s %9.4f %9.4f %9.4f %-6s %3d %-8s %9.4f" %\
                   (atom.id, atom.symbol, atom.x[0], atom.x[1], atom.x[2], atom.atype,\
-                   atom.resnr, atom.resname, atom.q)
-        print >>fp, '@<TRIPOS>BOND'
+                   atom.resnr, atom.resname, atom.q), file=fp)
+        print('@<TRIPOS>BOND',file=fp)
         for i, b in enumerate(self.bonds):
-            print >>fp, "%6d %6d %6d %6s" % ((i+1), b[0].id, b[1].id, b[2])
+            print("%6d %6d %6d %6s" % ((i+1), b[0].id, b[1].id, b[2]), file=fp)
         for line in self.footer:
-            print >>fp, line
+            print(line, file=fp)
         
     def add_atom( self, atom ):
         n = len(self.atoms)+1

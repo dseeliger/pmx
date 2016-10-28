@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -49,9 +49,12 @@ Basic Usage:
      .
      
 """
+from __future__ import print_function
 from atomselection import *
 from molecule import *
 import copy, library
+import logging
+
 #import builder
 
 class Chain(Atomselection):
@@ -114,8 +117,8 @@ class Chain(Atomselection):
         else:
             have_model = False
         if pos not in range(len(self.residues)+1):
-            raise ValueError, 'Chain has only %d residues' % \
-                  len(self.residues)
+            logger.error('Cannot insert molecule at position %d. # residues in chain is %d' % (pos, len(self.residues)))
+            sys.exit(1)
         else:
             mol.set_resid(-999)
             mol.set_chain_id(self.id)
@@ -163,8 +166,8 @@ class Chain(Atomselection):
         else:
             resl = chain
         if pos not in range(len(self.residues)+1):
-            raise ValueError, 'Chain has only %d residues' % \
-                  len(self.residues)
+            logger.error('Cannot insert molecule at position %d. # residues in chain is %d' % (pos, len(self.residues)))
+            sys.exit(1)
         if pos == len(self.residues):
             m = self.residues[-1]
             if have_model:
@@ -256,7 +259,8 @@ class Chain(Atomselection):
 
     def append(self,mol):
         if not isinstance(mol,Molecule):
-            raise TypeError, "%s is not a Molecule instance" % str(mol)
+            logger.error("%s is not a Molecule instance" % str(mol))
+            sys.exit(1)
         else:
             n = len(self.residues)
             self.insert_residue(n,mol)
@@ -276,8 +280,8 @@ class Chain(Atomselection):
             if self.unity=='A':
                 d*=.1
             if d > 0.45:
-                print 'Warning: Long Bond %d-%s <-> %d-%s' %\
-                      (r.id,r.resname,r2.id,r2.resname)
+                logger.warning('Long Bond %d-%s <-> %d-%s' %\
+                      (r.id,r.resname,r2.id,r2.resname))
             else:
                 c.bonds.append(n)
                 n.bonds.append(c)
@@ -399,7 +403,7 @@ class Chain(Atomselection):
     def __prepare_cterm_for_extension(self):
         cterm = self.cterminus()
         if  cterm.resname not in library._protein_residues:
-            print " Cannot attach to this residue! ", cterm.resname
+            logger.error("Cannot attach to this residue -> %s " % cterm.resname)
             sys.exit(1)
         a = cterm.fetch_atoms('OXT')
         if a:
@@ -644,8 +648,6 @@ class Chain(Atomselection):
 
 
     def create(self, seq, phi_psi = [], ss = []):
-##         print 'seq = ', seq
-##         print 'phi_psi', phi_psi
         if ss:
             assert len(seq) == len(ss) or len(ss) == 1
             if len(ss) == 1:
@@ -657,24 +659,12 @@ class Chain(Atomselection):
                 elif ss[i] == 'E':
                     phi_psi.append( [-139, 135] )
                     
-##         if not phi_psi:
-##             print seq, len(seq)
-##             for i in range(len(seq)):
-##                 print i
-##                 phi_psi.append( [-139, 135] )
-##         else:
-##             print phi_psi
-##             print seq, phi_psi, len(seq), len(phi_psi)
-##             assert len(phi_psi) == len(seq)
         first_res = seq[0]
         resn = library._aacids_dic[first_res]
-#        new = builder.make_residue(resn,hydrogens = True)
         new = Molecule().new_aa(resn)
         
         self.residues.append( new )
         new.chain = self
-##         new.set_phi( phi_psi[0][0] )
-##         new.set_psi( phi_psi[0][1] )
         new.unity = 'A'
         self.al_from_resl()
         for i, aa in enumerate(seq[1:]):
@@ -812,7 +802,7 @@ class Chain(Atomselection):
                         r.next = next_res
                         next_res.previous = r
                     else:
-                        print >>sys.stderr, 'Gap between residues ', r, '< - >', next_res, 'dist = ', d
+                        logger.warning('Gap between residues %d%s and %d%s (%4.2 A)' % (r.id, r.resname, next_res.id, next_res.resnamer, d))
                         self.residue_tree_ok = False
                             
     def cterminus(self):

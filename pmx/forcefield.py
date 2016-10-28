@@ -149,8 +149,8 @@ class ITPFile:
             lines = open(fname).readlines()
         else:
             lines = fname.readlines()
-        lines = kickOutComments(lines,';')
-        lines = kickOutComments(lines,'#')
+        lines = filter_comments(lines,';')
+        lines = filter_comments(lines,'#')
         self.name, self.nrexcl = read_moleculetype(lines)
         self.atoms = read_itp_atoms(lines)
         self.bonds = read_itp_bonds(lines)
@@ -329,7 +329,7 @@ class ITPFile:
         if starts:
             self.has_vsites2 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites2 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites2 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:3]]
@@ -354,7 +354,7 @@ class ITPFile:
         if starts:
             self.has_vsites3 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites3 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites3 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:4]]
@@ -379,7 +379,7 @@ class ITPFile:
         if starts:
             self.has_vsites4 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites4 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites4 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:5]]
@@ -427,8 +427,8 @@ class Topology:
         if filename is not None:
             self.read_top(filename, ff = ff)
             l = cpp_parse_file(self.topfile)
-            l = kickOutComments(l,'#')
-            l = kickOutComments(l,';')
+            l = filter_comments(l,'#')
+            l = filter_comments(l,';')
             self.BondedParams = BondedParser( l )
             self.NBParams = NBParser( l )
 #            self.types, self.bond_lib, self.ang_lib, self.dih_lib = \
@@ -440,11 +440,11 @@ class Topology:
             lines = open(fname).readlines()
         else:
             lines = fname.readlines()
-        lines = kickOutComments(lines,';')
+        lines = filter_comments(lines,';')
         if not self.is_itp:
             self.read_header(lines)
             self.read_footer(lines)
-        lines = kickOutComments(lines,'#')
+        lines = filter_comments(lines,'#')
         self.read_moleculetype(lines)
         self.read_atoms(lines)
         if not self.atoms:
@@ -546,27 +546,27 @@ class Topology:
                 self.dihedrals[i][-2][1] = 0
 
     def read_molecules(self,lines):
-        lst = readSection(lines,'[ molecules ]','[')
+        lst = read_section(lines,'[ molecules ]','[')
         self.molecules = []
         for line in lst:
             entr = line.split()
             self.molecules.append([entr[0],int(entr[1])])
 
     def read_system(self,lines):
-        lst = readSection(lines,'[ system ]','[')
+        lst = read_section(lines,'[ system ]','[')
         self.system = lst[0].strip()
 
         
         
     def read_atoms(self,lines):
-        lst = readSection(lines,'[ atoms ]','[')
+        lst = read_section(lines,'[ atoms ]','[')
         self.atoms = []
         for line in lst:
             a = topline2atom(line)
             self.atoms.append(a)
 
     def read_bonds(self,lines):
-        lst = readSection(lines,'[ bonds ]','[')
+        lst = read_section(lines,'[ bonds ]','[')
         self.bonds = []
         for line in lst:
             entries = line.split()
@@ -588,14 +588,14 @@ class Topology:
                 self.bonds.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], idx[2], [lA,kA],[lB,kB]])
             
     def read_pairs(self,lines):
-        lst = readSection(lines,'[ pairs ]','[')
+        lst = read_section(lines,'[ pairs ]','[')
         self.pairs = []
         for line in lst:
             idx = [int(x) for x in line.split()]
             self.pairs.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], idx[2]])
         
     def read_constraints(self,lines):
-        lst = readSection(lines,'[ constraints ]','[')
+        lst = read_section(lines,'[ constraints ]','[')
         self.constraints = []
         for line in lst:
             idx = [int(x) for x in line.split()]
@@ -604,7 +604,7 @@ class Topology:
             self.have_constraints = True
             
     def read_angles(self, lines):
-        lst = readSection(lines,'[ angles ]','[')
+        lst = read_section(lines,'[ angles ]','[')
         angles = []
         for line in lst:
             entries = line.split()
@@ -634,7 +634,7 @@ class Topology:
             if line.strip().startswith('[ dihedrals ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(lines[s:],'[ dihedrals ]','[')
+            lst = read_section(lines[s:],'[ dihedrals ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:4]]
@@ -658,7 +658,7 @@ class Topology:
         if starts:
             self.has_vsites3 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites3 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites3 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:4]]
@@ -683,7 +683,7 @@ class Topology:
         if starts:
             self.has_vsites4 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites4 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites4 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:5]]
@@ -720,7 +720,7 @@ class Topology:
         self.footer = self.footer[:idx]
 
     def read_moleculetype(self, lines):
-        l = readSection(lines,'[ moleculetype ]','[')
+        l = read_section(lines,'[ moleculetype ]','[')
         if l:
             self.name, self.nexcl =  l[0].split()[0], int(l[0].split()[1])
         
@@ -1158,19 +1158,19 @@ def cpp_parse_file(fn,cpp_defs=[],cpp_path=[os.environ.get('GMXLIB')] ):
 
 def read_atp(fn):
     l = open(fn).readlines()
-    l = kickOutComments(l,';')
-    l = parseList('sf',l)
+    l = filter_comments(l,';')
+    l = parse_list('sf',l)
     dic = {}
     for type,mass in l:
         dic[type] = mass
     return dic
 
 def read_atomtypes(l, ff= 'amber99sb'):
-    lst = readSection(l,'[ atomtypes ]','[')
+    lst = read_section(l,'[ atomtypes ]','[')
     if ff == 'oplsaa':
-        lst = parseList('ssiffsff',lst)
+        lst = parse_list('ssiffsff',lst)
     elif ff in ['amber03','amber99sb']:
-        lst = parseList('ssffsff',lst)
+        lst = parse_list('ssffsff',lst)
     dic = {}
     for line in lst:
         dic[line[0]]=line[1:]
@@ -1183,8 +1183,8 @@ def read_bondtypes(l):
         if line.strip().startswith('[ bondtypes ]'):
             starts.append(i)
     for s in starts:
-        lst = readSection(l[s:],'[ bondtypes ]','[')
-        lst = parseList('ssiff',lst)
+        lst = read_section(l[s:],'[ bondtypes ]','[')
+        lst = parse_list('ssiff',lst)
         res.extend(lst)
     return res
 
@@ -1195,8 +1195,8 @@ def read_angletypes(l):
         if line.strip().startswith('[ angletypes ]'):
             starts.append(i)
     for s in starts:
-        lst = readSection(l[s:],'[ angletypes ]','[')
-        lst = parseList('sssiff',lst)
+        lst = read_section(l[s:],'[ angletypes ]','[')
+        lst = parse_list('sssiff',lst)
         res.extend(lst)
     return res
 
@@ -1207,22 +1207,22 @@ def read_dihedraltypes(l):
         if line.strip().startswith('[ dihedraltypes ]'):
             starts.append(i)
     for s in starts:
-        lst = readSection(l[s:],'[ dihedraltypes ]','[')
+        lst = read_section(l[s:],'[ dihedraltypes ]','[')
         try:
-            lst = parseList('ssssiffffff',lst)
+            lst = parse_list('ssssiffffff',lst)
         except:
             try:
-                lst = parseList('ssssiffi',lst)
+                lst = parse_list('ssssiffi',lst)
             except:
-                lst = parseList('ssiffi',lst)
+                lst = parse_list('ssiffi',lst)
         res.extend(lst)
     return res
 
 
 def read_ff(fn,ff='amber99sb',cpp_defs = [], cpp_path = [os.environ.get('GMXLIB')]):
     l = cpp_parse_file(fn,cpp_defs,cpp_path)
-    l = kickOutComments(l,'#')
-    l = kickOutComments(l,';')
+    l = filter_comments(l,'#')
+    l = filter_comments(l,';')
     atomtypes = read_atomtypes(l,ff=ff)
     bt = read_bondtypes(l)
     at = read_angletypes(l)
@@ -1338,22 +1338,22 @@ def __read_rtp_impropers( resname, lines ):
 def read_rtp( filename ):
     rtp_entries = {}
     l = open(filename,'r').readlines()
-    lines = kickOutComments(l,';')
+    lines = filter_comments(l,';')
     keys = __get_rtp_resnames(lines)
     for key in keys:
         sys.stderr.write('%s -> %4s\r' % (filename, key))
         rtp_lines = __get_rtp_entry( key, lines)
         # read atoms
-        al = readSection(rtp_lines,'[ atoms ]','[')
+        al = read_section(rtp_lines,'[ atoms ]','[')
         atoms = __read_rtp_atoms(key, al )
         # read bonds
-        bl = readSection(rtp_lines,'[ bonds ]','[')
+        bl = read_section(rtp_lines,'[ bonds ]','[')
         bonds = __read_rtp_bonds( key, bl )
         # read dihedrals
-        dl = readSection(rtp_lines,'[ dihedrals ]','[')
+        dl = read_section(rtp_lines,'[ dihedrals ]','[')
         diheds = __read_rtp_dihedrals(key, dl)
         # read impropers
-        il = readSection(rtp_lines,'[ impropers ]','[')
+        il = read_section(rtp_lines,'[ impropers ]','[')
         improps = __read_rtp_impropers(key, il)
         rtp_entries[key] = {
             'atoms': atoms,
@@ -1368,7 +1368,7 @@ def read_rtp( filename ):
 
 def get_rtp_entry(key, filename = 'ffamber99sb.rtp'):
     l = open(filename,'r').readlines()
-    lines = kickOutComments(l,';')
+    lines = filter_comments(l,';')
 
     r = []
     idx = 0
@@ -1387,7 +1387,7 @@ def get_rtp_entry(key, filename = 'ffamber99sb.rtp'):
             r.append(line)
     # read atoms
     atoms = []
-    al = readSection(r,'[ atoms ]','[')
+    al = read_section(r,'[ atoms ]','[')
     for line in al:
         entr = line.split()
         entr[2] = float(entr[2])
@@ -1395,13 +1395,13 @@ def get_rtp_entry(key, filename = 'ffamber99sb.rtp'):
         atoms.append(entr)
     # read bonds
     bonds = []
-    bl = readSection(r,'[ bonds ]','[')
+    bl = read_section(r,'[ bonds ]','[')
     for line in bl:
         entr = line.split()
         bonds.append(entr)
     # read dihedrals
     diheds = []
-    dl = readSection(r,'[ dihedrals ]','[')
+    dl = read_section(r,'[ dihedrals ]','[')
     for line in dl:
         entr = line.split()
         if len(entr) == 5:
@@ -1410,7 +1410,7 @@ def get_rtp_entry(key, filename = 'ffamber99sb.rtp'):
             diheds.append(entr+[''])
     # read impropers
     improps = []
-    il = readSection(r,'[ impropers ]','[')
+    il = read_section(r,'[ impropers ]','[')
     for line in il:
         entr = line.split()
         if len(entr)==5:
@@ -1445,7 +1445,7 @@ def topline2atom(line):
     return a
 
 def read_itp_atoms(lines):
-    lst = readSection(lines,'[ atoms ]','[')
+    lst = read_section(lines,'[ atoms ]','[')
     al = []
     for line in lst:
         a = topline2atom(line)
@@ -1541,7 +1541,7 @@ def write_itp_moleculetype(fp,name,nrexcl):
     print >>fp, '%s  %d' % (name,nrexcl)
     
 def read_itp_bonds(lines):
-    lst = readSection(lines,'[ bonds ]','[')
+    lst = read_section(lines,'[ bonds ]','[')
     bonds = []
     for line in lst:
         entr = line.split()
@@ -1556,7 +1556,7 @@ def read_itp_bonds(lines):
     return bonds
 
 def read_itp_pairs(lines):
-    lst = readSection(lines,'[ pairs ]','[')
+    lst = read_section(lines,'[ pairs ]','[')
     pairs = []
     for line in lst:
         entr = line.split()
@@ -1567,7 +1567,7 @@ def read_itp_pairs(lines):
     return pairs
 
 def read_itp_angles(lines):
-    lst = readSection(lines,'[ angles ]','[')
+    lst = read_section(lines,'[ angles ]','[')
     angles = []
     for line in lst:
         entr = line.split()
@@ -1589,7 +1589,7 @@ def read_itp_dihedrals(lines):
         if line.strip().startswith('[ dihedrals ]'):
             starts.append(i)
     for s in starts:
-        lst = readSection(lines[s:],'[ dihedrals ]','[')
+        lst = read_section(lines[s:],'[ dihedrals ]','[')
         for line in lst:
             entr = line.split()
             b0 = int(entr[0])
@@ -1610,7 +1610,7 @@ def read_itp_dihedrals(lines):
 
 
 def read_moleculetype(lines):
-    l = readSection(lines,'[ moleculetype ]','[')
+    l = read_section(lines,'[ moleculetype ]','[')
     if l:
         return l[0].split()[0], int(l[0].split()[1])
     else:
@@ -1620,7 +1620,7 @@ def read_gaff_top(fname):
     """ this function reads topology files from gaff """
 
     lines = open(fname).readlines()
-    lines = kickOutComments(lines,';')
+    lines = filter_comments(lines,';')
     itp = ITPFile(fname, ff = 'amber03')
 #    atypes = read_atomtypes(lines, ff = 'amber03')
 #    itp.atomtypes = atypes
@@ -1835,7 +1835,7 @@ class MDP:
 
     def read(self, filename):
         lines = open(filename).readlines()
-        l = kickOutComments(lines,';')
+        l = filter_comments(lines,';')
         for line in l:
             entr = line.split('=')
             key = entr[0].strip()

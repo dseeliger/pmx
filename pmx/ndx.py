@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -61,7 +61,7 @@ class IndexGroup:
             name = name[1:-1].strip()
         self.name = name
         key = '[ '+name+' ]'
-        ll = readSection(lines,key,'[')
+        ll = read_section(lines,key,'[')
         self.ids = []
         for line in ll:
             self.ids.extend([int(x) for x in line.split()])

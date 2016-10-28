@@ -34,6 +34,8 @@ Take a look there for details...
 
 
 """
+from __future__ import print_function
+
 import sys
 from numpy import *
 import random
@@ -73,13 +75,13 @@ class Atomselection:
                 title = str(self.__class__)+' '+str(self)
 
         header = 'TITLE    '+title
-        print >>fp, header
-        print >>fp, 'MODEL%5d' % nr
+        print(header, file = fp)
+        print('Model{5d}'.format(nr),file=fp)
         if not hasattr(self,"box"):
             self.box = [ [0,0,0], [0,0,0], [0,0,0] ]
         if self.box[XX][XX]*self.box[YY][YY]*self.box[ZZ][ZZ] != 0:
             box_line = _pmx.box_as_cryst1( self.box )
-            print >>fp, box_line
+            print(box_line, file = fp)
 
 	chainID = self.atoms[0].chain_id
         for atom in self.atoms:

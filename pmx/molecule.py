@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -592,16 +592,16 @@ class Mol2Molecule:
                     self.keys.append( entr )
     def read(self, lines):
         self.header = readUntil( lines, '@<TRIPOS>ATOM')
-        self.atom_lines = readSection(lines,'@<TRIPOS>ATOM','@')
-        self.bond_lines = readSection(lines,'@<TRIPOS>BOND','@')
+        self.atom_lines = read_section(lines,'@<TRIPOS>ATOM','@')
+        self.bond_lines = read_section(lines,'@<TRIPOS>BOND','@')
         self.__parse_molecule()
         self.__parse_atoms()
         self.__parse_bonds()
         if self.keys:
-            self.footer = [self.keys[0]]+readSection(lines, self.keys[0], 'XX')
+            self.footer = [self.keys[0]]+read_section(lines, self.keys[0], 'XX')
 
     def __parse_molecule(self):
-        lines = readSection(self.header, '@<TRIPOS>MOLECULE', '@')
+        lines = read_section(self.header, '@<TRIPOS>MOLECULE', '@')
         self.name = lines[0].strip()
         self.counts = [int(x) for x in lines[1].strip().split()]
         self.num_atoms = self.counts[0]
@@ -625,7 +625,7 @@ class Mol2Molecule:
         return None
 
     def __parse_bonds(self):
-        entries = parseList('iiis', self.bond_lines )
+        entries = parse_list('iiis', self.bond_lines )
         for e in entries:
             atom1 = self.atom_by_id( e[1] )
             atom2 = self.atom_by_id( e[2] )

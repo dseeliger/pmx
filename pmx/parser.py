@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -33,12 +33,12 @@ Some functions to write parsers for different data formats.
 Usage:
 
 >>> lst = open(infile,'r').readlines()     # read file
->>> lst = kickOutComments(lst,'#')       # remove comments with # or ;
->>> lst = parseList('ifs',lst)            # parse each line and return
+>>> lst = filter_omments(lst,'#')       # remove comments with # or ;
+>>> lst = parse_list('ifs',lst)            # parse each line and return
 [integer, float, string] triples
 
 
->>> subl = readSection(lst,'[ begin ]','[ end ]') # get all lines between
+>>> subl = read_section(lst,'[ begin ]','[ end ]') # get all lines between
 [ begin ] and [ end ]
 
 
@@ -53,7 +53,7 @@ logger = logging.getLogger()
 
 
 
-def kickOutComments( lines, comment = '#'):
+def filter_comments( lines, comment = '#'):
     ret = []
     for line in lines:
         if comment in line:
@@ -67,7 +67,7 @@ def kickOutComments( lines, comment = '#'):
                 ret.append( new_line )
     return ret
 
-def readSection(lines, begin, end):
+def read_section(lines, begin, end):
     ret = []
     for i, line in enumerate(lines):
         if line.strip() == begin:
@@ -100,7 +100,7 @@ def __parse_entry(entr, tp):
     return new
     
 
-def parseList(format_string, lst, ignore_missing = False):
+def parse_list(format_string, lst, ignore_missing = False):
 
 	""" Read a list of lines into a defined format.
 	The format_string can contain i, f and s (for integer, float and string)
@@ -132,7 +132,7 @@ def read_and_format(filename, format_string, comment = '#', ignore_missing = Fal
 	""" A shortcut function to read a file into a defined format.
 
 	:param filename: filename
-	:param format_string: same is in parseList, e.g. 'siffiff'
+	:param format_string: same is in parse_list, e.g. 'siffiff'
 	:param comment: content after this character is ignored, e.g. the line '1 2 3 # XX' will be parsed as [1,2,3]
 	:param ignore_missing:  Ignore if a line does not match format string 
 	:returns: formatted list of lists
@@ -141,8 +141,8 @@ def read_and_format(filename, format_string, comment = '#', ignore_missing = Fal
 
     l = open(filename).readlines()
     if comment is not None:
-        l = kickOutComments(l, comment)
-    n = parseList( format_string, l, ignore_missing)
+        l = filter_comments(l, comment)
+    n = parse_list( format_string, l, ignore_missing)
     return n
 
 
@@ -152,7 +152,7 @@ def read_and_format(filename, format_string, comment = '#', ignore_missing = Fal
 
 def read_fasta( fn ):
     l = open(fn).readlines()
-    l = kickOutComments(l)
+    l = filter_comments(l)
     dic = OrderedDict()
     name = None
     for line in l:
@@ -170,10 +170,10 @@ def read_fasta( fn ):
 
 def read_xvg( fn,  style='xy'):
     l = open(fn).readlines()
-    l = kickOutComments(l,'@')
-    l = kickOutComments(l,'#')
-    l = kickOutComments(l,'&')
-    res = parseList('ff', l)
+    l = filter_comments(l,'@')
+    l = filter_comments(l,'#')
+    l = filter_omments(l,'&')
+    res = parse_list('ff', l)
     if style == 'list':
         return res
     else:

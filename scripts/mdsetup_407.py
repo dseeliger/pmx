@@ -7,7 +7,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -221,7 +221,7 @@ class FreeEnergyMD(MD):
     def read_mutation_file(self, mut_file ):
         print '\n\t\t\tReading mutation file: %s\n' % mut_file
         l = open(mut_file).readlines()
-        l = kickOutComments(l)
+        l = filter_comments(l)
         count = 1
         for line in l:
             entr = line.strip()

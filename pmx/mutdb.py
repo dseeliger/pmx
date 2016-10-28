@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -58,7 +58,7 @@ def read_new_mtp_entry( entry, filename = 'mutres.mtp'):
     else:
         lst = filename.readlines()
         
-    lst = kickOutComments(lst,';')
+    lst = filter_comments(lst,';')
     key = '[ '+entry+' ]'
     keyw = ('[ morphes ]', '[ atoms ]','[ impropers ]','[ dihedrals ]',\
             '[ rotations ]','[ coords ]')
@@ -73,7 +73,7 @@ def read_new_mtp_entry( entry, filename = 'mutres.mtp'):
                     res.append(line2)
 
     morphes = {}
-    ml = readSection(res,'[ morphes ]','[')
+    ml = read_section(res,'[ morphes ]','[')
     for i, line in enumerate(ml):
         entr = line.split()
         n0 = entr[0]
@@ -86,7 +86,7 @@ def read_new_mtp_entry( entry, filename = 'mutres.mtp'):
             't1':t1,
             }
     atoms = [] 
-    al = readSection(res,'[ atoms ]','[')
+    al = read_section(res,'[ atoms ]','[')
     for i, line in enumerate(al):
         entr = line.split()
         name = entr[0]
@@ -105,20 +105,20 @@ def read_new_mtp_entry( entry, filename = 'mutres.mtp'):
     mol = Molecule(atoms = atoms, unity = 'nm')
     mol.set_resname(entry)
 
-    coords = readSection(res,'[ coords ]','[')
-    coords = parseList('fff',coords)
+    coords = read_section(res,'[ coords ]','[')
+    coords = parse_list('fff',coords)
     for i, atom in enumerate(mol.atoms):
         atom.x = coords[i]
         atom.unity = 'A'
-    il = readSection(res,'[ impropers ]','[')
+    il = read_section(res,'[ impropers ]','[')
     imps = []
     for line in il:
         imps.append(line.split())
     diheds = []
-    dl = readSection(res,'[ dihedrals ]','[')
+    dl = read_section(res,'[ dihedrals ]','[')
     for line in dl:
         diheds.append(line.split())
-    rl = readSection(res,'[ rotations ]','[')
+    rl = read_section(res,'[ rotations ]','[')
     rots = []
     for line in rl:
         rots.append(line.split())
@@ -142,7 +142,7 @@ def read_mtp_entry(entry,filename='ffamber99sb.mtp', version = 'old'):
     else:
         lst = filename.readlines()
         
-    lst = kickOutComments(lst,';')
+    lst = filter_comments(lst,';')
     key = '[ '+entry+' ]'
     keyw = ('[ morphes ]', '[ atoms ]','[ bonds ]','[ impropers ]',\
             '[ dihedrals ]','[ rotations ]','[ coords ]')
@@ -157,7 +157,7 @@ def read_mtp_entry(entry,filename='ffamber99sb.mtp', version = 'old'):
                     res.append(line2)
 
     morphes = {}
-    ml = readSection(res,'[ morphes ]','[')
+    ml = read_section(res,'[ morphes ]','[')
     for i, line in enumerate(ml):
         entr = line.split()
         n0 = entr[0]
@@ -175,7 +175,7 @@ def read_mtp_entry(entry,filename='ffamber99sb.mtp', version = 'old'):
             }
         
     atoms = [] 
-    al = readSection(res,'[ atoms ]','[')
+    al = read_section(res,'[ atoms ]','[')
     for i, line in enumerate(al):
         entr = line.split()
         name = entr[0]
@@ -194,25 +194,25 @@ def read_mtp_entry(entry,filename='ffamber99sb.mtp', version = 'old'):
     mol = Molecule(atoms = atoms, unity = 'nm')
     mol.set_resname(entry)
 
-    coords = readSection(res,'[ coords ]','[')
-    coords = parseList('fff',coords)
+    coords = read_section(res,'[ coords ]','[')
+    coords = parse_list('fff',coords)
     for i, atom in enumerate(mol.atoms):
         atom.x = coords[i]
         atom.unity = 'nm'
     bonds = []
-    bl = readSection(res,'[ bonds ]','[')
+    bl = read_section(res,'[ bonds ]','[')
     for line in bl:
         bonds.append(line.split())
     imps = []
-    il = readSection(res,'[ impropers ]','[')
+    il = read_section(res,'[ impropers ]','[')
     for line in il:
         imps.append(line.split())
     diheds = []
-    dl = readSection(res,'[ dihedrals ]','[')
+    dl = read_section(res,'[ dihedrals ]','[')
     for line in dl:
         diheds.append(line.split())
     rots = []
-    rl = readSection(res,'[ rotations ]','[')
+    rl = read_section(res,'[ rotations ]','[')
     for line in rl:
         rots.append(line.split())
     rotdic = {}
@@ -230,7 +230,7 @@ def read_mtp(filename = 'ffoplsaa.mtp'):
         lst = open(filename).readlines()
     else:
         lst = filename.readlines()
-    lst = kickOutComments(lst,';')
+    lst = filter_comments(lst,';')
 
     keyw = ('[ atoms ]','[ bonds ]','[ impropers ]',\
             '[ dihedrals ]','[ rotations ]')

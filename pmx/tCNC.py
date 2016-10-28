@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -43,7 +43,7 @@ def read_atom_types(f):
     else:
         fp = open(f,'r')
     l = fp.readlines()
-    l = kickOutComments(l,'#')
+    l = filter_comments(l,'#')
     keys = []
     # we search for [ XXX ]
     for line in l:
@@ -54,7 +54,7 @@ def read_atom_types(f):
     dic = {}
     for key in keys:
         dic[key] = {}
-        sec = readSection(l,'[ '+key+' ]',"[")
+        sec = read_section(l,'[ '+key+' ]',"[")
         for line in sec:
             entr = line.split()
             if len(entr)==3:
@@ -133,9 +133,9 @@ def assign_radii(model):
     except:
         p = os.environ.get('CNCLIB')
         lst = open(os.path.join(p,'Atomradii.dat')).readlines()
-    lst = kickOutComments(lst,';')
-    tps = readSection(lst,'[ TYPES ]','[')
-    tps = parseList('sff',tps)
+    lst = filter_comments(lst,';')
+    tps = read_section(lst,'[ TYPES ]','[')
+    tps = parse_list('sff',tps)
     types = map(lambda a: a[0], tps)
     dic = {}
     pdic = {}
@@ -148,10 +148,10 @@ def assign_radii(model):
         atom.ptype = pdic[atom.atype]
 
     if hasattr(model,"chains"):
-        comb = readSection(lst,'[ COMBINATIONS ]','[')
-        comb = parseList('ssf',comb)
-        comb14 = readSection(lst,'[ 14_COMBINATIONS ]','[')
-        comb14 = parseList('ssf',comb14)
+        comb = read_section(lst,'[ COMBINATIONS ]','[')
+        comb = parse_list('ssf',comb)
+        comb14 = read_section(lst,'[ 14_COMBINATIONS ]','[')
+        comb14 = parse_list('ssf',comb14)
     
         size = len(tps)
         table = zeros((size,size))

@@ -6,7 +6,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -48,24 +48,24 @@ class RTPParser:
         filename = pmx_data_file(filename)
         self.filename = filename
         l = open(filename).readlines()
-        self.lines = kickOutComments(l,';')
+        self.lines = filter_comments(l,';')
         self.__get_residue_names()
         for key in self.keys:
             rtp_lines = self.__read_residue_entry( key)
             # read atoms
-            al = readSection(rtp_lines,'[ atoms ]','[')
+            al = read_section(rtp_lines,'[ atoms ]','[')
             atoms = self.__read_rtp_atoms(key, al )
             # read bonds
-            bl = readSection(rtp_lines,'[ bonds ]','[')
+            bl = read_section(rtp_lines,'[ bonds ]','[')
             bonds = self.__read_rtp_bonds( key, bl )
             # read dihedrals
-            dl = readSection(rtp_lines,'[ dihedrals ]','[')
+            dl = read_section(rtp_lines,'[ dihedrals ]','[')
             diheds = self.__read_rtp_dihedrals(key, dl)
             # read impropers
-            il = readSection(rtp_lines,'[ impropers ]','[')
+            il = read_section(rtp_lines,'[ impropers ]','[')
             improps = self.__read_rtp_impropers(key, il)
             # read cmap (only for charmm)
-            cmap = readSection(rtp_lines,'[ cmap ]','[')
+            cmap = read_section(rtp_lines,'[ cmap ]','[')
             #print cmap
 	    #cmap = self.__read_rtp_cmap(key, cl)
             self.entries[key] = {
@@ -455,7 +455,7 @@ class BondedParser:
         else:
             l = filename
             self.filename = '< from list >'
-        self.lines = kickOutComments(l,';')
+        self.lines = filter_comments(l,';')
         self.__parse_directives()
         self.__parse_bondtypes()
         self.__parse_angletypes()
@@ -615,7 +615,7 @@ class BondedParser:
                 name = entr[1]
                 params = [float(x) for x in entr[2:] ]
                 self.directives[name] = params
-        self.lines = kickOutComments(self.lines,'#')
+        self.lines = filter_comments(self.lines,'#')
         
     def __parse_bondtypes(self):
         res = []
@@ -624,8 +624,8 @@ class BondedParser:
             if line.strip().startswith('[ bondtypes ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(self.lines[s:],'[ bondtypes ]','[')
-            lst = parseList('ssiff',lst)
+            lst = read_section(self.lines[s:],'[ bondtypes ]','[')
+            lst = parse_list('ssiff',lst)
             res.extend(lst)
         self.bondtypes = res
 
@@ -636,12 +636,12 @@ class BondedParser:
             if line.strip().startswith('[ angletypes ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(self.lines[s:],'[ angletypes ]','[')
+            lst = read_section(self.lines[s:],'[ angletypes ]','[')
 	    try :
-                lst = parseList('sssiff',lst)
+                lst = parse_list('sssiff',lst)
             except:
                 try:
-                    lst = parseList('sssiffff',lst)
+                    lst = parse_list('sssiffff',lst)
 		except:
 		    print "Unkown Angle type"
 		    exit()
@@ -655,17 +655,17 @@ class BondedParser:
             if line.strip().startswith('[ dihedraltypes ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(self.lines[s:],'[ dihedraltypes ]','[')
+            lst = read_section(self.lines[s:],'[ dihedraltypes ]','[')
             try:
-                lst = parseList('ssssiffffff',lst)
+                lst = parse_list('ssssiffffff',lst)
             except:
                 try:
-                    lst = parseList('ssssiffi',lst)
+                    lst = parse_list('ssssiffi',lst)
                 except:
 		    try :
-                        lst = parseList('ssiffi',lst)
+                        lst = parse_list('ssiffi',lst)
 	            except :
-                        lst = parseList('ssssiff',lst)
+                        lst = parse_list('ssssiff',lst)
             res.extend(lst)
         self.dihedraltypes = res
 
@@ -691,7 +691,7 @@ class NBParser:
         else:
             l = filename
             self.filename = '< from list >'
-        self.lines = kickOutComments(l,';')
+        self.lines = filter_comments(l,';')
         self.__parse_atomtypes(version)
 
     def __str__(self):
@@ -701,11 +701,11 @@ class NBParser:
     def __parse_atomtypes(self, version):
 
         self.atomtypes = {}
-        lst = readSection(self.lines,'[ atomtypes ]','[')
+        lst = read_section(self.lines,'[ atomtypes ]','[')
 	ffnamelower = self.ff.lower()
         if version == 'old':
             if ffnamelower.startswith('amber') :
-                lst = parseList('ssffsff',lst)
+                lst = parse_list('ssffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
                         'bond_type':entr[1],
@@ -714,7 +714,7 @@ class NBParser:
                         'eps':entr[6]
                         }
             elif ffnamelower.startswith('opls'):
-                lst = parseList('ssiffsff',lst)
+                lst = parse_list('ssiffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
                         'bond_type':entr[1],
@@ -725,7 +725,7 @@ class NBParser:
                 
         elif version == 'new':
             if ffnamelower.startswith('amber') or ffnamelower.startswith('charmm'):
-                lst = parseList('siffsff',lst)
+                lst = parse_list('siffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
                         'bond_type':entr[0],
@@ -734,7 +734,7 @@ class NBParser:
                         'eps':entr[6]
                         }
             elif ffnamelower.startswith('opls') :
-                lst = parseList('ssiffsff',lst)
+                lst = parse_list('ssiffsff',lst)
                 for entr in lst:
                     self.atomtypes[entr[0]] = {
                         'bond_type':entr[1],
@@ -744,7 +744,7 @@ class NBParser:
 			}
             elif ffnamelower.startswith('gaff'):
                 try:
-                    lst = parseList('sffsff',lst)
+                    lst = parse_list('sffsff',lst)
                     for entr in lst:
                         self.atomtypes[entr[0]] = {
                             'bond_type':entr[1],
@@ -754,7 +754,7 @@ class NBParser:
                             'eps':entr[5]
                             }
                 except:
-                    lst = parseList('ssffsff',lst)
+                    lst = parse_list('ssffsff',lst)
                     for entr in lst:
                         self.atomtypes[entr[0]] = {
                             'bond_type':entr[1],
@@ -784,8 +784,8 @@ class ATPParser:
         
     def parse(self):
         lst = open(self.fn).readlines()
-        lst = kickOutComments(lst,';')
-        lst = parseList('sf', lst)
+        lst = filter_comments(lst,';')
+        lst = parse_list('sf', lst)
         for tp,  mass in lst:
             self.dic[tp] = mass
         

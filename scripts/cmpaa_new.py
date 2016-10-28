@@ -2,7 +2,7 @@ import sys, os
 from pmx import *
 from pmx.ffparser import RTPParser, NBParser
 from pmx.rotamer import _aa_chi
-from pmx.parser import kickOutComments, readSection, parseList
+from pmx.parser import filter_comments, read_section, parse_list
 import tempfile
 
 standard_pair_list = [
@@ -897,7 +897,7 @@ def assign_mass(r1, r2,ffnonbonded,bCharmm,ff):
 def assign_mass_atp(r1, r2,ffatomtypes):
     fp = open(ffatomtypes,"r")
     lst = fp.readlines()
-    lst = kickOutComments(lst,';')
+    lst = filter_comments(lst,';')
     fp.close()
     mass = {}
     for l in lst:
@@ -969,10 +969,10 @@ def improps_as_atoms( im, r, use_b = False):
 
 def read_nbitp(fn):
     l = open(fn,'r').readlines()
-    l = kickOutComments(l,';')
-    l = kickOutComments(l,'#')
-    l = readSection(l,'[ atomtypes ]','[')
-    l = parseList('ssiffsff',l)
+    l = filter_comments(l,';')
+    l = filter_comments(l,'#')
+    l = read_section(l,'[ atomtypes ]','[')
+    l = parse_list('ssiffsff',l)
     dic = {}
     for entry in l:
         dic[entry[0]]=entry[1:]

@@ -106,11 +106,11 @@ class TopolBase:
     
     def read( self ):
         lines = open(self.filename).readlines()
-        lines = kickOutComments(lines,';')
+        lines = filter_comments(lines,';')
         if not self.is_itp:
             self.read_header( lines )
         self.read_footer( lines )
-        lines = kickOutComments(lines,'#')
+        lines = filter_comments(lines,'#')
         self.read_moleculetype(lines)
         if self.name: # atoms, bonds, ... section
             self.read_atoms(lines)
@@ -186,18 +186,18 @@ class TopolBase:
 
 
     def read_system(self,lines):
-        lst = readSection(lines,'[ system ]','[')
+        lst = read_section(lines,'[ system ]','[')
         self.system = lst[0].strip()
 
     def read_molecules(self,lines):
-        lst = readSection(lines,'[ molecules ]','[')
+        lst = read_section(lines,'[ molecules ]','[')
         self.molecules = []
         for line in lst:
             entr = line.split()
             self.molecules.append([entr[0],int(entr[1])])
 
     def read_moleculetype(self, lines):
-        l = readSection(lines,'[ moleculetype ]','[')
+        l = read_section(lines,'[ moleculetype ]','[')
         if l:
             self.name, self.nrexcl =  l[0].split()[0], int(l[0].split()[1])
 
@@ -224,14 +224,14 @@ class TopolBase:
             pass
 
     def read_atoms(self,lines):
-        lst = readSection(lines,'[ atoms ]','[')
+        lst = read_section(lines,'[ atoms ]','[')
         self.atoms = []
         for line in lst:
             a = self.__atom_from_top_line( line )
             self.atoms.append(a)
 
     def read_bonds(self,lines):
-        lst = readSection(lines,'[ bonds ]','[')
+        lst = read_section(lines,'[ bonds ]','[')
         self.bonds = []
         for line in lst:
             entries = line.split()
@@ -253,14 +253,14 @@ class TopolBase:
                 self.bonds.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], idx[2], [idx[2],lA,kA],[idx[2],lB,kB]])
             
     def read_pairs(self,lines):
-        lst = readSection(lines,'[ pairs ]','[')
+        lst = read_section(lines,'[ pairs ]','[')
         self.pairs = []
         for line in lst:
             idx = [int(x) for x in line.split()]
             self.pairs.append([self.atoms[idx[0]-1], self.atoms[idx[1]-1], idx[2]])
         
     def read_constraints(self,lines):
-        lst = readSection(lines,'[ constraints ]','[')
+        lst = read_section(lines,'[ constraints ]','[')
         self.constraints = []
         for line in lst:
             idx = [int(x) for x in line.split()]
@@ -269,7 +269,7 @@ class TopolBase:
             self.have_constraints = True
             
     def read_angles(self, lines):
-        lst = readSection(lines,'[ angles ]','[')
+        lst = read_section(lines,'[ angles ]','[')
         angles = []
         for line in lst:
             entries = line.split()
@@ -320,7 +320,7 @@ class TopolBase:
             if line.strip().startswith('[ dihedrals ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(lines[s:],'[ dihedrals ]','[')
+            lst = read_section(lines[s:],'[ dihedrals ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:4]]
@@ -344,7 +344,7 @@ class TopolBase:
             if line.strip().startswith('[ cmap ]'):
                 starts.append(i)
         for s in starts:
-            lst = readSection(lines[s:],'[ cmap ]','[')
+            lst = read_section(lines[s:],'[ cmap ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:5]]
@@ -372,7 +372,7 @@ class TopolBase:
         if starts:
             self.has_vsites3 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites3 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites3 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:4]]
@@ -397,7 +397,7 @@ class TopolBase:
         if starts:
             self.has_vsites4 = True
         for s in starts:
-            lst = readSection(lines[s:],'[ virtual_sites4 ]','[')
+            lst = read_section(lines[s:],'[ virtual_sites4 ]','[')
             for line in lst:
                 entr = line.split()
                 idx = [int(x) for x in entr[:5]]
@@ -874,8 +874,8 @@ class Topology( TopolBase ):
 	    bItp = True
         if assign_types:
             l = cpp_parse_file(topfile, cpp_defs = cpp_defs, cpp_path = cpp_path, itp = bItp, ffpath = ffpath)
-            l = kickOutComments(l,'#')
-            l = kickOutComments(l,';')
+            l = filter_comments(l,'#')
+            l = filter_comments(l,';')
             self.BondedParams = BondedParser( l )
             self.NBParams = NBParser( l, version, ff = ff )
             self.assign_fftypes()
@@ -954,8 +954,8 @@ class GAFFTopology( TopolBase ):
 
     def __read_atomtypes( self, filename):
         l = open(filename).readlines()
-        lst = readSection(l,'[ atomtypes ]','[')
-        lst = parseList('ssffsff',lst)
+        lst = read_section(l,'[ atomtypes ]','[')
+        lst = parse_list('ssffsff',lst)
         for line in lst:
             self.atomtypes[line[0]]=line[1:]
 
@@ -1171,7 +1171,7 @@ class MDP:
 
     def read(self, filename):
         lines = open(filename).readlines()
-        l = kickOutComments(lines,';')
+        l = filter_comments(lines,';')
         for line in l:
             entr = line.split('=')
             key = entr[0].strip()

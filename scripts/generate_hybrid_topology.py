@@ -7,7 +7,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2013 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2016 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -33,7 +33,7 @@ import sys, os, copy
 from pmx import *
 from pmx.forcefield2 import Topology
 from pmx.mutdb import read_mtp_entry
-from pmx.parser import kickOutComments
+from pmx.parser import filter_comments
 
 _perturbed_nucleotides = ['DAT','DAC','DAG','DCT','DCG','DCA',
                           'DTA','DTG','DTC','DGA','DGC','DGT',

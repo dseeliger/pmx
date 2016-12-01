@@ -169,15 +169,20 @@ def bb_super(mol1,mol2, use_orig_mc_coords = True):
         for atom1, atom2 in zip(atoms1, atoms2):
             atom2.x = atom1.x
 
-def nuc_super(mol1,mol2):
+def nuc_super(mol1,mol2,name1=None,name2=None):
     """ superpose mol2 on mol1"""
 
-    if mol1.resname[:2] in ['DT','DC','RC','RU']:
+    if name1==None:
+	name1 = mol1.resname[:2]
+    if name2==None:
+	name2 = mol2.resname[:2]
+
+    if name1 in ['DT','DC','RC','RU']:
         fit1_atoms = ['C1\'', 'C6','N1','C2','C5','N3']
     else:
         fit1_atoms = ['C1\'', 'C8','N9','C4','N7','C5']
 
-    if mol2.resname[:2] in ['DT','DC','RC','RU']:
+    if name2 in ['DT','DC','RC','RU']:
         fit2_atoms = ['C1\'', 'C6','N1','C2','C5','N3']
     else:
         fit2_atoms = ['C1\'', 'C8','N9','C4','N7','C5']

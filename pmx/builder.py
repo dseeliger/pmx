@@ -76,24 +76,24 @@ def add_bp(m, strand = None):
         atom.x[2]+=N*3.4
 
 def make_3ter(r):
-    # we add a proton at O5'
-
+    # we add a proton at O3'
     c3, o3 = r.fetchm(['C3\'', 'O3\''])
     v = array(o3.x)-array(c3.x)
     normed = v*1./linalg.norm(v)
-    newpos = array(o3.x) + normed*.1
+    newpos = array(o3.x) + normed#*.1
     a = Atom(name='H3T', x = newpos)
     r.append(a)
 
 def make_5ter(r):
     del r['O1P']
     del r['O2P']
+    # we add a proton at O5'
     a = r.fetch_atoms('P')[0]
     a.name = 'H5T'
     h5t, o5 = r.fetchm(['H5T', 'O5\''])
     v = array(h5t.x)-array(o5.x)
     normed = v*1./linalg.norm(v)
-    newpos = array(o5.x) + normed*.1
+    newpos = array(o5.x) + normed#*.1
     h5t.x = newpos
 
 

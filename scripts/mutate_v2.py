@@ -130,6 +130,15 @@ dna_names = {
     'DG3_DA3':'D3X',
     'DG3_DT3':'D3Y',
     'DG3_DC3':'D3Z',
+# False names to avoid an error
+    'DG3_DG3':'FOO',
+    'DC3_DC3':'FOO',
+    'DA3_DA3':'FOO',
+    'DT3_DT3':'FOO',
+    'DG5_DG5':'FOO',
+    'DC5_DC5':'FOO',
+    'DA5_DA5':'FOO',
+    'DT5_DT5':'FOO',
     }
 
 def check_residue_name( res ):

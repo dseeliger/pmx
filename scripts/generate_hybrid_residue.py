@@ -90,7 +90,131 @@ standard_pair_list_charmmD = [
     ('C','C'),
     ('O','O')
     ]
+
+standard_dna_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('H2\'2','H2\'2'),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
     
+standard_dna_5term_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('H2\'2','H2\'2'),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('H5T','H5T'),
+    ]
+
+standard_dna_3term_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('H2\'2','H2\'2'),
+    ('O3\'','O3\''),
+    ('H3T','H3T'),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
+
+standard_dna_pair_list_charmm = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'','H2\''),
+    ('H2\'\'','H2\'\''),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'','H5\''),
+    ('H5\'\'','H5\'\''),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
+    
+standard_dna_5term_pair_list_charmm = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'','H2\''),
+    ('H2\'\'','H2\'\''),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'','H5\''),
+    ('H5\'\'','H5\'\''),
+    ('H5T','H5T'),
+    ]
+
+standard_dna_3term_pair_list_charmm = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'','H2\''),
+    ('H2\'\'','H2\'\''),
+    ('O3\'','O3\''),
+    ('H3T','H3T'),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'','H5\''),
+    ('H5\'\'','H5\'\''),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
+
 use_standard_pair_list = {
     'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
     'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
@@ -104,6 +228,27 @@ use_standard_pair_list = {
     'HIS1': [ 'TRP','PHE','TYR'],
     'HISE': [ 'TRP','PHE','TYR'],
     'HISH': [ 'TRP','PHE','TYR']
+    }
+
+use_standard_dna_pair_list = {
+    'DA': [ 'DC','DT'],
+    'DG': [ 'DC','DT'],
+    'DC': [ 'DA','DG'],
+    'DT': [ 'DA','DG'],
+    }
+
+use_standard_dna_5term_pair_list = {
+    'DA5': [ 'DC5','DT5'],
+    'DG5': [ 'DC5','DT5'],
+    'DC5': [ 'DA5','DG5'],
+    'DT5': [ 'DA5','DG5'],
+    }
+
+use_standard_dna_3term_pair_list = {
+    'DA3': [ 'DC3','DT3'],
+    'DG3': [ 'DC3','DT3'],
+    'DC3': [ 'DA3','DG3'],
+    'DT3': [ 'DA3','DG3'],
     }
 
 res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP',
@@ -154,6 +299,40 @@ mol_branch = {
     'LYS':5,
     'LYN':5,
     }
+
+dna_names = {
+    'DA5_DT5':'D5K',
+    'DA5_DC5':'D5L',
+    'DA5_DG5':'D5M',
+    'DT5_DA5':'D5N',
+    'DT5_DC5':'D5O',
+    'DT5_DG5':'D5P',
+    'DC5_DA5':'D5R',
+    'DC5_DT5':'D5S',
+    'DC5_DG5':'D5T',
+    'DG5_DA5':'D5X',
+    'DG5_DT5':'D5Y',
+    'DG5_DC5':'D5Z',
+    'DA3_DT3':'D3K',
+    'DA3_DC3':'D3L',
+    'DA3_DG3':'D3M',
+    'DT3_DA3':'D3N',
+    'DT3_DC3':'D3O',
+    'DT3_DG3':'D3P',
+    'DC3_DA3':'D3R',
+    'DC3_DT3':'D3S',
+    'DC3_DG3':'D3T',
+    'DG3_DA3':'D3X',
+    'DG3_DT3':'D3Y',
+    'DG3_DC3':'D3Z',
+    }
+
+def dna_mutation_naming(aa1,aa2):
+    rr_name = 'D'+aa1[-1]+aa2[-1]
+    dict_key = aa1+'_'+aa2
+    if dict_key in dna_names.keys():
+	rr_name = dna_names[dict_key]
+    return(rr_name)
 
 def max_rotation(dihedrals):
     m = 0
@@ -248,6 +427,16 @@ def align_sidechains(r1, r2):
         phi = r1.get_chi(i+1, degree = True)
         r2.set_chi(i+1,phi)
 
+def rename_atoms_dna(m):
+    for atom in m.atoms:
+	aname = atom.name
+	if len(aname)==4:
+	    if (aname[0].isdigit()==True) or (aname[0]=='\''):
+	        first = aname[0]
+    	   	rest = aname[1:]
+		new = rest+first
+		atom.name = new
+
 def assign_rtp_entries( mol, rtp):
     entr = rtp[mol.resname]
     neigh=[]
@@ -263,7 +452,7 @@ def assign_rtp_entries( mol, rtp):
         atom.cgnr = atom_cgnr
     # bonds
     for a1, a2 in entr['bonds']:
-	#MS charmm uses next residue in bonds (+), amber pervious (-)
+	#MS charmm uses next residue in bonds (+), amber previous (-)
 	#MS also write rtp is affected now, since normally -C N is added
 	#MS charmm used C +N, problem is that you run into trouble on the
 	#MS termini
@@ -409,14 +598,16 @@ def merge_by_names( mol1, mol2 ):
 
     
 
-def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
+def make_pairs( mol1, mol2,bCharmm, bH2heavy=True, bDNA=False ):
     # make main chain + cb pairs
     print 'Making atom pairs.........'
     mol1.batoms = []
     merged_atoms1 = []
     merged_atoms2 = []
     atom_pairs = []
-    if bCharmm :
+    if bDNA:
+	mc_list = []
+    elif bCharmm :
         mc_list = ['N','CA','C','O','HN','HA','CB']
         gly_mc_list = ['N','CA','C','O','HN','1HA','2HA'] 
     else :
@@ -443,35 +634,49 @@ def make_pairs( mol1, mol2,bCharmm, bH2heavy=True ):
         atom_pairs.append( [at1, at2] )
     # now go for the rest of the side chain
 
+    if bDNA:
+	# identify atom morphes by distances
+	atoms1 = mol1.atoms
+	atoms2 = mol2.atoms
+        for at1 in atoms1:
+            print '-- Checking atom...', at1.name
+   	    aa, d = find_closest_atom( at1, atoms2, merged_atoms2, bH2heavy )
+	    if aa:
+                merged_atoms2.append( aa )
+                merged_atoms1.append( at1 )
+                atom_pairs.append( [ at1, aa] )
+	        print "here ",at1.name, aa.name
+    else:
+        for k in [1,2]:
+            print '-- Searching branch', k
+            done_branch = False
+            for i in range( 2, 8 ):
+                if done_branch: break
+                print '-- Searching order', i
 
-    for k in [1,2]:
-        print '-- Searching branch', k
-        done_branch = False
-        for i in range( 2, 8 ):
-            if done_branch: break
-            print '-- Searching order', i
+                atoms1 = get_atoms_by_order_and_branch( mol1, i, k, merged_atoms1 )
+                atoms2 = get_atoms_by_order_and_branch( mol2, i, k, merged_atoms2 )
+                for at1 in atoms1:
+                    if last_atom_is_morphed( at1, merged_atoms1 ):
+                        print '-- Checking atom...', at1.name
+                        candidates = []
+                        for at2 in atoms2:
+                            #if cmp_mol2_types( at1.atype, at2.atype):
+                            candidates.append( at2 )
+                        aa, d = find_closest_atom( at1, candidates, merged_atoms2, bH2heavy )
+                        if aa:
+                            merged_atoms2.append( aa )
+                            merged_atoms1.append( at1 )
+                            atom_pairs.append( [ at1, aa] )
+                            print '--> Define atom pair: ', tag(at1), '- >', tag(aa),  '(d = %4.2f A)' % d
+                        else:
+                           print 'No partner found for atom ', at1.name
+##                         print '-- done branch', k
+##                         done_branch = True
+##                         break # done with this branch
 
-            atoms1 = get_atoms_by_order_and_branch( mol1, i, k, merged_atoms1 )
-            atoms2 = get_atoms_by_order_and_branch( mol2, i, k, merged_atoms2 )
-            for at1 in atoms1:
-                if last_atom_is_morphed( at1, merged_atoms1 ):
-                    print '-- Checking atom...', at1.name
-                    candidates = []
-                    for at2 in atoms2:
-                        #if cmp_mol2_types( at1.atype, at2.atype):
-                        candidates.append( at2 )
-                    aa, d = find_closest_atom( at1, candidates, merged_atoms2, bH2heavy )
-                    if aa:
-                        merged_atoms2.append( aa )
-                        merged_atoms1.append( at1 )
-                        atom_pairs.append( [ at1, aa] )
-                        print '--> Define atom pair: ', tag(at1), '- >', tag(aa),  '(d = %4.2f A)' % d
-                    else:
-                       print 'No partner found for atom ', at1.name
-##                     print '-- done branch', k
-##                     done_branch = True
-##                     break # done with this branch
     for at1, at2 in atom_pairs:
+	print at1,at2
         at1.atomtypeB = at2.atomtype
         at1.qB = at2.q
         at1.mB = at2.m
@@ -1124,6 +1329,7 @@ options=[
    Option( "-align", "bool", True, "align side chains"),
    Option( "-cbeta", "bool", False, "morphing up to Cbeta atom"),
    Option( "-H2heavy", "bool", True, "allow morphing between hydrogens and heavy atoms"),
+   Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
 	]
 
 help_text = ('The script creates hybrid structure (.pdb) and topology database entries (.rtp, .mtp).',
@@ -1150,17 +1356,22 @@ cmdl = Commandline( sys.argv, options = options,
 		     fileoptions = files,
                      program_desc = help_text,
                      check_for_existing_files = False )
-if cmdl['-ft']=="charmm":
+if "charmm" in cmdl['-ft'].lower():
     bCharmm=True
 else :
     bCharmm=False
 align = cmdl['-align']
 cbeta = cmdl['-cbeta']
 bH2heavy = cmdl['-H2heavy']
+bDNA = cmdl['-dna']
 
 ffpath = get_ff_path(cmdl['-ff'])
 
-rtpfile=os.path.join(ffpath,'aminoacids.rtp')
+if bDNA:
+    rtpfile=os.path.join(ffpath,'dna.rtp')
+else:
+    rtpfile=os.path.join(ffpath,'aminoacids.rtp')
+
 m1 = Model(cmdl['-pdb1'])
 m2 = Model(cmdl['-pdb2'])
 nm1=cmdl['-pdb1']
@@ -1169,13 +1380,19 @@ aa1 = nm1.split('.')[0].split('_')[0]
 aa2 = nm2.split('.')[0].split('_')[0]
 
 rr_name = aa1+'2'+aa2
+if bDNA:
+    rr_name = dna_mutation_naming(aa1,aa2)
 
 m1.get_symbol()
 m2.get_symbol()
-m1.get_order()
-m2.get_order()
+if not bDNA:
+    m1.get_order()
+    m2.get_order()
 m1.rename_atoms()
 m2.rename_atoms()
+if bDNA:
+    rename_atoms_dna(m1)
+    rename_atoms_dna(m2)
 
 if bCharmm:
     rename_atoms_charmm(m1)
@@ -1186,8 +1403,9 @@ if bCharmm:
 r1 = m1.residues[0]
 r2 = m2.residues[0]
 
-r1.get_mol2_types()
-r2.get_mol2_types()
+if not bDNA:
+    r1.get_mol2_types()
+    r2.get_mol2_types()
 r1.get_real_resname()
 r2.get_real_resname()
 if(align):
@@ -1241,7 +1459,7 @@ elif resn2_dih=='CYSH':
 
 hash1 = {}
 hash2 = {}
-if align:
+if align and not bDNA:
     dihed1 = get_dihedrals(resn1_dih)
     dihed2 = get_dihedrals(resn2_dih)
     #dihed1 = get_dihedrals(m1.residues[0].resname)
@@ -1270,8 +1488,41 @@ assign_branch( r2 )
 ######################################################################################
 ############################### selecting pair lists #################################
 ######################################################################################
+######## nucleic acids ########
+if bDNA:
+    if (('5' in r1.resname) and ('5' not in r2.resname)) or \
+	(('3' in r1.resname) and ('3' not in r2.resname)) or \
+	(('5' in r2.resname) and ('5' not in r1.resname)) or \
+	(('3' in r2.resname) and ('3' not in r1.resname)):
+	print "Cannot mutate terminal nucleic acid to non-terminal or a terminal of the other end (e.g. 5' to 3')"
+	sys.exit(0)
+    if use_standard_dna_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_dna_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE"
+        if bCharmm :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_pair_list_charmm)
+        else :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_pair_list)
+    elif use_standard_dna_5term_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_dna_5term_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE: 5term"
+        if bCharmm :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_5term_pair_list_charmm)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_5term_pair_list)
+    elif use_standard_dna_3term_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_dna_3term_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE: 3term"
+        if bCharmm :
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_3term_pair_list_charmm)
+	else:
+            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_dna_3term_pair_list)
+    else:
+	print "PURINE <-> PURINE	PYRIMIDINE <-> PYRIMIDINE"
+        atom_pairs, dummies = make_pairs( r1, r2,bCharmm, bH2heavy, bDNA=True )
+####### amino acids #########
 #ring-res 2 ring-res
-if use_standard_pair_list.has_key( r1.resname ) and \
+elif use_standard_pair_list.has_key( r1.resname ) and \
    r2.resname in use_standard_pair_list[r1.resname]:
     print "ENTERED STANDARD"
     if bCharmm :
@@ -1342,6 +1593,7 @@ else:
 ######################################################################################
 ######################################################################################
 ######################################################################################
+#sys.exit(0)
 
 
 
@@ -1388,7 +1640,8 @@ dihi_list = generate_dihedral_entries(dih1, dih2, r1, atom_pairs)
 # impropers #
 ii_list = generate_improp_entries(im1, im2, r1)
 
-rot = make_rotations(r1,resn1_dih,resn2_dih)
+if not bDNA:
+    rot = make_rotations(r1,resn1_dih,resn2_dih)
 
 r1.set_resname( rr_name )
 rename_to_gmx( r1 )
@@ -1398,5 +1651,8 @@ write_rtp(rtp_out, r1,ii_list, dihi_list, bond_neigh,cmap)
 r1.write(rr_name+'.pdb')
 mtp_out = open(rr_name+'.mtp','w')
 
-write_mtp(mtp_out, r1, ii_list, rot, dihi_list)     
+if bDNA:
+    write_mtp(mtp_out, r1, ii_list, False, dihi_list)     
+else:
+    write_mtp(mtp_out, r1, ii_list, rot, dihi_list)     
 

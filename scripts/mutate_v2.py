@@ -105,6 +105,33 @@ ext_one_letter = {
     'VAL':'V',
 }
 
+dna_names = {
+    'DA5_DT5':'D5K',
+    'DA5_DC5':'D5L',
+    'DA5_DG5':'D5M',
+    'DT5_DA5':'D5N',
+    'DT5_DC5':'D5O',
+    'DT5_DG5':'D5P',
+    'DC5_DA5':'D5R',
+    'DC5_DT5':'D5S',
+    'DC5_DG5':'D5T',
+    'DG5_DA5':'D5X',
+    'DG5_DT5':'D5Y',
+    'DG5_DC5':'D5Z',
+    'DA3_DT3':'D3K',
+    'DA3_DC3':'D3L',
+    'DA3_DG3':'D3M',
+    'DT3_DA3':'D3N',
+    'DT3_DC3':'D3O',
+    'DT3_DG3':'D3P',
+    'DC3_DA3':'D3R',
+    'DC3_DT3':'D3S',
+    'DC3_DG3':'D3T',
+    'DG3_DA3':'D3X',
+    'DG3_DT3':'D3Y',
+    'DG3_DC3':'D3Z',
+    }
+
 def check_residue_name( res ):
     if res.resname == 'LYS':
         if res.has_atom( 'HZ3'):
@@ -135,12 +162,12 @@ def check_OPLS_LYS( res ):
     else:
 	return('O')
 
-def get_restype(r):
-    if r.resname in ['DA','DT','DC','DG']:
-        return 'DNA'
-    elif r.resname in ['RA','RU','RC','RG']:
-        return 'RNA'
-    else: return 'PEPTIDE'
+#def get_restype(r):
+#    if r.resname in ['DA','DT','DC','DG']:
+#        return 'DNA'
+#    elif r.resname in ['RA','RU','RC','RG']:
+#        return 'RNA'
+#    else: return 'PEPTIDE'
 
 def read_script(fn):
     return read_and_format(fn,"is")
@@ -214,13 +241,14 @@ def select_aa_mutation(residue,ffpath):
     aa = None
     ol = library._aacids_dic.keys()
     tl = library._aacids_dic.values()
-    if('amber' in ffpath):
-	    ol = library._aacids_ext_amber.keys()
-	    tl = library._aacids_ext_amber.values()
-    if('opls' in ffpath):
+    ffpathlower = ffpath.lower()
+    if('amber' in ffpathlower):
+            ol = library._aacids_ext_amber.keys()
+            tl = library._aacids_ext_amber.values()
+    if('opls' in ffpathlower):
             ol = library._aacids_ext_oplsaa.keys()
             tl = library._aacids_ext_oplsaa.values()+['ASPP','GLUP','LSN']
-    if('charmm' in ffpath):
+    if('charmm' in ffpathlower):
             ol = library._aacids_ext_charmm.keys()
             tl = library._aacids_ext_charmm.values()
 
@@ -307,16 +335,35 @@ def set_conformation(old_res, new_res, rotdic):
         if atom.name[0] != 'D':
             atom.x = old_res[atom.name].x
 
+def get_nuc_hybrid_resname(residue,new_nuc_name):
+    # identify if the nucleotide is terminal
+    for a in residue.atoms:
+	if a.name=='H3T':
+	    r1 = 'D'+residue.resname[1]+'3'
+	    r2 = 'D'+new_nuc_name+'3'
+	    dict_key = r1+'_'+r2
+	    hybrid_residue_name = dna_names[dict_key]
+	    return(hybrid_residue_name,residue.resname[1],new_nuc_name)
+	elif a.name=='H5T':
+	    r1 = 'D'+residue.resname[1]+'5'
+	    r2 = 'D'+new_nuc_name+'5'
+	    dict_key = r1+'_'+r2
+	    hybrid_residue_name = dna_names[dict_key]
+	    return(hybrid_residue_name,residue.resname[1],new_nuc_name)
+    hybrid_residue_name = residue.resname+new_nuc_name
+    return(hybrid_residue_name,residue.resname[1],new_nuc_name)
 
 def apply_nuc_mutation(m, residue, new_nuc_name, mtp_file):
 
-    hybrid_residue_name = residue.resname+new_nuc_name
+#    hybrid_residue_name = residue.resname+new_nuc_name
+    hybrid_residue_name,resname1,resname2 = get_nuc_hybrid_resname(residue,new_nuc_name)
     print 'log_> Residue to mutate: %d | %s | %s ' % ( residue.id, residue.resname, residue.chain_id)
     print 'log_> Mutation to apply: %s->%s' % (residue.resname[1], new_nuc_name)
     print 'log_> Hybrid residue name: %s' % hybrid_residue_name
     hybrid_res, bonds, imps, diheds, rotdic = get_hybrid_residue(hybrid_residue_name, mtp_file)
-    hybrid_res.nm2a()
-    nuc_super( residue, hybrid_res )
+#    hybrid_res.nm2a()
+    
+    nuc_super( residue, hybrid_res, resname1, resname2 )
     for atom in hybrid_res.atoms:
         if atom.name[0] != 'D':
             atom.x = residue[atom.name].x
@@ -413,26 +460,27 @@ def rename_atoms_to_gromacs( m ):
 
 
 def get_restype(r):
-    if r.resname in ['DA','DT','DC','DG']:
+    if r.resname in ['DA','DT','DC','DG','DA3','DT3','DC3','DG3','DA5','DT5','DC5','DG5','DAN','DTN','DCN','DGN']:
         return 'DNA'
     elif r.resname in ['RA','RU','RC','RG']:
         return 'RNA'
     else: return 'PEPTIDE'
 
 
-def get_ff_path( ff ):
+def get_ff_path( ff ): 
     ff_path = None
     if not os.path.isdir(ff):
-	### VG ###
-#        gmxlib = os.environ.get('GMXDATA')
-	gmxlib = os.environ.get('GMXLIB')
-	p = os.path.join(gmxlib,ff)
-	### VG ###
-        if not os.path.isdir(p):
-            print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
-        else:
+        gmxlib = os.environ.get('GMXLIB')
+        p = os.path.join(gmxlib,ff)
+        pff = p+'.ff'
+        if os.path.isdir(p):
             ff_path = p
-    else:
+        elif os.path.isdir(pff):
+            ff_path = pff
+        else:
+            print >>sys.stderr,' Error: forcefield path "%s" not found' % ff
+            sys.exit(0)
+    else: 
         ff_path = ff
     print 'Opening forcefield: %s' % ff_path
     return ff_path
@@ -442,6 +490,7 @@ def main(argv):
 
    options = [
         Option( "-resinfo", "bool", False, "print a 3-letter -> 1-letter residue list"),
+        Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
 ##         Option( "-r", "rvec", [1,2,3], "some string"),
 ##         Option( "-b", "bool", True, "bool"),
 ##         Option( "-r2", "rvec", [1,2,3], "some vector that does wonderful things and returns always segfaults")
@@ -492,6 +541,7 @@ def main(argv):
                        program_desc = help_text,
                        check_for_existing_files = False )
     
+   bDNA = cmdl['-dna']
 
    if cmdl['-resinfo']:
        print 'Residue dictionary:'
@@ -508,7 +558,10 @@ def main(argv):
 	infileB = cmdl['-fB']
 
    ffpath = get_ff_path(cmdl['-ff'])
-   mtp_file = os.path.join( ffpath,'mutres.mtp')
+   if bDNA:
+       mtp_file = os.path.join( ffpath,'mutres_dna.mtp')
+   else:
+       mtp_file = os.path.join( ffpath,'mutres.mtp')
    infile = cmdl['-f']
    m = Model(infile)
    rename_atoms_to_gromacs( m )

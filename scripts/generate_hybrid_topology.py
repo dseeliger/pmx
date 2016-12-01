@@ -39,6 +39,8 @@ _perturbed_nucleotides = ['DAT','DAC','DAG','DCT','DCG','DCA',
                           'DTA','DTG','DTC','DGA','DGC','DGT',
                           'RAU','RAC','RAG','RCU','RCG','RCA',
                           'RUA','RUG','RUC','RGA','RGC','RGU',
+			  'D5K','D5L','D5M','D5N','D5O','D5P','D5R','D5S','D5T','D5X','D5Y','D5Z',
+			  'D3K','D3L','D3M','D3N','D3O','D3P','D3R','D3S','D3T','D3X','D3Y','D3Z',
                           ]
 
 
@@ -821,6 +823,7 @@ def main(argv):
     options = [
         Option( "-split", "bool", False, "Write splitted topologies for vdw and q morphes"),
         Option( "-scale_mass", "bool", True, "scale_mass"),
+        Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
         ]
     
     files = [
@@ -865,7 +868,11 @@ def main(argv):
     top_file = cmdl['-p']
     out_file = cmdl['-o']
     log_file = cmdl['-log']
-    mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres.mtp')
+    bDNA = cmdl['-dna']
+    if bDNA:
+        mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres_dna.mtp')
+    else:
+        mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres.mtp')
     ffbonded_file = os.path.join( get_ff_path(cmdl['-ff']), 'ffbonded.itp')
     do_split = cmdl['-split']
     if cmdl.opt['-itp'].is_set:

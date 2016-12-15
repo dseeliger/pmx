@@ -108,7 +108,7 @@ class Chain(Atomselection):
                 self.atoms.append(atom)
                 atom.chain = self
                 
-    def insert_residue(self,pos,mol):
+    def insert_residue(self,pos,mol,newResNum=False):
         if self.model is not None:
             have_model = True
         else:
@@ -118,6 +118,8 @@ class Chain(Atomselection):
                   len(self.residues)
         else:
             mol.set_resid(-999)
+	    if newResNum != False:
+		mol.set_resid(newResNum)
             mol.set_chain_id(self.id)
             mol.chain = self
             if pos == len(self.residues):
@@ -132,7 +134,8 @@ class Chain(Atomselection):
             if have_model:
                 self.model.residues.insert(idx_model,mol)
                 self.residues.insert(pos,mol)
-                self.model.renumber_residues()
+		if newResNum==False:
+                    self.model.renumber_residues()
                 self.model.al_from_resl()
                 self.model.renumber_atoms()
                 self.al_from_resl()
@@ -142,7 +145,8 @@ class Chain(Atomselection):
                     self.residues.append(mol)
                 else:
                     self.residues.insert(pos,mol)
-                self.renumber_residues()
+		if newResNum==False:
+                    self.renumber_residues()
                 self.al_from_resl()
                 self.renumber_atoms()
         self.make_residue_tree()
@@ -199,7 +203,7 @@ class Chain(Atomselection):
             self.renumber_residues()
         self.make_residue_tree()
 
-    def remove_residue(self,residue):
+    def remove_residue(self,residue,bKeepResNum=False):
         idx = self.residues.index(residue)
         try:
             midx = self.model.residues.index(residue)
@@ -218,13 +222,17 @@ class Chain(Atomselection):
                 self.atoms.append(atom)
         if midx!=-1:
             self.model.renumber_atoms()
-            self.model.renumber_residues()
+	    if bKeepResNum==False:
+                self.model.renumber_residues()
         self.make_residue_tree()
         
-    def replace_residue(self,residue, new):
+    def replace_residue(self,residue, new, bKeepResNum=False):
         idx = self.residues.index(residue)
-        self.insert_residue(idx,new)
-        self.remove_residue(residue)
+	if bKeepResNum==True:
+            self.insert_residue(idx,new,residue.id)
+	else:
+	    self.insert_residue(idx,new)
+        self.remove_residue(residue,bKeepResNum)
 
     def remove_atom(self,atom):
         m = atom.molecule

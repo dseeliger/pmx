@@ -486,9 +486,9 @@ class Model(Atomselection):
         ch = self.chdic[chain_id]
         ch.insert_residue(pos,res)
 
-    def replace_residue(self,residue,new):
+    def replace_residue(self,residue,new,bKeepResNum=False):
         ch = residue.chain
-        ch.replace_residue(residue,new)
+        ch.replace_residue(residue,new,bKeepResNum)
         
     def insert_chain(self,pos,new_chain):
         if self.chdic.has_key(new_chain.id):

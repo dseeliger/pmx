@@ -406,7 +406,10 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file, bStrB, infileB):
     set_conformation(residue, hybrid_res, rotdic)
     if bStrB:
 	print "log_> Set Bstate geometry according to the provided structure"
-   	mB = Model(infileB)
+        if bRenumber==True:
+   	    mB = Model(infileB)
+        else:
+            mB = Model(infileB,bPDBTER=True,renumber_residues=False,renumber_atoms=False)
    	rename_atoms_to_gromacs( mB )
 	mB.nm2a()
 	residueB = mB.residues[residue.id-1] 
@@ -500,6 +503,7 @@ def main(argv):
    options = [
         Option( "-resinfo", "bool", False, "print a 3-letter -> 1-letter residue list"),
         Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
+        Option( "-renumber", "bool", True, "renumber residues and atoms; residue selection still considers renumbered version"),
 ##         Option( "-r", "rvec", [1,2,3], "some string"),
 ##         Option( "-b", "bool", True, "bool"),
 ##         Option( "-r2", "rvec", [1,2,3], "some vector that does wonderful things and returns always segfaults")
@@ -572,7 +576,16 @@ def main(argv):
    else:
        mtp_file = os.path.join( ffpath,'mutres.mtp')
    infile = cmdl['-f']
-   m = Model(infile)
+
+   bRenumber = True
+   if cmdl.opt['-renumber'].is_set:
+        bRenumber = cmdl['-renumber']
+
+   if bRenumber==True:
+       m = Model(infile)
+   else:
+       m = Model(infile,bPDBTER=True,renumber_residues=False,renumber_atoms=False)
+
    rename_atoms_to_gromacs( m )
 #   m.write('ll.pdb')
    m.nm2a()

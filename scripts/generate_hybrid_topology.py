@@ -824,7 +824,6 @@ def main(argv):
         Option( "-split", "bool", False, "Write splitted topologies for vdw and q morphes"),
         Option( "-scale_mass", "bool", True, "scale_mass"),
         Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
-        Option( "-renumber", "bool", True, "renumber residues and atoms; residue selection still considers renumbered version"),
         ]
     
     files = [
@@ -896,15 +895,7 @@ def main(argv):
 #    for i in topol.dihedrals:
 #        print  i[0].id,i[1].id,i[2].id,i[3].id
 
-    bRenumber = True
-    if cmdl.opt['-renumber'].is_set:
-        bRenumber = cmdl['-renumber']
-
-    if bRenumber==True:
-        m = Model( atoms = topol.atoms )     # create model with residue list
-    else:
-        m = Model( atoms = topol.atoms,renumber_residues=False,renumber_atoms=False )     # create model with residue list
-
+    m = Model( atoms = topol.atoms )     # create model with residue list
 
     topol.residues = m.residues          # use model residue list
     rlist, rdic = get_hybrid_residues( m, mtp_file, version = 'new')

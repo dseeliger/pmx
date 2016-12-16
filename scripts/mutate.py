@@ -321,7 +321,7 @@ def apply_nuc_mutation(m, residue, new_nuc_name, mtp_file):
     for atom in hybrid_res.atoms:
         if atom.name[0] != 'D':
             atom.x = residue[atom.name].x
-    m.replace_residue( residue, hybrid_res)
+    m.replace_residue( residue, hybrid_res, bKeepResNum=True)
     print 'log_> Inserted hybrid residue %s at position %d (chain %s)' %\
           (hybrid_res.resname, hybrid_res.id, hybrid_res.chain_id)
 
@@ -353,7 +353,7 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file):
     rename_back(hybrid_res,hash2)
     ## VG rename residue atoms back
 
-    m.replace_residue( residue, hybrid_res)
+    m.replace_residue( residue, hybrid_res, bKeepResNum=True)
     print 'log_> Inserted hybrid residue %s at position %d (chain %s)' %\
           (hybrid_res.resname, hybrid_res.id, hybrid_res.chain_id)
 
@@ -432,6 +432,7 @@ def main(argv):
 
    options = [
         Option( "-resinfo", "bool", False, "print a 3-letter -> 1-letter residue list"),
+        Option( "-renumber", "bool", True, "renumber residues and atoms; residue selection still considers renumbered version"),
 ##         Option( "-r", "rvec", [1,2,3], "some string"),
 ##         Option( "-b", "bool", True, "bool"),
 ##         Option( "-r2", "rvec", [1,2,3], "some vector that does wonderful things and returns always segfaults")
@@ -493,7 +494,16 @@ def main(argv):
    ffpath = get_ff_path(cmdl['-ff'])
    mtp_file = os.path.join( ffpath,'mutres.mtp')
    infile = cmdl['-f']
-   m = Model(infile)
+
+   bRenumber = True
+   if cmdl.opt['-renumber'].is_set:
+	bRenumber = cmdl['-renumber']
+   
+   if bRenumber==True:
+       m = Model(infile)
+   else:
+       m = Model(infile,bPDBTER=True,renumber_residues=False,renumber_atoms=False)
+
    rename_atoms_to_gromacs( m )
 #   m.write('ll.pdb')
    m.nm2a()

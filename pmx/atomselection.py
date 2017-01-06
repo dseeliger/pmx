@@ -59,7 +59,7 @@ class Atomselection:
         for key, val in kwargs.items():
             setattr(self,key,val)
 
-    def writePDB(self,fname,title="",nr=1,bPDBTER=False):
+    def writePDB(self,fname,title="",nr=1,bPDBTER=False,resnrlist=[]):
 	if nr > 1:
 	    fp = open(fname,'a')
 	else:
@@ -84,6 +84,10 @@ class Atomselection:
 	    if (bPDBTER==True) and (atom.chain_id != chainID):
 		print >>fp, 'TER'
 		chainID = atom.chain_id
+	    if (len(resnrlist)>0) and (atom.resnr not in resnrlist):
+		continue
+	    if atom.chain_id.startswith('pmx'):
+		atom.chain_id = ""
             if( len(atom.name) > 4): # too long atom name
                 foo = cp.deepcopy(atom)
                 foo.name = foo.name[:4]

@@ -83,7 +83,7 @@ ZZ       =  2
 class Model(Atomselection):
 
     def __init__(self, filename = None, pdbline = None, renumber_atoms=True,
-                 renumber_residues = True, bPDBTER= False, **kwargs):
+                 renumber_residues = True, bPDBTER= False, bNoNewID=True, **kwargs):
         
         Atomselection.__init__(self)
         self.title = 'PMX MODEL'
@@ -100,7 +100,7 @@ class Model(Atomselection):
             setattr(self,key,val)
 
         if filename is not None:
-            self.read(filename,bPDBTER)
+            self.read(filename,bPDBTER,bNoNewID)
         if pdbline is not None:
             self.__readPDB(pdbline = pdbline)
         if self.atoms:
@@ -328,7 +328,7 @@ class Model(Atomselection):
         self.unity  = 'A'
         return self
     
-    def __readPDBTER(self,fname=None, pdbline=None):
+    def __readPDBTER(self,fname=None, pdbline=None, bNoNewID=True):
         if pdbline:
             l = pdbline.split('\n')
         else:
@@ -358,6 +358,8 @@ class Model(Atomselection):
 				bFound=True
 				usedChainIDs = usedChainIDs+foo
 				chainID = foo
+				if bNoNewID==True:
+				    chainID = "pmx"+foo
 		    else:
 			chainID = a.chain_id
 			usedChainIDs = usedChainIDs + chainID
@@ -430,11 +432,11 @@ class Model(Atomselection):
         self.unity = 'nm'
         return self
 
-    def read(self, filename, bPDBTER=False ):
+    def read(self, filename, bPDBTER=False, bNoNewID=True ):
         ext = filename.split('.')[-1]
         if ext == 'pdb':
 	    if bPDBTER:
-                return self.__readPDBTER( filename )
+                return self.__readPDBTER( filename, None, bNoNewID )
 	    else:
                 return self.__readPDB( filename )
         elif ext == 'gro':

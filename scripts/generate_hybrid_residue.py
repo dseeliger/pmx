@@ -91,6 +91,71 @@ standard_pair_list_charmmD = [
     ('O','O')
     ]
 
+standard_rna_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('O2\'','O2\''),
+    ('HO\'2','HO\'2'),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
+    
+standard_rna_5term_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('O2\'','O2\''),
+    ('HO\'2','HO\'2'),
+    ('O3\'','O3\''),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('H5T','H5T'),
+    ]
+
+standard_rna_3term_pair_list = [
+    ('C1\'','C1\''),
+    ('C2\'','C2\''),
+    ('C3\'','C3\''),
+    ('C4\'','C4\''),
+    ('O4\'','O4\''),
+    ('C5\'','C5\''),
+    ('O5\'','O5\''),
+    ('H1\'','H1\''),
+    ('H2\'1','H2\'1'),
+    ('O2\'','O2\''),
+    ('HO\'2','HO\'2'),
+    ('O3\'','O3\''),
+    ('H3T','H3T'),
+    ('H3\'','H3\''),
+    ('H4\'','H4\''),
+    ('H5\'1','H5\'1'),
+    ('H5\'2','H5\'2'),
+    ('P','P'),
+    ('O1P','O1P'),
+    ('O2P','O2P'),
+    ]
+
 standard_dna_pair_list = [
     ('C1\'','C1\''),
     ('C2\'','C2\''),
@@ -230,6 +295,27 @@ use_standard_pair_list = {
     'HISH': [ 'TRP','PHE','TYR']
     }
 
+use_standard_rna_pair_list = {
+    'RA': [ 'RC','RU'],
+    'RG': [ 'RC','RU'],
+    'RC': [ 'RA','RG'],
+    'RU': [ 'RA','RG'],
+    }
+
+use_standard_rna_5term_pair_list = {
+    'RA5': [ 'RC5','RU5'],
+    'RG5': [ 'RC5','RU5'],
+    'RC5': [ 'RA5','RG5'],
+    'RU5': [ 'RA5','RG5'],
+    }
+
+use_standard_rna_3term_pair_list = {
+    'RA3': [ 'RC3','RU3'],
+    'RG3': [ 'RC3','RU3'],
+    'RC3': [ 'RA3','RG3'],
+    'RU3': [ 'RA3','RG3'],
+    }
+
 use_standard_dna_pair_list = {
     'DA': [ 'DC','DT'],
     'DG': [ 'DC','DT'],
@@ -334,6 +420,13 @@ def dna_mutation_naming(aa1,aa2):
 	rr_name = dna_names[dict_key]
     return(rr_name)
 
+def rna_mutation_naming(aa1,aa2):
+    rr_name = 'R'+aa1[-1]+aa2[-1]
+    dict_key = aa1+'_'+aa2
+    if dict_key in dna_names.keys():
+	rr_name = dna_names[dict_key]
+    return(rr_name)
+
 def max_rotation(dihedrals):
     m = 0
     for d in dihedrals:
@@ -428,6 +521,16 @@ def align_sidechains(r1, r2):
         r2.set_chi(i+1,phi)
 
 def rename_atoms_dna(m):
+    for atom in m.atoms:
+	aname = atom.name
+	if len(aname)==4:
+	    if (aname[0].isdigit()==True) or (aname[0]=='\''):
+	        first = aname[0]
+    	   	rest = aname[1:]
+		new = rest+first
+		atom.name = new
+
+def rename_atoms_rna(m):
     for atom in m.atoms:
 	aname = atom.name
 	if len(aname)==4:
@@ -598,14 +701,14 @@ def merge_by_names( mol1, mol2 ):
 
     
 
-def make_pairs( mol1, mol2,bCharmm, bH2heavy=True, bDNA=False ):
+def make_pairs( mol1, mol2,bCharmm, bH2heavy=True, bDNA=False, bRNA=False ):
     # make main chain + cb pairs
     print 'Making atom pairs.........'
     mol1.batoms = []
     merged_atoms1 = []
     merged_atoms2 = []
     atom_pairs = []
-    if bDNA:
+    if bDNA or bRNA:
 	mc_list = []
     elif bCharmm :
         mc_list = ['N','CA','C','O','HN','HA','CB']
@@ -634,7 +737,7 @@ def make_pairs( mol1, mol2,bCharmm, bH2heavy=True, bDNA=False ):
         atom_pairs.append( [at1, at2] )
     # now go for the rest of the side chain
 
-    if bDNA:
+    if bDNA or bRNA:
 	# identify atom morphes by distances
 	atoms1 = mol1.atoms
 	atoms2 = mol2.atoms
@@ -1330,6 +1433,7 @@ options=[
    Option( "-cbeta", "bool", False, "morphing up to Cbeta atom"),
    Option( "-H2heavy", "bool", True, "allow morphing between hydrogens and heavy atoms"),
    Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
+   Option( "-rna", "bool", False, "generate hybrid residue for the RNA nucleotides"),
 	]
 
 help_text = ('The script creates hybrid structure (.pdb) and topology database entries (.rtp, .mtp).',
@@ -1364,11 +1468,14 @@ align = cmdl['-align']
 cbeta = cmdl['-cbeta']
 bH2heavy = cmdl['-H2heavy']
 bDNA = cmdl['-dna']
+bRNA = cmdl['-rna']
 
 ffpath = get_ff_path(cmdl['-ff'])
 
 if bDNA:
     rtpfile=os.path.join(ffpath,'dna.rtp')
+elif bRNA:
+    rtpfile=os.path.join(ffpath,'rna.rtp')
 else:
     rtpfile=os.path.join(ffpath,'aminoacids.rtp')
 
@@ -1382,10 +1489,12 @@ aa2 = nm2.split('.')[0].split('_')[0]
 rr_name = aa1+'2'+aa2
 if bDNA:
     rr_name = dna_mutation_naming(aa1,aa2)
+elif bRNA:
+    rr_name = rna_mutation_naming(aa1,aa2)
 
 m1.get_symbol()
 m2.get_symbol()
-if not bDNA:
+if not (bDNA or bRNA):
     m1.get_order()
     m2.get_order()
 m1.rename_atoms()
@@ -1393,6 +1502,9 @@ m2.rename_atoms()
 if bDNA:
     rename_atoms_dna(m1)
     rename_atoms_dna(m2)
+elif bRNA:
+    rename_atoms_rna(m1)
+    rename_atoms_rna(m2)
 
 if bCharmm:
     rename_atoms_charmm(m1)
@@ -1403,7 +1515,7 @@ if bCharmm:
 r1 = m1.residues[0]
 r2 = m2.residues[0]
 
-if not bDNA:
+if not (bDNA or bRNA):
     r1.get_mol2_types()
     r2.get_mol2_types()
 r1.get_real_resname()
@@ -1459,7 +1571,7 @@ elif resn2_dih=='CYSH':
 
 hash1 = {}
 hash2 = {}
-if align and not bDNA:
+if align and not (bDNA or bRNA):
     dihed1 = get_dihedrals(resn1_dih)
     dihed2 = get_dihedrals(resn2_dih)
     #dihed1 = get_dihedrals(m1.residues[0].resname)
@@ -1482,7 +1594,6 @@ r2.write(cmdl['-opdb2'])
 
 assign_branch( r1 )
 assign_branch( r2 )
-
 
 
 ######################################################################################
@@ -1520,6 +1631,37 @@ if bDNA:
     else:
 	print "PURINE <-> PURINE	PYRIMIDINE <-> PYRIMIDINE"
         atom_pairs, dummies = make_pairs( r1, r2,bCharmm, bH2heavy, bDNA=True )
+elif bRNA:
+    if (('5' in r1.resname) and ('5' not in r2.resname)) or \
+	(('3' in r1.resname) and ('3' not in r2.resname)) or \
+	(('5' in r2.resname) and ('5' not in r1.resname)) or \
+	(('3' in r2.resname) and ('3' not in r1.resname)):
+	print "Cannot mutate terminal nucleic acid to non-terminal or a terminal of the other end (e.g. 5' to 3')"
+	sys.exit(0)
+    if use_standard_rna_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_rna_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE"
+#        if bCharmm :
+#            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_pair_list_charmm)
+#        else :
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_pair_list)
+    elif use_standard_rna_5term_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_rna_5term_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE: 5term"
+#        if bCharmm :
+#            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_5term_pair_list_charmm)
+#	else:
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_5term_pair_list)
+    elif use_standard_rna_3term_pair_list.has_key( r1.resname ) and \
+	r2.resname in use_standard_rna_3term_pair_list[r1.resname]:
+        print "PURINE <-> PYRIMIDINE: 3term"
+#        if bCharmm :
+#            atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_3term_pair_list_charmm)
+#	else:
+        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_rna_3term_pair_list)
+    else:
+	print "PURINE <-> PURINE	PYRIMIDINE <-> PYRIMIDINE"
+        atom_pairs, dummies = make_pairs( r1, r2,bCharmm, bH2heavy, bDNA=False, bRNA=True )
 ####### amino acids #########
 #ring-res 2 ring-res
 elif use_standard_pair_list.has_key( r1.resname ) and \
@@ -1640,7 +1782,7 @@ dihi_list = generate_dihedral_entries(dih1, dih2, r1, atom_pairs)
 # impropers #
 ii_list = generate_improp_entries(im1, im2, r1)
 
-if not bDNA:
+if not (bDNA or bRNA):
     rot = make_rotations(r1,resn1_dih,resn2_dih)
 
 r1.set_resname( rr_name )
@@ -1651,7 +1793,7 @@ write_rtp(rtp_out, r1,ii_list, dihi_list, bond_neigh,cmap)
 r1.write(rr_name+'.pdb')
 mtp_out = open(rr_name+'.mtp','w')
 
-if bDNA:
+if bDNA or bRNA:
     write_mtp(mtp_out, r1, ii_list, False, dihi_list)     
 else:
     write_mtp(mtp_out, r1, ii_list, rot, dihi_list)     

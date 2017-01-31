@@ -41,6 +41,8 @@ _perturbed_nucleotides = ['DAT','DAC','DAG','DCT','DCG','DCA',
                           'RUA','RUG','RUC','RGA','RGC','RGU',
 			  'D5K','D5L','D5M','D5N','D5O','D5P','D5R','D5S','D5T','D5X','D5Y','D5Z',
 			  'D3K','D3L','D3M','D3N','D3O','D3P','D3R','D3S','D3T','D3X','D3Y','D3Z',
+			  'R5K','R5L','R5M','R5N','R5O','R5P','R5R','R5S','R5T','R5X','R5Y','R5Z',
+			  'R3K','R3L','R3M','R3N','R3O','R3P','R3R','R3S','R3T','R3X','R3Y','R3Z',
                           ]
 
 
@@ -757,7 +759,7 @@ def get_hybrid_residues( m, mtp_file, version ):
     return rlist, rdic
 
 
-def __add_extra_DNA_impropers(  topol, rlist, func_type, stateA, stateB ):
+def __add_extra_DNA_RNA_impropers(  topol, rlist, func_type, stateA, stateB ):
     extra_impropers = []
     for r in rlist:
         if r.resname in  ['DAT','DAC','DGC','DGT','RAU','RAC','RGC','RGU']:
@@ -824,6 +826,7 @@ def main(argv):
         Option( "-split", "bool", False, "Write splitted topologies for vdw and q morphes"),
         Option( "-scale_mass", "bool", True, "scale_mass"),
         Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
+        Option( "-rna", "bool", False, "generate hybrid residue for the RNA nucleotides"),
         ]
     
     files = [
@@ -869,8 +872,11 @@ def main(argv):
     out_file = cmdl['-o']
     log_file = cmdl['-log']
     bDNA = cmdl['-dna']
+    bRNA = cmdl['-rna']
     if bDNA:
         mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres_dna.mtp')
+    elif bRNA:
+        mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres_rna.mtp')
     else:
         mtp_file = os.path.join( get_ff_path(cmdl['-ff']), 'mutres.mtp')
     ffbonded_file = os.path.join( get_ff_path(cmdl['-ff']), 'ffbonded.itp')
@@ -916,7 +922,7 @@ def main(argv):
     find_predefined_dihedrals(topol,rlist,rdic,ffbonded_file,dih_predef_default, cmdl['-ff'])
     find_dihedral_entries( topol, rlist, rdic, dih_predef_default )
 
-    __add_extra_DNA_impropers(topol, rlist,   1, [180,40,2],[180,40,2])
+    __add_extra_DNA_RNA_impropers(topol, rlist,   1, [180,40,2],[180,40,2])
     qA, qB = sum_charge_of_states( rlist )
     qA_mem = copy.deepcopy( qA )
     qB_mem = copy.deepcopy( qB )

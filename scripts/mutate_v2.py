@@ -141,6 +141,42 @@ dna_names = {
     'DT5_DT5':'FOO',
     }
 
+rna_names = {
+    'RA5_RU5':'R5K',
+    'RA5_RC5':'R5L',
+    'RA5_RG5':'R5M',
+    'RU5_RA5':'R5N',
+    'RU5_RC5':'R5O',
+    'RU5_RG5':'R5P',
+    'RC5_RA5':'R5R',
+    'RC5_RU5':'R5S',
+    'RC5_RG5':'R5T',
+    'RG5_RA5':'R5X',
+    'RG5_RU5':'R5Y',
+    'RG5_RC5':'R5Z',
+    'RA3_RU3':'R3K',
+    'RA3_RC3':'R3L',
+    'RA3_RG3':'R3M',
+    'RU3_RA3':'R3N',
+    'RU3_RC3':'R3O',
+    'RU3_RG3':'R3P',
+    'RC3_RA3':'R3R',
+    'RC3_RU3':'R3S',
+    'RC3_RG3':'R3T',
+    'RG3_RA3':'R3X',
+    'RG3_RU3':'R3Y',
+    'RG3_RC3':'R3Z',
+# False names to avoid an error
+    'RG3_RG3':'FOO',
+    'RC3_RC3':'FOO',
+    'RA3_RA3':'FOO',
+    'RU3_RU3':'FOO',
+    'RG5_RG5':'FOO',
+    'RC5_RC5':'FOO',
+    'RA5_RA5':'FOO',
+    'RU5_RU5':'FOO',
+    }
+
 def check_residue_name( res ):
     if res.resname == 'LYS':
         if res.has_atom( 'HZ3'):
@@ -344,28 +380,38 @@ def set_conformation(old_res, new_res, rotdic):
         if atom.name[0] != 'D':
             atom.x = old_res[atom.name].x
 
-def get_nuc_hybrid_resname(residue,new_nuc_name):
+def get_nuc_hybrid_resname(residue,new_nuc_name,bRNA=False):
+    firstLetter = 'D'
+    if bRNA:
+	firstLetter = 'R'    
+
     # identify if the nucleotide is terminal
     for a in residue.atoms:
 	if a.name=='H3T':
-	    r1 = 'D'+residue.resname[1]+'3'
-	    r2 = 'D'+new_nuc_name+'3'
+	    r1 = firstLetter+residue.resname[1]+'3'
+	    r2 = firstLetter+new_nuc_name+'3'
 	    dict_key = r1+'_'+r2
-	    hybrid_residue_name = dna_names[dict_key]
+	    if bRNA:
+	        hybrid_residue_name = rna_names[dict_key]
+	    else:
+	        hybrid_residue_name = dna_names[dict_key]
 	    return(hybrid_residue_name,residue.resname[1],new_nuc_name)
 	elif a.name=='H5T':
-	    r1 = 'D'+residue.resname[1]+'5'
-	    r2 = 'D'+new_nuc_name+'5'
+	    r1 = firstLetter+residue.resname[1]+'5'
+	    r2 = firstLetter+new_nuc_name+'5'
 	    dict_key = r1+'_'+r2
-	    hybrid_residue_name = dna_names[dict_key]
+	    if bRNA:
+	        hybrid_residue_name = rna_names[dict_key]
+	    else:
+	        hybrid_residue_name = dna_names[dict_key]
 	    return(hybrid_residue_name,residue.resname[1],new_nuc_name)
     hybrid_residue_name = residue.resname+new_nuc_name
     return(hybrid_residue_name,residue.resname[1],new_nuc_name)
 
-def apply_nuc_mutation(m, residue, new_nuc_name, mtp_file):
+def apply_nuc_mutation(m, residue, new_nuc_name, mtp_file, bRNA=False):
 
 #    hybrid_residue_name = residue.resname+new_nuc_name
-    hybrid_residue_name,resname1,resname2 = get_nuc_hybrid_resname(residue,new_nuc_name)
+    hybrid_residue_name,resname1,resname2 = get_nuc_hybrid_resname(residue,new_nuc_name,bRNA)
     print 'log_> Residue to mutate: %d | %s | %s ' % ( residue.id, residue.resname, residue.chain_id)
     print 'log_> Mutation to apply: %s->%s' % (residue.resname[1], new_nuc_name)
     print 'log_> Hybrid residue name: %s' % hybrid_residue_name
@@ -425,7 +471,7 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file, bStrB, infileB):
           (hybrid_res.resname, hybrid_res.id, hybrid_res.chain_id)
 
 
-def apply_mutation(m, mut, mtp_file, bStrB, infileB):
+def apply_mutation(m, mut, mtp_file, bStrB, infileB, bRNA):
     residue_id = mut[0]
     if not check_residue_range(m, residue_id):
         raise RangeCheckError(residue_id)
@@ -435,7 +481,7 @@ def apply_mutation(m, mut, mtp_file, bStrB, infileB):
         apply_aa_mutation(m, residue, new_aa_name, mtp_file, bStrB, infileB)
     elif get_restype(residue) in ['DNA','RNA']:
         new_nuc_name = mut[1].upper()
-        apply_nuc_mutation(m, residue, new_nuc_name, mtp_file)
+        apply_nuc_mutation(m, residue, new_nuc_name, mtp_file, bRNA)
         
     
 def get_hybrid_residue(residue_name, mtp_file = 'ffamber99sb.mtp'):
@@ -469,9 +515,9 @@ def rename_atoms_to_gromacs( m ):
 
 
 def get_restype(r):
-    if r.resname in ['DA','DT','DC','DG','DA3','DT3','DC3','DG3','DA5','DT5','DC5','DG5','DAN','DTN','DCN','DGN']:
+    if r.resname in ['DA','DT','DC','DG','DA3','DT3','DC3','DG3','DA5','DT5','DC5','DG5']:
         return 'DNA'
-    elif r.resname in ['RA','RU','RC','RG']:
+    elif r.resname in ['RA','RU','RC','RG','RA3','RU3','RC3','RG3','RA5','RU5','RC5','RG5']:
         return 'RNA'
     else: return 'PEPTIDE'
 
@@ -500,6 +546,7 @@ def main(argv):
    options = [
         Option( "-resinfo", "bool", False, "print a 3-letter -> 1-letter residue list"),
         Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
+        Option( "-rna", "bool", False, "generate hybrid residue for the RNA nucleotides"),
 ##         Option( "-r", "rvec", [1,2,3], "some string"),
 ##         Option( "-b", "bool", True, "bool"),
 ##         Option( "-r2", "rvec", [1,2,3], "some vector that does wonderful things and returns always segfaults")
@@ -551,6 +598,7 @@ def main(argv):
                        check_for_existing_files = False )
     
    bDNA = cmdl['-dna']
+   bRNA = cmdl['-rna']
 
    if cmdl['-resinfo']:
        print 'Residue dictionary:'
@@ -569,6 +617,8 @@ def main(argv):
    ffpath = get_ff_path(cmdl['-ff'])
    if bDNA:
        mtp_file = os.path.join( ffpath,'mutres_dna.mtp')
+   elif bRNA:
+       mtp_file = os.path.join( ffpath,'mutres_rna.mtp')
    else:
        mtp_file = os.path.join( ffpath,'mutres.mtp')
    infile = cmdl['-f']
@@ -584,12 +634,12 @@ def main(argv):
        mutations_to_make = read_script( cmdl['-script'] )
        for mut in mutations_to_make:
 	   check_residue_name( m.residues[ mut[0]-1 ] )
-           apply_mutation( m, mut, mtp_file, bStrB, infileB )
+           apply_mutation( m, mut, mtp_file, bStrB, infileB, bRNA )
    else:
        do_more = True
        while do_more:
            mutation = interactive_selection(m,ffpath)
-           apply_mutation( m, mutation, mtp_file, bStrB, infileB )
+           apply_mutation( m, mutation, mtp_file, bStrB, infileB, bRNA )
            if not ask_next(): do_more = False
        
 

@@ -62,13 +62,17 @@ def cross(x,y):
 
 
     
-def add_bp(m, strand = None):
+def add_bp(m, strand = None, bRNA=False):
     if strand:
         N = len(strand)/2 
+	if bRNA:
+	    N = len(strand)
     else:
         N = 1
 #    print N, len(strand)
     r = Rotation([0,0,0],[0,0,1])
+    phi = 0.0
+#    if not bRNA:
     phi = N*36*pi/180.
     for atom in m.atoms:
         atom.x = r.apply(atom.x, phi)
@@ -141,6 +145,38 @@ def build_dna_strand(seq):
         make_3ter(r)
     return mm
 
+def build_rna_strand(seq):
+
+    dic = pmx_data_file('rna.pkl')
+
+    seq = seq.lower()
+    ss = []
+    for x in seq:
+        ss.append(x)
+    new = []
+    new.extend(dic[ss[0]].residues)
+    ss.pop(0)
+    while ss:
+        newbp = ss.pop(0)
+        newm = dic[newbp].copy()
+        add_bp(newm, new, True)
+        new.extend(newm.residues)
+    chA = []
+    a = 1
+    for r in new:
+        r.set_resid(a)
+        a+=1
+        chA.append(r)
+    mm = Model(residues=chA)
+    mm.chains[0].set_chain_id('A')
+    for chain in mm.chains:
+        r = chain.residues[0]
+        r.set_resname(r.resname+'5')
+        make_5ter(r)
+        r = chain.residues[-1]
+        r.set_resname(r.resname+'3')
+        make_3ter(r)
+    return mm
 
 def get_fragments():
     dic = pmx_data_file('fragments.pkl')

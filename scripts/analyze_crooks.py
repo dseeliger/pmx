@@ -400,6 +400,38 @@ def BAR_err_boot(res_ab, res_ba, nruns, T=298):
     err = std(res)
     return(err)
 
+def BAR_conv(dG, wf, wb, T):
+    wf = np.array(wf)
+    wb = np.array(wb)
+    kb=0.00831447215
+    beta = 1./(kb*T)
+    N = float(len(wf)+len(wb))
+    ratio_alpha = float(len(wf))/N
+    ratio_beta = float(len(wb))/N
+    bf = 1.0/(ratio_beta + ratio_alpha*np.exp(beta*(wf-dG)))
+    tf = 1.0/(ratio_alpha + ratio_beta*np.exp(beta*(-wb+dG)))
+    Ua = (np.mean(tf) + np.mean(bf))/2.0
+    Ua2 = ratio_alpha*np.mean(np.power(tf,2)) + ratio_beta*np.mean(np.power(bf,2))
+    a = (Ua-Ua2)/Ua
+    return(a)
+
+def BAR_conv_boot(bar_result, res_ab, res_ba, nruns, T):
+    res = []
+    nf = int(len(res_ab))
+    nr = int(len(res_ba))
+    for k in range(nruns):
+        sys.stdout.write('\rConvergence error bootstrap: iteration %s/%s' % (k,nruns) )
+        sys.stdout.flush()
+        for i in range(nf):
+            valA = [choice(res_ab) for _ in xrange(nf)]
+        for i in range(nr):
+            valB = [choice(res_ab) for _ in xrange(nr)]
+        foo = BAR_conv(bar_result, valA, valB, T)
+        res.append(foo)
+    sys.stdout.write('\n')
+    err = std(res)
+    return(err)
+
 def gauss_func( A, mean, dev, x):
     x = array(x)
     y = A*exp(-(((x-mean)**2)/(2.0*(dev**2))))
@@ -541,6 +573,7 @@ def main(argv):
         Option( "-integ_only", "bool", False, "Do integration only. Skip analysis."),
         Option( "-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option( "-jarz", "bool", False, "Jarzynski estimation"),
+        Option( "-plot", "bool", True, "Plot work histograms"),
         Option( "-nruns", "int", 100, "number of runs for bootstrapped BAR error"),
         ]
     
@@ -684,9 +717,13 @@ def main(argv):
     tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar_result)
     bar_err = BAR_err( bar_result, res_ab, res_ba, T)
     bar_err_boot = BAR_err_boot( res_ab, res_ba, cmdl['-nruns'], T)
+    bar_convergence = BAR_conv(bar_result, res_ab, res_ba, T)
+    bar_convergence_boot = BAR_conv_boot(bar_result, res_ab, res_ba, cmdl['-nruns'], T)
     
     tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
     tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
+    tee(out, '  RESULT: convergence (BAR ) = %8.4f' % bar_convergence)
+    tee(out, '  RESULT: convergence_error_bootstrap (BAR ) = %8.4f' % bar_convergence_boot)
     tee(out, ' ------------------------------------------------------')
     diff = abs( cgi_result - bar_result )
     mean = (cgi_result+bar_result)*.5
@@ -713,9 +750,10 @@ def main(argv):
     	tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean )
 	tee(out, ' ------------------------------------------------------')
 
-    print '\n   Plotting histograms......'
-    make_plot( cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'] )
-    make_W_over_time_plot( cmdl['-W_over_t'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'])
+    if cmdl['-plot']:    
+        print '\n   Plotting histograms......'
+        make_plot( cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'] )
+        make_W_over_time_plot( cmdl['-W_over_t'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'])
 
     tee(out, '\n   ......done...........\n')
     

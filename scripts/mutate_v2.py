@@ -610,7 +610,7 @@ def main(argv):
 
    bStrB = False
    infile = ''
-   if cmdl['-fB']:
+   if cmdl.opt['-fB'].is_set:
 	bStrB = True
 	infileB = cmdl['-fB']
 

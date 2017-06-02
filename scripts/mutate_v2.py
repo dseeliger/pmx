@@ -609,7 +609,7 @@ def main(argv):
        sys.exit(0)
 
    bStrB = False
-   infile = ''
+   infileB = ''
    if cmdl.opt['-fB'].is_set:
 	bStrB = True
 	infileB = cmdl['-fB']

@@ -57,7 +57,7 @@ rcParams.update(params)
 def tee( fp, s ):
     print >>fp, s
     print s
-    
+
 def cgi_error_from_mean(nruns, mu1, sig1, n1, mu2, sig2, n2):
     iseq = []
 
@@ -137,7 +137,7 @@ def process_dgdl( fn, ndata = -1, lambda0 = 0 ):
             except:
                 print ' !! Skipping %s ' % (fn )
                 return None, None
-                
+
     if ndata != -1 and len(r) != ndata:
         try:
             print ' !! Skipping %s ( read %d data points, should be %d )' % (fn, len(r), ndata )
@@ -147,7 +147,8 @@ def process_dgdl( fn, ndata = -1, lambda0 = 0 ):
     # convert time to lambda
     ndata = len( r )
     dlambda = 1./ float( ndata )
-    if lambda0 == 1: dlambda*=-1
+    if lambda0 == 1:
+        dlambda*=-1
 #    if debug:
 #        print 'dlambda = ', dlambda
     data = []
@@ -156,6 +157,7 @@ def process_dgdl( fn, ndata = -1, lambda0 = 0 ):
         data.append( [ lambda0+i*dlambda, dgdl] )
     x = map( lambda a: a[0], data )
     y = map( lambda a: a[1], data )
+
     if lambda0 == 1:
         x.reverse()
         y.reverse()
@@ -179,8 +181,8 @@ def check_first_dgdl( fn, lambda0 ):
     print '\t\t Length of trajectory: %8.3f ps' % r[-1][0]
     print '\t\t Delta lambda: %8.5f' % dlambda
     print '---------------------------------------------'
-    
-def work_from_crooks( lst, lambda0 ):
+
+def work_from_crooks( lst, lambda0 , reverseB=False):
     print '\nProcessing simulation data......'
     output_data = []
     check_first_dgdl( lst[0], lambda0 )
@@ -192,7 +194,11 @@ def work_from_crooks( lst, lambda0 ):
         if res is not None:
             results.append( res )
             output_data.append( [ f, res] )
-    print
+
+    if reverseB is True:
+        results = [x*(-1) for x in results]
+        output_data = [[x,y*(-1)] for x,y in output_data]
+
     return results, output_data
 
 def data_to_gauss( data ):
@@ -220,7 +226,7 @@ def gauss_intersection( g1, g2 ):
         return False # we do not take the intersection
 
 def ksref():
-    
+
     f = 1
     potent = 10000
     lamb = arange(0.25,2.5,.001)
@@ -302,7 +308,7 @@ def dump_integ_file( fn, data):
     for fn, w in data:
         print >>fp, fn, w
     fp.close()
-    
+
 def Jarz(res, c=1.0, T=298):
     kb=0.00831447215
     beta = 1./(kb*T)
@@ -339,14 +345,14 @@ def Jarz_err_boot(res, nruns, c=1.0, T=298):
 def BAR(res_ab, res_ba, T = 298):
     kb=0.00831447215
     beta = 1./(kb*T)
-    
+
     nf = float(len(res_ab))
     nr = float(len(res_ba))
     M = kb*T*log(nf/nr)
-    
+
     res_ab = array(res_ab)
     res_ba = array(res_ba)
-    
+
     def func(x, res_ab, res_ba):
         sf = 0
         for v in res_ab:
@@ -442,7 +448,7 @@ def make_plot( fname, data1, data2, result, err, nbins, dpi ):
     figure( figsize = (8, 6) )
     mf, devf, Af = data_to_gauss( data1 )
     mb, devb, Ab = data_to_gauss( data2 )
-    
+
     maxi = max( data1+data2 )
     mini = min( data1+data2 )
     n1, bins1, patches1 = hist(data1, range = (mini,maxi),bins=nbins, facecolor='blue', alpha=0.75, normed=True, label='0->1')
@@ -459,10 +465,10 @@ def make_plot( fname, data1, data2, result, err, nbins, dpi ):
     x = arange( mini, maxi, .5 )
     y1 = gauss_func( Af, mf, devf, x )
     y2 = gauss_func( Ab, mb, devb, x )
-    
+
     plot(x, y1, 'b--', linewidth=2)
     plot(x, y2, 'r--', linewidth=2)
-    
+
     size = max( [max(y1), max(y2)] )
     res_x = [result, result ]
     res_y = [0, size*1.2 ]
@@ -473,7 +479,7 @@ def make_plot( fname, data1, data2, result, err, nbins, dpi ):
     for val in xl.spines.values():
         val.set_lw(2)
     savefig( fname, dpi= dpi )
-        
+
 
 def make_W_over_time_plot( fname, data1, data2, result, err, nbins, dpi):
 
@@ -484,7 +490,7 @@ def make_W_over_time_plot( fname, data1, data2, result, err, nbins, dpi):
     else: x = x2
     mf, devf, Af = data_to_gauss( data1 )
     mb, devb, Ab = data_to_gauss( data2 )
-    
+
     maxi = max( data1+data2 )
     mini = min( data1+data2 )
 
@@ -492,9 +498,9 @@ def make_W_over_time_plot( fname, data1, data2, result, err, nbins, dpi):
     sm2 = smooth( array(data2) )
     subplot(1,2,1)
     plot(x1,data1,'g-',linewidth=2 ,label="Forward (0->1)", alpha=.3)
-    plot(x1,sm1,'g-',linewidth=3) 
+    plot(x1,sm1,'g-',linewidth=3)
     plot(x2,data2,'b-',linewidth=2 ,label="Backward (1->0)", alpha=.3)
-    plot(x2,sm2,'b-',linewidth=3) 
+    plot(x2,sm2,'b-',linewidth=3)
     legend(shadow=True, fancybox = True, loc='upper center')
     ylabel(r'W [kJ/mol]', fontsize = 20)
     xlabel(r'# Snapshot', fontsize = 20)
@@ -526,7 +532,7 @@ def make_W_over_time_plot( fname, data1, data2, result, err, nbins, dpi):
         val.set_lw(2)
     subplots_adjust(wspace=0.0, hspace = 0.1)
     savefig(fname, dpi=dpi)
-    
+
 def smooth(x,window_len=11,window='hanning'):
 
     if x.ndim != 1:
@@ -576,7 +582,7 @@ def main(argv):
         Option( "-plot", "bool", True, "Plot work histograms"),
         Option( "-nruns", "int", 100, "number of runs for bootstrapped BAR error"),
         ]
-    
+
     files = [
         FileOption("-pa", "r/m",["xvg"],"dgdl.xvg", "paths to 0->1 runs"),
         FileOption("-pb", "r/m",["xvg"],"dgdl.xvg", "paths to 1->0 runs"),
@@ -587,18 +593,18 @@ def main(argv):
         FileOption("-i1", "r/m/o",["dat"],"integ1.dat", "read integrated W (1->0)"),
         FileOption("-o0", "w",["dat"],"integ0.dat", "write integrated W (0->1)"),
         FileOption("-o1", "w",["dat"],"integ1.dat", "write integrated W (1->0)"),
-        
+
         ]
-    
-    
-    
+
+
+
     help_text = ('Calculates free energies from fast growth  ',
                  'thermodynamic integration runs.',
                  'First method: Crooks-Gaussian Intersection (CGI)',
                  'Second method: Benett Acceptance Ratio (BAR)'
                  )
 
-    
+
     cmdl = Commandline( argv, options = options,
                         fileoptions = files,
                         program_desc = help_text,
@@ -610,14 +616,19 @@ def main(argv):
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER') )
     print >>out, "# command = %s" % ' '.join(argv)
     print >>out, "#------------------------------------------------"
-    
-    if not cmdl.opt['-i0'].is_set: 
+
+    if cmdl['-reverseB']:
+        reverseB = True
+    else:
+        reverseB = False
+
+    if not cmdl.opt['-i0'].is_set:
         run_ab = cmdl['-pa']
         run_ba = cmdl['-pb']
         run_ab = sort_file_list( run_ab )
         run_ba = sort_file_list( run_ba )
         res_ab, ab_data = work_from_crooks( run_ab, lambda0 = 0 )
-        res_ba, ba_data = work_from_crooks( run_ba, lambda0 = 1 )
+        res_ba, ba_data = work_from_crooks( run_ba, lambda0 = 1 , reverseB=reverseB)
         dump_integ_file( cmdl['-o0'], ab_data)
         dump_integ_file( cmdl['-o1'], ba_data)
     else:
@@ -633,7 +644,7 @@ def main(argv):
     if cmdl['-integ_only']:
         print '\n    Integration done. Skipping analysis.'
         print '\n    ......done........\n'
-        sys.exit(0) 
+        sys.exit(0)
 
     firstA = 0
     lastA = len(res_ab)
@@ -661,14 +672,14 @@ def main(argv):
         tee(out, ' select random subset of trajectories: %d' % ntraj )
         res_ab = select_random_subset(res_ab, ntraj)
         res_ba = select_random_subset(res_ba, ntraj)
-        
+
     mf, devf, Af = data_to_gauss( res_ab )
     mb, devb, Ab = data_to_gauss( res_ba )
     tee(out, ' --------------------------------------------------------')
     tee(out, '             ANALYSIS: NUMBER OF TRAJECTORIES:')
     tee(out, '               0->1 : %d' % len(res_ab))
     tee(out, '               1->0 : %d' % len(res_ba))
-    
+
     tee(out, ' --------------------------------------------------------')
     tee(out, '             ANALYSIS: Crooks-Gaussian Intersection     ')
     tee(out, ' --------------------------------------------------------')
@@ -679,19 +690,19 @@ def main(argv):
         tee(out, '  Running KS-test ....')
         q0, lam00, check0, bOk0 = ks(res_ab)
         q1, lam01, check1, bOk1 = ks(res_ba)
-    
+
         tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
         if bOk0:
             tee(out, '             ---> KS-Test Ok')
-        else: 
+        else:
             tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q0, check0 ))
         tee(out, '  Backward : gaussian quality = %3.2f' % q1)
         if bOk1:
             tee(out, '             ---> KS-Test Ok')
-        else: 
+        else:
             tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' %( q1, check1 ))
-       
-   
+
+
 
     tee(out, '  Calculating Intersection...')
     cgi_result = gauss_intersection( [Af, mf, devf], [Ab, mb, devb ] )
@@ -719,7 +730,7 @@ def main(argv):
     bar_err_boot = BAR_err_boot( res_ab, res_ba, cmdl['-nruns'], T)
     bar_convergence = BAR_conv(bar_result, res_ab, res_ba, T)
     bar_convergence_boot = BAR_conv_boot(bar_result, res_ab, res_ba, cmdl['-nruns'], T)
-    
+
     tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
     tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
     tee(out, '  RESULT: convergence (BAR ) = %8.4f' % bar_convergence)
@@ -727,10 +738,10 @@ def main(argv):
     tee(out, ' ------------------------------------------------------')
     diff = abs( cgi_result - bar_result )
     mean = (cgi_result+bar_result)*.5
-    tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff ) 
+    tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff )
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean )
     tee(out, ' ------------------------------------------------------')
-   
+
     if cmdl['-jarz']:
         tee(out, ' --------------------------------------------------------')
         tee(out, '             ANALYSIS: Jarzynski estimator     ')
@@ -750,13 +761,12 @@ def main(argv):
     	tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean )
 	tee(out, ' ------------------------------------------------------')
 
-    if cmdl['-plot']:    
+    if cmdl['-plot']:
         print '\n   Plotting histograms......'
         make_plot( cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'] )
         make_W_over_time_plot( cmdl['-W_over_t'], res_ab, res_ba, cgi_result, cgi_err, cmdl['-nbins'], cmdl['-dpi'])
 
     tee(out, '\n   ......done...........\n')
-    
-   
-main( sys.argv )
 
+
+main( sys.argv )

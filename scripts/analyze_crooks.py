@@ -41,13 +41,32 @@ from scipy.optimize import fmin
 from scipy.special import erf
 from random import gauss, randint, choice
 
-# TODO: use logger.debug instead?
-debug = True
+# TODO:
+# - consolidate functions: e.g. BAR* and Jarz* functions
+# - define internal-use functions
+# - add docstrings
+# - cleanup main:
+#     - move messages to stderr (tee) inside the different functions?
+#     - make more readable by using less and more self-contained funcs, e.g.:
+#           data = read_dgdl()
+#           if args.do_jarz:
+#               dg_jarz = jarz(data)
+#           etc etc
+#
+#  The above will make it easier to use this both as command line tool as well
+#  as within other scripts. E.g. one could get a list of the dgdl.xvg files
+#  then estimate the free energy along with its error just like BAR(dgdl_list)
+#  and do whatever they want with the numbers
+#
+# - use logger for info and debug
 
+debug = True  # unused: remove?
+
+# move this inside plot functions?
 params = {'legend.fontsize': 12}
 rcParams.update(params)
 
-# TODO: doc strings
+
 def tee(fp, s):
     print >>fp, s
     print s
@@ -182,7 +201,7 @@ def check_first_dgdl(fn, lambda0):
     print '---------------------------------------------'
 
 
-def work_from_crooks(lst, lambda0, reverseB=False):
+def work_from_crooks(lst, lambda0, reverse=False):
     print '\nProcessing simulation data......'
     output_data = []
     check_first_dgdl(lst[0], lambda0)
@@ -195,7 +214,7 @@ def work_from_crooks(lst, lambda0, reverseB=False):
             results.append(res)
             output_data.append([f, res])
 
-    if reverseB is True:
+    if reverse is True:
         results = [x*(-1) for x in results]
         output_data = [[x, y*(-1)] for x, y in output_data]
 
@@ -594,6 +613,7 @@ def select_random_subset(lst, n):
 
 def parse_options(argv):
 
+    # should we keep versioning just for the whole pmx?
     version = "1.2"
 
     options = [
@@ -672,8 +692,8 @@ def main(cmdl):
         run_ba = cmdl['-pb']
         run_ab = sort_file_list(run_ab)
         run_ba = sort_file_list(run_ba)
-        res_ab, ab_data = work_from_crooks(run_ab, lambda0=0, reverseB=False)
-        res_ba, ba_data = work_from_crooks(run_ba, lambda0=1, reverseB=reverseB)
+        res_ab, ab_data = work_from_crooks(run_ab, lambda0=0, reverse=False)
+        res_ba, ba_data = work_from_crooks(run_ba, lambda0=1, reverse=reverseB)
         dump_integ_file(cmdl['-o0'], ab_data)
         dump_integ_file(cmdl['-o1'], ba_data)
     else:

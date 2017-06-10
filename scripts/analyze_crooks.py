@@ -47,7 +47,7 @@ debug = True
 params = {'legend.fontsize': 12}
 rcParams.update(params)
 
-
+# TODO: doc strings
 def tee(fp, s):
     print >>fp, s
     print s
@@ -592,7 +592,7 @@ def select_random_subset(lst, n):
     return ret
 
 
-def main(argv):
+def parse_options(argv):
 
     version = "1.2"
 
@@ -649,12 +649,17 @@ def main(argv):
     cmdl = Commandline(argv, options=options, fileoptions=files,
                        program_desc=help_text, check_for_existing_files=False,
                        version=version)
+    cmdl.argv = argv
+    return cmdl
+
+
+def main(cmdl):
 
     out = open(cmdl['-o'], 'w')
-    print >>out, "# analyze_crooks.py, version = %s" % version
+    print >>out, "# analyze_crooks.py, version = %s" % cmdl.version
     print >>out, "# pwd = %s" % os.getcwd()
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER'))
-    print >>out, "# command = %s" % ' '.join(argv)
+    print >>out, "# command = %s" % ' '.join(cmdl.argv)
     print >>out, "#------------------------------------------------"
 
     if cmdl['-reverseB']:
@@ -808,4 +813,6 @@ def main(argv):
     tee(out, '\n   ......done...........\n')
 
 
-main(sys.argv)
+if __name__ == '__main__':
+    cmdl = parse_options(sys.argv)
+    main(cmdl)

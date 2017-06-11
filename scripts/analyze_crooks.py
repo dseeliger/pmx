@@ -33,7 +33,7 @@ import sys
 import os
 import time
 from copy import deepcopy
-from pmx import *
+from pmx import *  # TODO: use explicit imports: hard to find out what modules are being used
 from pmx.parser import *
 from pylab import *
 from scipy.integrate import simps
@@ -56,7 +56,7 @@ from random import gauss, randint, choice
 #  The above will make it easier to use this both as command line tool as well
 #  as within other scripts. E.g. one could get a list of the dgdl.xvg files
 #  then estimate the free energy along with its error just like BAR(dgdl_list)
-#  and do whatever they want with the numbers
+#  and do whatever they want with the numbers, or something like that
 #
 # - use logger for info and debug
 
@@ -65,6 +65,9 @@ debug = True  # unused: remove?
 # move this inside plot functions?
 params = {'legend.fontsize': 12}
 rcParams.update(params)
+
+# Constants
+kb = 0.00831447215
 
 
 def tee(fp, s):
@@ -371,106 +374,162 @@ def Jarz_err_boot(res, nruns, c=1.0, T=298.):
     return(err)
 
 
-def BAR(res_ab, res_ba, T=298.):
-    kb = 0.00831447215
-    beta = 1./(kb*T)
+# =================
+# Estimator Classes
+# =================
+# TODO: docstrings
+class BAR(object):
+    '''Bennett acceptance ratio (BAR).
 
-    nf = float(len(res_ab))
-    nr = float(len(res_ba))
-    M = kb*T*log(nf/nr)
+    Description...
 
-    res_ab = array(res_ab)
-    res_ba = array(res_ba)
+    Parameters
+    ----------
 
-    def func(x, res_ab, res_ba):
-        sf = 0
-        for v in res_ab:
-            sf += 1./(1+exp(beta*(M+v - x)))
-        sr = 0
-        for v in res_ba:
-            sr += 1./(1+exp(-beta*(M+v - x)))
+    Examples
+    --------
+    '''
 
-        r = sf-sr
-        return r**2
+    def __init__(self, wf, wr, T=298., nboots=0):
+        self.wf = array(wf)  # is array() needed? they are both lists
+        self.wr = array(wr)
+        self.T = float(T)
+        self.nboots = nboots
 
-    avA = average(res_ab)
-    avB = average(res_ba)
-    x0 = (avA+avB)/2.
-    result = fmin(func, x0=x0, args=(res_ab, res_ba), disp=0)
-    return result
+        self.nf = len(wf)
+        self.nr = len(wr)
+        self.beta = 1./(kb*self.T)
+        self.M = kb * self.T * log(float(self.nf) / float(self.nr))
 
+        # Calculate all BAR properties available
+        self.dg = self.calc_dg(self.wf, self.wr, self.T)
+        self.err = self.calc_err(self.dg, self.wf, self.wr, self.T)
+        if nboots > 0:
+            self.err_boot = self.calc_err_boot(self.wf, self.wr, nboots,
+                                               self.T)
+        self.conv = self.calc_conv(self.dg, self.wf, self.wr, self.T)
+        if nboots > 0:
+            self.conv_err_boot = self.calc_conv_err_boot(self.dg, self.wf,
+                                                         self.wr, nboots,
+                                                         self.T)
 
-def BAR_err(dG, res_ab, res_ba, T=298.):
-    kb = 0.00831447215
-    beta = 1./(kb*T)
-    res_ab = array(res_ab)
-    res_ba = array(res_ba)
-    nf = float(len(res_ab))
-    nr = float(len(res_ba))
-    M = kb*T*log(nf/nr)
-    err = 0
-    for v in res_ab:
-        err += 1./(2+2*cosh(beta*(M+v-dG)))
-    for v in res_ba:
-        err += 1./(2+2*cosh(beta*(M+v-dG)))
-    N = nf+nr
-    err /= float(N)
-    tot = 1/(beta**2*N)*(1./err-(N/nf+N/nr))
-    return sqrt(tot)
+    @staticmethod
+    def calc_dg(wf, wr, T):
+        '''Estimates and returns the free energy difference.
 
+        Parameters
+        ----------
 
-def BAR_err_boot(res_ab, res_ba, nruns, T=298.):
-    res = []
-    nf = int(len(res_ab))
-    nr = int(len(res_ba))
-    for k in range(nruns):
-        sys.stdout.write('\rBAR error bootstrap: iteration %s/%s' % (k, nruns))
-        sys.stdout.flush()
-        for i in range(nf):
-            valA = [choice(res_ab) for _ in xrange(nf)]
-        for i in range(nr):
-            valB = [choice(res_ab) for _ in xrange(nr)]
-        foo = BAR(valA, valB, T)
-        res.append(foo)
-    sys.stdout.write('\n')
-    err = std(res)
-    return(err)
+        Returns
+        ----------
+        '''
 
+        nf = float(len(wf))
+        nr = float(len(wr))
+        beta = 1./(kb*T)
+        M = kb * T * log(nf/nr)
 
-def BAR_conv(dG, wf, wb, T):
-    wf = np.array(wf)
-    wb = np.array(wb)
-    kb = 0.00831447215
-    beta = 1./(kb*T)
-    N = float(len(wf)+len(wb))
-    ratio_alpha = float(len(wf))/N
-    ratio_beta = float(len(wb))/N
-    bf = 1.0/(ratio_beta + ratio_alpha*np.exp(beta*(wf-dG)))
-    tf = 1.0/(ratio_alpha + ratio_beta*np.exp(beta*(-wb+dG)))
-    Ua = (np.mean(tf) + np.mean(bf))/2.0
-    Ua2 = (ratio_alpha*np.mean(np.power(tf, 2)) +
-           ratio_beta*np.mean(np.power(bf, 2)))
-    a = (Ua-Ua2)/Ua
-    return(a)
+        def func(x, wf, wr):
+            sf = 0
+            for v in wf:
+                sf += 1./(1+exp(beta*(M+v - x)))
+                sr = 0
+                for v in wr:
+                    sr += 1./(1+exp(-beta*(M+v - x)))
+            r = sf-sr
+            return r**2
 
+        avA = average(wf)
+        avB = average(wr)
+        x0 = (avA+avB)/2.
+        dg = fmin(func, x0=x0, args=(wf, wr), disp=0)
 
-def BAR_conv_boot(bar_result, res_ab, res_ba, nruns, T):
-    res = []
-    nf = int(len(res_ab))
-    nr = int(len(res_ba))
-    for k in range(nruns):
-        sys.stdout.write('\rConvergence error bootstrap: iteration %s/%s'
-                         % (k, nruns))
-        sys.stdout.flush()
-        for i in range(nf):
-            valA = [choice(res_ab) for _ in xrange(nf)]
-        for i in range(nr):
-            valB = [choice(res_ab) for _ in xrange(nr)]
-        foo = BAR_conv(bar_result, valA, valB, T)
-        res.append(foo)
-    sys.stdout.write('\n')
-    err = std(res)
-    return(err)
+        return float(dg)
+
+    @staticmethod
+    def calc_err(dg, wf, wr, T):
+        '''Calculates the analytical error estimate.'''
+
+        nf = float(len(wf))
+        nr = float(len(wr))
+        beta = 1./(kb*T)
+        M = kb * T * log(nf/nr)
+
+        err = 0
+        for v in wf:
+            err += 1./(2+2*cosh(beta * (M+v-dg)))
+        for v in wr:
+            err += 1./(2+2*cosh(beta * (M+v-dg)))
+        N = nf + nr
+        err /= float(N)
+        tot = 1/(beta**2*N)*(1./err-(N/nf + N/nr))
+
+        err = float(sqrt(tot))
+        return err
+
+    @staticmethod
+    def calc_err_boot(wf, wr, nruns, T):
+        '''Calculates the error by bootstrapping.'''
+
+        nf = len(wf)
+        nr = len(wr)
+        res = []
+        for k in range(nruns):
+            sys.stdout.write('\rBAR error bootstrap: iteration %s/%s'
+                             % (k, nruns))
+            sys.stdout.flush()
+            for i in range(nf):
+                valA = [choice(wf) for _ in xrange(nf)]
+            for i in range(nr):
+                valB = [choice(wf) for _ in xrange(nr)]
+            foo = BAR.calc_dg(valA, valB, T)
+            res.append(foo)
+        sys.stdout.write('\n')
+        err_boot = std(res)
+
+        return err_boot
+
+    @staticmethod
+    def calc_conv(dg, wf, wr, T):
+        '''Evaluates BAR convergence'''
+
+        wf = np.array(wf)
+        wr = np.array(wr)
+
+        beta = 1./(kb*T)
+        nf = len(wf)
+        nr = len(wr)
+        N = float(nf + nr)
+
+        ratio_alpha = float(nf)/N
+        ratio_beta = float(nr)/N
+        bf = 1.0/(ratio_beta + ratio_alpha * np.exp(beta*(wf-dg)))  # where is numpy coming from? probably from pmx import *
+        tf = 1.0/(ratio_alpha + ratio_beta * np.exp(beta*(-wr+dg)))
+        Ua = (np.mean(tf) + np.mean(bf))/2.0
+        Ua2 = (ratio_alpha * np.mean(np.power(tf, 2)) +
+               ratio_beta * np.mean(np.power(bf, 2)))
+        conv = (Ua-Ua2)/Ua
+        return conv
+
+    @staticmethod
+    def calc_conv_err_boot(dg, wf, wr, nruns, T):
+        nf = len(wf)
+        nr = len(wr)
+        res = []
+        for k in range(nruns):
+            sys.stdout.write('\rConvergence error bootstrap: '
+                             'iteration %s/%s' % (k, nruns))
+            sys.stdout.flush()
+            for i in range(nf):
+                valA = [choice(wf) for _ in xrange(nf)]
+            for i in range(nr):
+                # FIXME: is "choice(wf)" correct? seems like it should be "choice(wr)"
+                valB = [choice(wf) for _ in xrange(nr)]
+            foo = BAR.calc_conv(dg, valA, valB, T)
+            res.append(foo)
+        sys.stdout.write('\n')
+        err = std(res)
+        return(err)
 
 
 def gauss_func(A, mean, dev, x):
@@ -787,21 +846,18 @@ def main(cmdl):
     T = cmdl['-T']
     tee(out, '  Solving numerical equation with Nelder-Mead Simplex algorithm.. ')
     tee(out, '  Temperature used: %8.2f K' % T)
-    bar_result = BAR(res_ab, res_ba, T)
-    tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar_result)
-    bar_err = BAR_err(bar_result, res_ab, res_ba, T)
-    bar_err_boot = BAR_err_boot(res_ab, res_ba, cmdl['-nruns'], T)
-    bar_convergence = BAR_conv(bar_result, res_ab, res_ba, T)
-    bar_convergence_boot = BAR_conv_boot(bar_result, res_ab, res_ba,
-                                         cmdl['-nruns'], T)
 
-    tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar_err)
-    tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar_err_boot)
-    tee(out, '  RESULT: convergence (BAR ) = %8.4f' % bar_convergence)
-    tee(out, '  RESULT: convergence_error_bootstrap (BAR ) = %8.4f' % bar_convergence_boot)
+    bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
+    # TODO: allow turning the bootstrapping off (e.g. nruns = 0 ):
+    # it slows things down a lot but might not always be necessary
+    tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar.dg)
+    tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar.err)
+    tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar.err_boot)
+    tee(out, '  RESULT: convergence (BAR ) = %8.4f' % bar.conv)
+    tee(out, '  RESULT: convergence_error_bootstrap (BAR ) = %8.4f' % bar.conv_err_boot)
     tee(out, ' ------------------------------------------------------')
-    diff = abs(cgi_result - bar_result)
-    mean = (cgi_result+bar_result)*.5
+    diff = abs(cgi_result - bar.dg)
+    mean = (cgi_result+bar.dg)*.5
     tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
     tee(out, ' ------------------------------------------------------')

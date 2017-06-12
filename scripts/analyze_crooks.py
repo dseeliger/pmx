@@ -32,6 +32,7 @@
 import sys
 import os
 import time
+import re
 from copy import deepcopy
 from pmx.parser import *
 from matplotlib import pyplot as plt
@@ -460,27 +461,10 @@ def tee(fp, s):
     print s
 
 
-def sort_file_list(lst):
-
-    # we assume that the directory is numbered
-    # guess directory base name first
-    dir_name = lst[0].split('/')[-2]
-    base_name = ''
-    for i, x in enumerate(dir_name):
-        if x.isdigit():
-            check = True
-            for k in range(i, len(dir_name)):
-                if not dir_name[k].isdigit():
-                    check = False
-            if check:
-                base_name = dir_name[:i]
-                break
-    if base_name:
-        def get_num(s): return int(s.split('/')[-2].split(base_name)[1])
-        lst.sort(lambda a, b: cmp(get_num(a), get_num(b)))
-        return lst
-    else:
-        return lst
+def natural_sort(l):
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    return sorted(l, key=alphanum_key)
 
 
 def process_dgdl(fn, ndata=-1, lambda0=0):
@@ -675,11 +659,10 @@ def data_from_file(fn):
     return map(lambda a: a[1], data)
 
 
-def dump_integ_file(fn, data):
-    fp = open(fn, 'w')
-    for fn, w in data:
-        print >>fp, fn, w
-    fp.close()
+def _dump_integ_file(fn, data):
+    with open(fn, 'w') as f:
+        for fn, w in data:
+            f.write('{dhdl} {work}\n'.format(dhdl=fn, work=w))
 
 
 def gauss_func(A, mean, dev, x):
@@ -899,28 +882,35 @@ def parse_options(argv):
 def main(cmdl):
 
     out = open(cmdl['-o'], 'w')
+    T = cmdl['-T']
+
     print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
     print >>out, "# pwd = %s" % os.getcwd()
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER'))
     print >>out, "# command = %s" % ' '.join(cmdl.argv)
     print >>out, "\n\n"
 
-    T = cmdl['-T']
-
+    # Whether the work values for 1->0 need to be inverted
     if cmdl['-reverseB']:
         reverseB = True
     else:
         reverseB = False
 
+    # ==========
+    # Parse Data
+    # ==========
+
+    # If list of dhdl.xvg files are provided
     if not cmdl.opt['-i0'].is_set:
         run_ab = cmdl['-pa']
         run_ba = cmdl['-pb']
-        run_ab = sort_file_list(run_ab)
-        run_ba = sort_file_list(run_ba)
+        run_ab = natural_sort(run_ab)
+        run_ba = natural_sort(run_ba)
         res_ab, ab_data = work_from_crooks(run_ab, lambda0=0, reverse=False)
         res_ba, ba_data = work_from_crooks(run_ba, lambda0=1, reverse=reverseB)
-        dump_integ_file(cmdl['-o0'], ab_data)
-        dump_integ_file(cmdl['-o1'], ba_data)
+        _dump_integ_file(cmdl['-o0'], ab_data)
+        _dump_integ_file(cmdl['-o1'], ba_data)
+    # If work values are given as input
     else:
         res_ab = []
         res_ba = []
@@ -931,6 +921,7 @@ def main(cmdl):
             print '\t\tReading integrated values (1->0) from', fn
             res_ba.extend(data_from_file(fn))
 
+    # If asked to only do the integration of dhdl.xvg, exit
     if cmdl['-integ_only']:
         print '\n    Integration done. Skipping analysis.'
         print '\n    ......done........\n'
@@ -962,6 +953,9 @@ def main(cmdl):
         res_ab = select_random_subset(res_ab, ntraj)
         res_ba = select_random_subset(res_ba, ntraj)
 
+    # ==============
+    # Begin Analysis
+    # ==============
     print('\n\n')
     tee(out, ' --------------------------------------------------------')
     tee(out, '                       ANALYSIS')

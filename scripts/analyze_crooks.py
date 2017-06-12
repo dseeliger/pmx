@@ -430,8 +430,7 @@ class Crooks(object):
                                                  s2=self.devr)
         self.err_boot = self.calc_err_boot(self.mf, self.devf, len(wf),
                                            self.mr, self.devr, len(wr),
-                                           nboots=1000,
-                                           intersection=self.inters_bool)
+                                           nboots=1000)
 
     @staticmethod
     def calc_dg(A1, m1, s1, A2, m2, s2):
@@ -485,8 +484,12 @@ class Crooks(object):
             dg = (m1 + m2) * 0.5
             return dg, False
 
+    # Possible change of behaviour compared to the original script:
+    # here it is not determined in advanced whether to take the intersection
+    # or the mean, but for each bootstrap sample if the intersecion cannot
+    # be taken, then the mean is used automatically.
     @staticmethod
-    def calc_err_boot(m1, s1, n1, m2, s2, n2, nboots=1000, intersection=True):
+    def calc_err_boot(m1, s1, n1, m2, s2, n2, nboots=1000):
         '''Calculates the standard error of the Crooks Gaussian Intersection
         via parametric bootstrap.
 
@@ -527,16 +530,10 @@ class Crooks(object):
                 g1.append(gauss(m1, s1))
             for i in range(n2):
                 g2.append(gauss(m2, s2))
-            m1 = average(g1)
-            s1 = std(g1)
-            m2 = average(g2)
-            s2 = std(g2)
-            p1 = 1./(s1*sqrt(2*pi))
-            p2 = 1./(s2*sqrt(2*pi))
-            if intersection is True:
-                iq, _ = Crooks.calc_dg(p1, m1, s1, p2, m2, s2)
-            elif intersection is False:
-                iq = (m1 + m2) / 2.0
+
+            m1, dev1, A1 = data_to_gauss(g1)
+            m2, dev2, A2 = data_to_gauss(g2)
+            iq, _ = Crooks.calc_dg(A1, m1, s1, A2, m2, s2)
             iseq.append(iq)
         err = std(iseq)
         return err

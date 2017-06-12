@@ -34,7 +34,7 @@ import os
 import time
 import re
 from copy import deepcopy
-from pmx.parser import *
+from pmx.parser import read_and_format
 from matplotlib import pyplot as plt
 import numpy as np
 from scipy.integrate import simps
@@ -456,15 +456,122 @@ class BAR(object):
 # ==============================================================================
 #                               Functions
 # ==============================================================================
-def tee(fp, s):
-    print >>fp, s
-    print s
+def ks_norm_test(data, alpha=0.05, refks=None):
+    '''Performs a Kolmogorov-Smirnov test of normality.
+
+    Parameters
+    ----------
+    data : array_like
+        a one-dimensional array of values. This is the distribution tested
+        for normality.
+    alpha : float
+        significance level of the statistics. Default if 0.05.
+    refks : ???
+        ???
+
+    Returns
+    -------
+    Q : float
+    lam0 : float
+    check : float
+    bOk : bool
+    '''
+
+    def ksref():
+        f = 1
+        potent = 10000
+        lamb = np.arange(0.25, 2.5, 0.001)
+        q = np.zeros(len(lamb), float)
+        res = []
+        for k in range(-potent, potent):
+            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
+            f = -f
+        for i in range(len(lamb)):
+            res.append((lamb[i], q[i]))
+        return res
+
+    def ksfunc(lamb):
+        f = 1
+        potent = 10000
+        q = 0
+        for k in range(-potent, potent):
+            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
+            f *= -1
+        return q
+
+    def edf(dg_data):
+        edf_ = []
+        ndata = []
+        data = deepcopy(dg_data)
+        data.sort()
+        N = float(len(data))
+        cnt = 0
+        for item in data:
+            cnt += 1
+            edf_.append(cnt/N)
+            ndata.append(item)
+        ndata = np.array(ndata)
+        edf_ = np.array(edf_)
+        return ndata, edf_
+
+    def cdf(dg_data):
+        data = deepcopy(dg_data)
+        data.sort()
+        mean = np.average(data)
+        sig = np.std(data)
+        cdf = 0.5*(1+erf((data-mean)/float(sig*np.sqrt(2))))
+        return cdf
+
+    N = len(data)
+    nd, ed = edf(data)
+    cd = cdf(data)
+    siglev = 1-alpha
+    dval = []
+    for i, val in enumerate(ed):
+        d = abs(val-cd[i])
+        dval.append(d)
+        if i:
+            d = abs(ed[i-1]-cd[i])
+            dval.append(d)
+    dmax = max(dval)
+    check = np.sqrt(N)*dmax
+    if not refks:
+        refks = ksref()
+    lst = filter(lambda x: x[1] > siglev, refks)
+    lam0 = lst[0][0]
+    if check >= lam0:
+        bOk = False
+    else:
+        bOk = True
+
+    q = ksfunc(check)
+    return (1-q), lam0, check, bOk
 
 
-def natural_sort(l):
-    convert = lambda text: int(text) if text.isdigit() else text.lower()
-    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
-    return sorted(l, key=alphanum_key)
+def data_to_gauss(data):
+    '''Takes a one dimensional array and fits a Gaussian.
+
+    Returns
+    -------
+    float
+        mean of the distribution.
+    float
+        standard deviation of the distribution.
+    float
+        height of the curve's peak.
+    '''
+    m = np.average(data)
+    dev = np.std(data)
+    A = 1./(dev*np.sqrt(2*np.pi))
+    return m, dev, A
+
+
+def gauss_func(A, mean, dev, x):
+    '''Given the parameters of a Gaussian and a range of the x-values, returns
+    the y-values of the Gaussian function'''
+    x = np.array(x)
+    y = A*np.exp(-(((x-mean)**2.)/(2.0*(dev**2.))))
+    return y
 
 
 # -------------
@@ -493,7 +600,7 @@ def parse_dgdl_files(lst, lambda0=0, invert_values=False):
     print '\nProcessing simulation data......'
 
     # check lambda0 is either 0 or 1
-    assert lambda0 in [0,1]
+    assert lambda0 in [0, 1]
 
     _check_dgdl(lst[0], lambda0)
     first_w, ndata = integrate_dgdl(lst[0], lambda0=lambda0,
@@ -531,7 +638,7 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
     '''
 
     # check lambda0 is either 0 or 1
-    assert lambda0 in [0,1]
+    assert lambda0 in [0, 1]
 
     sys.stdout.write('\r------>  %s' % fn)
     sys.stdout.flush()
@@ -609,118 +716,9 @@ def _data_from_file(fn):
     return map(lambda a: a[1], data)
 
 
-def data_to_gauss(data):
-    '''Takes a one dimensional array and fits a Gaussian.
-
-    Returns
-    -------
-    float
-        mean of the distribution.
-    float
-        standard deviation of the distribution.
-    float
-        height of the curve's peak.
-    '''
-    m = np.average(data)
-    dev = np.std(data)
-    A = 1./(dev*np.sqrt(2*np.pi))
-    return m, dev, A
-
-
-def ks_norm_test(data, alpha=0.05, refks=None):
-    '''Performs a Kolmogorov-Smirnov test of normality.
-
-    Parameters
-    ----------
-    data : array_like
-        a one-dimensional array of values. This is the distribution tested
-        for normality.
-    alpha : float
-        significance level of the statistics. Default if 0.05.
-    refks : ???
-        ???
-
-    Returns
-    -------
-    '''
-
-    def ksref():
-        f = 1
-        potent = 10000
-        lamb = np.arange(0.25, 2.5, 0.001)
-        q = np.zeros(len(lamb), float)
-        res = []
-        for k in range(-potent, potent):
-            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
-            f = -f
-        for i in range(len(lamb)):
-            res.append((lamb[i], q[i]))
-        return res
-
-    def ksfunc(lamb):
-        f = 1
-        potent = 10000
-        q = 0
-        for k in range(-potent, potent):
-            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
-            f *= -1
-        return q
-
-    def edf(dg_data):
-        edf_ = []
-        ndata = []
-        data = deepcopy(dg_data)
-        data.sort()
-        N = float(len(data))
-        cnt = 0
-        for item in data:
-            cnt += 1
-            edf_.append(cnt/N)
-            ndata.append(item)
-        ndata = np.array(ndata)
-        edf_ = np.array(edf_)
-        return ndata, edf_
-
-    def cdf(dg_data):
-        data = deepcopy(dg_data)
-        data.sort()
-        mean = np.average(data)
-        sig = np.std(data)
-        cdf = 0.5*(1+erf((data-mean)/float(sig*np.sqrt(2))))
-        return cdf
-
-    N = len(data)
-    nd, ed = edf(data)
-    cd = cdf(data)
-    siglev = 1-alpha
-    dval = []
-    for i, val in enumerate(ed):
-        d = abs(val-cd[i])
-        dval.append(d)
-        if i:
-            d = abs(ed[i-1]-cd[i])
-            dval.append(d)
-    dmax = max(dval)
-    check = np.sqrt(N)*dmax
-    if not refks:
-        refks = ksref()
-    lst = filter(lambda x: x[1] > siglev, refks)
-    lam0 = lst[0][0]
-    if check >= lam0:
-        bOk = False
-    else:
-        bOk = True
-
-    q = ksfunc(check)
-    return (1-q), lam0, check, bOk
-
-
-def gauss_func(A, mean, dev, x):
-    x = np.array(x)
-    y = A*np.exp(-(((x-mean)**2)/(2.0*(dev**2))))
-    return y
-
-
+# ------------------
+# Plotting functions
+# ------------------
 # Is this needed? Seems redundandt since it's included in make_W_over_time_plot
 def make_plot(fname, data1, data2, result, err, nbins, dpi=300):
 
@@ -784,7 +782,7 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi=300):
         s = np.r_[2*x[0]-x[window_len:1:-1], x, 2*x[-1]-x[-1:-window_len:-1]]
         # moving average
         if window == 'flat':
-            w = ones(window_len, 'd')
+            w = np.ones(window_len, 'd')
         else:
             w = eval('np.' + window + '(window_len)')
         y = np.convolve(w/w.sum(), s, mode='same')
@@ -838,7 +836,7 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi=300):
     plt.plot(res_y, res_x, 'k--', linewidth=2,
              label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
     plt.legend(shadow=True, fancybox=True, loc='upper center',
-               prop={'size':12})
+               prop={'size': 12})
     plt.xticks([])
     plt.yticks([])
     xl = plt.gca()
@@ -846,6 +844,20 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi=300):
         val.set_lw(2)
     plt.subplots_adjust(wspace=0.0, hspace=0.1)
     plt.savefig(fname, dpi=dpi)
+
+
+# ---------------------
+# Some helper functions
+# ---------------------
+def _tee(fp, s):
+    print >>fp, s
+    print s
+
+
+def natural_sort(l):
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    return sorted(l, key=alphanum_key)
 
 
 def select_random_subset(lst, n):
@@ -860,6 +872,9 @@ def select_random_subset(lst, n):
     return ret
 
 
+# ==============================================================================
+#                   Command Line Parsing and Main
+# ==============================================================================
 def parse_options(argv):
 
     from pmx import Option
@@ -971,29 +986,30 @@ def main(cmdl):
         print '\n    ......done........\n'
         sys.exit(0)
 
+    # select work values to keep - default is all
     firstA = 0
     lastA = len(res_ab)
     firstB = 0
     lastB = len(res_ba)
     if cmdl.opt['-firstA'].is_set:
         firstA = cmdl['-firstA']
-        tee(out, '   first trajectory to read from A: %d' % firstA)
+        _tee(out, '   first trajectory to read from A: %d' % firstA)
     if cmdl.opt['-lastA'].is_set:
         lastA = cmdl['-lastA']
-        tee(out, '   last trajectory to read from A : %d' % lastA)
+        _tee(out, '   last trajectory to read from A : %d' % lastA)
     if cmdl.opt['-firstB'].is_set:
         firstB = cmdl['-firstB']
-        tee(out, '   first trajectory to read from B: %d' % firstB)
+        _tee(out, '   first trajectory to read from B: %d' % firstB)
     if cmdl.opt['-lastB'].is_set:
         lastB = cmdl['-lastB']
-        tee(out, '   last trajectory to read from B : %d' % lastB)
+        _tee(out, '   last trajectory to read from B : %d' % lastB)
 
     res_ab = res_ab[firstA:lastA]
     res_ba = res_ba[firstB:lastB]
 
     if cmdl.opt['-rand'].is_set:
         ntraj = cmdl['-rand']
-        tee(out, ' select random subset of trajectories: %d' % ntraj)
+        _tee(out, ' select random subset of trajectories: %d' % ntraj)
         res_ab = select_random_subset(res_ab, ntraj)
         res_ba = select_random_subset(res_ba, ntraj)
 
@@ -1001,30 +1017,30 @@ def main(cmdl):
     # Begin Analysis
     # ==============
     print('\n\n')
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '                       ANALYSIS')
-    tee(out, ' --------------------------------------------------------')
-    tee(out, ' Number of forward (0->1) trajectories: %d' % len(res_ab))
-    tee(out, ' Number of reverse (1->0) trajectories: %d' % len(res_ba))
-    tee(out, ' Temperature : %.2f K' % T)
+    _tee(out, ' --------------------------------------------------------')
+    _tee(out, '                       ANALYSIS')
+    _tee(out, ' --------------------------------------------------------')
+    _tee(out, '  Number of forward (0->1) trajectories: %d' % len(res_ab))
+    _tee(out, '  Number of reverse (1->0) trajectories: %d' % len(res_ba))
+    _tee(out, '  Temperature : %.2f K' % T)
 
     # ============================
     # Crooks Gaussian Intersection
     # ============================
-    tee(out, '\n --------------------------------------------------------')
-    tee(out, '             Crooks Gaussian Intersection     ')
-    tee(out, ' --------------------------------------------------------')
+    _tee(out, '\n --------------------------------------------------------')
+    _tee(out, '             Crooks Gaussian Intersection     ')
+    _tee(out, ' --------------------------------------------------------')
 
     print('  Calculating Intersection...')
     cgi = Crooks(wf=res_ab, wr=res_ba)
 
-    tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
-    tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
+    _tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
+    _tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
     if cgi.inters_bool is False:
-        tee(out, '\n  Gaussians too close for intersection calculation')
-        tee(out, '   --> Taking difference of mean values')
-    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
-    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
+        _tee(out, '\n  Gaussians too close for intersection calculation')
+        _tee(out, '   --> Taking difference of mean values')
+    _tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
+    _tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
 
     # --------------
     # Normality test
@@ -1034,23 +1050,25 @@ def main(cmdl):
         q0, lam00, check0, bOk0 = ks_norm_test(res_ab)
         q1, lam01, check1, bOk1 = ks_norm_test(res_ba)
 
-        tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
+        _tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
         if bOk0:
-            tee(out, '             ---> KS-Test Ok')
+            _tee(out, '             ---> KS-Test Ok')
         else:
-            tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' % (q0, check0))
-        tee(out, '  Backward : gaussian quality = %3.2f' % q1)
+            _tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f,'
+                      ' lambda0 = %4.2f' % (q0, check0))
+        _tee(out, '  Backward : gaussian quality = %3.2f' % q1)
         if bOk1:
-            tee(out, '             ---> KS-Test Ok')
+            _tee(out, '             ---> KS-Test Ok')
         else:
-            tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' % (q1, check1))
+            _tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f,'
+                      ' lambda0 = %4.2f' % (q1, check1))
 
     # ========================
     # Bennett Acceptance Ratio
     # ========================
-    tee(out, '\n --------------------------------------------------------')
-    tee(out, '             Bennett Acceptance Ratio     ')
-    tee(out, ' --------------------------------------------------------')
+    _tee(out, '\n --------------------------------------------------------')
+    _tee(out, '             Bennett Acceptance Ratio     ')
+    _tee(out, ' --------------------------------------------------------')
 
     bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
 
@@ -1058,40 +1076,40 @@ def main(cmdl):
 
     # TODO: allow turning the bootstrapping off (e.g. nruns = 0 ):
     # it slows things down a lot but might not always be necessary
-    tee(out, '  RESULT: dG (BAR) = %8.4f kJ/mol' % bar.dg)
-    tee(out, '  RESULT: error_dG_analyt (BAR) = %8.4f kJ/mol' % bar.err)
+    _tee(out, '  RESULT: dG (BAR) = %8.4f kJ/mol' % bar.dg)
+    _tee(out, '  RESULT: error_dG_analyt (BAR) = %8.4f kJ/mol' % bar.err)
     if cmdl['-nruns'] > 0:
-        tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
-    tee(out, '  RESULT: convergence (BAR) = %8.4f' % bar.conv)
+        _tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
+    _tee(out, '  RESULT: convergence (BAR) = %8.4f' % bar.conv)
     if cmdl['-nruns'] > 0:
-        tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
-    tee(out, ' ------------------------------------------------------')
+        _tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
+    _tee(out, ' ------------------------------------------------------')
     # Should we make this optional?
     diff = abs(cgi.dg - bar.dg)
     mean = (cgi.dg + bar.dg) * 0.5
-    tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
-    tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
-    tee(out, ' ------------------------------------------------------')
+    _tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
+    _tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
+    _tee(out, ' ------------------------------------------------------')
 
     # =========
     # Jarzynski
     # =========
     if cmdl['-jarz']:
-        tee(out, '\n --------------------------------------------------------')
-        tee(out, '             Jarzynski estimator     ')
-        tee(out, ' --------------------------------------------------------')
+        _tee(out, '\n --------------------------------------------------------')
+        _tee(out, '             Jarzynski estimator     ')
+        _tee(out, ' --------------------------------------------------------')
 
         jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=cmdl['-nruns'])
 
-        tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
-        tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
+        _tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
+        _tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
         if cmdl['-nruns'] > 0:
-            tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
+            _tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
         if cmdl['-nruns'] > 0:
-            tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
-        tee(out, ' ------------------------------------------------------')
-        tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % jarz.dg_mean)
-        tee(out, ' ------------------------------------------------------')
+            _tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
+        _tee(out, ' ------------------------------------------------------')
+        _tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % jarz.dg_mean)
+        _tee(out, ' ------------------------------------------------------')
 
     if cmdl['-plot']:
         print '\n   Plotting histograms......'

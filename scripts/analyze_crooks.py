@@ -34,7 +34,7 @@ import os
 import time
 from copy import deepcopy
 from pmx.parser import *
-#from pylab import *
+from matplotlib import pyplot as plt
 import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
@@ -688,59 +688,76 @@ def gauss_func(A, mean, dev, x):
     return y
 
 
-def make_plot(fname, data1, data2, result, err, nbins, dpi):
-    #from pylab import *
+# Is this needed? Seems redundandt since it's included in make_W_over_time_plot
+def make_plot(fname, data1, data2, result, err, nbins, dpi=300):
 
-    # move this inside plot functions?
-    params = {'legend.fontsize': 12}
-    rcParams.update(params)
-
-
-    figure(figsize=(8, 6))
+    plt.figure(figsize=(8, 6))
     mf, devf, Af = data_to_gauss(data1)
     mb, devb, Ab = data_to_gauss(data2)
 
     maxi = max(data1+data2)
     mini = min(data1+data2)
-    n1, bins1, patches1 = hist(data1, range=(mini, maxi), bins=nbins,
-                               facecolor='blue', alpha=0.75, normed=True,
-                               label='0->1')
-    n2, bins2, patches2 = hist(data2, range=(mini, maxi), bins=nbins,
-                               facecolor='red', alpha=0.75, normed=True,
-                               label='1->0')
-    xlabel('W [kJ/mol]', fontsize=20)
-    ylabel('Probability', fontsize=20)
-    title(r'Work Distribution $\lambda$ 0->1 (blue) $\lambda$ 1->0 (red)')
-    grid(lw=2)
-    loc, lab = yticks()
+    n1, bins1, patches1 = plt.hist(data1, range=(mini, maxi), bins=nbins,
+                                   facecolor='blue', alpha=0.75, normed=True,
+                                   label='0->1')
+    n2, bins2, patches2 = plt.hist(data2, range=(mini, maxi), bins=nbins,
+                                   facecolor='red', alpha=0.75, normed=True,
+                                   label='1->0')
+    plt.xlabel('W [kJ/mol]', fontsize=20)
+    plt.ylabel('Probability', fontsize=20)
+    plt.title(r'Work Distribution $\lambda$ 0->1 (blue) $\lambda$ 1->0 (red)')
+    plt.grid(lw=2)
+    loc, lab = plt.yticks()
     ll = []
     for i in range(len(lab)):
         ll.append("")
-    yticks(loc, ll)
+    plt.yticks(loc, ll)
     x = np.arange(mini, maxi, .5)
     y1 = gauss_func(Af, mf, devf, x)
     y2 = gauss_func(Ab, mb, devb, x)
 
-    plot(x, y1, 'b--', linewidth=2)
-    plot(x, y2, 'r--', linewidth=2)
+    plt.plot(x, y1, 'b--', linewidth=2)
+    plt.plot(x, y2, 'r--', linewidth=2)
 
     size = max([max(y1), max(y2)])
     res_x = [result, result]
     res_y = [0, size*1.2]
-    plot(res_x, res_y, 'k--', linewidth=2,
-         label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
-    legend(shadow=True, fancybox=True)
-    ylim(0, size*1.2)
-    xl = gca()
+    plt.plot(res_x, res_y, 'k--', linewidth=2,
+             label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
+    plt.legend(shadow=True, fancybox=True, prop={'size': 12})
+    plt.ylim(0, size*1.2)
+    xl = plt.gca()
     for val in xl.spines.values():
         val.set_lw(2)
-    savefig(fname, dpi=dpi)
+    plt.savefig(fname, dpi=dpi)
 
 
-def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi):
-    #from pylab import *
+def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi=300):
+    '''Plots work distributions and results for Crooks Gaussian Intersection'''
 
-    figure(figsize=(8, 6))
+    def smooth(x, window_len=11, window='hanning'):
+
+        if x.ndim != 1:
+            raise ValueError("smooth only accepts 1 dimension arrays.")
+        if x.size < window_len:
+            raise ValueError("Input vector needs to be bigger than "
+                             "window size.")
+        if window_len < 3:
+            return x
+        if window not in ['flat', 'hanning', 'hamming',
+                          'bartlett', 'blackman']:
+            raise ValueError("Window is on of 'flat', 'hanning', 'hamming', "
+                             "'bartlett', 'blackman'")
+        s = np.r_[2*x[0]-x[window_len:1:-1], x, 2*x[-1]-x[-1:-window_len:-1]]
+        # moving average
+        if window == 'flat':
+            w = ones(window_len, 'd')
+        else:
+            w = eval('np.' + window + '(window_len)')
+        y = np.convolve(w/w.sum(), s, mode='same')
+        return y[window_len-1:-window_len+1]
+
+    plt.figure(figsize=(8, 6))
     x1 = range(len(data1))
     x2 = range(len(data2))
     if x1 > x2:
@@ -755,66 +772,47 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi):
 
     sm1 = smooth(np.array(data1))
     sm2 = smooth(np.array(data2))
-    subplot(1, 2, 1)
-    plot(x1, data1, 'g-', linewidth=2, label="Forward (0->1)", alpha=.3)
-    plot(x1, sm1, 'g-', linewidth=3)
-    plot(x2, data2, 'b-', linewidth=2, label="Backward (1->0)", alpha=.3)
-    plot(x2, sm2, 'b-', linewidth=3)
-    legend(shadow=True, fancybox=True, loc='upper center')
-    ylabel(r'W [kJ/mol]', fontsize=20)
-    xlabel(r'# Snapshot', fontsize=20)
-    grid(lw=2)
-    xlim(0, x[-1]+1)
-    xl = gca()
+    plt.subplot(1, 2, 1)
+    plt.plot(x1, data1, 'g-', linewidth=2, label="Forward (0->1)", alpha=.3)
+    plt.plot(x1, sm1, 'g-', linewidth=3)
+    plt.plot(x2, data2, 'b-', linewidth=2, label="Backward (1->0)", alpha=.3)
+    plt.plot(x2, sm2, 'b-', linewidth=3)
+    plt.legend(shadow=True, fancybox=True, loc='upper center',
+               prop={'size': 12})
+    plt.ylabel(r'W [kJ/mol]', fontsize=20)
+    plt.xlabel(r'# Snapshot', fontsize=20)
+    plt.grid(lw=2)
+    plt.xlim(0, x[-1]+1)
+    xl = plt.gca()
     for val in xl.spines.values():
         val.set_lw(2)
-    subplot(1, 2, 2)
-    hist(data1, bins=nbins, orientation='horizontal', facecolor='green',
-         alpha=.75, normed=True)
-    hist(data2, bins=nbins, orientation='horizontal', facecolor='blue',
-         alpha=.75, normed=True)
+    plt.subplot(1, 2, 2)
+    plt.hist(data1, bins=nbins, orientation='horizontal', facecolor='green',
+             alpha=.75, normed=True)
+    plt.hist(data2, bins=nbins, orientation='horizontal', facecolor='blue',
+             alpha=.75, normed=True)
 
     x = np.arange(mini, maxi, .5)
 
     y1 = gauss_func(Af, mf, devf, x)
     y2 = gauss_func(Ab, mb, devb, x)
 
-    plot(y1, x, 'g--', linewidth=2)
-    plot(y2, x, 'b--', linewidth=2)
+    plt.plot(y1, x, 'g--', linewidth=2)
+    plt.plot(y2, x, 'b--', linewidth=2)
     size = max([max(y1), max(y2)])
     res_x = [result, result]
     res_y = [0, size*1.2]
-    plot(res_y, res_x, 'k--', linewidth=2,
-         label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
-    legend(shadow=True, fancybox=True, loc='upper center')
-    xticks([])
-    yticks([])
-    xl = gca()
+    plt.plot(res_y, res_x, 'k--', linewidth=2,
+             label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
+    plt.legend(shadow=True, fancybox=True, loc='upper center',
+               prop={'size':12})
+    plt.xticks([])
+    plt.yticks([])
+    xl = plt.gca()
     for val in xl.spines.values():
         val.set_lw(2)
-    subplots_adjust(wspace=0.0, hspace=0.1)
-    savefig(fname, dpi=dpi)
-
-
-def smooth(x, window_len=11, window='hanning'):
-
-    if x.ndim != 1:
-        raise ValueError("smooth only accepts 1 dimension arrays.")
-    if x.size < window_len:
-        raise ValueError("Input vector needs to be bigger than window size.")
-    if window_len < 3:
-        return x
-    if window not in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
-        raise ValueError("Window is on of 'flat', 'hanning', 'hamming', "
-                         "'bartlett', 'blackman'")
-    s = r_[2*x[0]-x[window_len:1:-1], x, 2*x[-1]-x[-1:-window_len:-1]]
-    # moving average
-    if window == 'flat':
-        w = ones(window_len, 'd')
-    else:
-        w = eval(window+'(window_len)')
-    y = convolve(w/w.sum(), s, mode='same')
-    return y[window_len-1:-window_len+1]
+    plt.subplots_adjust(wspace=0.0, hspace=0.1)
+    plt.savefig(fname, dpi=dpi)
 
 
 def select_random_subset(lst, n):

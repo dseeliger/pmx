@@ -393,7 +393,7 @@ def BAR_err_boot(res_ab, res_ba, nruns, T=298):
 	for i in range(nf):
 	    valA = [choice(res_ab) for _ in xrange(nf)]
         for i in range(nr):
-            valB = [choice(res_ab) for _ in xrange(nr)]
+            valB = [choice(res_ba) for _ in xrange(nr)]
 	foo = BAR(valA, valB, T)
 	res.append(foo)
     sys.stdout.write('\n')
@@ -425,7 +425,7 @@ def BAR_conv_boot(bar_result, res_ab, res_ba, nruns, T):
         for i in range(nf):
             valA = [choice(res_ab) for _ in xrange(nf)]
         for i in range(nr):
-            valB = [choice(res_ab) for _ in xrange(nr)]
+            valB = [choice(res_ba) for _ in xrange(nr)]
         foo = BAR_conv(bar_result, valA, valB, T)
         res.append(foo)
     sys.stdout.write('\n')

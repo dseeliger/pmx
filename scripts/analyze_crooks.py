@@ -410,7 +410,7 @@ class Jarz(object):
         out = []
         n = int(len(w))
         for k in range(nboots):
-            sys.stdout.write('\rJarzynski error bootstrap: iteration %s/%s'
+            sys.stdout.write('\r  Jarzynski error bootstrap: iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
             for i in range(n):
@@ -520,7 +520,7 @@ class BAR(object):
         nr = len(wr)
         res = []
         for k in range(nruns):
-            sys.stdout.write('\rBAR error bootstrap: iteration %s/%s'
+            sys.stdout.write('\r  BAR error bootstrap: iteration %s/%s'
                              % (k+1, nruns))
             sys.stdout.flush()
             for i in range(nf):
@@ -562,7 +562,7 @@ class BAR(object):
         nr = len(wr)
         res = []
         for k in range(nruns):
-            sys.stdout.write('\rConvergence error bootstrap: '
+            sys.stdout.write('\r  Convergence error bootstrap: '
                              'iteration %s/%s' % (k+1, nruns))
             sys.stdout.flush()
             for i in range(nf):
@@ -719,7 +719,8 @@ def parse_options(argv):
 
     # should we keep versioning just for the whole pmx?
     version = "1.2"
-
+    # TODO: option to choose units for output
+    # TODO: choose which estimator to use as list. e.g. -est BAR CGI
     options = [
         Option("-nbins", "int", 10, "number of histograms bins for plot"),
         Option("-T", "real", 298, "Temperature for BAR calculation"),
@@ -784,7 +785,9 @@ def main(cmdl):
     print >>out, "# pwd = %s" % os.getcwd()
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER'))
     print >>out, "# command = %s" % ' '.join(cmdl.argv)
-    print >>out, "#------------------------------------------------"
+    print >>out, "\n\n"
+
+    T = cmdl['-T']
 
     if cmdl['-reverseB']:
         reverseB = True
@@ -843,19 +846,24 @@ def main(cmdl):
 
     mf, devf, Af = data_to_gauss(res_ab)
     mb, devb, Ab = data_to_gauss(res_ba)
+
+    print('\n\n')
     tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: NUMBER OF TRAJECTORIES:')
+    tee(out, '                       ANALYSIS')
+    tee(out, ' --------------------------------------------------------')
+    tee(out, '               Number of trajectories:')
     tee(out, '               0->1 : %d' % len(res_ab))
     tee(out, '               1->0 : %d' % len(res_ba))
+    tee(out, '               Temp : %.2f K' % T)
 
-    tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: Crooks-Gaussian Intersection     ')
+    tee(out, '\n --------------------------------------------------------')
+    tee(out, '             Crooks-Gaussian Intersection     ')
     tee(out, ' --------------------------------------------------------')
     tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (mf, devf))
     tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (mb, devb))
 
     if cmdl['-KS']:
-        tee(out, '  Running KS-test ....')
+        print('  Running KS-test ....')
         q0, lam00, check0, bOk0 = ks(res_ab)
         q1, lam01, check1, bOk1 = ks(res_ba)
 
@@ -870,7 +878,7 @@ def main(cmdl):
         else:
             tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' % (q1, check1))
 
-    tee(out, '  Calculating Intersection...')
+    print('  Calculating Intersection...')
     cgi_result = gauss_intersection([Af, mf, devf], [Ab, mb, devb])
     intersection = True
     if not cgi_result:
@@ -878,40 +886,50 @@ def main(cmdl):
         tee(out, '   --> Taking difference of mean values')
         cgi_result = (mf+mb)*.5
         intersection = False
-    tee(out, '  RESULT: dG ( CGI )  = %8.4f kJ/mol' % cgi_result)
+    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi_result)
     if intersection:
         cgi_err = cgi_error(1000, mf, devf, len(res_ab), mb, devb, len(res_ba))
     else:
         cgi_err = cgi_error_from_mean(1000, mf, devf, len(res_ab),
                                       mb, devb, len(res_ba))
-    tee(out, '  RESULT: error_dG ( CGI ) = %8.4f kJ/mol' % cgi_err)
+    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi_err)
+
+    # ------------------------
+    # Bennett Acceptance Ratio
+    # ------------------------
+    tee(out, '\n --------------------------------------------------------')
+    tee(out, '             Bennett Acceptance Ratio     ')
     tee(out, ' --------------------------------------------------------')
-    tee(out, '             ANALYSIS: Bennett Acceptance Ratio     ')
-    tee(out, ' --------------------------------------------------------')
-    T = cmdl['-T']
-    tee(out, '  Solving numerical equation with Nelder-Mead Simplex algorithm.. ')
-    tee(out, '  Temperature used: %8.2f K' % T)
 
     bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
+
+    print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
+
     # TODO: allow turning the bootstrapping off (e.g. nruns = 0 ):
     # it slows things down a lot but might not always be necessary
-    tee(out, '  RESULT: dG (BAR ) = %8.4f kJ/mol' % bar.dg)
-    tee(out, '  RESULT: error_dG_analyt (BAR ) = %8.4f kJ/mol' % bar.err)
-    tee(out, '  RESULT: error_dG_bootstrap (BAR ) = %8.4f kJ/mol' % bar.err_boot)
-    tee(out, '  RESULT: convergence (BAR ) = %8.4f' % bar.conv)
-    tee(out, '  RESULT: convergence_error_bootstrap (BAR ) = %8.4f' % bar.conv_err_boot)
+    tee(out, '  RESULT: dG (BAR) = %8.4f kJ/mol' % bar.dg)
+    tee(out, '  RESULT: error_dG_analyt (BAR) = %8.4f kJ/mol' % bar.err)
+    tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
+    tee(out, '  RESULT: convergence (BAR) = %8.4f' % bar.conv)
+    tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
     tee(out, ' ------------------------------------------------------')
+    # Should we make this optional?
     diff = abs(cgi_result - bar.dg)
     mean = (cgi_result+bar.dg)*.5
     tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
     tee(out, ' ------------------------------------------------------')
 
+    # ---------
+    # Jarzynski
+    # ---------
     if cmdl['-jarz']:
+        tee(out, '\n --------------------------------------------------------')
+        tee(out, '             Jarzynski estimator     ')
+        tee(out, ' --------------------------------------------------------')
+
         jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=cmdl['-nruns'])
-        tee(out, ' --------------------------------------------------------')
-        tee(out, '             ANALYSIS: Jarzynski estimator     ')
-        tee(out, ' --------------------------------------------------------')
+
         tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
         tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
         tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
@@ -927,7 +945,7 @@ def main(cmdl):
         make_W_over_time_plot(cmdl['-W_over_t'], res_ab, res_ba, cgi_result,
                               cgi_err, cmdl['-nbins'], cmdl['-dpi'])
 
-    tee(out, '\n   ......done...........\n')
+    print('\n   ......done...........\n')
 
 
 if __name__ == '__main__':

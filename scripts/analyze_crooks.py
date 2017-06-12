@@ -467,7 +467,72 @@ def natural_sort(l):
     return sorted(l, key=alphanum_key)
 
 
-def process_dgdl(fn, ndata=-1, lambda0=0):
+# -------------
+# Files Parsing
+# -------------
+def parse_dgdl_files(lst, lambda0=0, invert_values=False):
+    '''Takes a list of dgdl.xvg files and returns the integrated work values
+
+    Parameters
+    ----------
+    lst : list
+        list containing the paths to the dgdl.xvg files.
+    lambda0 : [0,1]
+        whether the simulations started from lambda 0 or 1. Default is 0.
+    invert_values : bool
+        whether to invert the sign of the returned work value.
+
+    Returns
+    -------
+    w : array
+        array of work values.
+    lst : list
+        sorted list of input dgdl.avg files corresponding to the work values
+        in w.
+    '''
+    print '\nProcessing simulation data......'
+
+    # check lambda0 is either 0 or 1
+    assert lambda0 in [0,1]
+
+    _check_dgdl(lst[0], lambda0)
+    first_w, ndata = integrate_dgdl(lst[0], lambda0=lambda0,
+                                    invert_values=invert_values)
+    w_list = [first_w]
+    for f in lst[1:]:
+        w, _ = integrate_dgdl(f, ndata=ndata, lambda0=lambda0,
+                              invert_values=invert_values)
+        if w is not None:
+            w_list.append(w)
+
+    return w_list
+
+
+def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
+    '''Integrates the data in a dgdl.xvg file.
+
+    Parameters
+    ----------
+    fn : str
+        the inpur dgdl.xvg file from Gromacs.
+    ndata : int, optional
+        number of datapoints in file. If -1, then ??? default is -1.
+    lambda0 : [0,1]
+        whether the simulations started from lambda 0 or 1. Default is 0.
+    invert_values : bool
+        whether to invert the sign of the returned work value.
+
+    Returns
+    -------
+    simps : float
+        result of the integration performed using Simpson's rule.
+    ndata : int
+        number of data points in the input file.
+    '''
+
+    # check lambda0 is either 0 or 1
+    assert lambda0 in [0,1]
+
     sys.stdout.write('\r------>  %s' % fn)
     sys.stdout.flush()
     l = open(fn).readlines()
@@ -504,10 +569,15 @@ def process_dgdl(fn, ndata=-1, lambda0=0):
     if lambda0 == 1:
         x.reverse()
         y.reverse()
-    return simps(y, x), ndata
+
+    if invert_values is True:
+        return simps(y, x) * (-1), ndata
+    else:
+        return simps(y, x), ndata
 
 
-def check_first_dgdl(fn, lambda0):
+def _check_dgdl(fn, lambda0):
+    '''Prints some info about a dgdl.xvg file.'''
     l = open(fn).readlines()
     if not l:
         return None
@@ -528,24 +598,15 @@ def check_first_dgdl(fn, lambda0):
     print '---------------------------------------------'
 
 
-def work_from_crooks(lst, lambda0, reverse=False):
-    print '\nProcessing simulation data......'
-    output_data = []
-    check_first_dgdl(lst[0], lambda0)
-    first_res, ndata = process_dgdl(lst[0], lambda0=lambda0)
-    output_data.append([lst[0], first_res])
-    results = [first_res]
-    for f in lst[1:]:
-        res, tmp = process_dgdl(f, ndata=ndata, lambda0=lambda0)
-        if res is not None:
-            results.append(res)
-            output_data.append([f, res])
+def _dump_integ_file(outfn, f_lst, w_lst):
+    with open(outfn, 'w') as f:
+        for fn, w in zip(f_lst, w_lst):
+            f.write('{dhdl} {work}\n'.format(dhdl=fn, work=w))
 
-    if reverse is True:
-        results = [x*(-1) for x in results]
-        output_data = [[x, y*(-1)] for x, y in output_data]
 
-    return results, output_data
+def _data_from_file(fn):
+    data = read_and_format(fn, 'sf')
+    return map(lambda a: a[1], data)
 
 
 def data_to_gauss(data):
@@ -652,17 +713,6 @@ def ks_norm_test(data, alpha=0.05, refks=None):
 
     q = ksfunc(check)
     return (1-q), lam0, check, bOk
-
-
-def data_from_file(fn):
-    data = read_and_format(fn, 'sf')
-    return map(lambda a: a[1], data)
-
-
-def _dump_integ_file(fn, data):
-    with open(fn, 'w') as f:
-        for fn, w in data:
-            f.write('{dhdl} {work}\n'.format(dhdl=fn, work=w))
 
 
 def gauss_func(A, mean, dev, x):
@@ -890,36 +940,30 @@ def main(cmdl):
     print >>out, "# command = %s" % ' '.join(cmdl.argv)
     print >>out, "\n\n"
 
-    # Whether the work values for 1->0 need to be inverted
-    if cmdl['-reverseB']:
-        reverseB = True
-    else:
-        reverseB = False
-
     # ==========
     # Parse Data
     # ==========
 
     # If list of dhdl.xvg files are provided
     if not cmdl.opt['-i0'].is_set:
-        run_ab = cmdl['-pa']
-        run_ba = cmdl['-pb']
-        run_ab = natural_sort(run_ab)
-        run_ba = natural_sort(run_ba)
-        res_ab, ab_data = work_from_crooks(run_ab, lambda0=0, reverse=False)
-        res_ba, ba_data = work_from_crooks(run_ba, lambda0=1, reverse=reverseB)
-        _dump_integ_file(cmdl['-o0'], ab_data)
-        _dump_integ_file(cmdl['-o1'], ba_data)
+        files_ab = natural_sort(cmdl['-pa'])
+        files_ba = natural_sort(cmdl['-pb'])
+        res_ab = parse_dgdl_files(files_ab, lambda0=0,
+                                  invert_values=False)
+        res_ba = parse_dgdl_files(files_ba, lambda0=1,
+                                  invert_values=cmdl['-reverseB'])
+        _dump_integ_file(cmdl['-o0'], files_ab, res_ab)
+        _dump_integ_file(cmdl['-o1'], files_ba, res_ba)
     # If work values are given as input
     else:
         res_ab = []
         res_ba = []
         for fn in cmdl['-i0']:
             print '\t\tReading integrated values (0->1) from', fn
-            res_ab.extend(data_from_file(fn))
+            res_ab.extend(_data_from_file(fn))
         for fn in cmdl['-i1']:
             print '\t\tReading integrated values (1->0) from', fn
-            res_ba.extend(data_from_file(fn))
+            res_ba.extend(_data_from_file(fn))
 
     # If asked to only do the integration of dhdl.xvg, exit
     if cmdl['-integ_only']:

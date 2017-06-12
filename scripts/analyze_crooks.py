@@ -75,51 +75,6 @@ def tee(fp, s):
     print s
 
 
-def cgi_error_from_mean(nruns, mu1, sig1, n1, mu2, sig2, n2):
-    iseq = []
-
-    for k in range(nruns):
-        g1 = []
-        g2 = []
-        for i in range(n1):
-            g1.append(gauss(mu1, sig1))
-        for i in range(n2):
-            g2.append(gauss(mu2, sig2))
-        m1 = average(g1)
-        s1 = std(g1)
-        m2 = average(g2)
-        s2 = std(g2)
-        p1 = 1./(s1*sqrt(2*pi))  # unused variable: remove?
-        p2 = 1./(s2*sqrt(2*pi))  # unused variable: remove?
-        iq = (m1+m2)/2.
-        iseq.append(iq)
-    mean = average(iseq)  # unused variable: remove?
-    err = std(iseq)
-    return err
-
-
-def cgi_error(nruns, mu1, sig1, n1, mu2, sig2, n2):
-    iseq = []
-    for k in range(nruns):
-        g1 = []
-        g2 = []
-        for i in range(n1):
-            g1.append(gauss(mu1, sig1))
-        for i in range(n2):
-            g2.append(gauss(mu2, sig2))
-        m1 = average(g1)
-        s1 = std(g1)
-        m2 = average(g2)
-        s2 = std(g2)
-        p1 = 1./(s1*sqrt(2*pi))
-        p2 = 1./(s2*sqrt(2*pi))
-        iq = gauss_intersection([p1, m1, s1], [p2, m2, s2])
-        iseq.append(iq)
-    mean = average(iseq)  # unused variable: remove?
-    err = std(iseq)
-    return err
-
-
 def sort_file_list(lst):
 
     # we assume that the directory is numbered
@@ -225,27 +180,21 @@ def work_from_crooks(lst, lambda0, reverse=False):
 
 
 def data_to_gauss(data):
+    '''Takes a one dimensional array and fits a Gaussian.
+
+    Returns
+    -------
+    float
+        mean of the distribution.
+    float
+        standard deviation of the distribution.
+    float
+        height of the curve's peak.
+    '''
     m = average(data)
     dev = std(data)
     A = 1./(dev*sqrt(2*pi))
     return m, dev, A
-
-
-def gauss_intersection(g1, g2):
-    A1, m1, s1 = g1
-    A2, m2, s2 = g2
-    p1 = m1/s1**2-m2/s2**2
-    p2 = sqrt(1/(s1**2*s2**2)*(m1-m2)**2+2*(1/s1**2-1/s2**2)*log(s2/s1))
-    p3 = 1/s1**2-1/s2**2
-    x1 = (p1+p2)/p3
-    x2 = (p1-p2)/p3
-    # determine which solution to take
-    if x1 > m1 and x1 < m2 or x1 > m2 and x1 < m1:
-        return x1
-    elif x2 > m1 and x2 < m2 or x2 > m2 and x2 < m1:
-        return x2
-    else:
-        return False  # we do not take the intersection
 
 
 def ksref():
@@ -420,6 +369,176 @@ class Jarz(object):
         sys.stdout.write('\n')
         err = std(out)
 
+        return err
+
+
+class Crooks(object):
+    '''Crooks Gaussian Intersection (CGI) estimator. The forward and reverse work
+    values are fitted to Gaussian functions and their intersection is taken
+    as the free energy estimate. In some cases, when the two Gaussians are very
+    close to each other, the intersection cannot be taken and the average of
+    the two Gaussian means is taken as the free energy estimate insted. The
+    standard error is by default calculated via bootstrap using 1000 samples.
+
+    Parameters
+    ----------
+    wf : array_like
+        array of forward work values.
+    wr : array_like
+        array of reverse work values.
+
+    Examples
+    --------
+    >>> Crooks(wf, wr)
+    >>> cgi_dg = Crooks.dg
+    >>> cgi_err = Crooks.err_boot
+
+    Attributes
+    ----------
+    dg : float
+        the free energy estimate.
+    err_boot : float
+        standard error of the free energy estimate calculated via bootstrap.
+    inters_bool : bool
+        whether the interection could be taken. If False, the free energy
+        estimate is the average of the two Gaussian means.
+    Af : float
+        height of the forward Gaussian.
+    mf : float
+        mean of the forward Gaussian.
+    devf : float
+        standard deviation of the forward Gaussian.
+    Ar : float
+        height of the reverse Gaussian.
+    mr : float
+        mean of the reverse Gaussian.
+    devr : float
+        standard deviation of the reverse Gaussian.
+    '''
+
+    def __init__(self, wf, wr):
+
+        self.mf, self.devf, self.Af = data_to_gauss(wf)
+        self.mr, self.devr, self.Ar = data_to_gauss(wr)
+
+        # Calculate Crooks properties
+        self.dg, self.inters_bool = self.calc_dg(A1=self.Af,
+                                                 m1=self.mf,
+                                                 s1=self.devf,
+                                                 A2=self.Ar,
+                                                 m2=self.mr,
+                                                 s2=self.devr)
+        self.err_boot = self.calc_err_boot(self.mf, self.devf, len(wf),
+                                           self.mr, self.devr, len(wr),
+                                           nboots=1000,
+                                           intersection=self.inters_bool)
+
+    @staticmethod
+    def calc_dg(A1, m1, s1, A2, m2, s2):
+        '''Calculates the free energy difference using the Crooks Gaussian
+        Intersection method. It finds the intersection of two Gaussian
+        functions. If the intersection cannot be computed, the average of
+        the two Gaussian locations is returned.
+
+        Parameters
+        ----------
+        A1 : float
+            height of the forward Gaussian.
+        m1 : float
+            mean of the forward Gaussian.
+        s1 : float
+            standard deviation of the forward Gaussian.
+        A2 : float
+            height of the reverse Gaussian.
+        m2 : float
+            mean of the reverse Gaussian.
+        s2 : float
+            standard deviation of the reverse Gaussian.
+
+        Returns
+        -------
+        float
+            location of the intersection.
+        bool
+            whether the intersection could be calculated. If the intersection
+            was calculated as expected a True value is returned.
+            If the Gaussians are too close to each other, the intersection
+            cannot be calculated and a False value is returned; in this case,
+            the first float value retured is the average of the Gaussian means.
+        '''
+
+        p1 = m1/s1**2-m2/s2**2
+        p2 = sqrt(1/(s1**2*s2**2)*(m1-m2)**2+2*(1/s1**2-1/s2**2)*log(s2/s1))
+        p3 = 1/s1**2-1/s2**2
+        x1 = (p1+p2)/p3
+        x2 = (p1-p2)/p3
+
+        # determine which solution to take
+        if x1 > m1 and x1 < m2 or x1 > m2 and x1 < m1:
+            dg = x1
+            return dg, True
+        elif x2 > m1 and x2 < m2 or x2 > m2 and x2 < m1:
+            dg = x2
+            return dg, True
+        else:
+            # we do not take the intersection but the average of the means
+            dg = (m1 + m2) * 0.5
+            return dg, False
+
+    @staticmethod
+    def calc_err_boot(m1, s1, n1, m2, s2, n2, nboots=1000, intersection=True):
+        '''Calculates the standard error of the Crooks Gaussian Intersection
+        via parametric bootstrap.
+
+        Parameters
+        ----------
+        m1 : float
+            mean of the forward Gaussian.
+        s1 : float
+            standard deviation of the forward Gaussian.
+        n1 : int
+            number of work values to which the first Gaussian was fit.
+        m2 : float
+            mean of the reverse Gaussian.
+        s2 : float
+            standard deviation of the reverse Gaussian.
+        n2 : int
+            number of work values to which the second Gaussian was fit.
+        nboots: int
+            number of bootstrap samples to use for the error estimate.
+            Parametric bootstrap is used where work values are resampled from
+            two Gaussians.
+        intersection : bool
+            True if the CGI free energy is to be taken from the Gaussians
+            intersection, False if it is to be taken from the average of the
+            means.
+
+        Returns
+        -------
+        float
+            standard error of the mean.
+        '''
+
+        iseq = []
+        for k in range(nboots):
+            g1 = []
+            g2 = []
+            for i in range(n1):
+                g1.append(gauss(m1, s1))
+            for i in range(n2):
+                g2.append(gauss(m2, s2))
+            m1 = average(g1)
+            s1 = std(g1)
+            m2 = average(g2)
+            s2 = std(g2)
+            p1 = 1./(s1*sqrt(2*pi))
+            p2 = 1./(s2*sqrt(2*pi))
+            if intersection is True:
+                iq, _ = Crooks.calc_dg(p1, m1, s1, p2, m2, s2)
+            elif intersection is False:
+                iq = (m1 + m2) / 2.0
+            iseq.append(iq)
+        err = std(iseq)
         return err
 
 
@@ -721,6 +840,7 @@ def parse_options(argv):
     version = "1.2"
     # TODO: option to choose units for output
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
+    # TODO: pickle data and results?
     options = [
         Option("-nbins", "int", 10, "number of histograms bins for plot"),
         Option("-T", "real", 298, "Temperature for BAR calculation"),
@@ -844,23 +964,26 @@ def main(cmdl):
         res_ab = select_random_subset(res_ab, ntraj)
         res_ba = select_random_subset(res_ba, ntraj)
 
-    mf, devf, Af = data_to_gauss(res_ab)
-    mb, devb, Ab = data_to_gauss(res_ba)
-
     print('\n\n')
     tee(out, ' --------------------------------------------------------')
     tee(out, '                       ANALYSIS')
     tee(out, ' --------------------------------------------------------')
-    tee(out, '               Number of trajectories:')
-    tee(out, '               0->1 : %d' % len(res_ab))
-    tee(out, '               1->0 : %d' % len(res_ba))
-    tee(out, '               Temp : %.2f K' % T)
+    tee(out, ' Number of forward (0->1) trajectories: %d' % len(res_ab))
+    tee(out, ' Number of reverse (1->0) trajectories: %d' % len(res_ba))
+    tee(out, ' Temperature : %.2f K' % T)
 
+    # ----------------------------
+    # Crooks Gaussian Intersection
+    # ----------------------------
     tee(out, '\n --------------------------------------------------------')
-    tee(out, '             Crooks-Gaussian Intersection     ')
+    tee(out, '             Crooks Gaussian Intersection     ')
     tee(out, ' --------------------------------------------------------')
-    tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (mf, devf))
-    tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (mb, devb))
+
+    print('  Calculating Intersection...')
+    cgi = Crooks(wf=res_ab, wr=res_ba)
+
+    tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
+    tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
 
     if cmdl['-KS']:
         print('  Running KS-test ....')
@@ -878,21 +1001,11 @@ def main(cmdl):
         else:
             tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' % (q1, check1))
 
-    print('  Calculating Intersection...')
-    cgi_result = gauss_intersection([Af, mf, devf], [Ab, mb, devb])
-    intersection = True
-    if not cgi_result:
+    if cgi.inters_bool is False:
         tee(out, '\n  Gaussians too close for intersection calculation')
         tee(out, '   --> Taking difference of mean values')
-        cgi_result = (mf+mb)*.5
-        intersection = False
-    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi_result)
-    if intersection:
-        cgi_err = cgi_error(1000, mf, devf, len(res_ab), mb, devb, len(res_ba))
-    else:
-        cgi_err = cgi_error_from_mean(1000, mf, devf, len(res_ab),
-                                      mb, devb, len(res_ba))
-    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi_err)
+    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
+    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
 
     # ------------------------
     # Bennett Acceptance Ratio
@@ -914,8 +1027,8 @@ def main(cmdl):
     tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
     tee(out, ' ------------------------------------------------------')
     # Should we make this optional?
-    diff = abs(cgi_result - bar.dg)
-    mean = (cgi_result+bar.dg)*.5
+    diff = abs(cgi.dg - bar.dg)
+    mean = (cgi.dg + bar.dg) * 0.5
     tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
     tee(out, ' ------------------------------------------------------')
@@ -940,10 +1053,10 @@ def main(cmdl):
 
     if cmdl['-plot']:
         print '\n   Plotting histograms......'
-        make_plot(cmdl['-cgi_plot'], res_ab, res_ba, cgi_result, cgi_err,
+        make_plot(cmdl['-cgi_plot'], res_ab, res_ba, cgi.dg, cgi.err_boot,
                   cmdl['-nbins'], cmdl['-dpi'])
-        make_W_over_time_plot(cmdl['-W_over_t'], res_ab, res_ba, cgi_result,
-                              cgi_err, cmdl['-nbins'], cmdl['-dpi'])
+        make_W_over_time_plot(cmdl['-W_over_t'], res_ab, res_ba, cgi.dg,
+                              cgi.err_boot, cmdl['-nbins'], cmdl['-dpi'])
 
     print('\n   ......done...........\n')
 

@@ -642,7 +642,7 @@ class BAR(object):
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
             for i in range(nr):
-                valB = [choice(wf) for _ in xrange(nr)]
+                valB = [choice(wr) for _ in xrange(nr)]
             foo = BAR.calc_dg(valA, valB, T)
             res.append(foo)
         sys.stdout.write('\n')
@@ -684,8 +684,7 @@ class BAR(object):
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
             for i in range(nr):
-                # FIXME: is "choice(wf)" correct? seems like it should be "choice(wr)"
-                valB = [choice(wf) for _ in xrange(nr)]
+                valB = [choice(wr) for _ in xrange(nr)]
             foo = BAR.calc_conv(dg, valA, valB, T)
             res.append(foo)
         sys.stdout.write('\n')
@@ -986,6 +985,12 @@ def main(cmdl):
         print('  Running KS-test ....')
         q0, lam00, check0, bOk0 = ks(res_ab)
         q1, lam01, check1, bOk1 = ks(res_ba)
+
+        print q0, lam00, check0, bOk0
+        from scipy import stats
+        stats.kstest(res_ab)
+        exit()
+
 
         tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
         if bOk0:

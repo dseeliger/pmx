@@ -336,48 +336,93 @@ def dump_integ_file(fn, data):
     fp.close()
 
 
-def Jarz(res, c=1.0, T=298):
-    kb = 0.00831447215
-    beta = 1./(kb*T)
-    n = float(len(res))
-    mexp = 0.0
-    m = 0.0
-    m2 = 0.0
-    for w in res:
-        mexp = mexp + exp(-beta*c*w)
-        m = m + c*w
-        m2 = m2 + w*w
-    mexp = mexp/n
-    m = m/n
-    m2 = m2/n
-    var = (m2-m*m)*(n/(n-1))
-    # Jarzynski estimator
-    dG1 = -kb*T*log(mexp)
-    # Fluctuation-Dissipation estimator - unused: remove?
-    dG2 = m - beta*var/2.0
-    return dG1
-
-
-def Jarz_err_boot(res, nruns, c=1.0, T=298.):
-    out = []
-    n = int(len(res))
-    for k in range(nruns):
-        sys.stdout.write('\rJarzynski error bootstrap: iteration %s/%s'
-                         % (k, nruns))
-        sys.stdout.flush()
-        for i in range(n):
-            val = [choice(res) for _ in xrange(n)]
-        foo = -1.0*Jarz(val, c, T)
-        out.append(foo)
-    sys.stdout.write('\n')
-    err = std(out)
-    return(err)
-
-
 # =================
 # Estimator Classes
 # =================
 # TODO: docstrings
+
+class Jarz(object):
+    '''Jarzynski estimator.
+
+    Description...
+
+    Parameters
+    ----------
+    wf : array_like
+        array of forward work values.
+    wr : array_like
+        array of reverse work values.
+    T : float or int
+    nboots : int
+        number of bootstrap samples to use for error estimation.
+
+    Examples
+    --------
+
+
+    Attributes
+    ----------
+
+    '''
+
+    def __init__(self, wf, wr, T, nboots=0):
+        self.wf = np.array(wf)
+        self.wr = np.array(wr)
+        self.T = float(T)
+        self.nboots = nboots
+
+        # Calculate all Jarz properties available
+        self.dg_for = self.calc_dg(w=self.wf, c=1.0, T=self.T)
+        self.dg_rev = -1.0 * self.calc_dg(w=self.wr, c=-1.0, T=self.T)
+        self.dg_mean = (self.dg_for + self.dg_rev) * 0.5
+
+        if nboots > 0:
+            self.err_boot_for = self.calc_err_boot(w=self.wf, T=self.T,
+                                                   c=1.0, nboots=nboots)
+            self.err_boot_rev = self.calc_err_boot(w=self.wr, T=self.T,
+                                                   c=-1.0, nboots=nboots)
+
+    @staticmethod
+    def calc_dg(w, T, c):
+        beta = 1./(kb*T)
+        n = float(len(w))
+        mexp = 0.0
+        m = 0.0
+        m2 = 0.0
+        for i in w:
+            mexp = mexp + exp(-beta*c*i)
+            m = m + c*i
+            m2 = m2 + i*i
+        mexp = mexp/n
+        m = m/n
+        m2 = m2/n
+        var = (m2-m*m)*(n/(n-1))
+        # Jarzynski estimator
+        dg = -kb*T*log(mexp)
+        # Fluctuation-Dissipation estimator
+        # FIXME: unused atm, remove or return?
+        dg2 = m - beta*var/2.0
+
+        return dg
+
+    @staticmethod
+    def calc_err_boot(w, T, c, nboots):
+        out = []
+        n = int(len(w))
+        for k in range(nboots):
+            sys.stdout.write('\rJarzynski error bootstrap: iteration %s/%s'
+                             % (k+1, nboots))
+            sys.stdout.flush()
+            for i in range(n):
+                val = [choice(w) for _ in xrange(n)]
+            foo = -1.0 * Jarz.calc_dg(val, T, c)
+            out.append(foo)
+        sys.stdout.write('\n')
+        err = std(out)
+
+        return err
+
+
 class BAR(object):
     '''Bennett acceptance ratio (BAR).
 
@@ -390,7 +435,7 @@ class BAR(object):
     --------
     '''
 
-    def __init__(self, wf, wr, T=298., nboots=0):
+    def __init__(self, wf, wr, T, nboots=0):
         self.wf = array(wf)  # is array() needed? they are both lists
         self.wr = array(wr)
         self.T = float(T)
@@ -476,7 +521,7 @@ class BAR(object):
         res = []
         for k in range(nruns):
             sys.stdout.write('\rBAR error bootstrap: iteration %s/%s'
-                             % (k, nruns))
+                             % (k+1, nruns))
             sys.stdout.flush()
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
@@ -518,7 +563,7 @@ class BAR(object):
         res = []
         for k in range(nruns):
             sys.stdout.write('\rConvergence error bootstrap: '
-                             'iteration %s/%s' % (k, nruns))
+                             'iteration %s/%s' % (k+1, nruns))
             sys.stdout.flush()
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
@@ -863,20 +908,16 @@ def main(cmdl):
     tee(out, ' ------------------------------------------------------')
 
     if cmdl['-jarz']:
+        jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=cmdl['-nruns'])
         tee(out, ' --------------------------------------------------------')
         tee(out, '             ANALYSIS: Jarzynski estimator     ')
         tee(out, ' --------------------------------------------------------')
-        jarz_resultA = Jarz(res_ab, 1.0, T)
-        jarz_resultB = -1.0*Jarz(res_ba, -1.0, T)
-        tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz_resultA)
-        tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz_resultB)
-        jarz_err_bootA = Jarz_err_boot(res_ab, cmdl['-nruns'], 1.0, T)
-        jarz_err_bootB = Jarz_err_boot(res_ba, cmdl['-nruns'], -1.0, T)
-        tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootA)
-        tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz_err_bootB)
+        tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
+        tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
+        tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
+        tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
         tee(out, ' ------------------------------------------------------')
-        mean = (jarz_resultA+jarz_resultB)*.5
-        tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % mean)
+        tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % jarz.dg_mean)
         tee(out, ' ------------------------------------------------------')
 
     if cmdl['-plot']:

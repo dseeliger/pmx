@@ -34,16 +34,12 @@ import os
 import time
 from copy import deepcopy
 from pmx.parser import *
-from pylab import *
+#from pylab import *
 import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
 from random import gauss, randint, choice
-
-# move this inside plot functions?
-params = {'legend.fontsize': 12}
-rcParams.update(params)
 
 # Constants
 kb = 0.00831447215
@@ -103,7 +99,7 @@ class Jarz(object):
         m = 0.0
         m2 = 0.0
         for i in w:
-            mexp = mexp + exp(-beta*c*i)
+            mexp = mexp + np.exp(-beta*c*i)
             m = m + c*i
             m2 = m2 + i*i
         mexp = mexp/n
@@ -111,7 +107,7 @@ class Jarz(object):
         m2 = m2/n
         var = (m2-m*m)*(n/(n-1))
         # Jarzynski estimator
-        dg = -kb*T*log(mexp)
+        dg = -kb*T*np.log(mexp)
         # Fluctuation-Dissipation estimator
         # FIXME: unused atm, remove or return?
         dg2 = m - beta*var/2.0
@@ -131,7 +127,7 @@ class Jarz(object):
             foo = -1.0 * Jarz.calc_dg(val, T, c)
             out.append(foo)
         sys.stdout.write('\n')
-        err = std(out)
+        err = np.std(out)
 
         return err
 
@@ -231,7 +227,7 @@ class Crooks(object):
         '''
 
         p1 = m1/s1**2-m2/s2**2
-        p2 = sqrt(1/(s1**2*s2**2)*(m1-m2)**2+2*(1/s1**2-1/s2**2)*log(s2/s1))
+        p2 = np.sqrt(1/(s1**2*s2**2)*(m1-m2)**2+2*(1/s1**2-1/s2**2)*np.log(s2/s1))
         p3 = 1/s1**2-1/s2**2
         x1 = (p1+p2)/p3
         x2 = (p1-p2)/p3
@@ -299,7 +295,7 @@ class Crooks(object):
             m2, dev2, A2 = data_to_gauss(g2)
             iq, _ = Crooks.calc_dg(A1, m1, s1, A2, m2, s2)
             iseq.append(iq)
-        err = std(iseq)
+        err = np.std(iseq)
         return err
 
 
@@ -316,15 +312,15 @@ class BAR(object):
     '''
 
     def __init__(self, wf, wr, T, nboots=0):
-        self.wf = array(wf)  # is array() needed? they are both lists
-        self.wr = array(wr)
+        self.wf = np.array(wf)
+        self.wr = np.array(wr)
         self.T = float(T)
         self.nboots = nboots
 
         self.nf = len(wf)
         self.nr = len(wr)
         self.beta = 1./(kb*self.T)
-        self.M = kb * self.T * log(float(self.nf) / float(self.nr))
+        self.M = kb * self.T * np.log(float(self.nf) / float(self.nr))
 
         # Calculate all BAR properties available
         self.dg = self.calc_dg(self.wf, self.wr, self.T)
@@ -352,20 +348,20 @@ class BAR(object):
         nf = float(len(wf))
         nr = float(len(wr))
         beta = 1./(kb*T)
-        M = kb * T * log(nf/nr)
+        M = kb * T * np.log(nf/nr)
 
         def func(x, wf, wr):
             sf = 0
             for v in wf:
-                sf += 1./(1+exp(beta*(M+v - x)))
+                sf += 1./(1+np.exp(beta*(M+v - x)))
                 sr = 0
                 for v in wr:
-                    sr += 1./(1+exp(-beta*(M+v - x)))
+                    sr += 1./(1+np.exp(-beta*(M+v - x)))
             r = sf-sr
             return r**2
 
-        avA = average(wf)
-        avB = average(wr)
+        avA = np.average(wf)
+        avB = np.average(wr)
         x0 = (avA+avB)/2.
         dg = fmin(func, x0=x0, args=(wf, wr), disp=0)
 
@@ -378,18 +374,18 @@ class BAR(object):
         nf = float(len(wf))
         nr = float(len(wr))
         beta = 1./(kb*T)
-        M = kb * T * log(nf/nr)
+        M = kb * T * np.log(nf/nr)
 
         err = 0
         for v in wf:
-            err += 1./(2+2*cosh(beta * (M+v-dg)))
+            err += 1./(2+2*np.cosh(beta * (M+v-dg)))
         for v in wr:
-            err += 1./(2+2*cosh(beta * (M+v-dg)))
+            err += 1./(2+2*np.cosh(beta * (M+v-dg)))
         N = nf + nr
         err /= float(N)
         tot = 1/(beta**2*N)*(1./err-(N/nf + N/nr))
 
-        err = float(sqrt(tot))
+        err = float(np.sqrt(tot))
         return err
 
     @staticmethod
@@ -410,7 +406,7 @@ class BAR(object):
             foo = BAR.calc_dg(valA, valB, T)
             res.append(foo)
         sys.stdout.write('\n')
-        err_boot = std(res)
+        err_boot = np.std(res)
 
         return err_boot
 
@@ -452,7 +448,7 @@ class BAR(object):
             foo = BAR.calc_conv(dg, valA, valB, T)
             res.append(foo)
         sys.stdout.write('\n')
-        err = std(res)
+        err = np.std(res)
         return(err)
 
 
@@ -580,9 +576,9 @@ def data_to_gauss(data):
     float
         height of the curve's peak.
     '''
-    m = average(data)
-    dev = std(data)
-    A = 1./(dev*sqrt(2*pi))
+    m = np.average(data)
+    dev = np.std(data)
+    A = 1./(dev*np.sqrt(2*np.pi))
     return m, dev, A
 
 
@@ -606,11 +602,11 @@ def ks_norm_test(data, alpha=0.05, refks=None):
     def ksref():
         f = 1
         potent = 10000
-        lamb = arange(0.25, 2.5, 0.001)
-        q = array(zeros(len(lamb), float))
+        lamb = np.arange(0.25, 2.5, 0.001)
+        q = np.zeros(len(lamb), float)
         res = []
         for k in range(-potent, potent):
-            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
             f = -f
         for i in range(len(lamb)):
             res.append((lamb[i], q[i]))
@@ -621,7 +617,7 @@ def ks_norm_test(data, alpha=0.05, refks=None):
         potent = 10000
         q = 0
         for k in range(-potent, potent):
-            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            q = q + f*np.exp(-2.0*(k**2)*(lamb**2))
             f *= -1
         return q
 
@@ -636,16 +632,16 @@ def ks_norm_test(data, alpha=0.05, refks=None):
             cnt += 1
             edf_.append(cnt/N)
             ndata.append(item)
-        ndata = array(ndata)
-        edf_ = array(edf_)
+        ndata = np.array(ndata)
+        edf_ = np.array(edf_)
         return ndata, edf_
 
     def cdf(dg_data):
         data = deepcopy(dg_data)
         data.sort()
-        mean = average(data)
-        sig = std(data)
-        cdf = 0.5*(1+erf((data-mean)/float(sig*sqrt(2))))
+        mean = np.average(data)
+        sig = np.std(data)
+        cdf = 0.5*(1+erf((data-mean)/float(sig*np.sqrt(2))))
         return cdf
 
     N = len(data)
@@ -660,7 +656,7 @@ def ks_norm_test(data, alpha=0.05, refks=None):
             d = abs(ed[i-1]-cd[i])
             dval.append(d)
     dmax = max(dval)
-    check = math.sqrt(N)*dmax
+    check = np.sqrt(N)*dmax
     if not refks:
         refks = ksref()
     lst = filter(lambda x: x[1] > siglev, refks)
@@ -687,12 +683,19 @@ def dump_integ_file(fn, data):
 
 
 def gauss_func(A, mean, dev, x):
-    x = array(x)
-    y = A*exp(-(((x-mean)**2)/(2.0*(dev**2))))
+    x = np.array(x)
+    y = A*np.exp(-(((x-mean)**2)/(2.0*(dev**2))))
     return y
 
 
 def make_plot(fname, data1, data2, result, err, nbins, dpi):
+    #from pylab import *
+
+    # move this inside plot functions?
+    params = {'legend.fontsize': 12}
+    rcParams.update(params)
+
+
     figure(figsize=(8, 6))
     mf, devf, Af = data_to_gauss(data1)
     mb, devb, Ab = data_to_gauss(data2)
@@ -714,7 +717,7 @@ def make_plot(fname, data1, data2, result, err, nbins, dpi):
     for i in range(len(lab)):
         ll.append("")
     yticks(loc, ll)
-    x = arange(mini, maxi, .5)
+    x = np.arange(mini, maxi, .5)
     y1 = gauss_func(Af, mf, devf, x)
     y2 = gauss_func(Ab, mb, devb, x)
 
@@ -735,6 +738,8 @@ def make_plot(fname, data1, data2, result, err, nbins, dpi):
 
 
 def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi):
+    #from pylab import *
+
     figure(figsize=(8, 6))
     x1 = range(len(data1))
     x2 = range(len(data2))
@@ -748,8 +753,8 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi):
     maxi = max(data1+data2)
     mini = min(data1+data2)
 
-    sm1 = smooth(array(data1))
-    sm2 = smooth(array(data2))
+    sm1 = smooth(np.array(data1))
+    sm2 = smooth(np.array(data2))
     subplot(1, 2, 1)
     plot(x1, data1, 'g-', linewidth=2, label="Forward (0->1)", alpha=.3)
     plot(x1, sm1, 'g-', linewidth=3)
@@ -769,7 +774,7 @@ def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi):
     hist(data2, bins=nbins, orientation='horizontal', facecolor='blue',
          alpha=.75, normed=True)
 
-    x = arange(mini, maxi, .5)
+    x = np.arange(mini, maxi, .5)
 
     y1 = gauss_func(Af, mf, devf, x)
     y2 = gauss_func(Ab, mb, devb, x)

@@ -33,34 +33,13 @@ import sys
 import os
 import time
 from copy import deepcopy
-from pmx import *  # TODO: use explicit imports: hard to find out what modules are being used
 from pmx.parser import *
 from pylab import *
+import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
 from random import gauss, randint, choice
-
-# TODO:
-# - consolidate functions: e.g. BAR* and Jarz* functions
-# - define internal-use functions
-# - add docstrings
-# - cleanup main:
-#     - move messages to stderr (tee) inside the different functions?
-#     - make more readable by using less and more self-contained funcs, e.g.:
-#           data = read_dgdl()
-#           if args.do_jarz:
-#               dg_jarz = jarz(data)
-#           etc etc
-#
-#  The above will make it easier to use this both as command line tool as well
-#  as within other scripts. E.g. one could get a list of the dgdl.xvg files
-#  then estimate the free energy along with its error just like BAR(dgdl_list)
-#  and do whatever they want with the numbers, or something like that
-#
-# - use logger for info and debug
-
-debug = True  # unused: remove?
 
 # move this inside plot functions?
 params = {'legend.fontsize': 12}
@@ -70,236 +49,9 @@ rcParams.update(params)
 kb = 0.00831447215
 
 
-def tee(fp, s):
-    print >>fp, s
-    print s
-
-
-def sort_file_list(lst):
-
-    # we assume that the directory is numbered
-    # guess directory base name first
-    dir_name = lst[0].split('/')[-2]
-    base_name = ''
-    for i, x in enumerate(dir_name):
-        if x.isdigit():
-            check = True
-            for k in range(i, len(dir_name)):
-                if not dir_name[k].isdigit():
-                    check = False
-            if check:
-                base_name = dir_name[:i]
-                break
-    if base_name:
-        def get_num(s): return int(s.split('/')[-2].split(base_name)[1])
-        lst.sort(lambda a, b: cmp(get_num(a), get_num(b)))
-        return lst
-    else:
-        return lst
-
-
-def process_dgdl(fn, ndata=-1, lambda0=0):
-    sys.stdout.write('\r------>  %s' % fn)
-    sys.stdout.flush()
-    l = open(fn).readlines()
-    if not l:
-        return None, None
-    r = []
-    for line in l:
-        if line[0] not in '#@&':
-            try:
-                r.append([float(x) for x in line.split()])
-            except:
-                print ' !! Skipping %s ' % (fn)
-                return None, None
-
-    if ndata != -1 and len(r) != ndata:
-        try:
-            print(' !! Skipping %s ( read %d data points, should be %d )'
-                  % (fn, len(r), ndata))
-        except:
-            print ' !! Skipping %s ' % (fn)
-        return None, None
-    # convert time to lambda
-    ndata = len(r)
-    dlambda = 1./float(ndata)
-    if lambda0 == 1:
-        dlambda *= -1
-    data = []
-
-    for i, (ttime, dgdl) in enumerate(r):
-        data.append([lambda0+i*dlambda, dgdl])
-    x = map(lambda a: a[0], data)
-    y = map(lambda a: a[1], data)
-
-    if lambda0 == 1:
-        x.reverse()
-        y.reverse()
-    return simps(y, x), ndata
-
-
-def check_first_dgdl(fn, lambda0):
-    l = open(fn).readlines()
-    if not l:
-        return None
-    r = []
-    for line in l:
-        if line[0] not in '#@&':
-            r.append([float(x) for x in line.split()])
-    ndata = len(r)
-    dlambda = 1./float(ndata)
-    if lambda0 == 1:
-        dlambda *= -1
-    print '---------------------------------------------'
-    print '\t\t Checking simulation data.....'
-    print '\t\t File: %s' % fn
-    print '\t\t # data points: %d' % ndata
-    print '\t\t Length of trajectory: %8.3f ps' % r[-1][0]
-    print '\t\t Delta lambda: %8.5f' % dlambda
-    print '---------------------------------------------'
-
-
-def work_from_crooks(lst, lambda0, reverse=False):
-    print '\nProcessing simulation data......'
-    output_data = []
-    check_first_dgdl(lst[0], lambda0)
-    first_res, ndata = process_dgdl(lst[0], lambda0=lambda0)
-    output_data.append([lst[0], first_res])
-    results = [first_res]
-    for f in lst[1:]:
-        res, tmp = process_dgdl(f, ndata=ndata, lambda0=lambda0)
-        if res is not None:
-            results.append(res)
-            output_data.append([f, res])
-
-    if reverse is True:
-        results = [x*(-1) for x in results]
-        output_data = [[x, y*(-1)] for x, y in output_data]
-
-    return results, output_data
-
-
-def data_to_gauss(data):
-    '''Takes a one dimensional array and fits a Gaussian.
-
-    Returns
-    -------
-    float
-        mean of the distribution.
-    float
-        standard deviation of the distribution.
-    float
-        height of the curve's peak.
-    '''
-    m = average(data)
-    dev = std(data)
-    A = 1./(dev*sqrt(2*pi))
-    return m, dev, A
-
-
-def ks_norm_test(data, alpha=0.05, refks=None):
-    '''Performs a Kolmogorov-Smirnov test of normality.
-
-    Parameters
-    ----------
-    data : array_like
-        a one-dimensional array of values. This is the distribution tested
-        for normality.
-    alpha : float
-        significance level of the statistics. Default if 0.05.
-    refks : ???
-        ???
-
-    Returns
-    -------
-    '''
-
-    def ksref():
-        f = 1
-        potent = 10000
-        lamb = arange(0.25, 2.5, 0.001)
-        q = array(zeros(len(lamb), float))
-        res = []
-        for k in range(-potent, potent):
-            q = q + f*exp(-2.0*(k**2)*(lamb**2))
-            f = -f
-        for i in range(len(lamb)):
-            res.append((lamb[i], q[i]))
-        return res
-
-    def ksfunc(lamb):
-        f = 1
-        potent = 10000
-        q = 0
-        for k in range(-potent, potent):
-            q = q + f*exp(-2.0*(k**2)*(lamb**2))
-            f *= -1
-        return q
-
-    def edf(dg_data):
-        edf_ = []
-        ndata = []
-        data = deepcopy(dg_data)
-        data.sort()
-        N = float(len(data))
-        cnt = 0
-        for item in data:
-            cnt += 1
-            edf_.append(cnt/N)
-            ndata.append(item)
-        ndata = array(ndata)
-        edf_ = array(edf_)
-        return ndata, edf_
-
-    def cdf(dg_data):
-        data = deepcopy(dg_data)
-        data.sort()
-        mean = average(data)
-        sig = std(data)
-        cdf = 0.5*(1+erf((data-mean)/float(sig*sqrt(2))))
-        return cdf
-
-    N = len(data)
-    nd, ed = edf(data)
-    cd = cdf(data)
-    siglev = 1-alpha
-    dval = []
-    for i, val in enumerate(ed):
-        d = abs(val-cd[i])
-        dval.append(d)
-        if i:
-            d = abs(ed[i-1]-cd[i])
-            dval.append(d)
-    dmax = max(dval)
-    check = math.sqrt(N)*dmax
-    if not refks:
-        refks = ksref()
-    lst = filter(lambda x: x[1] > siglev, refks)
-    lam0 = lst[0][0]
-    if check >= lam0:
-        bOk = False
-    else:
-        bOk = True
-
-    q = ksfunc(check)
-    return (1-q), lam0, check, bOk
-
-
-def data_from_file(fn):
-    data = read_and_format(fn, 'sf')
-    return map(lambda a: a[1], data)
-
-
-def dump_integ_file(fn, data):
-    fp = open(fn, 'w')
-    for fn, w in data:
-        print >>fp, fn, w
-    fp.close()
-
-
-# =================
-# Estimator Classes
-# =================
+# ==============================================================================
+#                             Estimator Classes
+# ==============================================================================
 # TODO: docstrings
 
 class Jarz(object):
@@ -641,15 +393,15 @@ class BAR(object):
         return err
 
     @staticmethod
-    def calc_err_boot(wf, wr, nruns, T):
+    def calc_err_boot(wf, wr, nboots, T):
         '''Calculates the error by bootstrapping.'''
 
         nf = len(wf)
         nr = len(wr)
         res = []
-        for k in range(nruns):
+        for k in range(nboots):
             sys.stdout.write('\r  BAR error bootstrap: iteration %s/%s'
-                             % (k+1, nruns))
+                             % (k+1, nboots))
             sys.stdout.flush()
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
@@ -685,13 +437,13 @@ class BAR(object):
         return conv
 
     @staticmethod
-    def calc_conv_err_boot(dg, wf, wr, nruns, T):
+    def calc_conv_err_boot(dg, wf, wr, nboots, T):
         nf = len(wf)
         nr = len(wr)
         res = []
-        for k in range(nruns):
+        for k in range(nboots):
             sys.stdout.write('\r  Convergence error bootstrap: '
-                             'iteration %s/%s' % (k+1, nruns))
+                             'iteration %s/%s' % (k+1, nboots))
             sys.stdout.flush()
             for i in range(nf):
                 valA = [choice(wf) for _ in xrange(nf)]
@@ -702,6 +454,236 @@ class BAR(object):
         sys.stdout.write('\n')
         err = std(res)
         return(err)
+
+
+# ==============================================================================
+#                               Functions
+# ==============================================================================
+def tee(fp, s):
+    print >>fp, s
+    print s
+
+
+def sort_file_list(lst):
+
+    # we assume that the directory is numbered
+    # guess directory base name first
+    dir_name = lst[0].split('/')[-2]
+    base_name = ''
+    for i, x in enumerate(dir_name):
+        if x.isdigit():
+            check = True
+            for k in range(i, len(dir_name)):
+                if not dir_name[k].isdigit():
+                    check = False
+            if check:
+                base_name = dir_name[:i]
+                break
+    if base_name:
+        def get_num(s): return int(s.split('/')[-2].split(base_name)[1])
+        lst.sort(lambda a, b: cmp(get_num(a), get_num(b)))
+        return lst
+    else:
+        return lst
+
+
+def process_dgdl(fn, ndata=-1, lambda0=0):
+    sys.stdout.write('\r------>  %s' % fn)
+    sys.stdout.flush()
+    l = open(fn).readlines()
+    if not l:
+        return None, None
+    r = []
+    for line in l:
+        if line[0] not in '#@&':
+            try:
+                r.append([float(x) for x in line.split()])
+            except:
+                print ' !! Skipping %s ' % (fn)
+                return None, None
+
+    if ndata != -1 and len(r) != ndata:
+        try:
+            print(' !! Skipping %s ( read %d data points, should be %d )'
+                  % (fn, len(r), ndata))
+        except:
+            print ' !! Skipping %s ' % (fn)
+        return None, None
+    # convert time to lambda
+    ndata = len(r)
+    dlambda = 1./float(ndata)
+    if lambda0 == 1:
+        dlambda *= -1
+    data = []
+
+    for i, (ttime, dgdl) in enumerate(r):
+        data.append([lambda0+i*dlambda, dgdl])
+    x = map(lambda a: a[0], data)
+    y = map(lambda a: a[1], data)
+
+    if lambda0 == 1:
+        x.reverse()
+        y.reverse()
+    return simps(y, x), ndata
+
+
+def check_first_dgdl(fn, lambda0):
+    l = open(fn).readlines()
+    if not l:
+        return None
+    r = []
+    for line in l:
+        if line[0] not in '#@&':
+            r.append([float(x) for x in line.split()])
+    ndata = len(r)
+    dlambda = 1./float(ndata)
+    if lambda0 == 1:
+        dlambda *= -1
+    print '---------------------------------------------'
+    print '\t\t Checking simulation data.....'
+    print '\t\t File: %s' % fn
+    print '\t\t # data points: %d' % ndata
+    print '\t\t Length of trajectory: %8.3f ps' % r[-1][0]
+    print '\t\t Delta lambda: %8.5f' % dlambda
+    print '---------------------------------------------'
+
+
+def work_from_crooks(lst, lambda0, reverse=False):
+    print '\nProcessing simulation data......'
+    output_data = []
+    check_first_dgdl(lst[0], lambda0)
+    first_res, ndata = process_dgdl(lst[0], lambda0=lambda0)
+    output_data.append([lst[0], first_res])
+    results = [first_res]
+    for f in lst[1:]:
+        res, tmp = process_dgdl(f, ndata=ndata, lambda0=lambda0)
+        if res is not None:
+            results.append(res)
+            output_data.append([f, res])
+
+    if reverse is True:
+        results = [x*(-1) for x in results]
+        output_data = [[x, y*(-1)] for x, y in output_data]
+
+    return results, output_data
+
+
+def data_to_gauss(data):
+    '''Takes a one dimensional array and fits a Gaussian.
+
+    Returns
+    -------
+    float
+        mean of the distribution.
+    float
+        standard deviation of the distribution.
+    float
+        height of the curve's peak.
+    '''
+    m = average(data)
+    dev = std(data)
+    A = 1./(dev*sqrt(2*pi))
+    return m, dev, A
+
+
+def ks_norm_test(data, alpha=0.05, refks=None):
+    '''Performs a Kolmogorov-Smirnov test of normality.
+
+    Parameters
+    ----------
+    data : array_like
+        a one-dimensional array of values. This is the distribution tested
+        for normality.
+    alpha : float
+        significance level of the statistics. Default if 0.05.
+    refks : ???
+        ???
+
+    Returns
+    -------
+    '''
+
+    def ksref():
+        f = 1
+        potent = 10000
+        lamb = arange(0.25, 2.5, 0.001)
+        q = array(zeros(len(lamb), float))
+        res = []
+        for k in range(-potent, potent):
+            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            f = -f
+        for i in range(len(lamb)):
+            res.append((lamb[i], q[i]))
+        return res
+
+    def ksfunc(lamb):
+        f = 1
+        potent = 10000
+        q = 0
+        for k in range(-potent, potent):
+            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            f *= -1
+        return q
+
+    def edf(dg_data):
+        edf_ = []
+        ndata = []
+        data = deepcopy(dg_data)
+        data.sort()
+        N = float(len(data))
+        cnt = 0
+        for item in data:
+            cnt += 1
+            edf_.append(cnt/N)
+            ndata.append(item)
+        ndata = array(ndata)
+        edf_ = array(edf_)
+        return ndata, edf_
+
+    def cdf(dg_data):
+        data = deepcopy(dg_data)
+        data.sort()
+        mean = average(data)
+        sig = std(data)
+        cdf = 0.5*(1+erf((data-mean)/float(sig*sqrt(2))))
+        return cdf
+
+    N = len(data)
+    nd, ed = edf(data)
+    cd = cdf(data)
+    siglev = 1-alpha
+    dval = []
+    for i, val in enumerate(ed):
+        d = abs(val-cd[i])
+        dval.append(d)
+        if i:
+            d = abs(ed[i-1]-cd[i])
+            dval.append(d)
+    dmax = max(dval)
+    check = math.sqrt(N)*dmax
+    if not refks:
+        refks = ksref()
+    lst = filter(lambda x: x[1] > siglev, refks)
+    lam0 = lst[0][0]
+    if check >= lam0:
+        bOk = False
+    else:
+        bOk = True
+
+    q = ksfunc(check)
+    return (1-q), lam0, check, bOk
+
+
+def data_from_file(fn):
+    data = read_and_format(fn, 'sf')
+    return map(lambda a: a[1], data)
+
+
+def dump_integ_file(fn, data):
+    fp = open(fn, 'w')
+    for fn, w in data:
+        print >>fp, fn, w
+    fp.close()
 
 
 def gauss_func(A, mean, dev, x):
@@ -844,8 +826,11 @@ def select_random_subset(lst, n):
 
 def parse_options(argv):
 
-    # should we keep versioning just for the whole pmx?
-    version = "1.2"
+    from pmx import Option
+    from pmx import FileOption
+    from pmx import Commandline
+    from pmx import __version__
+
     # TODO: option to choose units for output
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
     # TODO: pickle data and results?
@@ -871,8 +856,10 @@ def parse_options(argv):
         Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option("-jarz", "bool", False, "Jarzynski estimation"),
         Option("-plot", "bool", True, "Plot work histograms"),
-        Option("-nruns", "int", 100,
-               "number of runs for bootstrapped BAR error"),
+        Option("-nruns", "int", 0,
+               "number of runs for bootstrapped BAR and Jarz errors. Default "
+               "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "
+               "samples are always used by default."),
         ]
 
     files = [
@@ -901,7 +888,7 @@ def parse_options(argv):
 
     cmdl = Commandline(argv, options=options, fileoptions=files,
                        program_desc=help_text, check_for_existing_files=False,
-                       version=version)
+                       version=__version__)
     cmdl.argv = argv
     return cmdl
 
@@ -909,7 +896,7 @@ def parse_options(argv):
 def main(cmdl):
 
     out = open(cmdl['-o'], 'w')
-    print >>out, "# analyze_crooks.py, version = %s" % cmdl.version
+    print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
     print >>out, "# pwd = %s" % os.getcwd()
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER'))
     print >>out, "# command = %s" % ' '.join(cmdl.argv)
@@ -980,9 +967,9 @@ def main(cmdl):
     tee(out, ' Number of reverse (1->0) trajectories: %d' % len(res_ba))
     tee(out, ' Temperature : %.2f K' % T)
 
-    # ----------------------------
+    # ============================
     # Crooks Gaussian Intersection
-    # ----------------------------
+    # ============================
     tee(out, '\n --------------------------------------------------------')
     tee(out, '             Crooks Gaussian Intersection     ')
     tee(out, ' --------------------------------------------------------')
@@ -992,9 +979,17 @@ def main(cmdl):
 
     tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
     tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
+    if cgi.inters_bool is False:
+        tee(out, '\n  Gaussians too close for intersection calculation')
+        tee(out, '   --> Taking difference of mean values')
+    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
+    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
 
+    # --------------
+    # Normality test
+    # --------------
     if cmdl['-KS']:
-        print('  Running KS-test ....')
+        print('\n  Running KS-test ....')
         q0, lam00, check0, bOk0 = ks_norm_test(res_ab)
         q1, lam01, check1, bOk1 = ks_norm_test(res_ba)
 
@@ -1009,15 +1004,9 @@ def main(cmdl):
         else:
             tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f, lambda0 = %4.2f' % (q1, check1))
 
-    if cgi.inters_bool is False:
-        tee(out, '\n  Gaussians too close for intersection calculation')
-        tee(out, '   --> Taking difference of mean values')
-    tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
-    tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
-
-    # ------------------------
+    # ========================
     # Bennett Acceptance Ratio
-    # ------------------------
+    # ========================
     tee(out, '\n --------------------------------------------------------')
     tee(out, '             Bennett Acceptance Ratio     ')
     tee(out, ' --------------------------------------------------------')
@@ -1030,9 +1019,11 @@ def main(cmdl):
     # it slows things down a lot but might not always be necessary
     tee(out, '  RESULT: dG (BAR) = %8.4f kJ/mol' % bar.dg)
     tee(out, '  RESULT: error_dG_analyt (BAR) = %8.4f kJ/mol' % bar.err)
-    tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
+    if cmdl['-nruns'] > 0:
+        tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
     tee(out, '  RESULT: convergence (BAR) = %8.4f' % bar.conv)
-    tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
+    if cmdl['-nruns'] > 0:
+        tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
     tee(out, ' ------------------------------------------------------')
     # Should we make this optional?
     diff = abs(cgi.dg - bar.dg)
@@ -1041,9 +1032,9 @@ def main(cmdl):
     tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
     tee(out, ' ------------------------------------------------------')
 
-    # ---------
+    # =========
     # Jarzynski
-    # ---------
+    # =========
     if cmdl['-jarz']:
         tee(out, '\n --------------------------------------------------------')
         tee(out, '             Jarzynski estimator     ')
@@ -1053,8 +1044,10 @@ def main(cmdl):
 
         tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
         tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
-        tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
-        tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
+        if cmdl['-nruns'] > 0:
+            tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
+        if cmdl['-nruns'] > 0:
+            tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
         tee(out, ' ------------------------------------------------------')
         tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % jarz.dg_mean)
         tee(out, ' ------------------------------------------------------')

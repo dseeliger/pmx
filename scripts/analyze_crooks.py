@@ -855,7 +855,7 @@ def parse_options(argv):
                "Do integration only. Skip analysis."),
         Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option("-jarz", "bool", False, "Jarzynski estimation"),
-        Option("-plot", "bool", True, "Plot work histograms"),
+        Option("-plot", "bool", False, "Plot work histograms"),
         Option("-nruns", "int", 0,
                "number of runs for bootstrapped BAR and Jarz errors. Default "
                "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "

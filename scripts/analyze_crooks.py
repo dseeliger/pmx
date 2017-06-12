@@ -197,31 +197,68 @@ def data_to_gauss(data):
     return m, dev, A
 
 
-def ksref():
-    f = 1
-    potent = 10000
-    lamb = arange(0.25, 2.5, 0.001)
-    q = array(zeros(len(lamb), float))
-    res = []
-    for k in range(-potent, potent):
-        q = q + f*exp(-2.0*(k**2)*(lamb**2))
-        f = -f
-    for i in range(len(lamb)):
-        res.append((lamb[i], q[i]))
-    return res
+def ks_norm_test(data, alpha=0.05, refks=None):
+    '''Performs a Kolmogorov-Smirnov test of normality.
 
+    Parameters
+    ----------
+    data : array_like
+        a one-dimensional array of values. This is the distribution tested
+        for normality.
+    alpha : float
+        significance level of the statistics. Default if 0.05.
+    refks : ???
+        ???
 
-def ksfunc(lamb):
-    f = 1
-    potent = 10000
-    q = 0
-    for k in range(-potent, potent):
-        q = q + f*exp(-2.0*(k**2)*(lamb**2))
-        f *= -1
-    return q
+    Returns
+    -------
+    '''
 
+    def ksref():
+        f = 1
+        potent = 10000
+        lamb = arange(0.25, 2.5, 0.001)
+        q = array(zeros(len(lamb), float))
+        res = []
+        for k in range(-potent, potent):
+            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            f = -f
+        for i in range(len(lamb)):
+            res.append((lamb[i], q[i]))
+        return res
 
-def ks(data, alpha=.05, refks=None):
+    def ksfunc(lamb):
+        f = 1
+        potent = 10000
+        q = 0
+        for k in range(-potent, potent):
+            q = q + f*exp(-2.0*(k**2)*(lamb**2))
+            f *= -1
+        return q
+
+    def edf(dg_data):
+        edf_ = []
+        ndata = []
+        data = deepcopy(dg_data)
+        data.sort()
+        N = float(len(data))
+        cnt = 0
+        for item in data:
+            cnt += 1
+            edf_.append(cnt/N)
+            ndata.append(item)
+        ndata = array(ndata)
+        edf_ = array(edf_)
+        return ndata, edf_
+
+    def cdf(dg_data):
+        data = deepcopy(dg_data)
+        data.sort()
+        mean = average(data)
+        sig = std(data)
+        cdf = 0.5*(1+erf((data-mean)/float(sig*sqrt(2))))
+        return cdf
+
     N = len(data)
     nd, ed = edf(data)
     cd = cdf(data)
@@ -246,31 +283,6 @@ def ks(data, alpha=.05, refks=None):
 
     q = ksfunc(check)
     return (1-q), lam0, check, bOk
-
-
-def edf(dg_data):
-    edf_ = []
-    ndata = []
-    data = deepcopy(dg_data)
-    data.sort()
-    N = float(len(data))
-    cnt = 0
-    for item in data:
-        cnt += 1
-        edf_.append(cnt/N)
-        ndata.append(item)
-    ndata = array(ndata)
-    edf_ = array(edf_)
-    return ndata, edf_
-
-
-def cdf(dg_data):
-    data = deepcopy(dg_data)
-    data.sort()
-    mean = average(data)
-    sig = std(data)
-    cdf = 0.5*(1+erf((data-mean)/float(sig*sqrt(2))))
-    return cdf
 
 
 def data_from_file(fn):
@@ -983,14 +995,8 @@ def main(cmdl):
 
     if cmdl['-KS']:
         print('  Running KS-test ....')
-        q0, lam00, check0, bOk0 = ks(res_ab)
-        q1, lam01, check1, bOk1 = ks(res_ba)
-
-        print q0, lam00, check0, bOk0
-        from scipy import stats
-        stats.kstest(res_ab)
-        exit()
-
+        q0, lam00, check0, bOk0 = ks_norm_test(res_ab)
+        q1, lam01, check1, bOk1 = ks_norm_test(res_ba)
 
         tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
         if bOk0:

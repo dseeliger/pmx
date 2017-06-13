@@ -759,51 +759,7 @@ def _data_from_file(fn):
 # ------------------
 # Plotting functions
 # ------------------
-# Is this needed? Seems redundandt since it's included in make_W_over_time_plot
-def make_plot(fname, data1, data2, result, err, nbins, dpi=300):
-
-    plt.figure(figsize=(8, 6))
-    mf, devf, Af = data_to_gauss(data1)
-    mb, devb, Ab = data_to_gauss(data2)
-
-    maxi = max(data1+data2)
-    mini = min(data1+data2)
-    n1, bins1, patches1 = plt.hist(data1, range=(mini, maxi), bins=nbins,
-                                   facecolor='blue', alpha=0.75, normed=True,
-                                   label='0->1')
-    n2, bins2, patches2 = plt.hist(data2, range=(mini, maxi), bins=nbins,
-                                   facecolor='red', alpha=0.75, normed=True,
-                                   label='1->0')
-    plt.xlabel('W [kJ/mol]', fontsize=20)
-    plt.ylabel('Probability', fontsize=20)
-    plt.title(r'Work Distribution $\lambda$ 0->1 (blue) $\lambda$ 1->0 (red)')
-    plt.grid(lw=2)
-    loc, lab = plt.yticks()
-    ll = []
-    for i in range(len(lab)):
-        ll.append("")
-    plt.yticks(loc, ll)
-    x = np.arange(mini, maxi, .5)
-    y1 = gauss_func(Af, mf, devf, x)
-    y2 = gauss_func(Ab, mb, devb, x)
-
-    plt.plot(x, y1, 'b--', linewidth=2)
-    plt.plot(x, y2, 'r--', linewidth=2)
-
-    size = max([max(y1), max(y2)])
-    res_x = [result, result]
-    res_y = [0, size*1.2]
-    plt.plot(res_x, res_y, 'k--', linewidth=2,
-             label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
-    plt.legend(shadow=True, fancybox=True, prop={'size': 12})
-    plt.ylim(0, size*1.2)
-    xl = plt.gca()
-    for val in xl.spines.values():
-        val.set_lw(2)
-    plt.savefig(fname, dpi=dpi)
-
-
-def make_W_over_time_plot(fname, data1, data2, result, err, nbins, dpi=300):
+def make_cgi_plot(fname, data1, data2, result, err, nbins, dpi=300):
     '''Plots work distributions and results for Crooks Gaussian Intersection'''
 
     def smooth(x, window_len=11, window='hanning'):
@@ -912,7 +868,6 @@ def parse_options(argv):
 
     # TODO: option to choose units for output
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
-    # TODO: pickle data and results?
     options = [
         # FIXME: Option cannot take multiple arguments
         #Option("-m", "str", "BAR",
@@ -939,7 +894,6 @@ def parse_options(argv):
                "Do integration only. Skip analysis."),
         Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option("-jarz", "bool", False, "Jarzynski estimation"),
-        Option("-plot", "bool", False, "Plot work histograms"),
         Option("-pickle", "bool", False, "Whether to pickle the results data"),
         Option("-nruns", "int", 0,
                "number of runs for bootstrapped BAR and Jarz errors. Default "
@@ -953,8 +907,6 @@ def parse_options(argv):
         FileOption("-o", "w", ["dat"], "results.dat", "results"),
         FileOption("-cgi_plot", "w", ["png", "eps", "svg", "pdf"],
                    "cgi.png", "plot work histograms "),
-        FileOption("-W_over_t", "w", ["png", "eps", "svg", "pdf"],
-                   "W_over_t.png", "plot work over time "),
         FileOption("-i0", "r/m/o", ["dat"], "integ0.dat",
                    "read integrated W (0->1)"),
         FileOption("-i1", "r/m/o", ["dat"], "integ1.dat",
@@ -1149,12 +1101,9 @@ def main(cmdl):
             _tee(out, '  JARZ: Std Err Reverse (bootstrap) = %8.4f kJ/mol' % jarz.err_boot_rev)
         _tee(out, ' ------------------------------------------------------')
 
-    if cmdl['-plot']:
-        print '\n   Plotting histograms......'
-        make_plot(cmdl['-cgi_plot'], res_ab, res_ba, cgi.dg, cgi.err_boot,
+    print '\n   Plotting histograms......'
+    make_cgi_plot(cmdl['-cgi_plot'], res_ab, res_ba, cgi.dg, cgi.err_boot1,
                   cmdl['-nbins'], cmdl['-dpi'])
-        make_W_over_time_plot(cmdl['-W_over_t'], res_ab, res_ba, cgi.dg,
-                              cgi.err_boot, cmdl['-nbins'], cmdl['-dpi'])
 
     print('\n   ......done...........\n')
 

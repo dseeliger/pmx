@@ -176,17 +176,26 @@ class Crooks(object):
         standard deviation of the reverse Gaussian.
     '''
 
-    def __init__(self, wf, wr):
+    def __init__(self, wf, wr, nboots):
 
+        # inputs
+        self.wf = np.array(wf)
+        self.wr = np.array(wr)
+        self.nboots = nboots
+        # params of the gaussians
         self.mf, self.devf, self.Af = data_to_gauss(wf)
         self.mr, self.devr, self.Ar = data_to_gauss(wr)
 
         # Calculate Crooks properties
-        self.dg, self.inters_bool = self.calc_dg(wf, wr)
+        self.dg, self.inters_bool = self.calc_dg(wf=self.wf, wr=self.wr)
 
-        self.err_boot = self.calc_err_boot(self.mf, self.devf, len(wf),
-                                           self.mr, self.devr, len(wr),
-                                           nboots=1000)
+        self.err_boot1 = self.calc_err_boot1(m1=self.mf, s1=self.devf,
+                                             n1=len(wf), m2=self.mr,
+                                             s2=self.devr, n2=len(wr),
+                                             nboots=1000)
+        if nboots > 0:
+            self.err_boot2 = self.calc_err_boot2(wf=self.wf, wr=self.wr,
+                                                 nboots=nboots)
 
     @staticmethod
     def calc_dg(wf, wr):
@@ -197,18 +206,10 @@ class Crooks(object):
 
         Parameters
         ----------
-        A1 : float
-            height of the forward Gaussian.
-        m1 : float
-            mean of the forward Gaussian.
-        s1 : float
-            standard deviation of the forward Gaussian.
-        A2 : float
-            height of the reverse Gaussian.
-        m2 : float
-            mean of the reverse Gaussian.
-        s2 : float
-            standard deviation of the reverse Gaussian.
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
 
         Returns
         -------
@@ -248,7 +249,7 @@ class Crooks(object):
     # or the mean, but for each bootstrap sample if the intersecion cannot
     # be taken, then the mean is used automatically.
     @staticmethod
-    def calc_err_boot(m1, s1, n1, m2, s2, n2, nboots=1000):
+    def calc_err_boot1(m1, s1, n1, m2, s2, n2, nboots=1000):
         '''Calculates the standard error of the Crooks Gaussian Intersection
         via parametric bootstrap.
 
@@ -270,10 +271,6 @@ class Crooks(object):
             number of bootstrap samples to use for the error estimate.
             Parametric bootstrap is used where work values are resampled from
             two Gaussians.
-        intersection : bool
-            True if the CGI free energy is to be taken from the Gaussians
-            intersection, False if it is to be taken from the average of the
-            means.
 
         Returns
         -------
@@ -285,6 +282,45 @@ class Crooks(object):
         for k in range(nboots):
             bootA = np.random.normal(loc=m1, scale=s1, size=n1)
             bootB = np.random.normal(loc=m2, scale=s2, size=n2)
+
+            dg_boot, _ = Crooks.calc_dg(bootA, bootB)
+            dg_boots.append(dg_boot)
+        err = np.std(dg_boots)
+        return err
+
+    @staticmethod
+    def calc_err_boot2(wf, wr, nboots):
+        '''Calculates the standard error of the Crooks Gaussian Intersection
+        via non-parametric bootstrap.
+
+        Parameters
+        ----------
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        nboots: int
+            number of bootstrap samples to use for the error estimate.
+            Parametric bootstrap is used where work values are resampled from
+            two Gaussians.
+
+        Returns
+        -------
+        float
+            standard error of the mean.
+        '''
+
+        nf = len(wf)
+        nr = len(wr)
+
+        dg_boots = []
+        for k in range(nboots):
+            sys.stdout.write('\r  CGI error bootstrap: iteration %s/%s'
+                             % (k+1, nboots))
+            sys.stdout.flush()
+
+            bootA = np.random.choice(wf, size=nf, replace=True)
+            bootB = np.random.choice(wr, size=nr, replace=True)
 
             dg_boot, _ = Crooks.calc_dg(bootA, bootB)
             dg_boots.append(dg_boot)
@@ -1013,7 +1049,7 @@ def main(cmdl):
     _tee(out, ' --------------------------------------------------------')
 
     print('  Calculating Intersection...')
-    cgi = Crooks(wf=res_ab, wr=res_ba)
+    cgi = Crooks(wf=res_ab, wr=res_ba, nboots=cmdl['-nruns'])
     if cmdl['-pickle']:
         pickle.dump(cgi, open("cgi_results.pickle", "wb"))
 
@@ -1023,7 +1059,9 @@ def main(cmdl):
         _tee(out, '\n  Gaussians too close for intersection calculation')
         _tee(out, '   --> Taking difference of mean values')
     _tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
-    _tee(out, '  RESULT: error_dG (CGI) = %8.4f kJ/mol' % cgi.err_boot)
+    _tee(out, '  RESULT: error_dG_bootstrap_param (CGI) = %8.4f kJ/mol' % cgi.err_boot1)
+    if cmdl['-nruns'] > 0:
+        _tee(out, '  RESULT: error_dG_bootstrap_nonparam (CGI) = %8.4f kJ/mol' % cgi.err_boot2)
 
     # --------------
     # Normality test

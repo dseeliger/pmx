@@ -41,6 +41,7 @@ from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
 from random import gauss, randint, choice
+import pickle
 
 # Constants
 kb = 0.00831447215
@@ -907,6 +908,7 @@ def parse_options(argv):
         Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option("-jarz", "bool", False, "Jarzynski estimation"),
         Option("-plot", "bool", False, "Plot work histograms"),
+        Option("-pickle", "bool", False, "Whether to pickle the results data"),
         Option("-nruns", "int", 0,
                "number of runs for bootstrapped BAR and Jarz errors. Default "
                "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "
@@ -1033,6 +1035,8 @@ def main(cmdl):
 
     print('  Calculating Intersection...')
     cgi = Crooks(wf=res_ab, wr=res_ba)
+    if cmdl['-pickle']:
+        pickle.dump(cgi, open("cgi_results.pickle", "wb"))
 
     _tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
     _tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
@@ -1071,6 +1075,8 @@ def main(cmdl):
     _tee(out, ' --------------------------------------------------------')
 
     bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
+    if cmdl['-pickle']:
+        pickle.dump(bar, open("bar_results.pickle", "wb"))
 
     print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
 
@@ -1100,6 +1106,8 @@ def main(cmdl):
         _tee(out, ' --------------------------------------------------------')
 
         jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=cmdl['-nruns'])
+        if cmdl['-pickle']:
+            pickle.dump(jarz, open("jarz_results.pickle", "wb"))
 
         _tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
         _tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)

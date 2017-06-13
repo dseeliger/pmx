@@ -861,18 +861,6 @@ def natural_sort(l):
     return sorted(l, key=alphanum_key)
 
 
-def select_random_subset(lst, n):
-    ret = []
-    idx = []
-    while len(ret) < n:
-        rn = randint(0, len(lst)-1)
-        if rn not in idx:
-            idx.append(rn)
-            ret.append(lst[rn])
-    print idx
-    return ret
-
-
 # ==============================================================================
 #                   Command Line Parsing and Main
 # ==============================================================================
@@ -1012,8 +1000,8 @@ def main(cmdl):
     if cmdl.opt['-rand'].is_set:
         ntraj = cmdl['-rand']
         _tee(out, ' select random subset of trajectories: %d' % ntraj)
-        res_ab = select_random_subset(res_ab, ntraj)
-        res_ba = select_random_subset(res_ba, ntraj)
+        res_ab = np.random.choice(res_ab, size=ntraj, replace=False)
+        res_ba = np.random.choice(res_ba, size=ntraj, replace=False)
 
     # ==============
     # Begin Analysis

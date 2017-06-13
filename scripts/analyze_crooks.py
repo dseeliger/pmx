@@ -182,18 +182,14 @@ class Crooks(object):
         self.mr, self.devr, self.Ar = data_to_gauss(wr)
 
         # Calculate Crooks properties
-        self.dg, self.inters_bool = self.calc_dg(A1=self.Af,
-                                                 m1=self.mf,
-                                                 s1=self.devf,
-                                                 A2=self.Ar,
-                                                 m2=self.mr,
-                                                 s2=self.devr)
+        self.dg, self.inters_bool = self.calc_dg(wf, wr)
+
         self.err_boot = self.calc_err_boot(self.mf, self.devf, len(wf),
                                            self.mr, self.devr, len(wr),
                                            nboots=1000)
 
     @staticmethod
-    def calc_dg(A1, m1, s1, A2, m2, s2):
+    def calc_dg(wf, wr):
         '''Calculates the free energy difference using the Crooks Gaussian
         Intersection method. It finds the intersection of two Gaussian
         functions. If the intersection cannot be computed, the average of
@@ -225,6 +221,9 @@ class Crooks(object):
             cannot be calculated and a False value is returned; in this case,
             the first float value retured is the average of the Gaussian means.
         '''
+
+        m1, s1, A1 = data_to_gauss(wf)
+        m2, s2, A2 = data_to_gauss(wr)
 
         p1 = m1/s1**2-m2/s2**2
         p2 = np.sqrt(1/(s1**2*s2**2)*(m1-m2)**2+2*(1/s1**2-1/s2**2)*np.log(s2/s1))
@@ -284,12 +283,10 @@ class Crooks(object):
 
         dg_boots = []
         for k in range(nboots):
-            g1 = np.random.normal(loc=m1, scale=s1, size=n1)
-            g2 = np.random.normal(loc=m2, scale=s2, size=n2)
+            bootA = np.random.normal(loc=m1, scale=s1, size=n1)
+            bootB = np.random.normal(loc=m2, scale=s2, size=n2)
 
-            m1, dev1, A1 = data_to_gauss(g1)
-            m2, dev2, A2 = data_to_gauss(g2)
-            dg_boot, _ = Crooks.calc_dg(A1, m1, s1, A2, m2, s2)
+            dg_boot, _ = Crooks.calc_dg(bootA, bootB)
             dg_boots.append(dg_boot)
         err = np.std(dg_boots)
         return err

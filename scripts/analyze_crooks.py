@@ -40,7 +40,6 @@ import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
-from random import gauss, choice
 import pickle
 
 # Constants
@@ -283,20 +282,16 @@ class Crooks(object):
             standard error of the mean.
         '''
 
-        iseq = []
+        dg_boots = []
         for k in range(nboots):
-            g1 = []
-            g2 = []
-            for i in range(n1):
-                g1.append(gauss(m1, s1))
-            for i in range(n2):
-                g2.append(gauss(m2, s2))
+            g1 = np.random.normal(loc=m1, scale=s1, size=n1)
+            g2 = np.random.normal(loc=m2, scale=s2, size=n2)
 
             m1, dev1, A1 = data_to_gauss(g1)
             m2, dev2, A2 = data_to_gauss(g2)
-            iq, _ = Crooks.calc_dg(A1, m1, s1, A2, m2, s2)
-            iseq.append(iq)
-        err = np.std(iseq)
+            dg_boot, _ = Crooks.calc_dg(A1, m1, s1, A2, m2, s2)
+            dg_boots.append(dg_boot)
+        err = np.std(dg_boots)
         return err
 
 

@@ -94,6 +94,8 @@ class Jarz(object):
 
     @staticmethod
     def calc_dg(w, T, c):
+        '''to be filled
+        '''
         beta = 1./(kb*T)
         n = float(len(w))
         mexp = 0.0
@@ -117,6 +119,28 @@ class Jarz(object):
 
     @staticmethod
     def calc_err_boot(w, T, c, nboots):
+        '''Calculates the standard error via bootstrap. The work values are
+        resampled randomly with replacement multiple (nboots) times,
+        and the Jarzinski free energy recalculated for each bootstrap samples.
+        The standard error of the estimate is returned as the standard d
+        eviation of the bootstrapped free energies.
+
+        Parameters
+        ----------
+        w : array_like
+            work values.
+        T : float
+            temperature.
+        c : [0,1]
+            ???
+        nboots: int
+            number of bootstrap samples to use for the error estimate.
+
+        Returns
+        -------
+        err : float
+            standard error of the mean.
+        '''
         dg_boots = []
         n = len(w)
         for k in range(nboots):
@@ -311,12 +335,10 @@ class Crooks(object):
             array of reverse work values.
         nboots: int
             number of bootstrap samples to use for the error estimate.
-            Parametric bootstrap is used where work values are resampled from
-            two Gaussians.
 
         Returns
         -------
-        float
+        err : float
             standard error of the mean.
         '''
 
@@ -381,10 +403,20 @@ class BAR(object):
 
         Parameters
         ----------
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        T : float
+            temperature
 
         Returns
         ----------
+        dg : float
+            the BAR free energy estimate.
         '''
+
+        print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
 
         nf = float(len(wf))
         nr = float(len(wr))
@@ -410,7 +442,19 @@ class BAR(object):
 
     @staticmethod
     def calc_err(dg, wf, wr, T):
-        '''Calculates the analytical error estimate.'''
+        '''Calculates the analytical error estimate.
+
+        Parameters
+        ----------
+        dg : float
+            the BAR free energy estimate
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        T : float
+            temperature
+        '''
 
         nf = float(len(wf))
         nr = float(len(wr))
@@ -431,7 +475,20 @@ class BAR(object):
 
     @staticmethod
     def calc_err_boot(wf, wr, nboots, T):
-        '''Calculates the error by bootstrapping.'''
+        '''Calculates the error by bootstrapping.
+
+        Parameters
+        ----------
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        T : float
+            temperature
+        nboots: int
+            number of bootstrap samples.
+
+        '''
 
         nf = len(wf)
         nr = len(wr)
@@ -453,7 +510,22 @@ class BAR(object):
 
     @staticmethod
     def calc_conv(dg, wf, wr, T):
-        '''Evaluates BAR convergence'''
+        '''Evaluates BAR convergence as described in Hahn & Then, Phys Rev E
+        (2010), 81, 041117. Returns a value between -1 and 1: the closer this
+        value to zero the better the BAR convergence.
+
+        Parameters
+        ----------
+        dg : float
+            the BAR free energy estimate
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        T : float
+            temperature
+
+        '''
 
         wf = np.array(wf)
         wr = np.array(wr)
@@ -465,7 +537,7 @@ class BAR(object):
 
         ratio_alpha = float(nf)/N
         ratio_beta = float(nr)/N
-        bf = 1.0/(ratio_beta + ratio_alpha * np.exp(beta*(wf-dg)))  # where is numpy coming from? probably from pmx import *
+        bf = 1.0/(ratio_beta + ratio_alpha * np.exp(beta*(wf-dg)))
         tf = 1.0/(ratio_alpha + ratio_beta * np.exp(beta*(-wr+dg)))
         Ua = (np.mean(tf) + np.mean(bf))/2.0
         Ua2 = (ratio_alpha * np.mean(np.power(tf, 2)) +
@@ -494,7 +566,7 @@ class BAR(object):
 
 
 # ==============================================================================
-#                               Functions
+#                               FUNCTIONS
 # ==============================================================================
 def ks_norm_test(data, alpha=0.05, refks=None):
     '''Performs a Kolmogorov-Smirnov test of normality.
@@ -857,7 +929,7 @@ def natural_sort(l):
 
 
 # ==============================================================================
-#                   Command Line Parsing and Main
+#                      COMMAND LINE OPTIONS AND MAIN
 # ==============================================================================
 def parse_options(argv):
 
@@ -1066,8 +1138,6 @@ def main(cmdl):
     bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
     if cmdl['-pickle']:
         pickle.dump(bar, open("bar_results.pickle", "wb"))
-
-    print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
 
     _tee(out, '  BAR: dG = {dg:8.{p}f} kJ/mol'.format(dg=bar.dg, p=prec))
     _tee(out, '  BAR: Std Err (analytical) = {e:8.{p}f} kJ/mol'.format(e=bar.err, p=prec))

@@ -40,7 +40,7 @@ import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
-from random import gauss, randint, choice
+from random import gauss, choice
 import pickle
 
 # Constants
@@ -118,19 +118,18 @@ class Jarz(object):
 
     @staticmethod
     def calc_err_boot(w, T, c, nboots):
-        out = []
-        n = int(len(w))
+        dg_boots = []
+        n = len(w)
         for k in range(nboots):
             sys.stdout.write('\r  Jarzynski error bootstrap: iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
-            for i in range(n):
-                val = [choice(w) for _ in xrange(n)]
-            foo = -1.0 * Jarz.calc_dg(val, T, c)
-            out.append(foo)
-        sys.stdout.write('\n')
-        err = np.std(out)
 
+            boot = np.random.choice(w, size=n, replace=True)
+            dg_boot = -1.0 * Jarz.calc_dg(boot, T, c)
+            dg_boots.append(dg_boot)
+        sys.stdout.write('\n')
+        err = np.std(dg_boots)
         return err
 
 
@@ -396,19 +395,19 @@ class BAR(object):
 
         nf = len(wf)
         nr = len(wr)
-        res = []
+        dg_boots = []
         for k in range(nboots):
             sys.stdout.write('\r  BAR error bootstrap: iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
-            for i in range(nf):
-                valA = [choice(wf) for _ in xrange(nf)]
-            for i in range(nr):
-                valB = [choice(wr) for _ in xrange(nr)]
-            foo = BAR.calc_dg(valA, valB, T)
-            res.append(foo)
+
+            bootA = np.random.choice(wf, size=nf, replace=True)
+            bootB = np.random.choice(wr, size=nr, replace=True)
+            dg_boot = BAR.calc_dg(bootA, bootB, T)
+            dg_boots.append(dg_boot)
+
         sys.stdout.write('\n')
-        err_boot = np.std(res)
+        err_boot = np.std(dg_boots)
 
         return err_boot
 
@@ -438,20 +437,20 @@ class BAR(object):
     def calc_conv_err_boot(dg, wf, wr, nboots, T):
         nf = len(wf)
         nr = len(wr)
-        res = []
+        conv_boots = []
         for k in range(nboots):
             sys.stdout.write('\r  Convergence error bootstrap: '
                              'iteration %s/%s' % (k+1, nboots))
             sys.stdout.flush()
-            for i in range(nf):
-                valA = [choice(wf) for _ in xrange(nf)]
-            for i in range(nr):
-                valB = [choice(wr) for _ in xrange(nr)]
-            foo = BAR.calc_conv(dg, valA, valB, T)
-            res.append(foo)
+
+            bootA = np.random.choice(wf, size=nf, replace=True)
+            bootB = np.random.choice(wr, size=nr, replace=True)
+            conv_boot = BAR.calc_conv(dg, bootA, bootB, T)
+            conv_boots.append(conv_boot)
+
         sys.stdout.write('\n')
-        err = np.std(res)
-        return(err)
+        err = np.std(conv_boots)
+        return err
 
 
 # ==============================================================================

@@ -899,6 +899,8 @@ def parse_options(argv):
                "number of runs for bootstrapped BAR and Jarz errors. Default "
                "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "
                "samples are always used by default."),
+        Option("-precision", "int", 2, "choose the decimal precision of the "
+               "output"),
         ]
 
     files = [
@@ -934,6 +936,7 @@ def main(cmdl):
 
     out = open(cmdl['-o'], 'w')
     T = cmdl['-T']
+    prec = int(round(cmdl['-precision'], 0))
 
     print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
     print >>out, "# pwd = %s" % os.getcwd()
@@ -1022,15 +1025,15 @@ def main(cmdl):
     if cmdl['-pickle']:
         pickle.dump(cgi, open("cgi_results.pickle", "wb"))
 
-    _tee(out, '  CGI: Forward Gauss  mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
-    _tee(out, '  CGI: Reverse Gauss  mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
+    _tee(out, '  CGI: Forward Gauss  mean = {m:8.{p}f}  std = {s:8.{p}f}'.format(m=cgi.mf, s=cgi.devf, p=prec))
+    _tee(out, '  CGI: Reverse Gauss  mean = {m:8.{p}f}  std = {s:8.{p}f}'.format(m=cgi.mr, s=cgi.devr, p=prec))
     if cgi.inters_bool is False:
         _tee(out, '\n  Gaussians too close for intersection calculation')
         _tee(out, '   --> Taking difference of mean values')
-    _tee(out, '  CGI: dG = %8.4f kJ/mol' % cgi.dg)
-    _tee(out, '  CGI: Std Err (bootstrap:parametric) = %8.4f kJ/mol' % cgi.err_boot1)
+    _tee(out, '  CGI: dG = {dg:8.{p}f} kJ/mol'.format(dg=cgi.dg, p=prec))
+    _tee(out, '  CGI: Std Err (bootstrap:parametric) = {e:8.{p}f} kJ/mol'.format(e=cgi.err_boot1, p=prec))
     if cmdl['-nruns'] > 0:
-        _tee(out, '  CGI: Std Err (bootstrap) = %8.4f kJ/mol' % cgi.err_boot2)
+        _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=cgi.err_boot2, p=prec))
 
     # --------------
     # Normality test
@@ -1066,19 +1069,19 @@ def main(cmdl):
 
     print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
 
-    _tee(out, '  BAR: dG = %8.4f kJ/mol' % bar.dg)
-    _tee(out, '  BAR: Std Err (analytical) = %8.4f kJ/mol' % bar.err)
+    _tee(out, '  BAR: dG = {dg:8.{p}f} kJ/mol'.format(dg=bar.dg, p=prec))
+    _tee(out, '  BAR: Std Err (analytical) = {e:8.{p}f} kJ/mol'.format(e=bar.err, p=prec))
     if cmdl['-nruns'] > 0:
-        _tee(out, '  BAR: Std Err (bootstrap)  = %8.4f kJ/mol' % bar.err_boot)
-    _tee(out, '  BAR: Conv = %8.4f' % bar.conv)
+        _tee(out, '  BAR: Std Err (bootstrap)  = {e:8.{p}f} kJ/mol'.format(e=bar.err_boot, p=prec))
+    _tee(out, '  BAR: Conv = %8.2f' % bar.conv)
     if cmdl['-nruns'] > 0:
-        _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.4f' % bar.conv_err_boot)
+        _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.2f' % bar.conv_err_boot)
     _tee(out, ' ------------------------------------------------------')
     # Should we make this optional?
     diff = abs(cgi.dg - bar.dg)
     mean = (cgi.dg + bar.dg) * 0.5
-    _tee(out, '  Difference between BAR and CGI = %8.5f kJ/mol' % diff)
-    _tee(out, '  Mean of  BAR and CGI           = %8.5f kJ/mol' % mean)
+    _tee(out, '  Difference between BAR and CGI = {d:8.{p}f} kJ/mol'.format(d=diff, p=prec))
+    _tee(out, '  Mean of  BAR and CGI           = {m:8.{p}f} kJ/mol'.format(m=mean, p=prec))
     _tee(out, ' ------------------------------------------------------')
 
     # =========
@@ -1093,12 +1096,12 @@ def main(cmdl):
         if cmdl['-pickle']:
             pickle.dump(jarz, open("jarz_results.pickle", "wb"))
 
-        _tee(out, '  JARZ: dG Forward = %8.4f kJ/mol' % jarz.dg_for)
-        _tee(out, '  JARZ: dG Reverse = %8.4f kJ/mol' % jarz.dg_rev)
-        _tee(out, '  JARZ: dG Mean    = %8.4f kJ/mol' % jarz.dg_mean)
+        _tee(out, '  JARZ: dG Forward = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_for, p=prec))
+        _tee(out, '  JARZ: dG Reverse = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_rev, p=prec))
+        _tee(out, '  JARZ: dG Mean    = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_mean, p=prec))
         if cmdl['-nruns'] > 0:
-            _tee(out, '  JARZ: Std Err Forward (bootstrap) = %8.4f kJ/mol' % jarz.err_boot_for)
-            _tee(out, '  JARZ: Std Err Reverse (bootstrap) = %8.4f kJ/mol' % jarz.err_boot_rev)
+            _tee(out, '  JARZ: Std Err Forward (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=jarz.err_boot_for, p=prec))
+            _tee(out, '  JARZ: Std Err Reverse (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=jarz.err_boot_rev, p=prec))
         _tee(out, ' ------------------------------------------------------')
 
     print '\n   Plotting histograms......'

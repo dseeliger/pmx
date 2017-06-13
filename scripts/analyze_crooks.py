@@ -120,7 +120,7 @@ class Jarz(object):
         dg_boots = []
         n = len(w)
         for k in range(nboots):
-            sys.stdout.write('\r  Jarzynski error bootstrap: iteration %s/%s'
+            sys.stdout.write('\r  Bootstrap (Std Err): iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
 
@@ -251,7 +251,13 @@ class Crooks(object):
     @staticmethod
     def calc_err_boot1(m1, s1, n1, m2, s2, n2, nboots=1000):
         '''Calculates the standard error of the Crooks Gaussian Intersection
-        via parametric bootstrap.
+        via parametric bootstrap. Given the parameters of the forward and
+        reverse Gaussian distributions, multiple (nboots) bootstrap samples
+        are built by random sampling from these two Gaussian distributions.
+        The CGI free energy is then calculated for each bootstrap sample
+        (forward and reverse Gaussians). The standard error of the estimate
+        is returned as the standard deviation of the bootstrapped free
+        energies.
 
         Parameters
         ----------
@@ -291,7 +297,11 @@ class Crooks(object):
     @staticmethod
     def calc_err_boot2(wf, wr, nboots):
         '''Calculates the standard error of the Crooks Gaussian Intersection
-        via non-parametric bootstrap.
+        via non-parametric bootstrap. The work values are resampled randomly
+        with replacement multiple (nboots) times, and the CGI free energy
+        recalculated for each bootstrap samples. The standard error of
+        the estimate is returned as the standard deviation of the bootstrapped
+        free energies.
 
         Parameters
         ----------
@@ -315,7 +325,7 @@ class Crooks(object):
 
         dg_boots = []
         for k in range(nboots):
-            sys.stdout.write('\r  CGI error bootstrap: iteration %s/%s'
+            sys.stdout.write('\r  Bootstrap (Std Err): iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
 
@@ -324,6 +334,8 @@ class Crooks(object):
 
             dg_boot, _ = Crooks.calc_dg(bootA, bootB)
             dg_boots.append(dg_boot)
+
+        sys.stdout.write('\n')
         err = np.std(dg_boots)
         return err
 
@@ -425,7 +437,7 @@ class BAR(object):
         nr = len(wr)
         dg_boots = []
         for k in range(nboots):
-            sys.stdout.write('\r  BAR error bootstrap: iteration %s/%s'
+            sys.stdout.write('\r  Bootstrap (Std Err): iteration %s/%s'
                              % (k+1, nboots))
             sys.stdout.flush()
 
@@ -467,7 +479,7 @@ class BAR(object):
         nr = len(wr)
         conv_boots = []
         for k in range(nboots):
-            sys.stdout.write('\r  Convergence error bootstrap: '
+            sys.stdout.write('\r  Bootstrap (Conv): '
                              'iteration %s/%s' % (k+1, nboots))
             sys.stdout.flush()
 
@@ -902,6 +914,11 @@ def parse_options(argv):
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
     # TODO: pickle data and results?
     options = [
+        # FIXME: Option cannot take multiple arguments
+        #Option("-m", "str", "BAR",
+        #       "methods to use for the free energy estimate. Available options"
+        #       " are: BAR, GCI, JARZ. You can select one or more; selection is"
+        #       " case insensitive. Default is BAR"),
         Option("-nbins", "int", 10, "number of histograms bins for plot"),
         Option("-T", "real", 298, "Temperature for BAR calculation"),
         Option("-dpi", "int", 300, "plot resolution"),
@@ -1053,15 +1070,15 @@ def main(cmdl):
     if cmdl['-pickle']:
         pickle.dump(cgi, open("cgi_results.pickle", "wb"))
 
-    _tee(out, '  Forward  : mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
-    _tee(out, '  Backward : mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
+    _tee(out, '  CGI: Forward Gauss  mean = %8.3f  std = %8.3f' % (cgi.mf, cgi.devf))
+    _tee(out, '  CGI: Reverse Gauss  mean = %8.3f  std = %8.3f' % (cgi.mr, cgi.devr))
     if cgi.inters_bool is False:
         _tee(out, '\n  Gaussians too close for intersection calculation')
         _tee(out, '   --> Taking difference of mean values')
-    _tee(out, '  RESULT: dG (CGI)  = %8.4f kJ/mol' % cgi.dg)
-    _tee(out, '  RESULT: error_dG_bootstrap_param (CGI) = %8.4f kJ/mol' % cgi.err_boot1)
+    _tee(out, '  CGI: dG = %8.4f kJ/mol' % cgi.dg)
+    _tee(out, '  CGI: Std Err (bootstrap:parametric) = %8.4f kJ/mol' % cgi.err_boot1)
     if cmdl['-nruns'] > 0:
-        _tee(out, '  RESULT: error_dG_bootstrap_nonparam (CGI) = %8.4f kJ/mol' % cgi.err_boot2)
+        _tee(out, '  CGI: Std Err (bootstrap) = %8.4f kJ/mol' % cgi.err_boot2)
 
     # --------------
     # Normality test
@@ -1097,15 +1114,13 @@ def main(cmdl):
 
     print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
 
-    # TODO: allow turning the bootstrapping off (e.g. nruns = 0 ):
-    # it slows things down a lot but might not always be necessary
-    _tee(out, '  RESULT: dG (BAR) = %8.4f kJ/mol' % bar.dg)
-    _tee(out, '  RESULT: error_dG_analyt (BAR) = %8.4f kJ/mol' % bar.err)
+    _tee(out, '  BAR: dG = %8.4f kJ/mol' % bar.dg)
+    _tee(out, '  BAR: Std Err (analytical) = %8.4f kJ/mol' % bar.err)
     if cmdl['-nruns'] > 0:
-        _tee(out, '  RESULT: error_dG_bootstrap (BAR) = %8.4f kJ/mol' % bar.err_boot)
-    _tee(out, '  RESULT: convergence (BAR) = %8.4f' % bar.conv)
+        _tee(out, '  BAR: Std Err (bootstrap)  = %8.4f kJ/mol' % bar.err_boot)
+    _tee(out, '  BAR: Conv = %8.4f' % bar.conv)
     if cmdl['-nruns'] > 0:
-        _tee(out, '  RESULT: convergence_error_bootstrap (BAR) = %8.4f' % bar.conv_err_boot)
+        _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.4f' % bar.conv_err_boot)
     _tee(out, ' ------------------------------------------------------')
     # Should we make this optional?
     diff = abs(cgi.dg - bar.dg)
@@ -1126,14 +1141,12 @@ def main(cmdl):
         if cmdl['-pickle']:
             pickle.dump(jarz, open("jarz_results.pickle", "wb"))
 
-        _tee(out, '  RESULT: dG_forward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_for)
-        _tee(out, '  RESULT: dG_backward (Jarzynski) = %8.4f kJ/mol' % jarz.dg_rev)
+        _tee(out, '  JARZ: dG Forward = %8.4f kJ/mol' % jarz.dg_for)
+        _tee(out, '  JARZ: dG Reverse = %8.4f kJ/mol' % jarz.dg_rev)
+        _tee(out, '  JARZ: dG Mean    = %8.4f kJ/mol' % jarz.dg_mean)
         if cmdl['-nruns'] > 0:
-            _tee(out, '  RESULT: error_dG_bootstrap_forward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_for)
-        if cmdl['-nruns'] > 0:
-            _tee(out, '  RESULT: error_dG_bootstrap_backward (Jarzynski) = %8.4f kJ/mol' % jarz.err_boot_rev)
-        _tee(out, ' ------------------------------------------------------')
-        _tee(out, '  Mean of Jarzynski foward and backward = %8.5f kJ/mol' % jarz.dg_mean)
+            _tee(out, '  JARZ: Std Err Forward (bootstrap) = %8.4f kJ/mol' % jarz.err_boot_for)
+            _tee(out, '  JARZ: Std Err Reverse (bootstrap) = %8.4f kJ/mol' % jarz.err_boot_rev)
         _tee(out, ' ------------------------------------------------------')
 
     if cmdl['-plot']:

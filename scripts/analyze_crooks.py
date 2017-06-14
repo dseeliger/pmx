@@ -416,7 +416,7 @@ class BAR(object):
             the BAR free energy estimate.
         '''
 
-        print('  Solving numerical equation with Nelder-Mead Simplex algorithm... ')
+        print('  Running Nelder-Mead Simplex algorithm... ')
 
         nf = float(len(wf))
         nr = float(len(wr))
@@ -718,7 +718,10 @@ def parse_dgdl_files(lst, lambda0=0, invert_values=False):
     first_w, ndata = integrate_dgdl(lst[0], lambda0=lambda0,
                                     invert_values=invert_values)
     w_list = [first_w]
-    for f in lst[1:]:
+    for idx, f in enumerate(lst[1:]):
+        sys.stdout.write('\r------>  %s' % f)
+        sys.stdout.flush()
+
         w, _ = integrate_dgdl(f, ndata=ndata, lambda0=lambda0,
                               invert_values=invert_values)
         if w is not None:
@@ -752,8 +755,6 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
     # check lambda0 is either 0 or 1
     assert lambda0 in [0, 1]
 
-    sys.stdout.write('\r------>  %s' % fn)
-    sys.stdout.flush()
     l = open(fn).readlines()
     if not l:
         return None, None
@@ -941,11 +942,10 @@ def parse_options(argv):
     # TODO: option to choose units for output
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
     options = [
-        # FIXME: Option cannot take multiple arguments
-        #Option("-m", "str", "BAR",
-        #       "methods to use for the free energy estimate. Available options"
-        #       " are: BAR, GCI, JARZ. You can select one or more; selection is"
-        #       " case insensitive. Default is BAR"),
+        #Option("-m", "svec", "BAR",
+    #           "Methods to use for the free energy estimate. Available options"
+#               " are: BAR, GCI, JARZ. You can select one or more; selection is"
+#               " case insensitive. Default is BAR"),
         Option("-nbins", "int", 10, "number of histograms bins for plot"),
         Option("-T", "real", 298, "Temperature for BAR calculation"),
         Option("-dpi", "int", 300, "plot resolution"),
@@ -967,6 +967,8 @@ def parse_options(argv):
         Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
         Option("-jarz", "bool", False, "Jarzynski estimation"),
         Option("-pickle", "bool", False, "Whether to pickle the results data"),
+        Option("-pick", "int", 1, "Pick every nth work value. Default is 1 "
+               "(all). E.g. with 2, half of the data will be discarded."),
         Option("-nruns", "int", 0,
                "number of runs for bootstrapped BAR and Jarz errors. Default "
                "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "
@@ -991,10 +993,12 @@ def parse_options(argv):
                    "write integrated W (1->0)"),
         ]
 
-    help_text = ('Calculates free energies from fast growth  ',
-                 'thermodynamic integration runs.',
-                 'First method: Crooks-Gaussian Intersection (CGI)',
-                 'Second method: Benett Acceptance Ratio (BAR)'
+    help_text = ('Calculates free energies from fast growth thermodynamic '
+                 'integration runs.',
+                 '  Methods:',
+                 '  Crooks Gaussian Intersection (CGI)',
+                 '  Benett Acceptance Ratio (BAR)',
+                 '  Jarzinski equality (JARZ)'
                  )
 
     cmdl = Commandline(argv, options=options, fileoptions=files,
@@ -1008,6 +1012,7 @@ def main(cmdl):
 
     out = open(cmdl['-o'], 'w')
     T = cmdl['-T']
+    skip = cmdl['-pick']
     prec = int(round(cmdl['-precision'], 0))
 
     print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
@@ -1022,8 +1027,10 @@ def main(cmdl):
 
     # If list of dhdl.xvg files are provided
     if not cmdl.opt['-i0'].is_set:
-        files_ab = natural_sort(cmdl['-pa'])
-        files_ba = natural_sort(cmdl['-pb'])
+        # when skipping start count from end: in this way the last frame is
+        # always included, and what can change is the first one
+        files_ab = list(reversed(natural_sort(cmdl['-pa'])[::-skip]))
+        files_ba = list(reversed(natural_sort(cmdl['-pb'])[::-skip]))
         res_ab = parse_dgdl_files(files_ab, lambda0=0,
                                   invert_values=False)
         res_ba = parse_dgdl_files(files_ba, lambda0=1,
@@ -1111,17 +1118,17 @@ def main(cmdl):
     # Normality test
     # --------------
     if cmdl['-KS']:
-        print('\n  Running KS-test ....')
+        print('\n  Running KS-test...')
         q0, lam00, check0, bOk0 = ks_norm_test(res_ab)
         q1, lam01, check1, bOk1 = ks_norm_test(res_ba)
 
-        _tee(out, '  Forward  : gaussian quality = %3.2f' % q0)
+        _tee(out, '    Forward: gaussian quality = %3.2f' % q0)
         if bOk0:
             _tee(out, '             ---> KS-Test Ok')
         else:
             _tee(out, '             ---> KS-Test Failed. sqrt(N)*Dmax = %4.2f,'
                       ' lambda0 = %4.2f' % (q0, check0))
-        _tee(out, '  Backward : gaussian quality = %3.2f' % q1)
+        _tee(out, '    Reverse: gaussian quality = %3.2f' % q1)
         if bOk1:
             _tee(out, '             ---> KS-Test Ok')
         else:
@@ -1147,12 +1154,13 @@ def main(cmdl):
     if cmdl['-nruns'] > 0:
         _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.2f' % bar.conv_err_boot)
     _tee(out, ' ------------------------------------------------------')
-    # Should we make this optional?
-    diff = abs(cgi.dg - bar.dg)
-    mean = (cgi.dg + bar.dg) * 0.5
-    _tee(out, '  Difference between BAR and CGI = {d:8.{p}f} kJ/mol'.format(d=diff, p=prec))
-    _tee(out, '  Mean of  BAR and CGI           = {m:8.{p}f} kJ/mol'.format(m=mean, p=prec))
-    _tee(out, ' ------------------------------------------------------')
+    # TODO: make this optional
+    if False:
+        diff = abs(cgi.dg - bar.dg)
+        mean = (cgi.dg + bar.dg) * 0.5
+        _tee(out, '  Difference between BAR and CGI = {d:8.{p}f} kJ/mol'.format(d=diff, p=prec))
+        _tee(out, '  Mean of  BAR and CGI           = {m:8.{p}f} kJ/mol'.format(m=mean, p=prec))
+        _tee(out, ' ------------------------------------------------------')
 
     # =========
     # Jarzynski

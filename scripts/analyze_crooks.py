@@ -43,14 +43,13 @@ from scipy.special import erf
 import pickle
 
 # Constants
-kb = 0.00831447215
+kb = 0.00831447215   # kJ/(K*mol)
 
 
 # ==============================================================================
 #                             Estimator Classes
 # ==============================================================================
 # TODO: docstrings
-
 class Jarz(object):
     '''Jarzynski estimator.
 
@@ -942,10 +941,6 @@ def parse_options(argv):
     # TODO: option to choose units for output
     # TODO: choose which estimator to use as list. e.g. -est BAR CGI
     options = [
-        #Option("-m", "svec", "BAR",
-    #           "Methods to use for the free energy estimate. Available options"
-#               " are: BAR, GCI, JARZ. You can select one or more; selection is"
-#               " case insensitive. Default is BAR"),
         Option("-nbins", "int", 10, "number of histograms bins for plot"),
         Option("-T", "real", 298, "Temperature for BAR calculation"),
         Option("-dpi", "int", 300, "plot resolution"),
@@ -975,6 +970,8 @@ def parse_options(argv):
                "samples are always used by default."),
         Option("-precision", "int", 2, "choose the decimal precision of the "
                "output"),
+        Option("-units", "str", "kJ", "choose the units for the output. "
+               "Available options: kJ, kcal, kT. Default is kJ."),
         ]
 
     files = [
@@ -1005,6 +1002,7 @@ def parse_options(argv):
                        program_desc=help_text, check_for_existing_files=False,
                        version=__version__)
     cmdl.argv = argv
+
     return cmdl
 
 
@@ -1014,6 +1012,20 @@ def main(cmdl):
     T = cmdl['-T']
     skip = cmdl['-pick']
     prec = int(round(cmdl['-precision'], 0))
+
+    # Select output units
+    if cmdl['-units'].lower() == 'kj':
+        # kJ is the input from GMX
+        unit_fact = 1.
+        units = 'kJ/mol'
+    elif cmdl['-units'] == 'kcal':
+        unit_fact = 1./4.184
+        units = 'kcal/mol'
+    elif cmdl['-units'].lower() == 'kt':
+        unit_fact = 1./(kb*cmdl['-T'])
+        units = 'kT'
+    else:
+        exit('No unit type \'%s\' available' % cmdl['-units'])
 
     print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
     print >>out, "# pwd = %s" % os.getcwd()
@@ -1109,10 +1121,10 @@ def main(cmdl):
     if cgi.inters_bool is False:
         _tee(out, '\n  Gaussians too close for intersection calculation')
         _tee(out, '   --> Taking difference of mean values')
-    _tee(out, '  CGI: dG = {dg:8.{p}f} kJ/mol'.format(dg=cgi.dg, p=prec))
-    _tee(out, '  CGI: Std Err (bootstrap:parametric) = {e:8.{p}f} kJ/mol'.format(e=cgi.err_boot1, p=prec))
+    _tee(out, '  CGI: dG = {dg:8.{p}f} {u}'.format(dg=cgi.dg*unit_fact, p=prec, u=units))
+    _tee(out, '  CGI: Std Err (bootstrap:parametric) = {e:8.{p}f} {u}'.format(e=cgi.err_boot1*unit_fact, p=prec, u=units))
     if cmdl['-nruns'] > 0:
-        _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=cgi.err_boot2, p=prec))
+        _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact, p=prec, u=units))
 
     # --------------
     # Normality test

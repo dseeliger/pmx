@@ -41,6 +41,7 @@ from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
 import pickle
+import argparse
 
 # Constants
 kb = 0.00831447215   # kJ/(K*mol)
@@ -414,8 +415,6 @@ class BAR(object):
         dg : float
             the BAR free energy estimate.
         '''
-
-        print('  Running Nelder-Mead Simplex algorithm... ')
 
         nf = float(len(wf))
         nr = float(len(wr))
@@ -931,167 +930,289 @@ def natural_sort(l):
 # ==============================================================================
 #                      COMMAND LINE OPTIONS AND MAIN
 # ==============================================================================
-def parse_options(argv):
+def parse_options():
 
-    from pmx import Option
-    from pmx import FileOption
-    from pmx import Commandline
+    parser = argparse.ArgumentParser(description='Calculates free energies '
+            'from fast growth thermodynamic integration simulations. '
+            'Available methods for free energy estimation: '
+            'Crooks Gaussian Intersection (CGI); '
+            'Benett Acceptance Ratio (BAR); '
+            'Jarzinski equality (JARZ).')
+
+    exclus = parser.add_mutually_exclusive_group()
+
+    parser.add_argument('-fA',
+                        metavar='dgdl',
+                        dest='filesAB',
+                        type=str,
+                        help='dgdl.xvg files for the A->B simulations. Use '
+                        'wildcard to select multiple xvg files: e.g. "-fa '
+                        './forward_results/dgdl*.xvg"',
+                        required=True,
+                        nargs='+')
+    parser.add_argument('-fB',
+                        metavar='dgdl',
+                        dest='filesBA',
+                        type=str,
+                        help='dgdl.xvg files for the B->A simulations Use '
+                        'wildcard to select multiple xvg files: e.g. "-fb '
+                        './backward_results/dgdl*.xvg"',
+                        required=True,
+                        nargs='+')
+    parser.add_argument('-m',
+                        metavar='method',
+                        type=str.lower,
+                        dest='methods',
+                        help='Choose one or more estimators to use from the '
+                        'available ones: CGI, BAR, JARZ. Default is all.',
+                        default=['cgi', 'bar', 'jarz'],
+                        nargs='+')
+    parser.add_argument('-t',
+                        metavar='temperature',
+                        dest='temperature',
+                        type=float,
+                        help='Temperature in Kelvin. Default is 298.15.',
+                        default=298.15)
+    parser.add_argument('-o',
+                        metavar='result file',
+                        dest='outfn',
+                        type=str,
+                        help='Filename of output result file. Default is '
+                        '"results.txt."',
+                        default='results.txt')
+    parser.add_argument('-b',
+                        metavar='nboots',
+                        dest='nboots',
+                        type=int,
+                        help='Number of bootstrap samples to use for the '
+                        'bootstrap estimate of the standard errors. Default '
+                        'is 0 (no bootstrap).',
+                        default=0)
+    parser.add_argument('--integ_only',
+                        dest='integ_only',
+                        help='Whether to do integration only; the integrated '
+                        'values are computed and saved, and the program '
+                        'terminated. Default is False.',
+                        default=False,
+                        action='store_true')
+    parser.add_argument('-iA',
+                        metavar='work input',
+                        dest='iA',
+                        type=str,
+                        help='Two-column dat file containing the list of input'
+                        ' files and their respective integrated work values '
+                        'for the forward (A->B) tranformation.')
+    parser.add_argument('-iB',
+                        metavar='work input',
+                        dest='iB',
+                        type=str,
+                        help='Two-column dat file containing the list of input'
+                        ' files and their respective integrated work values '
+                        'for the reverse (B->A) tranformation.')
+    parser.add_argument('-oA',
+                        metavar='work output',
+                        dest='oA',
+                        type=str,
+                        help='File where to save the list of input dgdl'
+                        ' files and their respective integrated work values '
+                        'for the forward (A->B) tranformation. Default is '
+                        '"integA.dat"',
+                        default='integA.dat')
+    parser.add_argument('-oB',
+                        metavar='work output',
+                        dest='oB',
+                        type=str,
+                        help='File where to save the list of input dgdl'
+                        ' files and their respective integrated work values '
+                        'for the reverse (B->A) tranformation. Default is '
+                        '"integB.dat"',
+                        default='integB.dat')
+    parser.add_argument('--reverseB',
+                        dest='reverseB',
+                        help='Whether to reverse the work values for the '
+                        'backward (B->A) transformation. This is useful '
+                        'when in Gromacs both forward and reverse simulations '
+                        'were run from lambda zero to one.'
+                        'Default is False.',
+                        default=False,
+                        action='store_true')
+    exclus.add_argument('--skip',
+                        metavar='',
+                        dest='skip',
+                        type=int,
+                        help='Skip files, i.e. pick every nth work value. '
+                        'Default is 1 (all); with 2, every other work value '
+                        'is discarded, etc.',
+                        default=1)
+    exclus.add_argument('--slice',
+                        metavar='',
+                        dest='slice',
+                        type=int,
+                        help='Subset of trajectories to analyze.'
+                        'Provide list slice, e.g. "10 50" will'
+                        ' result in selecting dgdl_files[10:50].'
+                        ' Default is all.',
+                        default=None,
+                        nargs=2)
+    exclus.add_argument('--rand',
+                        metavar='',
+                        dest='rand',
+                        type=int,
+                        help='Take a random subset of trajectories. '
+                        'Default is None (do not take random subset)',
+                        default=None)
+    parser.add_argument('--prec',
+                        metavar='',
+                        dest='precision',
+                        type=int,
+                        help='The decimal precision of the screen/file output.'
+                        ' Default is 2.',
+                        default=2)
+    parser.add_argument('--units',
+                        metavar='',
+                        dest='units',
+                        type=str.lower,
+                        help='The units of the output. Choose from "kJ", '
+                        '"kcal", "kT". Default is "kJ."',
+                        default='kJ',
+                        choices=['kj', 'kcal', 'kt'])
+    parser.add_argument('--pickle',
+                        dest='pickle',
+                        help='Whether to save the free energy results from '
+                        'the estimators in pickled files. Default is False.',
+                        default=False,
+                        action='store_true')
+    parser.add_argument('--no_ks',
+                        dest='do_ks_test',
+                        help='Whether to do a Kolmogorov-Smirnov test '
+                        'to check whether the Gaussian assumption for CGI '
+                        'holds. Default is True; this flag turns it to False.',
+                        default=True,
+                        action='store_false')
+    parser.add_argument('--cgi_plot',
+                        metavar='',
+                        dest='cgi_plot',
+                        type=str,
+                        help='Whether to plot the work histograms along with '
+                        'the CGI results. If the flag is used, you also need'
+                        'to specify a filename.',
+                        default=None)
+    parser.add_argument('--nbins',
+                        metavar='',
+                        dest='nbins',
+                        type=int,
+                        help='Number of histograms bins for the plot. '
+                        'Default is 10.',
+                        default=10)
+    parser.add_argument('--dpi',
+                        metavar='',
+                        dest='dpi',
+                        type=int,
+                        help='Resolution of the plot. Default is 300.',
+                        default=300)
+
+    args = parser.parse_args()
+
     from pmx import __version__
+    args.pmx_version = __version__
 
-    # TODO: option to choose units for output
-    # TODO: choose which estimator to use as list. e.g. -est BAR CGI
-    options = [
-        Option("-nbins", "int", 10, "number of histograms bins for plot"),
-        Option("-T", "real", 298, "Temperature for BAR calculation"),
-        Option("-dpi", "int", 300, "plot resolution"),
-        Option("-reverseB", "bool", False, "reverse state B"),
-        Option("-firstA", "int", 0,
-               "first trajectory to analyze"
-               " (by default all values are taken)"),
-        Option("-lastA", "int", 100,
-               "last trajectory to analyze"
-               " (by default all values are taken)"),
-        Option("-firstB", "int", 0,
-               "first trajectory to analyze"
-               " (by default all values are taken)"),
-        Option("-lastB", "int", 100,
-               "last trajectory to analyze (by default all values are taken)"),
-        Option("-rand", "int", 50, "take a random subset of trajectories"),
-        Option("-integ_only", "bool", False,
-               "Do integration only. Skip analysis."),
-        Option("-KS", "bool", True, "Do Kolmogorov-Smirnov test"),
-        Option("-jarz", "bool", False, "Jarzynski estimation"),
-        Option("-pickle", "bool", False, "Whether to pickle the results data"),
-        Option("-pick", "int", 1, "Pick every nth work value. Default is 1 "
-               "(all). E.g. with 2, half of the data will be discarded."),
-        Option("-nruns", "int", 0,
-               "number of runs for bootstrapped BAR and Jarz errors. Default "
-               "is 0, i.e. do not use bootstrap. For CGI, 1000 bootstrap "
-               "samples are always used by default."),
-        Option("-precision", "int", 2, "choose the decimal precision of the "
-               "output"),
-        Option("-units", "str", "kJ", "choose the units for the output. "
-               "Available options: kJ, kcal, kT. Default is kJ."),
-        ]
-
-    files = [
-        FileOption("-pa", "r/m", ["xvg"], "dgdl.xvg", "paths to 0->1 runs"),
-        FileOption("-pb", "r/m", ["xvg"], "dgdl.xvg", "paths to 1->0 runs"),
-        FileOption("-o", "w", ["dat"], "results.dat", "results"),
-        FileOption("-cgi_plot", "w", ["png", "eps", "svg", "pdf"],
-                   "cgi.png", "plot work histograms "),
-        FileOption("-i0", "r/m/o", ["dat"], "integ0.dat",
-                   "read integrated W (0->1)"),
-        FileOption("-i1", "r/m/o", ["dat"], "integ1.dat",
-                   "read integrated W (1->0)"),
-        FileOption("-o0", "w", ["dat"], "integ0.dat",
-                   "write integrated W (0->1)"),
-        FileOption("-o1", "w", ["dat"], "integ1.dat",
-                   "write integrated W (1->0)"),
-        ]
-
-    help_text = ('Calculates free energies from fast growth thermodynamic '
-                 'integration runs.',
-                 '  Methods:',
-                 '  Crooks Gaussian Intersection (CGI)',
-                 '  Benett Acceptance Ratio (BAR)',
-                 '  Jarzinski equality (JARZ)'
-                 )
-
-    cmdl = Commandline(argv, options=options, fileoptions=files,
-                       program_desc=help_text, check_for_existing_files=False,
-                       version=__version__)
-    cmdl.argv = argv
-
-    return cmdl
+    return args
 
 
-def main(cmdl):
+def main(args):
 
-    out = open(cmdl['-o'], 'w')
-    T = cmdl['-T']
-    skip = cmdl['-pick']
-    prec = int(round(cmdl['-precision'], 0))
+    out = open(args.outfn, 'w')
+    filesAB = natural_sort(args.filesAB)
+    filesBA = natural_sort(args.filesBA)
+    T = args.temperature
+    skip = args.skip
+    prec = args.precision
+    methods = args.methods
+    reverseB = args.reverseB
+    integ_only = args.integ_only
+    nboots = args.nboots
+    do_ks_test = args.do_ks_test
 
+    # -------------------
     # Select output units
-    if cmdl['-units'].lower() == 'kj':
+    # -------------------
+    units = args.units
+    if units.lower() == 'kj':
         # kJ is the input from GMX
         unit_fact = 1.
         units = 'kJ/mol'
-    elif cmdl['-units'] == 'kcal':
+    elif units == 'kcal':
         unit_fact = 1./4.184
         units = 'kcal/mol'
-    elif cmdl['-units'].lower() == 'kt':
-        unit_fact = 1./(kb*cmdl['-T'])
+    elif units.lower() == 'kt':
+        unit_fact = 1./(kb*T)
         units = 'kT'
     else:
-        exit('No unit type \'%s\' available' % cmdl['-units'])
+        exit('No unit type \'%s\' available' % units)
 
-    print >>out, "# analyze_crooks.py, pmx version = %s" % cmdl.version
+    print >>out, "# analyze_crooks.py, pmx version = %s" % args.pmx_version
     print >>out, "# pwd = %s" % os.getcwd()
     print >>out, "# %s (%s)" % (time.asctime(), os.environ.get('USER'))
-    print >>out, "# command = %s" % ' '.join(cmdl.argv)
-    print >>out, "\n\n"
+    print >>out, "# command = %s" % ' '.join(sys.argv)
+    _tee(out, "\n\n")
 
     # ==========
     # Parse Data
     # ==========
 
-    # If list of dhdl.xvg files are provided
-    if not cmdl.opt['-i0'].is_set:
+    # If list of dgdl.xvg files are provided, parse dgdl
+    if args.iA is None and args.iB is None:
+        # If random selection is chosen, do this before reading files and
+        # calculating the work values
+        if args.rand is not None:
+            filesAB = np.random.choice(filesAB, size=args.rand, replace=False)
+            filesBA = np.random.choice(filesBA, size=args.rand, replace=False)
+            _tee(out, 'Selected random subset of %d trajectories.' % args.rand)
+
+        # If slice values provided, select the files needed. Again before
+        # reading files so speed up the process
+        if args.slice is not None:
+            first = args.slice[0]
+            last = args.slice[1]
+            _tee(out, 'First trajectories read: %s and %s'
+                 % (filesAB[first], filesBA[first]))
+            _tee(out, 'Last trajectories  read: %s and %s'
+                 % (filesAB[last], filesBA[last]))
+            filesAB = filesAB[first:last]
+            filesBA = filesBA[first:last]
+
         # when skipping start count from end: in this way the last frame is
         # always included, and what can change is the first one
-        files_ab = list(reversed(natural_sort(cmdl['-pa'])[::-skip]))
-        files_ba = list(reversed(natural_sort(cmdl['-pb'])[::-skip]))
-        res_ab = parse_dgdl_files(files_ab, lambda0=0,
+        filesAB = list(reversed(filesAB[::-skip]))
+        filesBA = list(reversed(filesBA[::-skip]))
+
+        res_ab = parse_dgdl_files(filesAB, lambda0=0,
                                   invert_values=False)
-        res_ba = parse_dgdl_files(files_ba, lambda0=1,
-                                  invert_values=cmdl['-reverseB'])
-        _dump_integ_file(cmdl['-o0'], files_ab, res_ab)
-        _dump_integ_file(cmdl['-o1'], files_ba, res_ba)
-    # If work values are given as input
-    else:
+        res_ba = parse_dgdl_files(filesBA, lambda0=1,
+                                  invert_values=reverseB)
+
+        _dump_integ_file(args.oA, filesAB, res_ab)
+        _dump_integ_file(args.oB, filesBA, res_ba)
+
+    # If work values are given as input instead, read those
+    elif args.iA is not None and args.iB is not None:
         res_ab = []
         res_ba = []
-        for fn in cmdl['-i0']:
-            print '\t\tReading integrated values (0->1) from', fn
+        for fn in args.iA:
+            print '\t\tReading integrated values (A->B) from', fn
             res_ab.extend(_data_from_file(fn))
-        for fn in cmdl['-i1']:
-            print '\t\tReading integrated values (1->0) from', fn
+        for fn in args.iB:
+            print '\t\tReading integrated values (B->A) from', fn
             res_ba.extend(_data_from_file(fn))
+    else:
+        exit('\nERROR: you need to provide either none of both sets of '
+             'integrated work values.')
 
     # If asked to only do the integration of dhdl.xvg, exit
-    if cmdl['-integ_only']:
-        print '\n    Integration done. Skipping analysis.'
-        print '\n    ......done........\n'
+    if integ_only:
+        print('\n    Integration done. Skipping analysis.')
+        print('\n    ......done........\n')
         sys.exit(0)
-
-    # select work values to keep - default is all
-    firstA = 0
-    lastA = len(res_ab)
-    firstB = 0
-    lastB = len(res_ba)
-    if cmdl.opt['-firstA'].is_set:
-        firstA = cmdl['-firstA']
-        _tee(out, '   first trajectory to read from A: %d' % firstA)
-    if cmdl.opt['-lastA'].is_set:
-        lastA = cmdl['-lastA']
-        _tee(out, '   last trajectory to read from A : %d' % lastA)
-    if cmdl.opt['-firstB'].is_set:
-        firstB = cmdl['-firstB']
-        _tee(out, '   first trajectory to read from B: %d' % firstB)
-    if cmdl.opt['-lastB'].is_set:
-        lastB = cmdl['-lastB']
-        _tee(out, '   last trajectory to read from B : %d' % lastB)
-
-    res_ab = res_ab[firstA:lastA]
-    res_ba = res_ba[firstB:lastB]
-
-    if cmdl.opt['-rand'].is_set:
-        ntraj = cmdl['-rand']
-        _tee(out, ' select random subset of trajectories: %d' % ntraj)
-        res_ab = np.random.choice(res_ab, size=ntraj, replace=False)
-        res_ba = np.random.choice(res_ba, size=ntraj, replace=False)
 
     # ==============
     # Begin Analysis
@@ -1107,29 +1228,42 @@ def main(cmdl):
     # ============================
     # Crooks Gaussian Intersection
     # ============================
-    _tee(out, '\n --------------------------------------------------------')
-    _tee(out, '             Crooks Gaussian Intersection     ')
-    _tee(out, ' --------------------------------------------------------')
+    if 'cgi' in methods:
+        _tee(out, '\n --------------------------------------------------------')
+        _tee(out, '             Crooks Gaussian Intersection     ')
+        _tee(out, ' --------------------------------------------------------')
 
-    print('  Calculating Intersection...')
-    cgi = Crooks(wf=res_ab, wr=res_ba, nboots=cmdl['-nruns'])
-    if cmdl['-pickle']:
-        pickle.dump(cgi, open("cgi_results.pickle", "wb"))
+        print('  Calculating Intersection...')
+        cgi = Crooks(wf=res_ab, wr=res_ba, nboots=nboots)
+        if args.pickle is True:
+            pickle.dump(cgi, open("cgi_results.pkl", "wb"))
 
-    _tee(out, '  CGI: Forward Gauss  mean = {m:8.{p}f}  std = {s:8.{p}f}'.format(m=cgi.mf, s=cgi.devf, p=prec))
-    _tee(out, '  CGI: Reverse Gauss  mean = {m:8.{p}f}  std = {s:8.{p}f}'.format(m=cgi.mr, s=cgi.devr, p=prec))
-    if cgi.inters_bool is False:
-        _tee(out, '\n  Gaussians too close for intersection calculation')
-        _tee(out, '   --> Taking difference of mean values')
-    _tee(out, '  CGI: dG = {dg:8.{p}f} {u}'.format(dg=cgi.dg*unit_fact, p=prec, u=units))
-    _tee(out, '  CGI: Std Err (bootstrap:parametric) = {e:8.{p}f} {u}'.format(e=cgi.err_boot1*unit_fact, p=prec, u=units))
-    if cmdl['-nruns'] > 0:
-        _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact, p=prec, u=units))
+        _tee(out, '  CGI: Forward Gauss mean = {m:8.{p}f} {u} '
+                  'std = {s:8.{p}f} {u}'.format(m=cgi.mf*unit_fact,
+                                                s=cgi.devf*unit_fact,
+                                                p=prec, u=units))
+        _tee(out, '  CGI: Reverse Gauss mean = {m:8.{p}f} {u} '
+                  'std = {s:8.{p}f} {u}'.format(m=cgi.mr*unit_fact,
+                                                s=cgi.devr*unit_fact,
+                                                p=prec, u=units))
+
+        if cgi.inters_bool is False:
+            _tee(out, '\n  Gaussians too close for intersection calculation')
+            _tee(out, '   --> Taking difference of mean values')
+
+        _tee(out, '  CGI: dG = {dg:8.{p}f} {u}'.format(dg=cgi.dg*unit_fact,
+                                                       p=prec, u=units))
+        _tee(out, '  CGI: Std Err (bootstrap:parametric) = {e:8.{p}f} {u}'.format(e=cgi.err_boot1*unit_fact,
+                                                                                  p=prec, u=units))
+
+        if nboots > 0:
+            _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact, 
+                                                                           p=prec, u=units))
 
     # --------------
     # Normality test
     # --------------
-    if cmdl['-KS']:
+    if do_ks_test:
         print('\n  Running KS-test...')
         q0, lam00, check0, bOk0 = ks_norm_test(res_ab)
         q1, lam01, check1, bOk1 = ks_norm_test(res_ba)
@@ -1150,57 +1284,62 @@ def main(cmdl):
     # ========================
     # Bennett Acceptance Ratio
     # ========================
-    _tee(out, '\n --------------------------------------------------------')
-    _tee(out, '             Bennett Acceptance Ratio     ')
-    _tee(out, ' --------------------------------------------------------')
+    if 'bar' in methods:
+        _tee(out, '\n --------------------------------------------------------')
+        _tee(out, '             Bennett Acceptance Ratio     ')
+        _tee(out, ' --------------------------------------------------------')
 
-    bar = BAR(res_ab, res_ba, T=T, nboots=cmdl['-nruns'])
-    if cmdl['-pickle']:
-        pickle.dump(bar, open("bar_results.pickle", "wb"))
+        print('  Running Nelder-Mead Simplex algorithm... ')
 
-    _tee(out, '  BAR: dG = {dg:8.{p}f} kJ/mol'.format(dg=bar.dg, p=prec))
-    _tee(out, '  BAR: Std Err (analytical) = {e:8.{p}f} kJ/mol'.format(e=bar.err, p=prec))
-    if cmdl['-nruns'] > 0:
-        _tee(out, '  BAR: Std Err (bootstrap)  = {e:8.{p}f} kJ/mol'.format(e=bar.err_boot, p=prec))
-    _tee(out, '  BAR: Conv = %8.2f' % bar.conv)
-    if cmdl['-nruns'] > 0:
-        _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.2f' % bar.conv_err_boot)
-    _tee(out, ' ------------------------------------------------------')
-    # TODO: make this optional
-    if False:
-        diff = abs(cgi.dg - bar.dg)
-        mean = (cgi.dg + bar.dg) * 0.5
-        _tee(out, '  Difference between BAR and CGI = {d:8.{p}f} kJ/mol'.format(d=diff, p=prec))
-        _tee(out, '  Mean of  BAR and CGI           = {m:8.{p}f} kJ/mol'.format(m=mean, p=prec))
+        bar = BAR(res_ab, res_ba, T=T, nboots=nboots)
+        if args.pickle:
+            pickle.dump(bar, open("bar_results.pkl", "wb"))
+
+        _tee(out, '  BAR: dG = {dg:8.{p}f} {u}'.format(dg=bar.dg*unit_fact, p=prec, u=units))
+        _tee(out, '  BAR: Std Err (analytical) = {e:8.{p}f} {u}'.format(e=bar.err*unit_fact, p=prec, u=units))
+
+        if nboots > 0:
+            _tee(out, '  BAR: Std Err (bootstrap)  = {e:8.{p}f} {u}'.format(e=bar.err_boot*unit_fact, p=prec, u=units))
+
+        _tee(out, '  BAR: Conv = %8.2f' % bar.conv)
+
+        if nboots > 0:
+            _tee(out, '  BAR: Conv Std Err (bootstrap) = %8.2f' % bar.conv_err_boot)
         _tee(out, ' ------------------------------------------------------')
 
     # =========
     # Jarzynski
     # =========
-    if cmdl['-jarz']:
+    if 'jarz' in methods:
         _tee(out, '\n --------------------------------------------------------')
         _tee(out, '             Jarzynski estimator     ')
         _tee(out, ' --------------------------------------------------------')
 
-        jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=cmdl['-nruns'])
-        if cmdl['-pickle']:
-            pickle.dump(jarz, open("jarz_results.pickle", "wb"))
+        jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=nboots)
+        if args.pickle:
+            pickle.dump(jarz, open("jarz_results.pkl", "wb"))
 
-        _tee(out, '  JARZ: dG Forward = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_for, p=prec))
-        _tee(out, '  JARZ: dG Reverse = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_rev, p=prec))
-        _tee(out, '  JARZ: dG Mean    = {dg:8.{p}f} kJ/mol'.format(dg=jarz.dg_mean, p=prec))
-        if cmdl['-nruns'] > 0:
-            _tee(out, '  JARZ: Std Err Forward (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=jarz.err_boot_for, p=prec))
-            _tee(out, '  JARZ: Std Err Reverse (bootstrap) = {e:8.{p}f} kJ/mol'.format(e=jarz.err_boot_rev, p=prec))
+        _tee(out, '  JARZ: dG Forward = {dg:8.{p}f} {u}'.format(dg=jarz.dg_for*unit_fact,
+                                                                p=prec, u=units))
+        _tee(out, '  JARZ: dG Reverse = {dg:8.{p}f} {u}'.format(dg=jarz.dg_rev*unit_fact,
+                                                                p=prec, u=units))
+        _tee(out, '  JARZ: dG Mean    = {dg:8.{p}f} {u}'.format(dg=jarz.dg_mean*unit_fact,
+                                                                p=prec, u=units))
+        if nboots:
+            _tee(out, '  JARZ: Std Err Forward (bootstrap) = {e:8.{p}f} {u}'.format(e=jarz.err_boot_for*unit_fact,
+                                                                                    p=prec, u=units))
+            _tee(out, '  JARZ: Std Err Reverse (bootstrap) = {e:8.{p}f} {u}'.format(e=jarz.err_boot_rev*unit_fact,
+                                                                                    p=prec, u=units))
         _tee(out, ' ------------------------------------------------------')
 
     print '\n   Plotting histograms......'
-    make_cgi_plot(cmdl['-cgi_plot'], res_ab, res_ba, cgi.dg, cgi.err_boot1,
-                  cmdl['-nbins'], cmdl['-dpi'])
+    if 'cgi' in methods and args.cgi_plot is not None:
+        make_cgi_plot(args.cgi_plot, res_ab, res_ba, cgi.dg, cgi.err_boot1,
+                      args.nbins, args.dpi)
 
     print('\n   ......done...........\n')
 
 
 if __name__ == '__main__':
-    cmdl = parse_options(sys.argv)
-    main(cmdl)
+    args = parse_options()
+    main(args)

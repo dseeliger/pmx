@@ -927,6 +927,12 @@ def natural_sort(l):
     return sorted(l, key=alphanum_key)
 
 
+def time_stats(seconds):
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    return h, m, s
+
+
 # ==============================================================================
 #                      COMMAND LINE OPTIONS AND MAIN
 # ==============================================================================
@@ -1121,6 +1127,10 @@ def parse_options():
 
 def main(args):
 
+    # start timing
+    stime = time.time()
+
+    # input arguments
     out = open(args.outfn, 'w')
     filesAB = natural_sort(args.filesAB)
     filesBA = natural_sort(args.filesBA)
@@ -1257,7 +1267,7 @@ def main(args):
                                                                                   p=prec, u=units))
 
         if nboots > 0:
-            _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact, 
+            _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact,
                                                                            p=prec, u=units))
 
     # --------------
@@ -1338,6 +1348,11 @@ def main(args):
                       args.nbins, args.dpi)
 
     print('\n   ......done...........\n')
+
+    # execution time
+    etime = time.time()
+    h, m, s = time_stats(etime-stime)
+    print("   Execution time = %02d:%02d:%02d\n" % (h, m, s))
 
 
 if __name__ == '__main__':

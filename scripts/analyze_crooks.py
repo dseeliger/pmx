@@ -425,9 +425,11 @@ class BAR(object):
             sf = 0
             for v in wf:
                 sf += 1./(1+np.exp(beta*(M+v - x)))
-                sr = 0
-                for v in wr:
-                    sr += 1./(1+np.exp(-beta*(M+v - x)))
+
+            sr = 0
+            for v in wr:
+                sr += 1./(1+np.exp(-beta*(M+v - x)))
+
             r = sf-sr
             return r**2
 
@@ -753,11 +755,11 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
     # check lambda0 is either 0 or 1
     assert lambda0 in [0, 1]
 
-    l = open(fn).readlines()
-    if not l:
+    lines = open(fn).readlines()
+    if not lines:
         return None, None
     r = []
-    for line in l:
+    for line in lines:
         if line[0] not in '#@&':
             try:
                 r.append([float(x) for x in line.split()])

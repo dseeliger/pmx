@@ -7,7 +7,7 @@
 # notices.
 #
 # ----------------------------------------------------------------------
-# pmx is Copyright (C) 2006-2011 by Daniel Seeliger
+# pmx is Copyright (C) 2006-2017 by Daniel Seeliger
 #
 #                        All Rights Reserved
 #
@@ -50,6 +50,8 @@ kb = 0.00831447215   # kJ/(K*mol)
 # ==============================================================================
 #                             Estimator Classes
 # ==============================================================================
+# TODO: make estimators a separete module and do e.g.:
+# from pmx.estimators import Jarz, BAR, Crooks
 # TODO: docstrings
 class Jarz(object):
     '''Jarzynski estimator.
@@ -746,7 +748,7 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
 
     Returns
     -------
-    simps : float
+    integr : float
         result of the integration performed using Simpson's rule.
     ndata : int
         number of data points in the input file.
@@ -791,9 +793,11 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
         y.reverse()
 
     if invert_values is True:
-        return simps(y, x) * (-1), ndata
+        integr = simps(y, x) * (-1)
+        return integr, ndata
     else:
-        return simps(y, x), ndata
+        integr = simps(y, x)
+        return integr, ndata
 
 
 def _check_dgdl(fn, lambda0):
@@ -1128,6 +1132,13 @@ def parse_options():
 
 
 def main(args):
+    """Run the main script.
+
+    Parameters
+    ----------
+    args : argparse.Namespace
+        The command line arguments
+    """
 
     # start timing
     stime = time.time()
@@ -1351,6 +1362,10 @@ def main(args):
 
     print('\n   ......done...........\n')
 
+    if args.pickle:
+        print('   NOTE: units of results in pickled files are as in the\n'
+              '   provided dgdl.xvg or integ.dat files. These are typically\n'
+              '   in kJ/mol when using dgdl.xvg files from Gromacs.\n')
     # execution time
     etime = time.time()
     h, m, s = time_stats(etime-stime)

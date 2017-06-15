@@ -424,11 +424,11 @@ class BAR(object):
         def func(x, wf, wr):
             sf = 0
             for v in wf:
-                sf += 1./(1+np.exp(beta*(M+v - x)))
+                sf += 1./(1+np.exp(beta*(M+v-x)))
 
             sr = 0
             for v in wr:
-                sr += 1./(1+np.exp(-beta*(M+v - x)))
+                sr += 1./(1+np.exp(-beta*(M+v-x)))
 
             r = sf-sr
             return r**2
@@ -758,14 +758,13 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
     lines = open(fn).readlines()
     if not lines:
         return None, None
-    r = []
-    for line in lines:
-        if line[0] not in '#@&':
-            try:
-                r.append([float(x) for x in line.split()])
-            except:
-                print ' !! Skipping %s ' % (fn)
-                return None, None
+
+    # extract dgdl datapoints into r
+    # TODO: we removed the check for file integrity. We could have an
+    # optional files integrity check before calling this integration func
+
+    lines = [l for l in lines if l[0] not in '#@&']
+    r = map(lambda x: float(x.split()[1]), lines)
 
     if ndata != -1 and len(r) != ndata:
         try:
@@ -779,12 +778,13 @@ def integrate_dgdl(fn, ndata=-1, lambda0=0, invert_values=False):
     dlambda = 1./float(ndata)
     if lambda0 == 1:
         dlambda *= -1
-    data = []
 
-    for i, (ttime, dgdl) in enumerate(r):
-        data.append([lambda0+i*dlambda, dgdl])
-    x = map(lambda a: a[0], data)
-    y = map(lambda a: a[1], data)
+    # arrays for the integration
+    # --------------------------
+    # array of lambda values
+    x = [lambda0+i*dlambda for i, dgdl in enumerate(r)]
+    # array of dgdl
+    y = r
 
     if lambda0 == 1:
         x.reverse()

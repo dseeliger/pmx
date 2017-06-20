@@ -1048,6 +1048,7 @@ def parse_options():
                         'Default is False.',
                         default=False,
                         action='store_true')
+    # The following are mutually exclusive options
     exclus.add_argument('--skip',
                         metavar='',
                         dest='skip',
@@ -1073,6 +1074,17 @@ def parse_options():
                         help='Take a random subset of trajectories. '
                         'Default is None (do not take random subset)',
                         default=None)
+    exclus.add_argument('--index',
+                        metavar='',
+                        dest='index',
+                        type=int,
+                        help='Zero-based index of files to analyze (e.g.'
+                        ' 0 10 20 50 60). It keeps '
+                        'the dgdl.xvg files according to their position in the'
+                        ' list, sorted according to the filenames. Default '
+                        'is None (i.e. all dgdl are used).',
+                        default=None,
+                        nargs='+')
     parser.add_argument('--prec',
                         metavar='',
                         dest='precision',
@@ -1186,7 +1198,7 @@ def main(args):
     # If list of dgdl.xvg files are provided, parse dgdl
     if args.iA is None and args.iB is None:
         # If random selection is chosen, do this before reading files and
-        # calculating the work values
+        # calculating the work values.
         if args.rand is not None:
             filesAB = np.random.choice(filesAB, size=args.rand, replace=False)
             filesBA = np.random.choice(filesBA, size=args.rand, replace=False)
@@ -1200,15 +1212,21 @@ def main(args):
             _tee(out, 'First trajectories read: %s and %s'
                  % (filesAB[first], filesBA[first]))
             _tee(out, 'Last trajectories  read: %s and %s'
-                 % (filesAB[last], filesBA[last]))
+                 % (filesAB[last-1], filesBA[last-1]))
             filesAB = filesAB[first:last]
             filesBA = filesBA[first:last]
+
+        # If index values provided, select the files needed
+        if args.index is not None:
+            filesAB = [filesAB[i] for i in args.index]
+            filesBA = [filesBA[i] for i in args.index]
 
         # when skipping start count from end: in this way the last frame is
         # always included, and what can change is the first one
         filesAB = list(reversed(filesAB[::-skip]))
         filesBA = list(reversed(filesBA[::-skip]))
 
+        # Now read in the data
         res_ab = parse_dgdl_files(filesAB, lambda0=0,
                                   invert_values=False)
         res_ba = parse_dgdl_files(filesBA, lambda0=1,

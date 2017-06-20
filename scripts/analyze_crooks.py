@@ -29,6 +29,7 @@
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # ----------------------------------------------------------------------
 
+from __future__ import division
 import sys
 import os
 import time
@@ -40,6 +41,7 @@ import numpy as np
 from scipy.integrate import simps
 from scipy.optimize import fmin
 from scipy.special import erf
+import scipy.stats
 import pickle
 import argparse
 
@@ -77,11 +79,12 @@ class Jarz(object):
 
     '''
 
-    def __init__(self, wf, wr, T, nboots=0):
+    def __init__(self, wf, wr, T, nboots=0, nblocks=1):
         self.wf = np.array(wf)
         self.wr = np.array(wr)
         self.T = float(T)
         self.nboots = nboots
+        self.nblocks = nblocks
 
         # Calculate all Jarz properties available
         self.dg_for = self.calc_dg(w=self.wf, c=1.0, T=self.T)
@@ -93,6 +96,14 @@ class Jarz(object):
                                                    c=1.0, nboots=nboots)
             self.err_boot_rev = self.calc_err_boot(w=self.wr, T=self.T,
                                                    c=-1.0, nboots=nboots)
+
+        if nblocks > 1:
+            self.err_blocks_for = self.calc_err_blocks(w=self.wf, c=1.0,
+                                                       T=self.T,
+                                                       nblocks=nblocks)
+            self.err_blocks_rev = self.calc_err_blocks(w=self.wr, c=-1.0,
+                                                       T=self.T,
+                                                       nblocks=nblocks)
 
     @staticmethod
     def calc_dg(w, T, c):
@@ -157,6 +168,49 @@ class Jarz(object):
         err = np.std(dg_boots)
         return err
 
+    @staticmethod
+    def calc_err_blocks(w, T, c, nblocks):
+        '''Calculates the standard error based on a number of blocks the
+        work values are divided into. It is useful when you run independent
+        equilibrium simulations, so that you can then use their respective
+        work values to compute the standard error based on the repeats.
+
+        Parameters
+        ----------
+        w : array_like
+            array of work values.
+        T : float
+            temperature.
+        c : [0,1]
+            ???
+        nblocks: int
+            number of blocks to divide the data into. This can be for
+            instance the number of independent equilibrium simulations
+            you ran.
+        '''
+
+        # get number of work values
+        len_w = len(w)
+        # here we assume/expect same lenght for wf and wr
+        assert len_w % float(nblocks) == 0.0
+        dg_blocks = []
+
+        nf_block = int(len_w/nblocks)
+        first = 0
+        last = nf_block
+        # calculate all dg
+        for i in range(nblocks):
+            w_block = np.array(w[first:last])
+            dg_block = -1.0 * Jarz.calc_dg(w_block, T, c)
+            dg_blocks.append(dg_block)
+            first += nf_block
+            last += nf_block
+
+        # get std err
+        err_blocks = scipy.stats.sem(dg_blocks, ddof=1)
+
+        return err_blocks
+
 
 class Crooks(object):
     '''Crooks Gaussian Intersection (CGI) estimator. The forward and reverse work
@@ -202,12 +256,13 @@ class Crooks(object):
         standard deviation of the reverse Gaussian.
     '''
 
-    def __init__(self, wf, wr, nboots):
+    def __init__(self, wf, wr, nboots=0, nblocks=1):
 
         # inputs
         self.wf = np.array(wf)
         self.wr = np.array(wr)
         self.nboots = nboots
+        self.nblocks = nblocks
         # params of the gaussians
         self.mf, self.devf, self.Af = data_to_gauss(wf)
         self.mr, self.devr, self.Ar = data_to_gauss(wr)
@@ -222,6 +277,9 @@ class Crooks(object):
         if nboots > 0:
             self.err_boot2 = self.calc_err_boot2(wf=self.wf, wr=self.wr,
                                                  nboots=nboots)
+
+        if nblocks > 1:
+            self.err_blocks = self.calc_err_blocks(self.wf, self.wr, nblocks)
 
     @staticmethod
     def calc_dg(wf, wr):
@@ -363,6 +421,50 @@ class Crooks(object):
         err = np.std(dg_boots)
         return err
 
+    @staticmethod
+    def calc_err_blocks(wf, wr, nblocks):
+        '''Calculates the standard error based on a number of blocks the
+        work values are divided into. It is useful when you run independent
+        equilibrium simulations, so that you can then use their respective
+        work values to compute the standard error based on the repeats.
+
+        Parameters
+        ----------
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        nblocks: int
+            number of blocks to divide the data into. This can be for
+            instance the number of independent equilibrium simulations
+            you ran.
+        '''
+
+        # get number of work values
+        len_wf = len(wf)
+        len_wr = len(wr)
+        # here we assume/expect same lenght for wf and wr
+        assert len_wf == len_wr
+        assert len_wf % float(nblocks) == 0.0
+        dg_blocks = []
+
+        nf_block = int(len_wf/nblocks)
+        first = 0
+        last = nf_block
+        # calculate all dg
+        for i in range(nblocks):
+            wf_block = np.array(wf[first:last])
+            wr_block = np.array(wr[first:last])
+            dg_block, _ = Crooks.calc_dg(wf_block, wr_block)
+            dg_blocks.append(dg_block)
+            first += nf_block
+            last += nf_block
+
+        # get std err
+        err_blocks = scipy.stats.sem(dg_blocks, ddof=1)
+
+        return err_blocks
+
 
 class BAR(object):
     '''Bennett acceptance ratio (BAR).
@@ -376,11 +478,12 @@ class BAR(object):
     --------
     '''
 
-    def __init__(self, wf, wr, T, nboots=0):
+    def __init__(self, wf, wr, T, nboots=0, nblocks=1):
         self.wf = np.array(wf)
         self.wr = np.array(wr)
         self.T = float(T)
         self.nboots = nboots
+        self.nblocks = nblocks
 
         self.nf = len(wf)
         self.nr = len(wr)
@@ -398,6 +501,9 @@ class BAR(object):
             self.conv_err_boot = self.calc_conv_err_boot(self.dg, self.wf,
                                                          self.wr, nboots,
                                                          self.T)
+        if nblocks > 1:
+            self.err_blocks = self.calc_err_blocks(self.wf, self.wr, nblocks,
+                                                   self.T)
 
     @staticmethod
     def calc_dg(wf, wr, T):
@@ -509,6 +615,52 @@ class BAR(object):
         err_boot = np.std(dg_boots)
 
         return err_boot
+
+    @staticmethod
+    def calc_err_blocks(wf, wr, nblocks, T):
+        '''Calculates the standard error based on a number of blocks the
+        work values are divided into. It is useful when you run independent
+        equilibrium simulations, so that you can then use their respective
+        work values to compute the standard error based on the repeats.
+
+        Parameters
+        ----------
+        wf : array_like
+            array of forward work values.
+        wr : array_like
+            array of reverse work values.
+        T : float
+            temperature
+        nblocks: int
+            number of blocks to divide the data into. This can be for
+            instance the number of independent equilibrium simulations
+            you ran.
+        '''
+
+        # get number of work values
+        len_wf = len(wf)
+        len_wr = len(wr)
+        # here we assume/expect same lenght for wf and wr
+        assert len_wf == len_wr
+        assert len_wf % float(nblocks) == 0.0
+        dg_blocks = []
+
+        nf_block = int(len_wf/nblocks)
+        first = 0
+        last = nf_block
+        # calculate all dg
+        for i in range(nblocks):
+            wf_block = np.array(wf[first:last])
+            wr_block = np.array(wr[first:last])
+            dg_block = BAR.calc_dg(wf_block, wr_block, T)
+            dg_blocks.append(dg_block)
+            first += nf_block
+            last += nf_block
+
+        # get std err
+        err_blocks = scipy.stats.sem(dg_blocks, ddof=1)
+
+        return err_blocks
 
     @staticmethod
     def calc_conv(dg, wf, wr, T):
@@ -1000,6 +1152,19 @@ def parse_options():
                         'bootstrap estimate of the standard errors. Default '
                         'is 0 (no bootstrap).',
                         default=0)
+    parser.add_argument('-n',
+                        metavar='nblocks',
+                        dest='nblocks',
+                        type=int,
+                        help='Number of blocks to divide the data into for '
+                        'an estimate of the standard error. You can use this '
+                        'when multiple independent equilibrium simulations'
+                        'have been run so to estimate the error from the '
+                        'repeats. Default is 1 (i.e. no repeats). It assumes '
+                        'the dgdl files for each repeat are read in order and '
+                        'are contiguous, e.g. dgdl_0 to dgdl_9 is the first '
+                        'repeat, dgdl_10 to dgdl_19 is the second one, etc.',
+                        default=1)
     parser.add_argument('--integ_only',
                         dest='integ_only',
                         help='Whether to do integration only; the integrated '
@@ -1166,6 +1331,7 @@ def main(args):
     reverseB = args.reverseB
     integ_only = args.integ_only
     nboots = args.nboots
+    nblocks = args.nblocks
     do_ks_test = args.do_ks_test
 
     # -------------------
@@ -1275,7 +1441,7 @@ def main(args):
         _tee(out, ' --------------------------------------------------------')
 
         print('  Calculating Intersection...')
-        cgi = Crooks(wf=res_ab, wr=res_ba, nboots=nboots)
+        cgi = Crooks(wf=res_ab, wr=res_ba, nboots=nboots, nblocks=nblocks)
         if args.pickle is True:
             pickle.dump(cgi, open("cgi_results.pkl", "wb"))
 
@@ -1300,6 +1466,10 @@ def main(args):
         if nboots > 0:
             _tee(out, '  CGI: Std Err (bootstrap) = {e:8.{p}f} {u}'.format(e=cgi.err_boot2*unit_fact,
                                                                            p=prec, u=units))
+
+        if nblocks > 1:
+            _tee(out, '  CGI: Std Err (blocks) = {e:8.{p}f} {u}'.format(e=cgi.err_blocks*unit_fact,
+                                                                        p=prec, u=units))
 
     # --------------
     # Normality test
@@ -1332,7 +1502,7 @@ def main(args):
 
         print('  Running Nelder-Mead Simplex algorithm... ')
 
-        bar = BAR(res_ab, res_ba, T=T, nboots=nboots)
+        bar = BAR(res_ab, res_ba, T=T, nboots=nboots, nblocks=nblocks)
         if args.pickle:
             pickle.dump(bar, open("bar_results.pkl", "wb"))
 
@@ -1341,6 +1511,8 @@ def main(args):
 
         if nboots > 0:
             _tee(out, '  BAR: Std Err (bootstrap)  = {e:8.{p}f} {u}'.format(e=bar.err_boot*unit_fact, p=prec, u=units))
+        if nblocks > 1:
+            _tee(out, '  BAR: Std Err (blocks)  = {e:8.{p}f} {u}'.format(e=bar.err_blocks*unit_fact, p=prec, u=units))
 
         _tee(out, '  BAR: Conv = %8.2f' % bar.conv)
 
@@ -1356,7 +1528,7 @@ def main(args):
         _tee(out, '             Jarzynski estimator     ')
         _tee(out, ' --------------------------------------------------------')
 
-        jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=nboots)
+        jarz = Jarz(wf=res_ab, wr=res_ba, T=T, nboots=nboots, nblocks=nblocks)
         if args.pickle:
             pickle.dump(jarz, open("jarz_results.pkl", "wb"))
 
@@ -1366,10 +1538,16 @@ def main(args):
                                                                 p=prec, u=units))
         _tee(out, '  JARZ: dG Mean    = {dg:8.{p}f} {u}'.format(dg=jarz.dg_mean*unit_fact,
                                                                 p=prec, u=units))
-        if nboots:
+        if nboots > 0:
             _tee(out, '  JARZ: Std Err Forward (bootstrap) = {e:8.{p}f} {u}'.format(e=jarz.err_boot_for*unit_fact,
                                                                                     p=prec, u=units))
             _tee(out, '  JARZ: Std Err Reverse (bootstrap) = {e:8.{p}f} {u}'.format(e=jarz.err_boot_rev*unit_fact,
+                                                                                    p=prec, u=units))
+
+        if nblocks > 1:
+            _tee(out, '  JARZ: Std Err Forward (blocks) = {e:8.{p}f} {u}'.format(e=jarz.err_blocks_for*unit_fact,
+                                                                                    p=prec, u=units))
+            _tee(out, '  JARZ: Std Err Reverse (blocks) = {e:8.{p}f} {u}'.format(e=jarz.err_blocks_rev*unit_fact,
                                                                                     p=prec, u=units))
         _tee(out, ' ------------------------------------------------------')
 

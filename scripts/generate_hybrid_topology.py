@@ -76,6 +76,207 @@ def types_morphe(atoms):
         if atom.atomtypeB is not None and atom.atomtype != atom.atomtypeB: return True
     return False
 
+def proline_dihedral_decouplings( topol, rlist, rdic ):
+    for r in rlist:
+        idx = r.id - 1
+	if 'P' in r.resname:
+	    # identify in which state proline sits
+	    prolineState = 'A'
+	    if '2P' in r.resname:
+		prolineState = 'B'
+
+	    # find the atoms for which the bond needs to be broken
+	    prolineCDatom = ''
+	    prolineCBatom = ''
+	    prolineNatom = ''
+	    prolineCAatom = ''
+	    for a in r.atoms:
+		if (prolineState=='A') and (a.name=='CD'):
+		    prolineCDatom = a
+		elif (prolineState=='A') and (a.name=='N'):
+		    prolineNatom = a
+		elif (prolineState=='A') and (a.name=='CB'):
+		    prolineCBatom = a
+		elif (prolineState=='A') and (a.name=='CA'):
+		    prolineCAatom = a
+		elif (prolineState=='B') and (a.name=='DCD'):
+		    prolineCDatom = a
+		elif (prolineState=='B') and (a.name=='N'):
+		    prolineNatom = a
+		elif (prolineState=='B') and (a.name=='DCB'):
+		    prolineCBatom = a
+		elif (prolineState=='B') and (a.name=='CA'):
+		    prolineCAatom = a
+
+	    # decouple [CD and N] dihedrals
+	    for dih in topol.dihedrals:
+                a1 = dih[0]
+		a2 = dih[1]
+		a3 = dih[2]
+		a4 = dih[3]
+		func = dih[4]
+		if ( (a1.id==prolineCDatom.id and a2.id==prolineNatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a1.id==prolineNatom.id) ) or \
+		   ( (a1.id==prolineCDatom.id and a3.id==prolineNatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a1.id==prolineNatom.id) ) or \
+		   ( (a1.id==prolineCDatom.id and a4.id==prolineNatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a1.id==prolineNatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a3.id==prolineNatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a2.id==prolineNatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a4.id==prolineNatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a2.id==prolineNatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a4.id==prolineNatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a3.id==prolineNatom.id) ):
+		     if (dih[5]=='NULL') or (dih[6]=='NULL'):
+			continue
+                     if prolineState=='A':
+                        if func==3:
+                            dih[6] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[6] = [func,dih[6][1],0.0]
+			else:
+			    dih[6] = [func,dih[6][1],0.0,dih[6][-1]]
+                     if prolineState=='B':
+                        if func==3:
+                            dih[5] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[5] = [func,dih[6][1],0.0]
+			else:
+			    dih[5] = [func,dih[6][1],0.0,dih[6][-1]]
+
+	    # decouple [CB and CA] dihedrals
+	    for dih in topol.dihedrals:
+                a1 = dih[0]
+		a2 = dih[1]
+		a3 = dih[2]
+		a4 = dih[3]
+		func = dih[4]
+		if ( (a1.id==prolineCBatom.id and a2.id==prolineCAatom.id) ) or \
+		   ( (a2.id==prolineCBatom.id and a1.id==prolineCAatom.id) ) or \
+		   ( (a1.id==prolineCBatom.id and a3.id==prolineCAatom.id) ) or \
+		   ( (a3.id==prolineCBatom.id and a1.id==prolineCAatom.id) ) or \
+		   ( (a1.id==prolineCBatom.id and a4.id==prolineCAatom.id) ) or \
+		   ( (a4.id==prolineCBatom.id and a1.id==prolineCAatom.id) ) or \
+		   ( (a2.id==prolineCBatom.id and a3.id==prolineCAatom.id) ) or \
+		   ( (a3.id==prolineCBatom.id and a2.id==prolineCAatom.id) ) or \
+		   ( (a2.id==prolineCBatom.id and a4.id==prolineCAatom.id) ) or \
+		   ( (a4.id==prolineCBatom.id and a2.id==prolineCAatom.id) ) or \
+		   ( (a3.id==prolineCBatom.id and a4.id==prolineCAatom.id) ) or \
+		   ( (a4.id==prolineCBatom.id and a3.id==prolineCAatom.id) ):
+		     if (dih[5]=='NULL') or (dih[6]=='NULL'):
+			continue
+                     if prolineState=='A':
+                        if func==3:
+                            dih[6] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[6] = [func,dih[6][1],0.0]
+			else:
+			    dih[6] = [func,dih[6][1],0.0,dih[6][-1]]
+                     if prolineState=='B':
+                        if func==3:
+                            dih[5] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[5] = [func,dih[6][1],0.0]
+			else:
+			    dih[5] = [func,dih[6][1],0.0,dih[6][-1]]
+
+
+
+def proline_decouplings( topol, rlist, rdic ):
+    for r in rlist:
+        idx = r.id - 1
+	if 'P' in r.resname:
+	    # identify in which state proline sits
+	    prolineState = 'A'
+	    if '2P' in r.resname:
+		prolineState = 'B'
+
+	    # find the atoms for which the bond needs to be broken
+	    prolineCDatom = ''
+	    prolineCGatom = ''
+	    for a in r.atoms:
+		if (prolineState=='A') and (a.name=='CD'):
+		    prolineCDatom = a
+		elif (prolineState=='A') and (a.name=='CG'):
+		    prolineCGatom = a
+		elif (prolineState=='B') and (a.name=='DCD'):
+		    prolineCDatom = a
+		elif (prolineState=='B') and (a.name=='DCG'):
+		    prolineCGatom = a
+
+	    # break the bond
+    	    for b in topol.bonds:
+                a1 = b[0]
+		a2 = b[1]
+		if ( (a1.id==prolineCDatom.id) and (a2.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id) and (a1.id==prolineCGatom.id) ):
+		    if prolineState=='A':
+			b[4] = cp.deepcopy(b[3])
+			b[4][2] = 0.0
+		    elif prolineState=='B':
+			b[3] = cp.deepcopy(b[4])
+			b[3][2] = 0.0
+            
+	    # decouple angles
+	    for ang in topol.angles:
+                a1 = ang[0]
+		a2 = ang[1]
+		a3 = ang[2]
+		func = ang[3]
+		if ( (a1.id==prolineCDatom.id and a2.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a1.id==prolineCGatom.id) ) or \
+		   ( (a1.id==prolineCDatom.id and a3.id==prolineCGatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a1.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a3.id==prolineCGatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a2.id==prolineCGatom.id) ):
+		    if prolineState=='A':
+			if func==5:
+			    ang[5] = [1,0,0,0,0]
+			else:
+			    ang[5] = [1,0,0]
+		    elif prolineState=='B':
+			if func==5:
+			    ang[4] = [1,0,0,0,0]
+			else:
+			    ang[4] = [1,0,0]
+			  
+	    # decouple dihedrals
+	    for dih in topol.dihedrals:
+                a1 = dih[0]
+		a2 = dih[1]
+		a3 = dih[2]
+		a4 = dih[3]
+		func = dih[4]
+		if ( (a1.id==prolineCDatom.id and a2.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a1.id==prolineCGatom.id) ) or \
+		   ( (a1.id==prolineCDatom.id and a3.id==prolineCGatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a1.id==prolineCGatom.id) ) or \
+		   ( (a1.id==prolineCDatom.id and a4.id==prolineCGatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a1.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a3.id==prolineCGatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a2.id==prolineCGatom.id) ) or \
+		   ( (a2.id==prolineCDatom.id and a4.id==prolineCGatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a2.id==prolineCGatom.id) ) or \
+		   ( (a3.id==prolineCDatom.id and a4.id==prolineCGatom.id) ) or \
+		   ( (a4.id==prolineCDatom.id and a3.id==prolineCGatom.id) ):
+		     if (dih[5]=='NULL') or (dih[6]=='NULL'):
+			continue
+
+                     if prolineState=='A':
+                        if func==3:
+                            dih[6] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[6] = [func,dih[6][1],0.0]
+			else:
+			    dih[6] = [func,dih[6][1],0.0,dih[6][-1]]
+                     if prolineState=='B':
+                        if func==3:
+                            dih[5] = [func,0.0,0.0,0.0,0.0,0.0,0.0]
+                        elif func==2:
+			    dih[5] = [func,dih[6][1],0.0]
+			else:
+			    dih[5] = [func,dih[6][1],0.0,dih[6][-1]]
+
 
 def find_bonded_entries( topol ):
     count = 0
@@ -929,6 +1130,14 @@ def main(argv):
     
     print 'log_> Total charge of state A = ', topol.get_qA()
     print 'log_> Total charge of state B = ', topol.get_qB()
+
+    # if prolines are involved, break one bond (CD-CG)
+    # and angles X-CD-CG, CD-CG-X
+    # and dihedrals with CD and CG
+    proline_decouplings(topol,rlist,rdic)
+    # also decouple all dihedrals with  [CD and N] and [CB and Calpha] for proline
+    proline_dihedral_decouplings(topol,rlist,rdic)
+
 
     topol.write( out_file, scale_mass = do_scale_mass, target_qB = qB )
 

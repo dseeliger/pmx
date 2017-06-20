@@ -31,7 +31,7 @@
 
 __doc__="""
 Program to insert mutated residues in structure files for
-free energy simulations.
+free energy simulations (so far unfinished new version).
 """
 
 import sys,os

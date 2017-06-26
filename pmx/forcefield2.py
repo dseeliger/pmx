@@ -829,8 +829,10 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites3 ]'    
         print >>fp,';  ai    aj    ak    al funct            c0            c1'
         for vs in self.virtual_sites3:
-            if len(vs) == 6:
+            if len(vs) == 5:
                 print >>fp, "%6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4])
+            elif len(vs) == 6:
+                print >>fp, "%6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4], vs[5])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites3!!!!\n')
                 print vs
@@ -840,8 +842,10 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites4 ]'    
         print >>fp,';  ai    aj    ak    al    am  funct            c0            c1          c2'
         for vs in self.virtual_sites4:
-            if len(vs) == 7:
+            if len(vs) == 6:
                 print >>fp, "%6d %6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5])
+            elif len(vs) == 7:
+                print >>fp, "%6d %6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5], vs[6])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites4!!!!\n')
                 print vs

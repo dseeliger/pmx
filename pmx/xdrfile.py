@@ -35,6 +35,7 @@ import os.path
 
 mTrr,mNumPy=1,2
 auto_mode=0
+out_mode=42
 
 
 class Frame:
@@ -46,14 +47,34 @@ class Frame:
     #prec 
     #lam: lambda
 
-    def __init__(self,n,mode):
+    def __init__(self,n,mode,x=None,box=None,units=None):
         #create vector for x
-		self.natoms = n
-        if mode&mNumPy:
+        self.natoms = n
+        # x (coordinates)
+        if mode==out_mode:
+            scale = 1.0
+            if units == 'A':
+                scale=0.1
+            self.x=((c_float*3)*n)() 
+            i=0
+            for a in range(0,self.natoms):
+                for dim in range(0,3):
+                    self.x[a][dim] = scale*x[i]
+                    i+=1
+        elif mode&mNumPy and mode!=out_mode:
             self.x=empty((n,3),dtype=float32)
-            self.box = empty((3,3),float32)
         else:
             self.x=((c_float*3)*n)() 
+
+        # box
+        if box!=None:
+            self.box = (c_float*3*3)()
+            for r in range(0,3):
+                for c in range(0,3):
+                    self.box[r][c] = box[r][c]
+        elif mode&mNumPy and mode!=out_mode:
+            self.box = empty((3,3),float32)
+        else:
             self.box = (c_float*3*3)()
 
 
@@ -112,7 +133,7 @@ class XDRFile:
     exdrOK, exdrHEADER, exdrSTRING, exdrDOUBLE, exdrINT, exdrFLOAT, exdrUINT, exdr3DX, exdrCLOSE, exdrMAGIC, exdrNOMEM, exdrENDOFFILE, exdrNR = range(13)
 
     #
-    def __init__(self,fn,mode="Auto",ft="Auto"):
+    def __init__(self,fn,mode="Auto",ft="Auto",atomNum=False):
         if mode=="NumPy":
           self.mode=mNumPy
           try:
@@ -123,6 +144,8 @@ class XDRFile:
           self.mode=0
         elif mode=="Auto":
           self.mode=auto_mode
+        elif mode=='Out':
+          self.mode=out_mode
         else: 
           raise IOError("unsupported mode")
           
@@ -142,29 +165,45 @@ class XDRFile:
           self.xdr=cdll.LoadLibrary(p)
         except:
           raise IOError("_xdrio.so can't be loaded")
+ 
           
         #open file
-        self.xd = self.xdr.xdrfile_open(fn,"r")
+        if self.mode==out_mode:
+            self.xd = self.xdr.xdrfile_open(fn,"w")
+        else:
+            self.xd = self.xdr.xdrfile_open(fn,"r")
         if not self.xd: raise IOError("Cannot open file: '%s'"%fn)
         
         #read natoms
         natoms=c_int()
-        if self.mode&mTrr:
-            r=self.xdr.read_trr_natoms(fn,byref(natoms))
+        if self.mode==out_mode:
+            if atomNum==False:
+                raise StandardError("To write an .xtc need to provide the number of atoms")
+            self.natoms = atomNum
         else:
-            r=self.xdr.read_xtc_natoms(fn,byref(natoms))
-        if r!=self.exdrOK: raise IOError("Error reading: '%s'"%fn)
-        self.natoms=natoms.value
+            if self.mode&mTrr:
+                r=self.xdr.read_trr_natoms(fn,byref(natoms))
+            else:
+                r=self.xdr.read_xtc_natoms(fn,byref(natoms))
+            if r!=self.exdrOK: raise IOError("Error reading: '%s'"%fn)
+            self.natoms=natoms.value
         
         #for NumPy define argtypes - ndpointer is not automatically converted to POINTER(c_float)
         #alternative of ctypes.data_as(POINTER(c_float)) requires two version for numpy and c_float array
-        if self.mode&mNumPy:
+        if self.mode&mNumPy and self.mode!=out_mode:
             self.xdr.read_xtc.argtypes=[c_int,c_int,POINTER(c_int),POINTER(c_float),
               ndpointer(ndim=2,dtype=float32),ndpointer(ndim=2,dtype=float32),POINTER(c_float)]
             self.xdr.read_trr.argtypes=[c_int,c_int,POINTER(c_int),POINTER(c_float),POINTER(c_float),
               ndpointer(ndim=2,dtype=float32),ndpointer(ndim=2,dtype=float32),
               POINTER(c_float),POINTER(c_float)]
-             
+
+    def write_xtc_frame( self, step=0, time=0.0, prec=1000.0, lam=0.0, box=False, x=False, units='A' ):
+        f = Frame(self.natoms,self.mode,box=box,x=x,units='A')
+        step = c_int(step)
+        time = c_float(time)
+        prec = c_float(prec)
+        lam = c_float(lam)
+        result = self.xdr.write_xtc(self.xd,self.natoms,step,time,f.box,f.x,prec)
         
     def __iter__(self):
         f = Frame(self.natoms,self.mode)
@@ -173,25 +212,24 @@ class XDRFile:
         time = c_float()
         prec = c_float()
         lam = c_float()
-        while 1:
-            #read next frame
-            if not self.mode&mTrr:
-                result = self.xdr.read_xtc(self.xd,self.natoms,byref(step),byref(time),f.box,
-                        f.x,byref(prec))
-                f.prec=prec.value
-            else:
-                result = self.xdr.read_trr(self.xd,self.natoms,byref(step),byref(time),byref(lam),
-                        f.box,f.x,None,None) #TODO: make v,f possible
-                f.lam=lam.value
+        if self.mode!=out_mode:
+            while 1:
+                #read next frame
+                if not self.mode&mTrr:
+                    result = self.xdr.read_xtc(self.xd,self.natoms,byref(step),byref(time),f.box,f.x,byref(prec))
+                    f.prec=prec.value
+                else:
+                    result = self.xdr.read_trr(self.xd,self.natoms,byref(step),byref(time),byref(lam),f.box,f.x,None,None) #TODO: make v,f possible
+                    f.lam=lam.value
                 
-            #check return value
-            if result==self.exdrENDOFFILE: break
-            if result==self.exdrINT and self.mode&mTrr: 
-              break  #TODO: dirty hack. read_trr return exdrINT not exdrENDOFFILE
-            if result!=self.exdrOK: raise IOError("Error reading xdr file")
+                #check return value
+                if result==self.exdrENDOFFILE: break
+                if result==self.exdrINT and self.mode&mTrr: 
+                  break  #TODO: dirty hack. read_trr return exdrINT not exdrENDOFFILE
+                if result!=self.exdrOK: raise IOError("Error reading xdr file")
             
-            #convert c_type to python 
-            f.step=step.value
-            f.time=time.value
-            yield f
+                #convert c_type to python 
+                f.step=step.value
+                f.time=time.value
+                yield f
         

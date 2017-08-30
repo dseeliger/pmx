@@ -47,7 +47,7 @@ class Frame:
     #prec 
     #lam: lambda
 
-    def __init__(self,n,mode,x=None,box=None,units=None):
+    def __init__(self,n,mode,x=None,box=None,units=None,v=None,f=None):
         #create vector for x
         self.natoms = n
         # x (coordinates)
@@ -65,6 +65,16 @@ class Frame:
             self.x=empty((n,3),dtype=float32)
         else:
             self.x=((c_float*3)*n)() 
+
+        # dummy v and f for .trr
+        self.v_size = c_size_t(0)
+        self.f_size = c_size_t(0)
+        if mode&mNumPy and mode!=out_mode:
+            self.v=empty((n,3),dtype=float32)
+            self.f=empty((n,3),dtype=float32)
+        else:
+            self.v=c_size_t(0)#((c_float*3)*n)()
+            self.f=c_size_t(0)#((c_float*3)*n)()
 
         # box
         if box!=None:
@@ -151,13 +161,14 @@ class XDRFile:
           
         if ft=="Auto":
           ft = os.path.splitext(fn)[1][1:]
-          
-        if ft=="trr":
-            self.mode|=mTrr
-        elif ft=="xtc":
-            pass
-        else:
-            raise IOError("Only xtc and trr supported")
+         
+        if self.mode!=out_mode:
+            if ft=="trr":
+                self.mode|=mTrr
+            elif ft=="xtc":
+                pass
+            else:
+                raise IOError("Only xtc and trr supported")
         
         #load libxdrfil
         try: 
@@ -197,13 +208,16 @@ class XDRFile:
               ndpointer(ndim=2,dtype=float32),ndpointer(ndim=2,dtype=float32),
               POINTER(c_float),POINTER(c_float)]
 
-    def write_xtc_frame( self, step=0, time=0.0, prec=1000.0, lam=0.0, box=False, x=False, units='A' ):
+    def write_xtc_frame( self, step=0, time=0.0, prec=1000.0, lam=0.0, box=False, x=False, units='A', bTrr=False ):
         f = Frame(self.natoms,self.mode,box=box,x=x,units='A')
         step = c_int(step)
         time = c_float(time)
         prec = c_float(prec)
         lam = c_float(lam)
-        result = self.xdr.write_xtc(self.xd,self.natoms,step,time,f.box,f.x,prec)
+        if bTrr:
+            result = self.xdr.write_trr(self.xd,self.natoms,step,time,lam,f.box,f.x,f.v,f.f)
+        else:
+            result = self.xdr.write_xtc(self.xd,self.natoms,step,time,f.box,f.x,prec)
         
     def __iter__(self):
         f = Frame(self.natoms,self.mode)

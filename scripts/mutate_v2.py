@@ -643,7 +643,7 @@ def main(argv):
            if not ask_next(): do_more = False
        
 
-   m.write(cmdl['-o'])
+   m.write(cmdl['-o'],bPDBTER=True)
    print
    print 'mutations done...........'
    print

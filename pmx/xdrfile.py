@@ -209,7 +209,7 @@ class XDRFile:
               POINTER(c_float),POINTER(c_float)]
 
     def write_xtc_frame( self, step=0, time=0.0, prec=1000.0, lam=0.0, box=False, x=False, units='A', bTrr=False ):
-        f = Frame(self.natoms,self.mode,box=box,x=x,units='A')
+        f = Frame(self.natoms,self.mode,box=box,x=x,units=units)
         step = c_int(step)
         time = c_float(time)
         prec = c_float(prec)

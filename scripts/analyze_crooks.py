@@ -189,22 +189,14 @@ class Jarz(object):
             you ran.
         '''
 
-        # get number of work values
-        len_w = len(w)
-        # here we assume/expect same lenght for wf and wr
-        assert len_w % float(nblocks) == 0.0
         dg_blocks = []
+        # loosely split the arrays
+        w_split = np.array_split(w, nblocks)
 
-        nf_block = int(len_w/nblocks)
-        first = 0
-        last = nf_block
         # calculate all dg
-        for i in range(nblocks):
-            w_block = np.array(w[first:last])
+        for w_block in w_split:
             dg_block = -1.0 * Jarz.calc_dg(w_block, T, c)
             dg_blocks.append(dg_block)
-            first += nf_block
-            last += nf_block
 
         # get std err
         err_blocks = scipy.stats.sem(dg_blocks, ddof=1)
@@ -440,25 +432,15 @@ class Crooks(object):
             you ran.
         '''
 
-        # get number of work values
-        len_wf = len(wf)
-        len_wr = len(wr)
-        # here we assume/expect same lenght for wf and wr
-        assert len_wf == len_wr
-        assert len_wf % float(nblocks) == 0.0
         dg_blocks = []
+        # loosely split the arrays
+        wf_split = np.array_split(wf, nblocks)
+        wr_split = np.array_split(wr, nblocks)
 
-        nf_block = int(len_wf/nblocks)
-        first = 0
-        last = nf_block
         # calculate all dg
-        for i in range(nblocks):
-            wf_block = np.array(wf[first:last])
-            wr_block = np.array(wr[first:last])
+        for wf_block, wr_block in zip(wf_split, wr_split):
             dg_block, _ = Crooks.calc_dg(wf_block, wr_block)
             dg_blocks.append(dg_block)
-            first += nf_block
-            last += nf_block
 
         # get std err
         err_blocks = scipy.stats.sem(dg_blocks, ddof=1)
@@ -637,25 +619,15 @@ class BAR(object):
             you ran.
         '''
 
-        # get number of work values
-        len_wf = len(wf)
-        len_wr = len(wr)
-        # here we assume/expect same lenght for wf and wr
-        assert len_wf == len_wr
-        assert len_wf % float(nblocks) == 0.0
         dg_blocks = []
+        # loosely split the arrays
+        wf_split = np.array_split(wf, nblocks)
+        wr_split = np.array_split(wr, nblocks)
 
-        nf_block = int(len_wf/nblocks)
-        first = 0
-        last = nf_block
         # calculate all dg
-        for i in range(nblocks):
-            wf_block = np.array(wf[first:last])
-            wr_block = np.array(wr[first:last])
+        for wf_block, wr_block in zip(wf_split, wr_split):
             dg_block = BAR.calc_dg(wf_block, wr_block, T)
             dg_blocks.append(dg_block)
-            first += nf_block
-            last += nf_block
 
         # get std err
         err_blocks = scipy.stats.sem(dg_blocks, ddof=1)

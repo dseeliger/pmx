@@ -114,6 +114,7 @@ class TopolBase:
         if not self.is_itp:
             self.read_header( lines )
         self.read_footer( lines )
+        posre_sections = self.get_posre_section( lines )
         lines = kickOutComments(lines,'#')
         self.read_moleculetype(lines)
         if self.name: # atoms, bonds, ... section
@@ -127,7 +128,8 @@ class TopolBase:
             self.read_vsites2(lines)
             self.read_vsites3(lines)
             self.read_vsites4(lines)
-	    self.read_posre(lines)
+            if self.has_posre:
+	        self.read_posre(posre_sections)
             self.__make_residues()
         if not self.is_itp:
             self.read_system(lines)
@@ -444,15 +446,34 @@ class TopolBase:
                                             self.atoms[idx[4]-1],\
                                             func,rest])
 
-    def read_posre(self, lines):
+    def get_posre_section( self, lines ):
         starts = []
+        bIfDef = False
         for i, line in enumerate(lines):
+            if line.strip().startswith('#endif'):
+                bIfDef = False
+            if line.strip().startswith('#ifdef'):
+                bIfDef = True
+            if bIfDef:
+                continue
             if line.strip().startswith('[ position_restraints ]'):
                 starts.append(i)
         if starts:
             self.has_posre = True
+
+        lstList = {}
+        counter = 0
         for s in starts:
             lst = readSection(lines[s:],'[ position_restraints ]','[')
+            lst = kickOutComments(lst,'#')
+            lstList[counter] = lst
+            counter+=1
+
+        return( lstList )
+
+    def read_posre(self, lstList):
+        for lstKey in lstList:
+            lst = lstList[lstKey]
             for line in lst:
                 entr = line.split()
 		idx = int(entr[0])

@@ -1356,8 +1356,18 @@ def main(args):
 
         # If index values provided, select the files needed
         if args.index is not None:
-            filesAB = [filesAB[i] for i in args.index]
-            filesBA = [filesBA[i] for i in args.index]
+            # Avoid index out of range error if "wrong" indices are provided
+            filesAB = [filesAB[i] for i in args.index if i < len(filesAB)]
+            filesBA = [filesBA[i] for i in args.index if i < len(filesBA)]
+            # ...but warn if this happens
+            if any(i > (len(filesAB) - 1) for i in args.index):
+                print('\nWARNING: index out of range for some of your chosen '
+                      '\nindices for the forward work values. This means you are'
+                      '\ntrying to select input files that are not present.')
+            if any(i > (len(filesBA) - 1) for i in args.index):
+                print('\nWARNING: index out of range for some of your chosen'
+                      '\nindices for the reverse work values. This means you are'
+                      '\ntrying to select input files that are not present.')
 
         # when skipping start count from end: in this way the last frame is
         # always included, and what can change is the first one

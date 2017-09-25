@@ -284,6 +284,11 @@ def fit_by_ndx(ref, model, ndx1, ndx2):
     apply_fit_R( model.atoms, R)
     model.translate( v )
 
+def translate_by_ndx(struct, ndx):
+    crd = map(lambda i: struct.atoms[i-1].x, ndx)
+    m = map(lambda x: 1., crd)
+    v = _p.center_vec( crd )
+    struct.translate( [-v[0], -v[1], -v[2]] )
 
 def fit_atoms( fit_atoms1, fit_atoms2, rot_atoms2 ):
 

@@ -289,6 +289,7 @@ def translate_by_ndx(struct, ndx):
     m = map(lambda x: 1., crd)
     v = _p.center_vec( crd )
     struct.translate( [-v[0], -v[1], -v[2]] )
+    return(v)
 
 def fit_atoms( fit_atoms1, fit_atoms2, rot_atoms2 ):
 

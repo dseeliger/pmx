@@ -535,6 +535,11 @@ class Model(Atomselection):
                     result.append(r)
         return result
     
+    def fetch_residues_by_ID(self, ind):
+        for r in self.residues:
+            if r.id == ind:
+                return r
+        return False
 
     def al_from_resl(self):
         self.atoms = []

@@ -349,8 +349,11 @@ class Model(Atomselection):
 		if (a.chain_id != prevID): # identify chain change by ID (when no TER is there)
 		    bNewChain = True
                 if (a.resnr != prevResID):
-                    if a.resnr != prevResID+1:
-		        bNewChain = True
+                    try:
+                        if a.resnr != prevResID+1:
+		            bNewChain = True
+                    except TypeError:
+                        bNewChain = False
 		prevID = a.chain_id
                 prevResID = a.resnr
 		if bNewChain==True:

@@ -214,10 +214,10 @@ class Model(Atomselection):
 ##         fp.close()
 
 
-    def write(self,fn, title = '', nr = 1, bPDBTER=False):
+    def write(self,fn, title = '', nr = 1, bPDBTER=False, bAssignChainIDs=False):
         ext = fn.split('.')[-1]
         if ext == 'pdb':
-            self.writePDB( fn, title, nr, bPDBTER )
+            self.writePDB( fn, title, nr, bPDBTER, bAssignChainIDs )
         elif ext == 'gro':
             self.writeGRO( fn, title )
         elif ext == 'pir':
@@ -334,7 +334,7 @@ class Model(Atomselection):
         else:
             l = open(fname,'r').readlines()
 
- 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnoprstuvwxyz123456789'
 	bNewChain = True
 	chainID = ' '
 	prevID = ' '

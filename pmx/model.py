@@ -340,11 +340,13 @@ class Model(Atomselection):
 	prevID = ' '
         prevResID = 0
 	usedChainIDs = ''
+        atomcount = 1
         for line in l:
 	    if 'TER' in line:
 		bNewChain = True
             if (line[:4]=='ATOM') or (line[:6]=='HETATM'):
-                a = Atom().readPDBString(line)
+                a = Atom().readPDBString(line,origID=atomcount)
+                atomcount+=1
 #		if (a.chain_id != prevID) and (a.chain_id != ' '): # identify chain change by ID (when no TER is there)
 		if (a.chain_id != prevID): # identify chain change by ID (when no TER is there)
 		    bNewChain = True

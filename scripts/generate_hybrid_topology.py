@@ -1025,7 +1025,7 @@ def main(argv):
     
     options = [
         Option( "-split", "bool", False, "Write splitted topologies for vdw and q morphes"),
-        Option( "-scale_mass", "bool", True, "scale_mass"),
+        Option( "-scale_mass", "bool", False, "scale_mass"),
         Option( "-dna", "bool", False, "generate hybrid residue for the DNA nucleotides"),
         Option( "-rna", "bool", False, "generate hybrid residue for the RNA nucleotides"),
         ]

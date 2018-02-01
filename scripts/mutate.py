@@ -71,7 +71,7 @@ ext_one_letter = {
     'CYS2':'C',
     'CYN':'C',
     'CYX':'C',
-    'CYM':'C',
+    'CYM':'CM',
     'CYSH':'C',
     'GLU':'E',
     'GLUH':'J',
@@ -299,7 +299,9 @@ def select_aa_mutation(residue,ffpath):
 
     while aa is None:
         aa = raw_input().upper()
-        if len(aa) != 1 and len(aa)!=3 and len(aa)!=4:
+        if aa=='CM': # some special residues: CM - deprotonated cysteine, YM - deprotonated tyrosine
+            sys.stdout.write('Special case for deprotonated residue')
+        elif len(aa) != 1 and len(aa)!=3 and len(aa)!=4:
             sys.stdout.write('Nope!\nThree- or one-letter code (or four-letter for ff specific residues): ')
             aa = None
         elif (len(aa) == 1 and aa not in ol+['B','J','O','X','Z']) or (len(aa)==3 and aa not in tl) or (len(aa)==4 and aa not in tl):
@@ -323,7 +325,9 @@ def ask_next():
     else: return ask_next()
 
 def convert_aa_name( aa ):
-    if len(aa) == 1: return aa.upper()
+    if aa=='CM': # firstly, some special deprotonated cases
+        return(aa.upper())
+    elif len(aa) == 1: return aa.upper()
     elif len(aa) == 3: return ext_one_letter[aa.upper()]
     elif len(aa) == 4: return ext_one_letter[aa.upper()]
     else: raise UnkownResidueError(aa)

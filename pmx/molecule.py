@@ -129,10 +129,10 @@ class Molecule(Atomselection):
 
     def get_real_resname(self):
         dic = {'LYP':'LYS','LYSH':'LYS','LYN':'LYS','LSN':'LYS','CYM':'CYS',
-               'CYS2':'CYS','CYN':'CYS','HIE':'HIS','HIP':'HIS',
+               'CYS2':'CYS','CYN':'CYS','HIE':'HIS','HIP':'HIS','CYSH':'CYS',
                'HID':'HIS','HISA':'HIS','HISB':'HIS','HSE':'HIS','HSP':'HIS',
-	       'HSD':'HIS','HISH':'HIS','HISD':'HIS','ASH':'ASP','ASPP':'ASP','ASPH':'ASP',
-	       'GLH':'GLU','GLUH':'GLU','GLUP':'GLU',
+               'HSD':'HIS','HISH':'HIS','HISD':'HIS','ASH':'ASP','ASPP':'ASP','ASPH':'ASP',
+               'GLH':'GLU','GLUH':'GLU','GLUP':'GLU','SEP':'SEP','SEQ':'SEQ',
                }
         if dic.has_key(self.resname): self.real_resname =  dic[self.resname]
         else: self.real_resname = self.resname

@@ -271,6 +271,26 @@ def fit(model1, model2, atom_names = []):
     model2.translate( v )
 
 
+def fit_by_ndx(ref, model, ndx1, ndx2):
+    crd1 = map(lambda i: ref.atoms[i-1].x, ndx1)
+    crd2 = map(lambda i: model.atoms[i-1].x, ndx2)
+    
+    assert( len(crd1) == len(crd2) )
+    m = map(lambda x: 1., crd1) # dummy array
+    v = _p.center_vec( crd1 )
+    v2 = _p.center_vec( crd2 )
+    R = _p.calc_fit_R(crd1, crd2, m)
+    model.translate( [-v2[0], -v2[1], -v2[2] ] )
+    apply_fit_R( model.atoms, R)
+    model.translate( v )
+
+def translate_by_ndx(struct, ndx):
+    crd = map(lambda i: struct.atoms[i-1].x, ndx)
+    m = map(lambda x: 1., crd)
+    v = _p.center_vec( crd )
+    struct.translate( [-v[0], -v[1], -v[2]] )
+    return(v)
+
 def fit_atoms( fit_atoms1, fit_atoms2, rot_atoms2 ):
 
     cs1 = map(lambda a: a.x, fit_atoms1)

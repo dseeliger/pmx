@@ -98,6 +98,8 @@ class TopolBase:
         self.has_vsites2 = False
         self.has_vsites3 = False
         self.has_vsites4 = False
+	self.has_posre = False
+	self.posre = []
         self.molecules = []
         self.system = ''
         self.qA = 0.
@@ -112,6 +114,7 @@ class TopolBase:
         if not self.is_itp:
             self.read_header( lines )
         self.read_footer( lines )
+        posre_sections = self.get_posre_section( lines )
         lines = kickOutComments(lines,'#')
         self.read_moleculetype(lines)
         if self.name: # atoms, bonds, ... section
@@ -125,6 +128,8 @@ class TopolBase:
             self.read_vsites2(lines)
             self.read_vsites3(lines)
             self.read_vsites4(lines)
+            if self.has_posre:
+	        self.read_posre(posre_sections)
             self.__make_residues()
         if not self.is_itp:
             self.read_system(lines)
@@ -441,6 +446,44 @@ class TopolBase:
                                             self.atoms[idx[4]-1],\
                                             func,rest])
 
+    def get_posre_section( self, lines ):
+        starts = []
+        bIfDef = False
+        for i, line in enumerate(lines):
+            if line.strip().startswith('#endif'):
+                bIfDef = False
+            if line.strip().startswith('#ifdef'):
+                bIfDef = True
+            if bIfDef:
+                continue
+            if line.strip().startswith('[ position_restraints ]'):
+                starts.append(i)
+        if starts:
+            self.has_posre = True
+
+        lstList = {}
+        counter = 0
+        for s in starts:
+            lst = readSection(lines[s:],'[ position_restraints ]','[')
+            lst = kickOutComments(lst,'#')
+            lstList[counter] = lst
+            counter+=1
+
+        return( lstList )
+
+    def read_posre(self, lstList):
+        for lstKey in lstList:
+            lst = lstList[lstKey]
+            for line in lst:
+                entr = line.split()
+		idx = int(entr[0])
+                
+                func = int(entr[1])
+                try:
+                    rest = ' '.join(entr[2:])
+                except:
+                    rest = ''
+                self.posre.append([self.atoms[idx-1],func,rest])
 
 
     #===============================================================================
@@ -473,6 +516,8 @@ class TopolBase:
                 self.write_vsites3(fp)
             if self.has_vsites4:
                 self.write_vsites4(fp)
+	    if self.has_posre:
+		self.write_posre(fp)
         self.write_footer(fp)
         if not self.is_itp:
             self.write_system(fp)
@@ -805,8 +850,10 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites3 ]'    
         print >>fp,';  ai    aj    ak    al funct            c0            c1'
         for vs in self.virtual_sites3:
-            if len(vs) == 6:
+            if len(vs) == 5:
                 print >>fp, "%6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4])
+            elif len(vs) == 6:
+                print >>fp, "%6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4], vs[5])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites3!!!!\n')
                 print vs
@@ -816,13 +863,25 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites4 ]'    
         print >>fp,';  ai    aj    ak    al    am  funct            c0            c1          c2'
         for vs in self.virtual_sites4:
-            if len(vs) == 7:
+            if len(vs) == 6:
                 print >>fp, "%6d %6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5])
+            elif len(vs) == 7:
+                print >>fp, "%6d %6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5], vs[6])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites4!!!!\n')
                 print vs
                 sys.exit(1)
 
+    def write_posre(self, fp):
+        print >>fp,'\n [ position_restraints ]'    
+        print >>fp,';  ai    funct            c0            c1          c2'
+        for pr in self.posre:
+            if len(pr) == 3:
+                print >>fp, "%6d %4d %s" % ( pr[0].id, pr[1], pr[2])
+            else:
+                sys.stderr.write('EEK! Something went wrong while writing position_restraints!!!!\n')
+                print pr
+                sys.exit(1)
 
     def write_system(self,fp):
         print >>fp, '[ system ]'

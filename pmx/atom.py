@@ -106,11 +106,12 @@ class Atom:
         if mol2line is not None:
             self.read_mol2_line(mol2line)
             
-    def readPDBString(self,line):
+    def readPDBString(self,line,origID=0):
         """PDB String to Atom"""
 
         self.race=line[0:6]
         self.id=int(line[7:11])
+        self.orig_id = origID
         self.name=line[12:16].strip()
         self.altloc=line[16]
         self.resname=line[17:21].strip()

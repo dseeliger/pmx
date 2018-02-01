@@ -31,7 +31,7 @@
 
 __doc__="""
 Program to insert mutated residues in structure files for
-free energy simulations.
+free energy simulations (so far unfinished new version).
 """
 
 import sys,os
@@ -643,7 +643,7 @@ def main(argv):
            if not ask_next(): do_more = False
        
 
-   m.write(cmdl['-o'])
+   m.write(cmdl['-o'],bPDBTER=True)
    print
    print 'mutations done...........'
    print

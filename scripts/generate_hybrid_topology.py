@@ -929,8 +929,8 @@ def get_hybrid_residue(residue_name, mtp_file = 'ffamber99sb.mtp', version = 'ol
 
 
 def is_hybrid_residue( resname ):
-    if resname in _perturbed_nucleotides or \
-       resname[1] == '2':
+    if resname in _perturbed_nucleotides or resname[1] == '2' or \
+       ('2CM' in resname) or ('CM2' in resname): # special two letter cases
         return True
     else: return False
 

@@ -60623,7 +60623,7 @@ C5  C4  C6  C5M
  [ impropers ]
        C       CH3     +N      O
 
-[ NME ] ; terminal residue, provided by Mark Abraham
+[ CT3 ] ; terminal residue, provided by Mark Abraham
         ; renamed by Justin Lemkul to avoid clash with N-methylacetamide
  [ atoms ]
        N       NH1     -0.470  1

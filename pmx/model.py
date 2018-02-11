@@ -339,7 +339,7 @@ class Model(Atomselection):
 	chainID = ' '
 	prevID = ' '
         prevResID = 0
-	usedChainIDs = ''
+        usedChainIDs = ''
         atomcount = 1
         for line in l:
 	    if 'TER' in line:
@@ -359,7 +359,7 @@ class Model(Atomselection):
 		prevID = a.chain_id
                 prevResID = a.resnr
 		if bNewChain==True:
-		    if (a.chain_id==' ') or (a.chain_id==chainID):
+		    if (a.chain_id==' ') or (a.chain_id==chainID) or (a.chain_id in usedChainIDs):
 			# find a new chain id
 			bFound = False
 			while bFound==False:

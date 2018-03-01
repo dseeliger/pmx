@@ -1714,7 +1714,7 @@
     -C    CA     N     H    
     CA   OC1     C   OC2    
                         
-[ CSE ]
+[ CSER ]
  [ atoms ]
      N    N           -0.38210     1
      H    H            0.26810     2
@@ -2129,7 +2129,7 @@
     CG   NE2    CD   OE1    
     CD  HE21   NE2  HE22    
                         
-[ CAR ]
+[ CARG ]
  [ atoms ]
      N    N           -0.34810     1
      H    H            0.27640     2
@@ -2862,7 +2862,7 @@
  [ impropers ]
     CA    +N     C     O
                         
-[ NSE ]
+[ NSER ]
  [ atoms ]
      N    N3           0.18490     1
     H1    H            0.18980     2
@@ -3183,7 +3183,7 @@
     CD  HE21   NE2  HE22
     N     CA     C    +N    105.4       0.75       1
                         
-[ NAR ]
+[ NARG ]
  [ atoms ]
      N    N3           0.13050     1
     H1    H            0.20830     2

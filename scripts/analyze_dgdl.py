@@ -203,8 +203,8 @@ def _data_from_file(fn):
 # ------------------
 # Plotting functions
 # ------------------
-def make_cgi_plot(fname, data1, data2, result, err, nbins, dpi=300):
-    '''Plots work distributions and results for Crooks Gaussian Intersection'''
+def make_bar_plot(fname, data1, data2, result, err, nbins, dpi=300):
+    '''Plots work distributions and results for BAR'''
 
     def smooth(x, window_len=11, window='hanning'):
 
@@ -366,7 +366,7 @@ def parse_options():
                         help='Number of bootstrap samples to use for the '
                         'bootstrap estimate of the standard errors. Default '
                         'is 0 (no bootstrap).',
-                        default=0)
+                        default=100)
     parser.add_argument('-n',
                         metavar='nblocks',
                         dest='nblocks',
@@ -493,12 +493,12 @@ def parse_options():
                         'holds. Default is True; this flag turns it to False.',
                         default=True,
                         action='store_false')
-    parser.add_argument('--cgi_plot',
+    parser.add_argument('--bar_plot',
                         metavar='',
-                        dest='cgi_plot',
+                        dest='bar_plot',
                         type=str,
                         help='Whether to plot the work histograms along with '
-                        'the CGI results. If the flag is used, you also need'
+                        'the BAR results. If the flag is used, you also need'
                         'to specify a filename.',
                         default=None)
     parser.add_argument('--nbins',
@@ -785,8 +785,8 @@ def main(args):
     _tee(out, ' ========================================================')
 
     print('\n   Plotting histograms......')
-    if 'cgi' in methods and args.cgi_plot is not None:
-        make_cgi_plot(args.cgi_plot, res_ab, res_ba, cgi.dg, cgi.err_boot1,
+    if 'bar' in methods and args.bar_plot is not None:
+        make_bar_plot(args.bar_plot, res_ab, res_ba, bar.dg, bar.err_boot,
                       args.nbins, args.dpi)
 
     print('\n   ......done...........\n')

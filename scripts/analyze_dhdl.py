@@ -376,9 +376,9 @@ def parse_options():
                         'when multiple independent equilibrium simulations'
                         'have been run so to estimate the error from the '
                         'repeats. Default is 1 (i.e. no repeats). It assumes '
-                        'the dgdl files for each repeat are read in order and '
-                        'are contiguous, e.g. dgdl_0 to dgdl_9 is the first '
-                        'repeat, dgdl_10 to dgdl_19 is the second one, etc.',
+                        'the dhdl files for each repeat are read in order and '
+                        'are contiguous, e.g. dhdl_0 to dhdl_9 is the first '
+                        'repeat, dhdl_10 to dhdl_19 is the second one, etc.',
                         default=1)
     parser.add_argument('--integ_only',
                         dest='integ_only',
@@ -405,7 +405,7 @@ def parse_options():
                         metavar='work output',
                         dest='oA',
                         type=str,
-                        help='File where to save the list of input dgdl'
+                        help='File where to save the list of input dhdl'
                         ' files and their respective integrated work values '
                         'for the forward (A->B) tranformation. Default is '
                         '"integA.dat"',
@@ -414,7 +414,7 @@ def parse_options():
                         metavar='work output',
                         dest='oB',
                         type=str,
-                        help='File where to save the list of input dgdl'
+                        help='File where to save the list of input dhdl'
                         ' files and their respective integrated work values '
                         'for the reverse (B->A) tranformation. Default is '
                         '"integB.dat"',
@@ -443,7 +443,7 @@ def parse_options():
                         type=int,
                         help='Subset of trajectories to analyze.'
                         'Provide list slice, e.g. "10 50" will'
-                        ' result in selecting dgdl_files[10:50].'
+                        ' result in selecting dhdl_files[10:50].'
                         ' Default is all.',
                         default=None,
                         nargs=2)
@@ -460,9 +460,9 @@ def parse_options():
                         type=int,
                         help='Zero-based index of files to analyze (e.g.'
                         ' 0 10 20 50 60). It keeps '
-                        'the dgdl.xvg files according to their position in the'
+                        'the dhdl.xvg files according to their position in the'
                         ' list, sorted according to the filenames. Default '
-                        'is None (i.e. all dgdl are used).',
+                        'is None (i.e. all dhdl are used).',
                         default=None,
                         nargs='+')
     parser.add_argument('--prec',
@@ -793,8 +793,8 @@ def main(args):
 
     if args.pickle:
         print('   NOTE: units of results in pickled files are as in the\n'
-              '   provided dgdl.xvg or integ.dat files. These are typically\n'
-              '   in kJ/mol when using dgdl.xvg files from Gromacs.\n')
+              '   provided dhdl.xvg or integ.dat files. These are typically\n'
+              '   in kJ/mol when using dhdl.xvg files from Gromacs.\n')
     # execution time
     etime = time.time()
     h, m, s = time_stats(etime-stime)

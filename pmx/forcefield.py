@@ -1168,7 +1168,10 @@ def read_atp(fn):
 def read_atomtypes(l, ff= 'amber99sb'):
     lst = readSection(l,'[ atomtypes ]','[')
     if ff == 'oplsaa':
-        lst = parseList('ssiffsff',lst)
+        try:
+            lst = parseList('ssiffsff',lst)
+        except:
+            lst = parseList('sffsff',lst)
     elif ff in ['amber03','amber99sb']:
         lst = parseList('ssffsff',lst)
     dic = {}

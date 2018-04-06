@@ -1174,6 +1174,8 @@ def read_atomtypes(l, ff= 'amber99sb'):
             lst = parseList('sffsff',lst)
     elif ff in ['amber03','amber99sb']:
         lst = parseList('ssffsff',lst)
+    elif ('gaff' in ff) or ('cgenff' in ff):
+        lst = parseList('sffsff',lst)
     dic = {}
     for line in lst:
         dic[line[0]]=line[1:]

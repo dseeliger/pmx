@@ -327,7 +327,6 @@ def parse_options():
                         help='dgdl.xvg files for the A->B simulations. Use '
                         'wildcard to select multiple xvg files: e.g. "-fa '
                         './forward_results/dgdl*.xvg"',
-                        required=True,
                         nargs='+')
     parser.add_argument('-fB',
                         metavar='dgdl',
@@ -336,7 +335,6 @@ def parse_options():
                         help='dgdl.xvg files for the B->A simulations Use '
                         'wildcard to select multiple xvg files: e.g. "-fb '
                         './backward_results/dgdl*.xvg"',
-                        required=True,
                         nargs='+')
     parser.add_argument('-m',
                         metavar='method',
@@ -537,8 +535,11 @@ def main(args):
 
     # input arguments
     out = open(args.outfn, 'w')
-    filesAB = natural_sort(args.filesAB)
-    filesBA = natural_sort(args.filesBA)
+    if (args.iA is None) and (args.iB is None):
+        if (args.filesAB is None) or (args.filesBA is None):
+            exit('Need to provide dhdl.xvg files or integrated work values')
+        filesAB = natural_sort(args.filesAB)
+        filesBA = natural_sort(args.filesBA)
     T = args.temperature
     skip = args.skip
     prec = args.precision
@@ -638,12 +639,10 @@ def main(args):
     elif args.iA is not None and args.iB is not None:
         res_ab = []
         res_ba = []
-        for fn in args.iA:
-            print('\t\tReading integrated values (A->B) from', fn)
-            res_ab.extend(_data_from_file(fn))
-        for fn in args.iB:
-            print('\t\tReading integrated values (B->A) from', fn)
-            res_ba.extend(_data_from_file(fn))
+        print('\t\tReading integrated values (A->B) from', args.iA)
+        res_ab.extend(_data_from_file(args.iA))
+        print('\t\tReading integrated values (B->A) from', args.iB)
+        res_ba.extend(_data_from_file(args.iB))
     else:
         exit('\nERROR: you need to provide either none of both sets of '
              'integrated work values.')

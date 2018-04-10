@@ -203,8 +203,35 @@ def _data_from_file(fn):
 # ------------------
 # Plotting functions
 # ------------------
-def make_bar_plot(fname, data1, data2, result, err, nbins, dpi=300):
-    '''Plots work distributions and results for BAR'''
+def plot_work_dist(wf, wr, fname='Wdist.png', nbins=20, dG=None, dGerr=None,
+                   units='kJ/mol', dpi=300):
+    '''Plots forward and reverse work distributions. Optionally, it adds the
+    estimate of the free energy change and its uncertainty on the plot.
+
+    Parameters
+    ----------
+    wf : list
+        list of forward work values.
+    wr : list
+        list of reverse work values.
+    fname : str, optional
+        filename of the saved image. Default is 'Wdist.png'.
+    nbins : int, optional
+        number of bins to use for the histogram. Default is 20.
+    dG : float, optional
+        free energy estimate.
+    dGerr : float, optional
+        uncertainty of the free energy estimate.
+    units : str, optional
+        the units of dG and dGerr. Default is 'kJ/mol'.
+    dpi : int
+        resolution of the saved image file.
+
+    Returns
+    -------
+    None
+
+    '''
 
     def smooth(x, window_len=11, window='hanning'):
 
@@ -229,24 +256,24 @@ def make_bar_plot(fname, data1, data2, result, err, nbins, dpi=300):
         return y[window_len-1:-window_len+1]
 
     plt.figure(figsize=(8, 6))
-    x1 = range(len(data1))
-    x2 = range(len(data2))
+    x1 = range(len(wf))
+    x2 = range(len(wr))
     if x1 > x2:
         x = x1
     else:
         x = x2
-    mf, devf, Af = data2gauss(data1)
-    mb, devb, Ab = data2gauss(data2)
+    mf, devf, Af = data2gauss(wf)
+    mb, devb, Ab = data2gauss(wr)
 
-    maxi = max(data1+data2)
-    mini = min(data1+data2)
+    maxi = max(wf+wr)
+    mini = min(wf+wr)
 
-    sm1 = smooth(np.array(data1))
-    sm2 = smooth(np.array(data2))
+    sm1 = smooth(np.array(wf))
+    sm2 = smooth(np.array(wr))
     plt.subplot(1, 2, 1)
-    plt.plot(x1, data1, 'g-', linewidth=2, label="Forward (0->1)", alpha=.3)
+    plt.plot(x1, wf, 'g-', linewidth=2, label="Forward (0->1)", alpha=.3)
     plt.plot(x1, sm1, 'g-', linewidth=3)
-    plt.plot(x2, data2, 'b-', linewidth=2, label="Backward (1->0)", alpha=.3)
+    plt.plot(x2, wr, 'b-', linewidth=2, label="Backward (1->0)", alpha=.3)
     plt.plot(x2, sm2, 'b-', linewidth=3)
     plt.legend(shadow=True, fancybox=True, loc='upper center',
                prop={'size': 12})
@@ -258,9 +285,9 @@ def make_bar_plot(fname, data1, data2, result, err, nbins, dpi=300):
     for val in xl.spines.values():
         val.set_lw(2)
     plt.subplot(1, 2, 2)
-    plt.hist(data1, bins=nbins, orientation='horizontal', facecolor='green',
+    plt.hist(wf, bins=nbins, orientation='horizontal', facecolor='green',
              alpha=.75, normed=True)
-    plt.hist(data2, bins=nbins, orientation='horizontal', facecolor='blue',
+    plt.hist(wr, bins=nbins, orientation='horizontal', facecolor='blue',
              alpha=.75, normed=True)
 
     x = np.arange(mini, maxi, .5)
@@ -271,12 +298,21 @@ def make_bar_plot(fname, data1, data2, result, err, nbins, dpi=300):
     plt.plot(y1, x, 'g--', linewidth=2)
     plt.plot(y2, x, 'b--', linewidth=2)
     size = max([max(y1), max(y2)])
-    res_x = [result, result]
+    res_x = [dG, dG]
     res_y = [0, size*1.2]
-    plt.plot(res_y, res_x, 'k--', linewidth=2,
-             label=r'$\Delta$G = %.2f $\pm$ %.2f kJ/mol' % (result, err))
-    plt.legend(shadow=True, fancybox=True, loc='upper center',
-               prop={'size': 12})
+    if dG is not None and dGerr is not None:
+        plt.plot(res_y, res_x, 'k--', linewidth=2,
+                 label=r'$\Delta$G = %.2f $\pm$ %.2f %s' % (dG, dGerr, units))
+        plt.legend(shadow=True, fancybox=True, loc='upper center',
+                   prop={'size': 12})
+    elif dG is not None and dGerr is None:
+        plt.plot(res_y, res_x, 'k--', linewidth=2,
+                 label=r'$\Delta$G = %.2f %s' % (dG, units))
+        plt.legend(shadow=True, fancybox=True, loc='upper center',
+                   prop={'size': 12})
+    else:
+        plt.plot(res_y, res_x, 'k--', linewidth=2)
+
     plt.xticks([])
     plt.yticks([])
     xl = plt.gca()
@@ -491,14 +527,18 @@ def parse_options():
                         'holds. Default is True; this flag turns it to False.',
                         default=True,
                         action='store_false')
-    parser.add_argument('--bar_plot',
+    parser.add_argument('--work_plot',
                         metavar='',
-                        dest='bar_plot',
+                        dest='wplot',
                         type=str,
-                        help='Whether to plot the work histograms along with '
-                        'the BAR results. If the flag is used, you also need'
-                        'to specify a filename.',
-                        default=None)
+                        help='Name of image file showing the distribution of '
+                        'work values. Default is "wplot.png". If you want to '
+                        'avoid saving this plot, pass "none" to this flag. '
+                        'If you choose to calculate the free energy with '
+                        'multiple estimators, the dG values shown on the plot '
+                        'will be chosen following the hierarchy '
+                        'BAR > CGI > JARZ.',
+                        default='wplot.png')
     parser.add_argument('--nbins',
                         metavar='',
                         dest='nbins',
@@ -783,10 +823,49 @@ def main(args):
 
     _tee(out, ' ========================================================')
 
-    print('\n   Plotting histograms......')
-    if 'bar' in methods and args.bar_plot is not None:
-        make_bar_plot(args.bar_plot, res_ab, res_ba, bar.dg, bar.err_boot,
-                      args.nbins, args.dpi)
+    # -----------------------
+    # plot work distributions
+    # -----------------------
+    if args.wplot.lower() is not 'none':
+        print('\n   Plotting histograms......')
+        # hierarchy of estimators: BAR > Crooks > Jarz
+        if 'bar' in locals():
+            show_dg = bar.dg * unit_fact
+            # hierarchy of error estimates : blocks > boots > analytical
+            if hasattr(bar, 'err_blocks'):
+                show_err = bar.err_blocks * unit_fact
+            elif hasattr(bar, 'err_boot') and not hasattr(bar, 'err_blocks'):
+                show_err = bar.err_boot * unit_fact
+            else:
+                show_err = bar.err * unit_fact
+            # plot
+            plot_work_dist(fname=args.wplot, wf=res_ab, wr=res_ba, dG=show_dg,
+                           dGerr=show_err, nbins=args.nbins, dpi=args.dpi,
+                           units=units)
+        elif 'bar' not in locals() and 'cgi' in locals():
+            show_dg = cgi.dg * unit_fact
+            # hierarchy of error estimates : blocks > boots
+            if hasattr(cgi, 'err_blocks'):
+                show_err = cgi.err_blocks * unit_fact
+            elif hasattr(cgi, 'err_boot2') and not hasattr(cgi, 'err_blocks'):
+                show_err = cgi.err_boot2 * unit_fact
+            else:
+                show_err = None
+            # plot
+            plot_work_dist(fname=args.wplot, wf=res_ab, wr=res_ba, dG=show_dg,
+                           dGerr=show_err, nbins=args.nbins, dpi=args.dpi,
+                           units=units)
+        elif 'bar' not in locals() and 'cgi' not in locals() and 'jarz' in locals():
+            # for the moment, show values only under specific circumstances
+            if hasattr(jarz, 'dg_mean'):
+                show_dg = jarz.dg_mean * unit_fact
+            else:
+                show_dg = None
+            show_err = None
+            # plot
+            plot_work_dist(fname=args.wplot, wf=res_ab, wr=res_ba, dG=show_dg,
+                           dGerr=show_err, nbins=args.nbins, dpi=args.dpi,
+                           units=units)
 
     print('\n   ......done...........\n')
 

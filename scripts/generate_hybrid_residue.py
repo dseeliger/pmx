@@ -91,21 +91,6 @@ standard_pair_list_charmmD = [
     ('O','O')
     ]
 
-standard_pair_listPro = [
-    ('N','N'),
-    ('CA','CA'),
-    ('HA','HA'),
-    ('C','C'),
-    ('O','O')
-    ]
-    
-standard_pair_listGlyPro = [
-    ('N','N'),
-    ('CA','CA'),
-    ('C','C'),
-    ('O','O')
-    ]
-
 standard_rna_pair_list = [
     ('C1\'','C1\''),
     ('C2\'','C2\''),
@@ -296,9 +281,9 @@ standard_dna_3term_pair_list_charmm = [
     ]
 
 use_standard_pair_list = {
-    'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
-    'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
-    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISH','HISE','HIE'],
+    'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE'],
+    'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE'],
+    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE','HIE'],
     'HID': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HIE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HIP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
@@ -306,6 +291,7 @@ use_standard_pair_list = {
     'HSE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HSP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
     'HIS1': [ 'TRP','PHE','TYR'],
+    'HISD': [ 'TRP','PHE','TYR'],
     'HISE': [ 'TRP','PHE','TYR'],
     'HISH': [ 'TRP','PHE','TYR']
     }
@@ -352,16 +338,12 @@ use_standard_dna_3term_pair_list = {
     'DT3': [ 'DA3','DG3'],
     }
 
-res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP',
-		   'PHE','TYR','TRP' ]
+res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HISD','HSE','HSD','HSP',
+		   'PHE','TYR','TRP','PRO' ]
 
 res_diff_Cb = [ 'THR', 'ALA', 'VAL', 'ILE' ]
 
 res_gly_pro = [ 'GLY', 'PRO' ]
-
-res_pro = [ 'PRO' ]
-
-res_gly = [ 'GLY' ]
 
 merge_by_name_list = {
     'PHE':['TYR'],
@@ -373,8 +355,9 @@ merge_by_name_list = {
     'HSE':['HSP','HSD'],
     'HSP':['HSD','HSE'],
     'HIS1':['HISE','HISH'],
-    'HISE':['HIS1','HISH'],
-    'HISH':['HIS1','HISE']
+    'HISD':['HISE','HISH'],
+    'HISE':['HIS1','HISD','HISH'],
+    'HISH':['HIS1','HISD','HISE']
 }
     
 
@@ -392,6 +375,7 @@ mol_branch = {
     'TRP':2,
     'HIS':2,
     'HIS1':2,
+    'HISD':2,
     'HISE':2,
     'HISH':2,
     'THR':2,
@@ -568,6 +552,7 @@ def assign_rtp_entries( mol, rtp):
         atom_type = atom_entry[1]
         atom_q    = atom_entry[2]
         atom_cgnr = atom_entry[3]
+        print "foo ",atom_name
         atom = mol.fetch( atom_name )[0]
         atom.atomtype = atom_type
         atom.q = atom_q
@@ -818,12 +803,8 @@ def make_pairs( mol1, mol2,bCharmm, bH2heavy=True, bDNA=False, bRNA=False ):
 def check_double_atom_names( r ):
     for atom in r.atoms:
         alist = r.fetch_atoms( atom.name )
-#	print "ATOM NAMES: ",atom.name
         if len(alist) != 1:
-	    if atom.name.startswith('HV'):
-		alist = r.fetch_atoms( atom.name )
-	    else:
-                alist = r.fetch_atoms( atom.name[:-1], wildcard = True )
+            alist = r.fetch_atoms( atom.name[:-1], wildcard = True )
             print 'Renaming atoms (%s)' % alist[0].name[:-1]
             start = 1
             for atom in alist:
@@ -833,7 +814,7 @@ def check_double_atom_names( r ):
     return True
 
 def merge_molecules( r1, dummies ):
-
+    
     for atom in dummies:
         new_atom = atom.copy()
         new_atom.atomtypeB = new_atom.atomtype
@@ -843,17 +824,15 @@ def merge_molecules( r1, dummies ):
         new_atom.atomtype = 'DUM_'+new_atom.atomtype
         new_atom.q = 0
         new_atom.nameB = new_atom.name
-        # hydrogen dummies are special
-        if new_atom.name.startswith('H') or (new_atom.name[0].isdigit() and new_atom.name[1]=='H'):
-            new_atom.name = 'HV'
+        if len(new_atom.name) == 4:
+            new_atom.name = 'D'+new_atom.name[:3]
+            if new_atom.name[1].isdigit():
+                new_atom.name = new_atom.name[0]+new_atom.name[2:]+new_atom.name[1]
+                
         else:
-            if len(new_atom.name) == 4:
-                new_atom.name = 'D'+new_atom.name[:3]
-                if new_atom.name[1].isdigit():
-                    new_atom.name = new_atom.name[0]+new_atom.name[2:]+new_atom.name[1]
-            else:
-                new_atom.name = 'D'+atom.name
+            new_atom.name = 'D'+atom.name
         r1.append( new_atom )
+
 
 def make_bstate_dummies(r1):
     for atom in r1.atoms:
@@ -870,7 +849,7 @@ def make_transition_dics( atom_pairs, r1 ):
         abdic[a1.name] = a2.name
         badic[a2.name] = a1.name
     for atom in r1.atoms:
-        if (atom.name[0] == 'D') or (atom.name.startswith('HV')):
+        if atom.name[0] == 'D':
             abdic[atom.name] = atom.name
             badic[atom.name] = atom.name
     return abdic, badic
@@ -886,7 +865,7 @@ def update_bond_lists(r1, badic):
 
     print 'Updating bond lists...........'
     for atom in r1.atoms:
-        if (atom.name[0] == 'D') or atom.name.startswith('HV'):
+        if atom.name[0] == 'D':
             print 'atom', atom.name
             print '  |  '
             new_list = []
@@ -976,15 +955,13 @@ def generate_dihedral_entries( im1, im2, r, pairs ):
         if i2 not in done_i2:
             im_new =  i2[:4] 
             if i2[4] == '': 
-                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) or \
-                    (i2[0].name.startswith('HV')) or (i2[1].name.startswith('HV')) or (i2[2].name.startswith('HV')) or (i2[3].name.startswith('HV')) ):
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( 'default-B' )
                 else:
                     im_new.append( 'un' )
 		im_new.append( 'default-B' )
             else: 
-                if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) or \
-                    (i2[0].name.startswith('HV')) or (i2[1].name.startswith('HV')) or (i2[2].name.startswith('HV')) or (i2[3].name.startswith('HV')) ):
+                if ( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( i2[4] )
                     im_new.append( i2[4] )
                 else:
@@ -1011,10 +988,9 @@ def generate_improp_entries( im1, im2, r ):
     done_i2 = []
     # common impropers
     for i1 in im1:
-	print "improper: ",i1[0].name,i1[1].name,i1[2].name,i1[3].name
         for i2 in im2:
             if improp_entries_match(i1[:4], i2[:4]):
-                print 'matched impropers: ',i1[0].name,i1[1].name,i1[2].name,i1[3].name
+		print 'alus %s' % i1[4]
                 im_new = i1[:4]
                 if i1[4] == '': 
 		    im_new.append( 'default-A' )
@@ -1033,91 +1009,46 @@ def generate_improp_entries( im1, im2, r ):
                 new_ii.append( im_new )
     for i1 in im1:
         if i1 not in done_i1:
-            print "unmatched impropers A: ",i1[0].name,i1[1].name,i1[2].name,i1[3].name
-            im_new =  i1[:4]
-            if i1[4] == '':
-                im_new.append( 'default-A' )
-                ### this construct with if and continue statements is for PRO impropers:
-                # for proline -C and +N containing impropers are different to those of the other residues
-                # therefore these impropers will remain unmatched
-                # however, at the same time -C and +N will not have a B state, i.e. atom.nameB attribute not existing
-		bFound = False
-                if hasattr(i1[0], 'nameB'):
-                    if 'gone' in i1[0].nameB:
-                        im_new.append( 'default-A' )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[1], 'nameB'):
-                    if 'gone' in i1[1].nameB:
-                        im_new.append( 'default-A' )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[2], 'nameB'):
-                    if 'gone' in i1[2].nameB:
-                        im_new.append( 'default-A' )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[3], 'nameB'):
-                    if 'gone' in i1[3].nameB:
-                        im_new.append( 'default-A' )
-                        bFound = True
-		if bFound==False:
-                    im_new.append( 'un' )
-                    print 'undefined'
+            im_new =  i1[:4] 
+            if i1[4] == '': 
+	        im_new.append( 'default-A' )
+		if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+	            im_new.append( 'default-A' )
+		else:
+		    im_new.append( 'un' )
             elif( i1[4] == '105.4' ): #star
                 im_new.append( 'default-star' )
                 im_new.append( 'un' )
-                print 'undefined'
-            else:
-                im_new.append( i1[4] )
-		bFound = False
-                if hasattr(i1[0], 'nameB'):
-                    if 'gone' in i1[0].nameB:
-                        im_new.append( i1[4] )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[1], 'nameB'):
-                    if 'gone' in i1[1].nameB:
-                        im_new.append( i1[4] )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[2], 'nameB'):
-                    if 'gone' in i1[2].nameB:
-                        im_new.append( i1[4] )
-                        bFound = True
-                if (bFound==False) and hasattr(i1[3], 'nameB'):
-                    if 'gone' in i1[3].nameB:
-                        im_new.append( i1[4] )
-                        bFound = True
-		if bFound==False:
+            else: 
+		im_new.append( i1[4] )
+                if( ('gone' in i1[0].nameB) or ('gone' in i1[1].nameB) or ('gone' in i1[2].nameB) or ('gone' in i1[3].nameB) ):
+                    im_new.append( i1[4] )
+                else:
                     im_new.append( 'un' )
-                    print 'undefined'
-#	    print "ENDIMPR1 ",im_new[0].name,im_new[1].name,im_new[2].name,im_new[3].name,im_new
             new_ii.append( im_new )
-
     for i2 in im2:
         if i2 not in done_i2:
-            print "unmatched impropers B: ",i2[0].name,i2[1].name,i2[2].name,i2[3].name
             im_new =  i2[:4] #[ find_atom_by_nameB(r, n) for n in i2[:4] ] 
 #            im_new.append( 'default-B' )
-            if i2[4] == '':
-                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) or \
-                    (i2[0].name.startswith('HV')) or (i2[1].name.startswith('HV')) or (i2[2].name.startswith('HV')) or (i2[3].name.startswith('HV')) ):
+            if i2[4] == '': 
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( 'default-B' )
                 else:
                     im_new.append( 'un' )
-                    print 'undefined'
-                im_new.append( 'default-B' )
+	        im_new.append( 'default-B' )
             elif( i2[4] == '105.4' ): #star
                 im_new.append( 'un' )
                 im_new.append( 'default-star' )
-                print 'undefined'
             else:
-                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) or \
-                    (i2[0].name.startswith('HV')) or (i2[1].name.startswith('HV')) or (i2[2].name.startswith('HV')) or (i2[3].name.startswith('HV')) ):
+                if( (i2[0].name.startswith('D')) or (i2[1].name.startswith('D')) or (i2[2].name.startswith('D')) or (i2[3].name.startswith('D')) ):
                     im_new.append( i2[4] )
                 else:
                     im_new.append( 'un' )
-                    print 'undefined'
-                im_new.append( i2[4] )
-#	    print "ENDIMPR2 ",im_new
+		im_new.append( i2[4] )
             new_ii.append( im_new )
-
+##     for ii in new_ii:
+##         print '--->', ' '.join(ii)
+##     print
     return new_ii
 
 def write_rtp( fp, r, ii_list, dihi_list,neigh_bonds,cmap):
@@ -1201,7 +1132,7 @@ def find_higher_atoms( rot_atom, r, order, branch ):
     res = []
     for atom in r.atoms:
         print "1level: %s %s %s" % (atom.name,atom.order,atom.branch)
-        if( ('gone' in rot_atom.nameB) and (atom.name.startswith('D') or atom.name.startswith('HV')) ):
+	if( ('gone' in rot_atom.nameB) and atom.name.startswith('D') ):
 	    continue
 #        if atom.order >= order and \
 #           (atom.branch == branch or branch == 0):
@@ -1758,17 +1689,10 @@ elif (r1.resname in res_with_rings and r2.resname in res_diff_Cb ) or \
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmC)
     else :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listC)
-#proline
-elif (r1.resname in res_pro ) or (r2.resname in res_pro ):
-    print "ENTERED P"
-    if (r1.resname in res_gly) or (r2.resname in res_gly ):
-        print "subENTERED G"
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listGlyPro)
-    else:
-        atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_listPro)
-#glycine
-elif (r1.resname in res_gly ) or  (r2.resname in res_gly ):
-    print "ENTERED G"
+#ring-res 2 non-ring-res: G,P
+elif (r1.resname in res_with_rings and r2.resname in res_gly_pro ) or \
+     (r2.resname in res_with_rings and r1.resname in res_gly_pro ):
+    print "ENTERED G,P"
     if bCharmm :
         atom_pairs, dummies = make_predefined_pairs( r1, r2, standard_pair_list_charmmD)
     else :

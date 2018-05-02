@@ -177,6 +177,13 @@ rna_names = {
     'RU5_RU5':'FOO',
     }
 
+def establish_mapping( mmap ):
+    mapping = []
+    for r in mmap.residues:
+        foo = 'ch'+r.chain.id+'_'+str(r.id)
+        mapping.append(foo)
+    return( mapping )
+
 def check_residue_name( res ):
     if res.resname == 'LYS':
         if res.has_atom( 'HZ3'):
@@ -231,12 +238,13 @@ def check_residue_range(m, idx):
     if idx not in valid_ids: return False
     return True
 
-def select_residue(m):
+def select_residue(m,mapping):
     valid_ids = range(1, len(m.residues)+1)
     print '\nSelect residue to mutate:'
     for i,r in enumerate(m.residues):
         if r.resname not in library._ions+library._water: 
-            sys.stdout.write('%6d-%s-%s' % (r.id,r.resname,r.chain_id))
+            sys.stdout.write('%6d-%s-%s' % (r.id,r.resname,mapping[i-1]))
+#            sys.stdout.write('%6d-%s-%s' % (r.id,r.resname,r.chain_id))
             if r.id % 6 == 0: print
     print
     selected_residue_id = None
@@ -312,8 +320,8 @@ def select_aa_mutation(residue,ffpath):
     return aa
 
 
-def interactive_selection(m,ffpath):
-    residue_id = select_residue(m)
+def interactive_selection(m,ffpath,mapping):
+    residue_id = select_residue(m,mapping)
     mutation = select_mutation(m, residue_id, ffpath )
     return residue_id, mutation
     
@@ -627,7 +635,12 @@ def main(argv):
        mtp_file = os.path.join( ffpath,'mutres.mtp')
    infile = cmdl['-f']
 
-   m = Model(infile,bPDBTER=True)
+   #### establish chainID/resID mapping with renumbered residues ####
+   mmap = Model(infile,bPDBTER=False,renumber_residues=False)
+   mapping = establish_mapping( mmap )
+   ##################################################################
+
+   m = Model(infile,bPDBTER=True,renumber_residues=True)
 
    rename_atoms_to_gromacs( m )
 #   m.write('ll.pdb')
@@ -642,7 +655,7 @@ def main(argv):
    else:
        do_more = True
        while do_more:
-           mutation = interactive_selection(m,ffpath)
+           mutation = interactive_selection(m,ffpath,mapping)
            apply_mutation( m, mutation, mtp_file, bStrB, infileB, bRNA )
            if not ask_next(): do_more = False
        

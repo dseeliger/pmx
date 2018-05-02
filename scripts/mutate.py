@@ -640,7 +640,7 @@ def main(argv):
    mapping = establish_mapping( mmap )
    ##################################################################
 
-   m = Model(infile,bPDBTER=True,renumber_residues=True)
+   m = Model(infile,bPDBTER=False,renumber_residues=True)
 
    rename_atoms_to_gromacs( m )
 #   m.write('ll.pdb')
@@ -660,7 +660,7 @@ def main(argv):
            if not ask_next(): do_more = False
        
 
-   m.write(cmdl['-o'])
+   m.write(cmdl['-o'],bPDBTER=True)
    print
    print 'mutations done...........'
    print

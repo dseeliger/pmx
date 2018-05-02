@@ -180,7 +180,7 @@ rna_names = {
 def establish_mapping( mmap ):
     mapping = []
     for r in mmap.residues:
-        foo = 'ch'+r.chain.id+'_'+str(r.id)
+        foo = 'ch'+r.chain.id+'_'+str(r.id+1)
         mapping.append(foo)
     return( mapping )
 

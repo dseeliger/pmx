@@ -334,21 +334,36 @@ class Model(Atomselection):
         else:
             l = open(fname,'r').readlines()
 
- 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ 	chainIDstring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnoprstuvwxyz123456789'
 	bNewChain = True
 	chainID = ' '
 	prevID = ' '
-	usedChainIDs = ''
+        prevAtomName = ' '
+        prevResID = 0
+        usedChainIDs = ''
+        atomcount = 1
         for line in l:
 	    if 'TER' in line:
 		bNewChain = True
             if (line[:4]=='ATOM') or (line[:6]=='HETATM'):
-                a = Atom().readPDBString(line)
-		if (a.chain_id != prevID) and (a.chain_id != ' '): # identify chain change by ID (when no TER is there)
+                a = Atom().readPDBString(line,origID=atomcount)
+                atomcount+=1
+#		if (a.chain_id != prevID) and (a.chain_id != ' '): # identify chain change by ID (when no TER is there)
+		if (a.chain_id != prevID): # identify chain change by ID (when no TER is there)
 		    bNewChain = True
+                if (a.resnr != prevResID):
+                    try:
+                        if a.resnr != prevResID+1:
+		            bNewChain = True
+                        if (prevAtomName == 'OC2') or (prevAtomName == 'OXT'):
+                            bNewChain = True
+                    except TypeError:
+                        bNewChain = False
 		prevID = a.chain_id
+                prevResID = a.resnr
+                prevAtomName = a.name
 		if bNewChain==True:
-		    if (a.chain_id==' ') or (a.chain_id==chainID):
+		    if (a.chain_id==' ') or (a.chain_id==chainID) or (a.chain_id in usedChainIDs):
 			# find a new chain id
 			bFound = False
 			while bFound==False:
@@ -526,6 +541,11 @@ class Model(Atomselection):
                     result.append(r)
         return result
     
+    def fetch_residues_by_ID(self, ind):
+        for r in self.residues:
+            if r.id == ind:
+                return r
+        return False
 
     def al_from_resl(self):
         self.atoms = []

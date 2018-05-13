@@ -338,6 +338,7 @@ class Model(Atomselection):
 	bNewChain = True
 	chainID = ' '
 	prevID = ' '
+        prevAtomName = ' '
         prevResID = 0
         usedChainIDs = ''
         atomcount = 1
@@ -354,10 +355,13 @@ class Model(Atomselection):
                     try:
                         if a.resnr != prevResID+1:
 		            bNewChain = True
+                        if (prevAtomName == 'OC2') or (prevAtomName == 'OXT'):
+                            bNewChain = True
                     except TypeError:
                         bNewChain = False
 		prevID = a.chain_id
                 prevResID = a.resnr
+                prevAtomName = a.name
 		if bNewChain==True:
 		    if (a.chain_id==' ') or (a.chain_id==chainID) or (a.chain_id in usedChainIDs):
 			# find a new chain id

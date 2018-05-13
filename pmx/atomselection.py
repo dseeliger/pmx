@@ -88,9 +88,9 @@ class Atomselection:
 		continue
 	    if atom.chain_id.startswith('pmx'):
                 if bAssignChainIDs==False:
-                    atom.chain_id = ""
-                else:
 		    atom.chain_id = ""
+                else:
+                    atom.chain_id = atom.chain_id#[-1]
             if( len(atom.name) > 4): # too long atom name
                 foo = cp.deepcopy(atom)
                 foo.name = foo.name[:4]

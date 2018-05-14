@@ -355,7 +355,7 @@ class Model(Atomselection):
                     try:
                         if a.resnr != prevResID+1:
 		            bNewChain = True
-                        if (prevAtomName == 'OC2') or (prevAtomName == 'OXT'):
+                        if (prevAtomName == 'OC2') or (prevAtomName == 'OXT') or (prevAtomName == 'OT2'):
                             bNewChain = True
                     except TypeError:
                         bNewChain = False

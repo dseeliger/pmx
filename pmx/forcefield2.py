@@ -77,10 +77,12 @@ class TopolBase:
     def __init__(self, filename, version = 'old'):
         self.filename = filename
         self.version = version
-        if os.path.splitext( filename )[1] == '.itp':
-            self.is_itp = True
-        else:
-            self.is_itp = False
+        self.is_itp = True
+        if filename!=None:
+            if os.path.splitext( filename )[1] == '.itp':
+                self.is_itp = True
+            else:
+                self.is_itp = False
         self.atoms = []
         self.residues = []
         self.name = ''
@@ -104,7 +106,8 @@ class TopolBase:
         self.system = ''
         self.qA = 0.
         self.qB = 0.
-        self.read()
+        if filename!=None:
+            self.read()
     #===============================================================================
     # read functions
     

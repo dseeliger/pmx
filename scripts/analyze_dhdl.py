@@ -361,7 +361,7 @@ def parse_options():
                         dest='filesAB',
                         type=str,
                         help='dgdl.xvg files for the A->B simulations. Use '
-                        'wildcard to select multiple xvg files: e.g. "-fa '
+                        'wildcard to select multiple xvg files: e.g. "-fA '
                         './forward_results/dgdl*.xvg"',
                         nargs='+')
     parser.add_argument('-fB',
@@ -369,7 +369,7 @@ def parse_options():
                         dest='filesBA',
                         type=str,
                         help='dgdl.xvg files for the B->A simulations Use '
-                        'wildcard to select multiple xvg files: e.g. "-fb '
+                        'wildcard to select multiple xvg files: e.g. "-fB '
                         './backward_results/dgdl*.xvg"',
                         nargs='+')
     parser.add_argument('-m',

@@ -731,6 +731,9 @@ def is_hybrid_residue( resname ):
     if resname in _perturbed_nucleotides or \
        resname[1] == '2':
         return True
+    # phosphoserines in charmm36
+    if resname=='SSP1' or resname=='SSP2' or resname=='SP1S' or resname=='SP2S':
+        return True
     else: return False
 
 

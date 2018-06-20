@@ -387,7 +387,16 @@ mol_branch = {
     'ARG':5,
     'LYS':5,
     'LYN':5,
+    'SP1':3,
+    'SP2':3,
     }
+
+noncanonical_aa = {
+    'S2SP1':'SSP1', # serine to pSer1
+    'S2SP2':'SSP2', # serine to pSer2
+    'SP12S':'SP1S', # pSer1 to serine
+    'SP22S':'SP2S', # pSer2 to setine
+}
 
 dna_names = {
     'DA5_DT5':'D5K',
@@ -1185,7 +1194,9 @@ def make_rotations( r, resn1_dih, resn2_dih ):
         atoms_to_rotate =  find_higher_atoms(atom2,  r, oo+1, bb ) 
         for atom in atoms_to_rotate:
             rot_list.append( atom )
+#            print atom.name
         rotations.append( rot_list )
+#    sys.exit(0)
     return rotations
 
 def parse_ffnonbonded_charmm(ffnonbonded,f):
@@ -1495,6 +1506,8 @@ if bDNA:
     rr_name = dna_mutation_naming(aa1,aa2)
 elif bRNA:
     rr_name = rna_mutation_naming(aa1,aa2)
+elif rr_name in noncanonical_aa.keys():
+    rr_name = noncanonical_aa[rr_name]
 
 m1.get_symbol()
 m2.get_symbol()

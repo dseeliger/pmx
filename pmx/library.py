@@ -105,6 +105,8 @@ _aacids_ext_charmm = {
     'F':'PHE',
     'P':'PRO',
     'S':'SER',
+    'SP1':'SP1', # phosphoserine
+    'SP2':'SP2', # phosphoserine
     'T':'THR',
     'W':'TRP',
     'Y':'TYR',
@@ -180,10 +182,13 @@ _protein_residues = (
     'NLYP','NPRO','NCYN','NCYX','NMET','CALA','CGLY','CSER','CTHR',
     'CLEU','CILE','CVAL','CASN','CGLN','CARG','CHID','CHIE','CHIP',
     'CTRP','CPHE','CTYR','CGLU','CASP','CLYP','CPRO','CCYN','CCYX',
-    'CMET','SEP','HISH','HIS1','HISE','GLUH'
+    'CMET','SEP','HISH','HIS1','HISD','HISE','GLUH',
+    'SP1','SP2', # phosphoserines in charmm36
     )
 
 _one_letter = {
+    'SP1':'SP1', # phosphoserine in charmm36
+    'SP2':'SP2', # phosphoserine in charmm36
     'ALA':'A',
     'ARG':'R',
     'ASN':'N',
@@ -1776,6 +1781,10 @@ _aliases = {
                 'HB1':'1HB',
                 'HB2':'2HB',
         },
+        'HISD': {
+                'HB1':'1HB',
+                'HB2':'2HB',
+        },
 	'HSE': {
 		'HB1':'1HB',
 		'HB2':'2HB',
@@ -2116,6 +2125,16 @@ _aliases = {
 		'HB1':'1HB',
 		'HB2':'2HB',
 		'HG1':'1HG',
+	},
+        # phosphoserine in charmm36
+	'SP1': {
+		'HB1':'1HB',
+		'HB2':'2HB',
+	},
+        # phosphoserine in charmm36
+	'SP2': {
+		'HB1':'1HB',
+		'HB2':'2HB',
 	},
 	'NSER': {
                  'H1':'1H',
@@ -4628,6 +4647,67 @@ _aa_dihedrals = {
 		['HB2', 'CB', 'OG', 'HG', 1, -1] ,
 		['C', 'CA', 'CB', 'OG', 1, -1] ,
 	     ),
+        # phosphoserine in charmm36
+	'SP1' : (
+		['N', 'CA', 'CB', 'HB1', 1, -1] ,
+		['N', 'CA', 'CB', 'HB2', 1, -1] ,
+		['N', 'CA', 'CB', 'OG', 1, 1] ,
+		['N', 'CA', 'C', 'O', 1, 0] ,
+		['H', 'N', 'CA', 'HA', 1, -1] ,
+		['H', 'N', 'CA', 'CB', 1, -1] ,
+		['C', 'CA', 'N', 'H', 1, -1] ,
+		['CA', 'CB', 'OG', 'PD', 1, 2] ,
+		['HA', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HA', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HA', 'CA', 'CB', 'OG', 1, -1] ,
+		['HA', 'CA', 'C', 'O', 1, -1] ,
+		['CB', 'CA', 'C', 'O', 1, -1] ,
+		['C', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HB1', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HB2', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'OG', 1, -1] ,
+		['CB', 'OG', 'PD', 'OE1', 1, 3] ,
+		['CB', 'OG', 'PD', 'OE2', 1, -1] ,
+		['CB', 'OG', 'PD', 'OE', 1, -1] ,
+		['C', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HB1', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HB2', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'CG', 1, -1] ,
+		['OG', 'PD', 'OE', 'HE', 1, 4] ,
+		['O1E', 'PD', 'OE', 'HE', 1, -1] ,
+		['O2E', 'PD', 'OE', 'HE', 1, -1] ,
+	     ),
+        # phosphoserine in charmm36
+	'SP2' : (
+		['N', 'CA', 'CB', 'HB1', 1, -1] ,
+		['N', 'CA', 'CB', 'HB2', 1, -1] ,
+		['N', 'CA', 'CB', 'OG', 1, 1] ,
+		['N', 'CA', 'C', 'O', 1, 0] ,
+		['H', 'N', 'CA', 'HA', 1, -1] ,
+		['H', 'N', 'CA', 'CB', 1, -1] ,
+		['C', 'CA', 'N', 'H', 1, -1] ,
+		['CA', 'CB', 'OG', 'PD', 1, 2] ,
+		['HA', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HA', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HA', 'CA', 'CB', 'OG', 1, -1] ,
+		['HA', 'CA', 'C', 'O', 1, -1] ,
+		['CB', 'CA', 'C', 'O', 1, -1] ,
+		['C', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HB1', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HB2', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'OG', 1, -1] ,
+		['CB', 'OG', 'PD', 'OE1', 1, 3] ,
+		['CB', 'OG', 'PD', 'OE2', 1, -1] ,
+		['CB', 'OG', 'PD', 'OE', 1, -1] ,
+		['C', 'CA', 'CB', 'HB1', 1, -1] ,
+		['HB1', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'HB2', 1, -1] ,
+		['HB2', 'CB', 'OG', 'PD', 1, -1] ,
+		['C', 'CA', 'CB', 'CG', 1, -1] ,
+	     ),
 	'SEP' : (
 		['N', 'CA', 'CB', 'HB1', 1, -1] ,
 		['N', 'CA', 'CB', 'HB2', 1, -1] ,
@@ -4650,7 +4730,6 @@ _aa_dihedrals = {
 		['CB', 'OG', 'P', 'O1P', 1, 3] ,
 		['CB', 'OG', 'P', 'O2P', 1, -1] ,
 		['CB', 'OG', 'P', 'O3P', 1, -1] ,
-                
 	     ),
 	'THR' : (
 		['N', 'CA', 'CB', 'HB', 1, -1] ,
@@ -5008,6 +5087,19 @@ _mol2_types = {
     'C':['C.2',0],
     'O':['O.2',0],
     },
+    'HISD':
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'CG':['C.2',0],
+    'ND1':['N.2',0],
+    'CE1':['C.2',0],
+    'NE2':['N.pl3',0],
+    'CD2':['C.2',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
     'HISE':
     {
     'N':['N.am',0],
@@ -5118,6 +5210,32 @@ _mol2_types = {
     'CA':['C.3',0],
     'CB':['C.3',0],
     'OG':['O.3',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'SP1': # phosphoserine in charmm36
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'OG':['O.3',0],
+    'PD':['P.3',0],
+    'OE1':['O.2',0],
+    'OE2':['O.3',0],
+    'OE':['O.3',0],
+    'C':['C.2',0],
+    'O':['O.2',0],
+    },
+    'SP2': # phosphoserine in charmm36
+    {
+    'N':['N.am',0],
+    'CA':['C.3',0],
+    'CB':['C.3',0],
+    'OG':['O.3',0],
+    'PD':['P.3',0],
+    'OE1':['O.2',0],
+    'OE2':['O.3',0],
+    'OE':['O.3',0],
     'C':['C.2',0],
     'O':['O.2',0],
     },

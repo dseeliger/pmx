@@ -83,6 +83,8 @@ class TopolBase:
                 self.is_itp = True
             else:
                 self.is_itp = False
+        self.has_atomtypes = False
+        self.atomtypes = []
         self.atoms = []
         self.residues = []
         self.name = ''
@@ -121,6 +123,7 @@ class TopolBase:
         self.read_footer( lines )
         posre_sections = self.get_posre_section( lines )
         lines = kickOutComments(lines,'#')
+        self.read_atomtypes(lines)
         self.read_moleculetype(lines)
         if self.name: # atoms, bonds, ... section
             self.read_atoms(lines)
@@ -214,6 +217,23 @@ class TopolBase:
         if l:
             self.name, self.nrexcl =  l[0].split()[0], int(l[0].split()[1])
 
+    def read_atomtypes( self, lines):
+        l = readSection(lines,'[ atomtypes ]','[')
+        lst = []
+        try:
+            lst = parseList('ssffsff',l) # gaff
+        except:
+            try:
+                lst = parseList('sffsff',l) # another gaff or cgenff
+            except:
+                try:
+                    lst = parseList('ssiffsff',l) # opls
+                except:
+                    print 'Could not read atomtype format'
+        if len(lst)>0:
+            self.has_atomtypes = True
+        self.atomtypes = lst
+                    
     def read_header(self, lines):
         ret = []
         for line in lines:
@@ -504,6 +524,8 @@ class TopolBase:
         if not self.is_itp:
             self.write_header(fp)
         if self.atoms:
+            if self.has_atomtypes:
+                self.write_atomtypes(fp)
             self.write_moleculetype(fp)
             self.write_atoms(fp, charges = stateQ, atomtypes = stateTypes, dummy_qA = dummy_qA,
                              dummy_qB = dummy_qB, scale_mass = scale_mass,
@@ -548,8 +570,13 @@ class TopolBase:
         print >>fp, '; Name        nrexcl'
         print >>fp, '%s  %d' % (self.name,self.nrexcl)
 
-
-
+    def write_atomtypes(self, fp):
+        fp.write('[ atomtypes ]\n')
+        for atype in self.atomtypes:
+            for x in atype:
+                fp.write(' %s' % x)
+            fp.write('\n')
+        fp.write('\n')
 
     def write_atoms(self, fp, charges = 'AB', atomtypes = 'AB', dummy_qA = 'on',\
                 dummy_qB = 'on',  scale_mass=True, target_qB = [], full_morphe = True):

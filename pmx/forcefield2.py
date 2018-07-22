@@ -101,6 +101,8 @@ class TopolBase:
         self.has_vsites3 = False
         self.has_vsites4 = False
 	self.has_posre = False
+        self.has_ii = False # intermolecular_interactions
+        self.ii = {} # ii is a dictionary, which containts bonds, angles, dihedrals
 	self.posre = []
         self.molecules = []
         self.system = ''
@@ -521,6 +523,8 @@ class TopolBase:
                 self.write_vsites4(fp)
 	    if self.has_posre:
 		self.write_posre(fp)
+            if self.has_ii:
+                self.write_ii(fp)
         self.write_footer(fp)
         if not self.is_itp:
             self.write_system(fp)
@@ -885,6 +889,36 @@ class TopolBase:
                 sys.stderr.write('EEK! Something went wrong while writing position_restraints!!!!\n')
                 print pr
                 sys.exit(1)
+
+    def write_ii(self, fp):
+        fp.write('\n [ intermolecular_interactions ]\n')
+        # bonds
+        if 'bonds' in self.ii.keys():
+           fp.write(' [ bonds ]\n')
+           for b in self.ii['bonds']: 
+               fp.write('%6d %6d %6d' % ( b[0].id, b[1].id, b[2] ))
+               if len(b)>3: 
+                   for x in b[3]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
+        # angles
+        if 'angles' in self.ii.keys():
+           fp.write(' [ angles ]\n')
+           for ang in self.ii['angles']: 
+               fp.write('%6d %6d %6d %6d' % ( ang[0].id, ang[1].id, ang[2].id, ang[3] ))
+               if len(ang)>4: 
+                   for x in ang[4]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
+        # dihedrals
+        if 'dihedrals' in self.ii.keys():
+           fp.write(' [ dihedrals ]\n')
+           for dih in self.ii['dihedrals']: 
+               fp.write('%6d %6d %6d %6d %6d' % ( dih[0].id, dih[1].id, dih[2].id, dih[3].id, dih[4] ))
+               if len(dih)>5: 
+                   for x in dih[5]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
 
     def write_system(self,fp):
         print >>fp, '[ system ]'

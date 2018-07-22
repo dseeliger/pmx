@@ -545,12 +545,13 @@ class TopolBase:
                 self.write_vsites4(fp)
 	    if self.has_posre:
 		self.write_posre(fp)
-            if self.has_ii:
-                self.write_ii(fp)
         self.write_footer(fp)
         if not self.is_itp:
             self.write_system(fp)
             self.write_molecules(fp)
+        if self.atoms:
+            if self.has_ii:
+                self.write_ii(fp)
         fp.close()
 
 

@@ -307,8 +307,10 @@ def build_chain(sequence,dihedrals = None, \
 
 
     rl = []
-    start = make_residue(library._aacids_dic[sequence[0]],\
-                                 hydrogens = hydrogens)
+    try:
+        start = make_residue(library._aacids_dic[sequence[0]],hydrogens = hydrogens)
+    except:
+        start = make_residue(library._aacids_ext_amber[sequence[0]],hydrogens = hydrogens)
     start.set_resid(1)
     set_psi(start,dihedrals[0][1])
     rl.append(start)
@@ -340,7 +342,7 @@ def set_phi(mol1,mol2,phi):
     # select c, n, ca, c
     C = mol1.fetchm(['C'])[0]
     N,CA,C2 = mol2.fetchm(['N','CA','C'])
-    dih = C.dihedral(N,CA,C2) - pi
+    dih = C.dihedral(N,CA,C2) #- pi
     phi = pi/180*phi
     delta = phi-dih
 
@@ -356,7 +358,7 @@ def set_psi(mol,phi):
 
     # select n, c, ca, o
     N, CA, C, O = mol.fetchm(['N','CA','C','O'])
-    dih = N.dihedral(CA,C,O) - pi
+    dih = N.dihedral(CA,C,O) #- pi
     phi = pi/180*phi  - pi # psi is defined with N'
     delta = phi - dih
     r = Rotation(CA.x,C.x)
@@ -370,7 +372,7 @@ def set_omega(mol1,mol2,phi):
     # select c, n, ca, c
     CA,C = mol1.fetchm(['CA','C'])
     N,CA2,C2 = mol2.fetchm(['N','CA','C'])
-    dih = CA.dihedral(C,N,CA2) -pi
+    dih = CA.dihedral(C,N,CA2) #-pi
     phi = pi/180*phi
     delta = phi-dih
 

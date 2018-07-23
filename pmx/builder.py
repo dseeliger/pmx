@@ -307,8 +307,10 @@ def build_chain(sequence,dihedrals = None, \
 
 
     rl = []
-    start = make_residue(library._aacids_dic[sequence[0]],\
-                                 hydrogens = hydrogens)
+    try:
+        start = make_residue(library._aacids_dic[sequence[0]],hydrogens = hydrogens)
+    except:
+        start = make_residue(library._aacids_ext_amber[sequence[0]],hydrogens = hydrogens)
     start.set_resid(1)
     set_psi(start,dihedrals[0][1])
     rl.append(start)

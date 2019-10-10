@@ -1,3 +1,8 @@
+# WARNING: #
+## This pmx repository is not updated anymore #
+## we have moved to ##
+## https://github.com/deGrootLab/pmx ##
+
 # pmx
 ## Introduction ##
 
